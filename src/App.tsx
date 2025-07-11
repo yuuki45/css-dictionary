@@ -50,6 +50,7 @@ function App() {
   const [selectedTechniqueId, setSelectedTechniqueId] = useState<string | null>(
     null
   );
+  const [usecasePage, setUsecasePage] = useState(0);
 
   const { isFavorite, addFavorite, removeFavorite, getFavoriteIds } =
     useFavorites();
@@ -270,29 +271,68 @@ function App() {
       analytics.trackUsecaseSelect(usecase.id, usecase.label);
     };
     const handleBackToUsecases = () => setSelectedUsecase(null);
+
+    const usecasesPerPage = 10;
+    const pagedUsecases = usecases.slice(
+      usecasePage * usecasesPerPage,
+      (usecasePage + 1) * usecasesPerPage
+    );
+    const totalPages = Math.ceil(usecases.length / usecasesPerPage);
+
     let content;
     if (!selectedUsecase) {
-      // ユースケース一覧
+      // ユースケース一覧（ページネーション対応）
       content = (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {usecases.map((uc) => (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {pagedUsecases.map((uc) => (
+              <button
+                key={uc.id}
+                onClick={() => handleUsecaseSelect(uc)}
+                className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-left"
+              >
+                <div className="text-lg font-bold text-blue-700 dark:text-blue-300 mb-1">
+                  {uc.label}
+                </div>
+                <div className="text-gray-600 dark:text-gray-300 text-sm mb-2">
+                  {uc.description}
+                </div>
+                <div className="text-xs text-gray-400">
+                  {uc.propertyIds.length}件の関連プロパティ
+                </div>
+              </button>
+            ))}
+          </div>
+          <div className="flex justify-center gap-4 mb-8">
             <button
-              key={uc.id}
-              onClick={() => handleUsecaseSelect(uc)}
-              className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-left"
+              onClick={() => setUsecasePage((p) => Math.max(0, p - 1))}
+              disabled={usecasePage === 0}
+              className={`px-4 py-2 rounded border text-sm font-medium transition-colors ${
+                usecasePage === 0
+                  ? "bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed"
+                  : "bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+              }`}
             >
-              <div className="text-lg font-bold text-blue-700 dark:text-blue-300 mb-1">
-                {uc.label}
-              </div>
-              <div className="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                {uc.description}
-              </div>
-              <div className="text-xs text-gray-400">
-                {uc.propertyIds.length}件の関連プロパティ
-              </div>
+              前へ
             </button>
-          ))}
-        </div>
+            <span className="self-center text-sm text-gray-600 dark:text-gray-300">
+              {usecasePage + 1} / {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setUsecasePage((p) => Math.min(totalPages - 1, p + 1))
+              }
+              disabled={usecasePage === totalPages - 1}
+              className={`px-4 py-2 rounded border text-sm font-medium transition-colors ${
+                usecasePage === totalPages - 1
+                  ? "bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed"
+                  : "bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+              }`}
+            >
+              次へ
+            </button>
+          </div>
+        </>
       );
     } else {
       // プロパティカード一覧
