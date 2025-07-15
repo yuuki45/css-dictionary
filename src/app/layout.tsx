@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/css_dictionary_icon_192x192.png',
+  },
   openGraph: {
     title: "CSS辞書 - CSSプロパティ完全ガイド",
     description: "すべてのCSSプロパティを日本語で解説。実用的なサンプルコード、逆引き検索、最新テクニック集を収録。",
