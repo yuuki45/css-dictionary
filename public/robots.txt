@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+
+# サイトマップの場所
+Sitemap: https://www.css-dictionary.com/sitemap.xml
+
+# クロール頻度の調整
+Crawl-delay: 1
+
+# 主要なページの指定
+Allow: /categories/
+Allow: /property/
+Allow: /techniques/
+Allow: /reverse/
+Allow: /favorites/
+Allow: /settings/ 

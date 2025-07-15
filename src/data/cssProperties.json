@@ -1,0 +1,1981 @@
+[
+  {
+    "id": "display",
+    "name": "display",
+    "category": "レイアウト・配置",
+    "description": "要素の表示方法を指定するプロパティです。ブロック要素、インライン要素、フレックスコンテナ、グリッド、noneなど、様々な表示形式を設定できます。インライン・インラインブロックの違いも重要です。",
+    "syntax": "display: block | inline | inline-block | flex | grid | none | table | ...",
+    "examples": [
+      {
+        "code": "display: flex;",
+        "description": "要素をフレックスコンテナにして、子要素を柔軟にレイアウト"
+      },
+      {
+        "code": "display: grid;",
+        "description": "要素をグリッドコンテナにして、2次元レイアウトを実現"
+      },
+      {
+        "code": "display: none;",
+        "description": "要素を完全に非表示にする（領域も確保されない）"
+      },
+      {
+        "code": "display: inline;",
+        "description": "インライン要素として表示。幅・高さ・margin/paddingの上下が効かない。"
+      },
+      {
+        "code": "display: inline-block;",
+        "description": "インライン要素のように並ぶが、幅・高さ・margin/paddingの上下も指定できる。"
+      }
+    ],
+    "tips": "flexとgridはモダンレイアウトの基本。display: noneとvisibility: hiddenの違い、inline/inline-blockの違いも覚えておこう。",
+    "commonMistakes": "display: noneを使うと要素が完全に消えるため、アニメーションが効かない。inlineは上下margin/paddingやwidth/heightが効かない。inline-blockは横並び時の隙間に注意。",
+    "relatedProperties": [
+      "flex-direction",
+      "justify-content",
+      "align-items",
+      "grid-template-columns"
+    ],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "display-flex",
+    "name": "display: flex",
+    "category": "レイアウト・配置",
+    "description": "要素をフレックスコンテナに変換し、子要素（フレックスアイテム）を柔軟にレイアウトできるプロパティです。1次元レイアウト（行または列）の配置に最適で、モダンWebデザインの基礎となります。",
+    "syntax": "display: flex",
+    "examples": [
+      {
+        "code": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+        "description": "子要素を水平・垂直中央に配置する最も簡単な方法"
+      },
+      {
+        "code": ".navbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}",
+        "description": "ナビゲーションバー：左端と右端に要素を配置"
+      },
+      {
+        "code": ".card-container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1rem;\n}",
+        "description": "レスポンシブなカードレイアウト：幅が足りない場合は折り返し"
+      },
+      {
+        "code": ".sidebar-layout {\n  display: flex;\n}\n\n.sidebar {\n  flex: 0 0 250px;\n}\n\n.main {\n  flex: 1;\n}",
+        "description": "サイドバーレイアウト：固定幅サイドバーと可変メインコンテンツ"
+      }
+    ],
+    "tips": "中央配置、等間隔配置、レスポンシブレイアウトが簡単に実現できる。子要素にflex: 1を指定すると等幅になる。gap プロパティで間隔調整が便利。",
+    "commonMistakes": "親要素にdisplay: flexを指定し忘れると子要素のflexプロパティが効かない。flex-direction を理解せずに使うと意図しない配置になる。",
+    "relatedProperties": [
+      "flex-direction",
+      "justify-content",
+      "align-items",
+      "flex-wrap",
+      "gap",
+      "flex",
+      "order"
+    ],
+    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+  },
+  {
+    "id": "display-grid",
+    "name": "display: grid",
+    "category": "レイアウト・配置",
+    "description": "要素をグリッドコンテナに変換し、子要素（グリッドアイテム）を2次元レイアウト（行と列）で配置できるプロパティです。複雑なレイアウトを直感的に実現でき、レスポンシブデザインにも最適です。",
+    "syntax": "display: grid",
+    "examples": [
+      {
+        "code": ".container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 1rem;\n}",
+        "description": "3列の等幅グリッドレイアウト。1frは利用可能な空間を等分"
+      },
+      {
+        "code": ".layout {\n  display: grid;\n  grid-template-columns: 250px 1fr;\n  grid-template-rows: auto 1fr auto;\n  min-height: 100vh;\n}",
+        "description": "サイドバー付きの全画面レイアウト。固定幅サイドバーと可変メインエリア"
+      },
+      {
+        "code": ".responsive-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 1rem;\n}",
+        "description": "レスポンシブグリッド。最小250pxで自動的に列数を調整"
+      },
+      {
+        "code": ".card-grid {\n  display: grid;\n  grid-template-areas:\n    'header header'\n    'sidebar main'\n    'footer footer';\n  grid-template-columns: 200px 1fr;\n  gap: 1rem;\n}",
+        "description": "グリッドエリア名を使った直感的なレイアウト定義"
+      }
+    ],
+    "tips": "2次元レイアウトならGrid、1次元ならFlexboxを選択。repeat()、minmax()、auto-fit/auto-fillでレスポンシブ対応が簡単。grid-template-areasで視覚的にレイアウトを定義できる。",
+    "commonMistakes": "grid-template-columnsを指定しないと1列になる。frとpxを混在させる際のサイズ計算に注意。grid-areaの名前にハイフンやアンダースコアを使うとエラーになる場合がある。",
+    "relatedProperties": [
+      "grid-template-columns",
+      "grid-template-rows",
+      "grid-template-areas",
+      "gap",
+      "grid-area",
+      "justify-items",
+      "align-items"
+    ],
+    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+  },
+  {
+    "id": "order",
+    "name": "order",
+    "category": "レイアウト・配置",
+    "description": "フレックスアイテムの表示順序を変更するプロパティです。HTMLの記述順序を変えずに、視覚的な並び順だけを調整できます。アクセシビリティを保ちながらレスポンシブデザインに対応できます。",
+    "syntax": "order: <integer>",
+    "examples": [
+      {
+        "code": ".first {\n  order: 1;\n}\n.second {\n  order: 3;\n}\n.third {\n  order: 2;\n}",
+        "description": "HTMLの順序（1,2,3）を視覚的に（1,3,2）の順序で表示"
+      },
+      {
+        "code": ".sidebar {\n  order: 2;\n}\n.main {\n  order: 1;\n}\n\n@media (max-width: 768px) {\n  .sidebar {\n    order: 1;\n  }\n  .main {\n    order: 2;\n  }\n}",
+        "description": "レスポンシブレイアウトでPC時とモバイル時の順序を切り替え"
+      },
+      {
+        "code": ".feature-box:nth-child(2) {\n  order: -1;\n}\n.feature-box:nth-child(1) {\n  order: 1;\n}\n.feature-box:nth-child(3) {\n  order: 0;\n}",
+        "description": "複数要素の順序を数値で細かく制御"
+      },
+      {
+        "code": ".header {\n  order: -999;\n}\n.footer {\n  order: 999;\n}\n.content {\n  order: 0;\n}",
+        "description": "ヘッダーを最初、フッターを最後に確実に配置"
+      }
+    ],
+    "tips": "デフォルト値は0。負の値も使用可能で、小さい値ほど前に表示される。SEOとアクセシビリティを考慮してHTMLの順序は論理的に保つこと。レスポンシブデザインでの順序変更に非常に便利。",
+    "commonMistakes": "HTMLの論理的な順序を無視して視覚的な順序だけを重視すると、スクリーンリーダーでの読み上げ順序が不自然になる。orderは親要素がdisplay: flexまたはdisplay: gridの場合のみ有効。",
+    "relatedProperties": [
+      "display",
+      "flex-direction",
+      "justify-content",
+      "align-items"
+    ],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "container-queries",
+    "name": "@container",
+    "category": "レスポンシブ・関数",
+    "description": "コンテナのサイズに基づいてスタイルを適用する最新のレスポンシブ手法です。メディアクエリの進化版として注目されています。",
+    "syntax": "@container <container-name> (<container-query>) { ... }",
+    "examples": [
+      {
+        "code": ".card {\n  container-type: inline-size;\n}\n\n@container (min-width: 400px) {\n  .card-content {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n  }\n}",
+        "description": "カードコンテナが400px以上の時にグリッドレイアウトに変更"
+      },
+      {
+        "code": ".sidebar {\n  container-type: size;\n  container-name: sidebar;\n}\n\n@container sidebar (max-height: 300px) {\n  .nav-item {\n    font-size: 0.8rem;\n  }\n}",
+        "description": "名前付きコンテナで高さに応じてフォントサイズを調整"
+      }
+    ],
+    "tips": "メディアクエリよりも柔軟で再利用可能。コンポーネント指向の開発に最適。",
+    "commonMistakes": "container-typeの指定を忘れると動作しない。",
+    "relatedProperties": ["container-type", "container-name"],
+    "browserSupport": "Chrome 105+, Firefox 110+, Safari 16+"
+  },
+  {
+    "id": "container-type",
+    "name": "container-type",
+    "category": "レイアウト・配置",
+    "description": "要素をコンテナクエリのコンテナとして定義し、どの軸のサイズ変化を監視するかを指定するプロパティです。子要素がコンテナのサイズに応じてスタイルを変更できるようになります。",
+    "syntax": "container-type: normal | size | inline-size",
+    "examples": [
+      {
+        "code": ".card {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card-title {\n    font-size: 1.5rem;\n  }\n}",
+        "description": "カードの幅に応じてタイトルのフォントサイズを変更"
+      },
+      {
+        "code": ".widget {\n  container-type: size;\n}\n\n@container (min-height: 200px) and (min-width: 400px) {\n  .widget-content {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n  }\n}",
+        "description": "ウィジェットの幅と高さ両方を監視してレイアウトを変更"
+      },
+      {
+        "code": ".sidebar {\n  container-type: inline-size;\n  container-name: sidebar;\n}\n\n@container sidebar (max-width: 250px) {\n  .nav-item {\n    font-size: 0.8rem;\n    padding: 0.25rem;\n  }\n}",
+        "description": "サイドバーが狭い時にナビゲーションアイテムをコンパクトに"
+      }
+    ],
+    "tips": "inline-sizeは横幅のみ監視（最も一般的）。sizeは幅と高さ両方を監視するが、無限ループの可能性があるため慎重に使用。container-nameと組み合わせて複数コンテナを管理できる。",
+    "commonMistakes": "container-typeを指定しないとコンテナクエリが動作しない。sizeを使う際は高さの循環参照に注意。",
+    "relatedProperties": ["@container", "container-name"],
+    "browserSupport": "Chrome 105+, Firefox 110+, Safari 16+"
+  },
+  {
+    "id": "subgrid",
+    "name": "subgrid",
+    "category": "レイアウト・配置",
+    "description": "親グリッドのトラック（行や列）を子グリッドで継承できる機能です。複雑なレイアウトの整列が簡単になります。",
+    "syntax": "grid-template-columns: subgrid | grid-template-rows: subgrid",
+    "examples": [
+      {
+        "code": ".parent {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n}\n\n.child {\n  display: grid;\n  grid-template-columns: subgrid;\n  grid-column: 1 / -1;\n}",
+        "description": "子グリッドが親の列トラックを継承"
+      },
+      {
+        "code": ".card-grid {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n}\n\n.card {\n  display: grid;\n  grid-template-rows: subgrid;\n  grid-row: 1 / -1;\n}",
+        "description": "カードの高さを親グリッドの行に合わせて整列"
+      }
+    ],
+    "tips": "カードレイアウトで高さを揃えるのに非常に便利。Flexboxでは難しい複雑な整列が可能。",
+    "relatedProperties": [
+      "display",
+      "grid-template-columns",
+      "grid-template-rows"
+    ],
+    "browserSupport": "Firefox 71+, Safari 16+（Chrome未対応）"
+  },
+  {
+    "id": "aspect-ratio",
+    "name": "aspect-ratio",
+    "category": "レイアウト・配置",
+    "description": "要素のアスペクト比（縦横比）を指定するプロパティです。レスポンシブな画像や動画の表示に便利です。",
+    "syntax": "aspect-ratio: <ratio> | auto",
+    "examples": [
+      {
+        "code": "aspect-ratio: 16 / 9;",
+        "description": "16:9のアスペクト比を維持"
+      },
+      {
+        "code": "aspect-ratio: 1;",
+        "description": "正方形（1:1）のアスペクト比"
+      },
+      {
+        "code": ".video-container {\n  aspect-ratio: 16 / 9;\n  width: 100%;\n}",
+        "description": "レスポンシブな動画コンテナ"
+      }
+    ],
+    "tips": "画像やiframeの埋め込みで、レイアウトシフトを防ぐのに効果的。",
+    "commonMistakes": "widthまたはheightのどちらかは指定する必要がある。",
+    "relatedProperties": ["object-fit", "width", "height"],
+    "browserSupport": "Chrome 88+, Firefox 89+, Safari 15+"
+  },
+  {
+    "id": "gap",
+    "name": "gap",
+    "category": "スペーシング・サイズ",
+    "description": "FlexboxやGridで要素間の間隔を指定するプロパティです。marginより直感的で管理しやすいです。",
+    "syntax": "gap: <length> | <percentage>",
+    "examples": [
+      {
+        "code": ".flex-container {\n  display: flex;\n  gap: 1rem;\n}",
+        "description": "Flexアイテム間に1remの間隔"
+      },
+      {
+        "code": ".grid-container {\n  display: grid;\n  gap: 2rem 1rem;\n}",
+        "description": "行間2rem、列間1remの間隔"
+      },
+      {
+        "code": "gap: clamp(1rem, 3vw, 2rem);",
+        "description": "レスポンシブな間隔設定"
+      }
+    ],
+    "tips": "marginと違って最初と最後の要素には適用されない。レスポンシブデザインに最適。",
+    "relatedProperties": ["row-gap", "column-gap", "display"],
+    "browserSupport": "Chrome 84+, Firefox 63+, Safari 14.1+"
+  },
+  {
+    "id": "clamp",
+    "name": "clamp()",
+    "category": "レスポンシブ・関数",
+    "description": "最小値、推奨値、最大値を指定してレスポンシブな値を設定する関数です。フルードタイポグラフィに最適です。",
+    "syntax": "clamp(<min>, <preferred>, <max>)",
+    "examples": [
+      {
+        "code": "font-size: clamp(1rem, 4vw, 3rem);",
+        "description": "1remから3remの間でビューポート幅に応じて調整"
+      },
+      {
+        "code": "width: clamp(300px, 50%, 800px);",
+        "description": "300pxから800pxの間で50%の幅を維持"
+      },
+      {
+        "code": "padding: clamp(1rem, 5vw, 4rem);",
+        "description": "レスポンシブなパディング設定"
+      }
+    ],
+    "tips": "メディアクエリを減らせる。calc()と組み合わせるとさらに柔軟。",
+    "relatedProperties": ["min()", "max()", "calc()"],
+    "browserSupport": "Chrome 79+, Firefox 75+, Safari 13.1+"
+  },
+  {
+    "id": "min-max-functions",
+    "name": "min() / max()",
+    "category": "レスポンシブ・関数",
+    "description": "複数の値から最小値または最大値を選択する関数です。レスポンシブデザインで条件分岐的な値設定が可能です。",
+    "syntax": "min(<value>, <value>, ...) | max(<value>, <value>, ...)",
+    "examples": [
+      {
+        "code": "width: min(100%, 600px);",
+        "description": "100%と600pxの小さい方を選択"
+      },
+      {
+        "code": "font-size: max(1rem, 3vw);",
+        "description": "1remと3vwの大きい方を選択"
+      },
+      {
+        "code": "margin: min(5vw, 2rem) auto;",
+        "description": "レスポンシブなマージン設定"
+      }
+    ],
+    "tips": "clamp()の代替として使える。calc()と組み合わせて複雑な計算も可能。",
+    "relatedProperties": ["clamp()", "calc()"],
+    "browserSupport": "Chrome 79+, Firefox 75+, Safari 11.1+"
+  },
+  {
+    "id": "css-custom-properties",
+    "name": "CSS変数 (--property)",
+    "category": "その他",
+    "description": "CSS内で変数を定義・使用できる機能です。テーマ切り替えや保守性の向上に大きく貢献します。",
+    "syntax": "--variable-name: <value>; property: var(--variable-name, <fallback>);",
+    "examples": [
+      {
+        "code": ":root {\n  --primary-color: #3b82f6;\n  --spacing: 1rem;\n}\n\n.button {\n  background: var(--primary-color);\n  padding: var(--spacing);\n}",
+        "description": "グローバル変数の定義と使用"
+      },
+      {
+        "code": ".card {\n  --card-padding: 2rem;\n  padding: var(--card-padding);\n}\n\n.card--compact {\n  --card-padding: 1rem;\n}",
+        "description": "コンポーネントレベルでの変数オーバーライド"
+      },
+      {
+        "code": "color: var(--text-color, #333);",
+        "description": "フォールバック値付きの変数使用"
+      }
+    ],
+    "tips": "JavaScriptから動的に変更可能。ダークモードの実装に必須。",
+    "commonMistakes": "変数名は大文字小文字を区別する。--で始める必要がある。",
+    "relatedProperties": ["var()", "calc()"],
+    "browserSupport": "Chrome 49+, Firefox 31+, Safari 9.1+"
+  },
+  {
+    "id": "backdrop-filter",
+    "name": "backdrop-filter",
+    "category": "アニメーション・エフェクト",
+    "description": "要素の背後にあるコンテンツにフィルター効果を適用するプロパティです。ガラス効果やぼかし効果を作成できます。",
+    "syntax": "backdrop-filter: <filter-function>",
+    "examples": [
+      {
+        "code": ".glass-effect {\n  backdrop-filter: blur(10px);\n  background: rgba(255, 255, 255, 0.1);\n  border: 1px solid rgba(255, 255, 255, 0.2);\n}",
+        "description": "ガラス効果（グラスモーフィズム）の実装"
+      },
+      {
+        "code": ".modal-overlay {\n  backdrop-filter: blur(5px) brightness(0.7);\n  background: rgba(0, 0, 0, 0.3);\n}",
+        "description": "モーダル背景のぼかしと暗化"
+      },
+      {
+        "code": "backdrop-filter: saturate(180%) blur(20px);",
+        "description": "彩度を上げてぼかし効果を適用"
+      }
+    ],
+    "tips": "iOS Safari風のデザインに最適。パフォーマンスに注意して使用。",
+    "commonMistakes": "背景が透明でないと効果が見えない。",
+    "relatedProperties": ["filter", "background", "opacity"],
+    "browserSupport": "Chrome 76+, Firefox 103+, Safari 9+"
+  },
+  {
+    "id": "filter",
+    "name": "filter",
+    "category": "アニメーション・エフェクト",
+    "description": "要素に視覚効果（ぼかし、明度調整、色相変更など）を適用するプロパティです。",
+    "syntax": "filter: <filter-function>",
+    "examples": [
+      {
+        "code": "filter: blur(5px);",
+        "description": "5pxのぼかし効果"
+      },
+      {
+        "code": "filter: brightness(1.2) contrast(1.1);",
+        "description": "明度と彩度を上げる"
+      },
+      {
+        "code": ".image:hover {\n  filter: grayscale(100%) sepia(100%) hue-rotate(200deg);\n}",
+        "description": "ホバー時にグレースケール→セピア→色相変更"
+      }
+    ],
+    "tips": "複数のフィルターを組み合わせ可能。アニメーションとの相性も良い。",
+    "relatedProperties": ["backdrop-filter", "transition"],
+    "browserSupport": "Chrome 53+, Firefox 35+, Safari 9.1+"
+  },
+  {
+    "id": "object-fit",
+    "name": "object-fit",
+    "category": "背景・装飾",
+    "description": "画像や動画などの置換要素がコンテナにどのようにフィットするかを制御するプロパティです。",
+    "syntax": "object-fit: fill | contain | cover | none | scale-down",
+    "examples": [
+      {
+        "code": "object-fit: cover;",
+        "description": "アスペクト比を保ちながらコンテナを埋める"
+      },
+      {
+        "code": "object-fit: contain;",
+        "description": "アスペクト比を保ちながらコンテナに収める"
+      },
+      {
+        "code": "object-fit: fill;",
+        "description": "アスペクト比を無視してコンテナに合わせる（歪む可能性あり）"
+      },
+      {
+        "code": "object-fit: none;",
+        "description": "元のサイズのまま表示（はみ出し部分はカット）"
+      },
+      {
+        "code": "object-fit: scale-down;",
+        "description": "containとnoneのうち、結果的に小さくなる方を適用"
+      }
+    ],
+    "tips": "レスポンシブ画像の必須プロパティ。aspect-ratioと組み合わせると強力。",
+    "relatedProperties": ["object-position", "aspect-ratio"],
+    "browserSupport": "Chrome 32+, Firefox 36+, Safari 10+"
+  },
+  {
+    "id": "place-items",
+    "name": "place-items",
+    "category": "レイアウト・配置",
+    "description": "align-itemsとjustify-itemsを一括で設定するショートハンドプロパティです。Grid/Flexboxで中央配置が簡単になります。",
+    "syntax": "place-items: <align-items> <justify-items>",
+    "examples": [
+      {
+        "code": ".grid-container {\n  display: grid;\n  place-items: center;\n}",
+        "description": "グリッドアイテムを中央配置"
+      },
+      {
+        "code": "place-items: start end;",
+        "description": "垂直方向は開始、水平方向は終端に配置"
+      }
+    ],
+    "tips": "1つの値で両方向、2つの値で個別指定。中央配置の最短記法。",
+    "relatedProperties": ["align-items", "justify-items", "place-content"],
+    "browserSupport": "Chrome 59+, Firefox 45+, Safari 11+"
+  },
+  {
+    "id": "place-content",
+    "name": "place-content",
+    "category": "レイアウト・配置",
+    "description": "align-contentとjustify-contentを一括で設定するショートハンドプロパティです。",
+    "syntax": "place-content: <align-content> <justify-content>",
+    "examples": [
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: wrap;\n  place-content: center;\n}",
+        "description": "フレックスコンテンツを中央配置"
+      },
+      {
+        "code": "place-content: space-between center;",
+        "description": "垂直方向は均等配置、水平方向は中央配置"
+      }
+    ],
+    "tips": "複数行のFlexboxやGridで威力を発揮。",
+    "relatedProperties": ["align-content", "justify-content", "place-items"],
+    "browserSupport": "Chrome 59+, Firefox 45+, Safari 11+"
+  },
+  {
+    "id": "flex-direction",
+    "name": "flex-direction",
+    "category": "レイアウト・配置",
+    "description": "フレックスコンテナ内のアイテムの配置方向を指定するプロパティです。",
+    "syntax": "flex-direction: row | row-reverse | column | column-reverse",
+    "examples": [
+      {
+        "code": "flex-direction: row;",
+        "description": "横方向（左から右）に配置（デフォルト）"
+      },
+      {
+        "code": "flex-direction: column;",
+        "description": "縦方向（上から下）に配置"
+      }
+    ],
+    "tips": "レスポンシブデザインでは、画面サイズに応じてrowとcolumnを切り替えることが多い。",
+    "commonMistakes": "親要素にdisplay: flexを指定し忘れると効果がない。",
+    "relatedProperties": [
+      "display",
+      "justify-content",
+      "align-items",
+      "flex-wrap"
+    ],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "justify-content",
+    "name": "justify-content",
+    "category": "レイアウト・配置",
+    "description": "フレックスコンテナ内のアイテムの主軸方向の配置を指定するプロパティです。",
+    "syntax": "justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly",
+    "examples": [
+      {
+        "code": "justify-content: center;",
+        "description": "アイテムを中央に配置"
+      },
+      {
+        "code": "justify-content: space-between;",
+        "description": "アイテム間に均等な間隔を配置"
+      },
+      {
+        "code": "justify-content: flex-start;",
+        "description": "アイテムを左（開始位置）に寄せて配置"
+      },
+      {
+        "code": "justify-content: space-around;",
+        "description": "アイテムの両端と間に均等な余白を配置"
+      }
+    ],
+    "tips": "centerはボタンやカードの中央配置によく使う。space-betweenはナビゲーションメニューに最適。",
+    "relatedProperties": ["align-items", "flex-direction", "display"],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "justify-items",
+    "name": "justify-items",
+    "category": "レイアウト・配置",
+    "description": "グリッドコンテナ内のアイテムの水平方向（インライン軸）の配置を制御するプロパティです。全てのグリッドアイテムに対して一括で配置を指定できます。",
+    "syntax": "justify-items: start | end | center | stretch",
+    "examples": [
+      {
+        "code": ".grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 200px);\n  justify-items: center;\n}",
+        "description": "各グリッドアイテムをセル内の中央に配置"
+      },
+      {
+        "code": ".grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  justify-items: start;\n}",
+        "description": "各グリッドアイテムをセル内の左端に配置"
+      },
+      {
+        "code": ".grid-container {\n  display: grid;\n  grid-template-columns: repeat(2, 300px);\n  justify-items: stretch;\n}",
+        "description": "各グリッドアイテムをセルの幅に合わせて伸縮（デフォルト）"
+      },
+      {
+        "code": ".card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 2rem;\n  justify-items: end;\n}",
+        "description": "レスポンシブカードグリッドで各カードをセル内の右端に配置"
+      }
+    ],
+    "tips": "justify-selfは個別のアイテムに、justify-itemsは全アイテムに適用される。Flexboxのjustify-contentとは用途が異なるので注意。",
+    "commonMistakes": "Flexboxでは効果がない。グリッドでのみ有効。個別制御にはjustify-selfを使う。",
+    "relatedProperties": [
+      "align-items",
+      "justify-self",
+      "place-items",
+      "grid-template-columns"
+    ],
+    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+  },
+  {
+    "id": "align-items",
+    "name": "align-items",
+    "category": "レイアウト・配置",
+    "description": "フレックスコンテナ内のアイテムの交差軸方向の配置を指定するプロパティです。",
+    "syntax": "align-items: flex-start | flex-end | center | baseline | stretch",
+    "examples": [
+      {
+        "code": "align-items: center;",
+        "description": "アイテムを交差軸の中央に配置"
+      },
+      {
+        "code": "align-items: stretch;",
+        "description": "アイテムをコンテナの高さに合わせて引き伸ばす（デフォルト）"
+      },
+      {
+        "code": "align-items: flex-start;",
+        "description": "アイテムを上（開始位置）に揃えて配置"
+      },
+      {
+        "code": "align-items: flex-end;",
+        "description": "アイテムを下（終了位置）に揃えて配置"
+      }
+    ],
+    "tips": "justify-contentと組み合わせて完全中央配置が可能。",
+    "relatedProperties": ["justify-content", "flex-direction", "align-self"],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "align-content",
+    "name": "align-content",
+    "category": "レイアウト・配置",
+    "description": "FlexboxやGridで複数行がある場合、行全体の交差軸方向の配置を制御するプロパティです。flex-wrapで複数行になった場合や、グリッドで複数行・列がある場合に効果を発揮します。",
+    "syntax": "align-content: flex-start | flex-end | center | space-between | space-around | space-evenly | stretch",
+    "examples": [
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: wrap;\n  height: 300px;\n  align-content: center;\n}",
+        "description": "複数行のFlexアイテムをコンテナの垂直中央に配置"
+      },
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: wrap;\n  height: 400px;\n  align-content: space-between;\n}",
+        "description": "複数行の間に均等な間隔を配置（上下端は余白なし）"
+      },
+      {
+        "code": ".grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  height: 500px;\n  align-content: start;\n}",
+        "description": "グリッドの全体を上端に配置"
+      },
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: wrap;\n  height: 300px;\n  align-content: space-evenly;\n}",
+        "description": "行間と上下端に均等な間隔を配置"
+      }
+    ],
+    "tips": "align-itemsは各アイテムの配置、align-contentは行全体の配置を制御。flex-wrapやグリッドで複数行がある場合にのみ効果がある。",
+    "commonMistakes": "単一行のFlexboxでは効果がない。flex-wrap: wrapが必要。align-itemsと混同しやすい。",
+    "relatedProperties": [
+      "align-items",
+      "justify-content",
+      "flex-wrap",
+      "grid-template-rows"
+    ],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "flex-wrap",
+    "name": "flex-wrap",
+    "category": "レイアウト・配置",
+    "description": "フレックスアイテムが一行に収まらない場合の折り返し動作を制御します。",
+    "syntax": "flex-wrap: nowrap | wrap | wrap-reverse",
+    "examples": [
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1rem;\n}\n\n.item {\n  flex: 1 1 200px;\n  min-width: 120px;\n  background: #3b82f6;\n  color: #fff;\n  margin-bottom: 8px;\n}",
+        "description": "横幅が足りない場合に自動で折り返して複数行に並ぶレイアウト。レスポンシブなカードやボタン配置でよく使います。"
+      },
+      {
+        "code": ".flex-container {\n  display: flex;\n  flex-wrap: nowrap;\n}\n\n.item {\n  flex: 1 1 200px;\n}",
+        "description": "nowrap（デフォルト）は折り返さず、アイテムが1行に収まらない場合は縮小されて詰まって表示されます。"
+      }
+    ],
+    "tips": "flex-basisと組み合わせてレスポンシブレイアウトを作成。",
+    "relatedProperties": ["flex-basis", "flex-grow", "flex-shrink"],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "flex-grow-shrink-basis",
+    "name": "flex (grow/shrink/basis)",
+    "category": "レイアウト・配置",
+    "description": "フレックスアイテムの伸縮性と基本サイズを制御するプロパティです。",
+    "syntax": "flex: <flex-grow> <flex-shrink> <flex-basis>",
+    "examples": [
+      {
+        "code": ".sidebar {\n  flex: 0 0 250px;\n}\n\n.main {\n  flex: 1;\n}",
+        "description": "固定サイドバーと可変メインコンテンツ"
+      },
+      {
+        "code": ".card {\n  flex: 1 1 300px;\n}",
+        "description": "最小300pxで均等に伸縮するカード"
+      },
+      {
+        "code": "flex: none;",
+        "description": "伸縮しない（flex: 0 0 auto と同じ）"
+      }
+    ],
+    "tips": "flex: 1は最も使用頻度が高い。レスポンシブデザインの基本。",
+    "relatedProperties": ["flex-wrap", "min-width", "max-width"],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "grid-template-columns",
+    "name": "grid-template-columns",
+    "category": "レイアウト・配置",
+    "description": "グリッドコンテナの列のサイズと数を定義するプロパティです。",
+    "syntax": "grid-template-columns: <track-size> ... | <line-name> <track-size> ...",
+    "examples": [
+      {
+        "code": "grid-template-columns: 1fr 1fr 1fr;",
+        "description": "3つの等幅（同じ幅）の列を作成します。例えば3カラムのレイアウトや、カードを均等に並べたい時に使います。"
+      },
+      {
+        "code": "grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));",
+        "description": "列の数を自動調整し、各列の最小幅を300px、最大幅を等分（1fr）にします。画面幅に応じてカラム数が増減するレスポンシブなグリッドが簡単に作れます。"
+      }
+    ],
+    "tips": "repeat()とminmax()を組み合わせるとレスポンシブなグリッドが簡単に作れる。",
+    "relatedProperties": ["grid-template-rows", "display", "grid-gap"],
+    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+  },
+  {
+    "id": "grid-template-areas",
+    "name": "grid-template-areas",
+    "category": "レイアウト・配置",
+    "description": "グリッドエリアに名前を付けて、視覚的にレイアウトを定義できるプロパティです。",
+    "syntax": "grid-template-areas: \"<area-name> <area-name> ...\" ...",
+    "examples": [
+      {
+        "code": ".layout {\n  display: grid;\n  grid-template-areas:\n    \"header header header\"\n    \"sidebar main aside\"\n    \"footer footer footer\";\n}\n\n.header { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.main { grid-area: main; }",
+        "description": "3行3列のグリッドで、上部にヘッダー、左にサイドバー、中央にメイン、右にアサイド、下部にフッターを配置する典型的なWebレイアウト例です。エリア名（header, sidebar, main, aside, footer）がどの位置に割り当てられるかを視覚的に定義できます。"
+      },
+      {
+        "code": "grid-template-areas:\n  \"logo nav nav\"\n  \"hero hero hero\"\n  \"content content sidebar\";",
+        "description": "1行目は左にロゴ、右2つ分にナビゲーション、2行目はヒーローエリアが3列分、3行目は左2つ分にコンテンツ、右にサイドバーを配置するレイアウト例です。エリア名を使うことで、HTML構造とCSSレイアウトの対応が直感的に分かります。"
+      }
+    ],
+    "tips": "レイアウトが視覚的に理解しやすい。メディアクエリで簡単に変更可能。",
+    "relatedProperties": [
+      "grid-area",
+      "grid-template-columns",
+      "grid-template-rows"
+    ],
+    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+  },
+  {
+    "id": "grid-auto-fit-fill",
+    "name": "grid-template-columns: repeat",
+    "category": "レイアウト・配置",
+    "description": "グリッドで自動的に列数を調整する関数です。レスポンシブグリッドの実装に必須です。",
+    "syntax": "grid-template-columns: repeat(auto-fit | auto-fill, <track-size>)",
+    "examples": [
+      {
+        "code": "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));",
+        "description": "最小250pxでコンテナ幅に応じて列数を自動調整"
+      },
+      {
+        "code": "grid-template-columns: repeat(auto-fill, 200px);",
+        "description": "200px固定幅で可能な限り多くの列を作成"
+      }
+    ],
+    "tips": "auto-fitは余った空間を埋める、auto-fillは空の列も作成する。",
+    "relatedProperties": ["minmax()", "grid-template-columns"],
+    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+  },
+  {
+    "id": "position",
+    "name": "position",
+    "category": "レイアウト・配置",
+    "description": "要素の配置方法を指定するプロパティです。通常の文書フローからの配置制御が可能です。top、right、bottom、leftプロパティと組み合わせて使用します。",
+    "syntax": "position: static | relative | absolute | fixed | sticky",
+    "examples": [
+      {
+        "code": ".relative-box {\n  position: relative;\n  top: 10px;\n  left: 20px;\n}",
+        "description": "通常位置から上に10px、左に20px移動した相対配置"
+      },
+      {
+        "code": ".absolute-box {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100px;\n  height: 100px;\n}",
+        "description": "親要素の右上角に配置される絶対配置"
+      },
+      {
+        "code": ".fixed-header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 60px;\n  z-index: 1000;\n}",
+        "description": "画面上部に固定されるヘッダー"
+      },
+      {
+        "code": ".sticky-sidebar {\n  position: sticky;\n  top: 20px;\n  height: fit-content;\n}",
+        "description": "スクロール時に上から20pxの位置で固定されるサイドバー"
+      },
+      {
+        "code": ".centered-modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 300px;\n}",
+        "description": "画面中央に配置されるモーダル"
+      }
+    ],
+    "tips": "absoluteとfixedは元の領域を確保しない。absoluteは最も近い位置指定された親要素が基準、fixedはビューポートが基準。stickyはスクロール時の追従に便利。",
+    "commonMistakes": "absoluteを使う際は、親要素にrelativeを指定することを忘れがち。top/right/bottom/leftを指定しないと効果が見えない場合がある。",
+    "relatedProperties": ["z-index", "transform"],
+    "browserSupport": "全ブラウザ対応（stickyはIE非対応）"
+  },
+  {
+    "id": "z-index",
+    "name": "z-index",
+    "category": "レイアウト・配置",
+    "description": "要素の重ね順（奥行き順）を指定するプロパティです。値が大きいほど手前に表示されます。",
+    "syntax": "z-index: auto | <integer>",
+    "examples": [
+      {
+        "code": ".box1 {\n  position: absolute;\n  z-index: 10;\n}\n.box2 {\n  position: absolute;\n  z-index: 5;\n}\n.box3 {\n  position: absolute;\n  z-index: 0;\n}",
+        "description": "z-indexの値が大きいほど手前に表示されます。上記の例では.box1（z-index:10）が一番手前、.box3（z-index:0）が一番奥に重なります。positionが必要です。"
+      },
+      {
+        "code": ".modal {\n  position: fixed;\n  z-index: 1000;\n}\n.overlay {\n  position: fixed;\n  z-index: 900;\n}",
+        "description": "モーダルウィンドウ（z-index:1000）をオーバーレイ（z-index:900）より手前に表示する例です。z-indexは重なり順を制御するのに便利です。"
+      },
+      {
+        "code": ".back {\n  position: relative;\n  z-index: -1;\n}",
+        "description": "z-index:-1は他の要素より背面（下）に配置したい場合に使います。position指定が必須です。"
+      }
+    ],
+    "tips": "positionがstaticでない要素にのみ有効。モーダルやドロップダウンでよく使用。",
+    "commonMistakes": "positionを指定していない要素にz-indexを指定しても効果がない。",
+    "relatedProperties": ["position"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "color",
+    "name": "color",
+    "category": "テキスト・フォント",
+    "description": "テキストの色を指定するプロパティです。様々な色形式で指定可能です。",
+    "syntax": "color: <color>",
+    "examples": [
+      {
+        "code": "color: #3b82f6;",
+        "description": "16進数カラーコードで青色を指定"
+      },
+      {
+        "code": "color: rgb(59, 130, 246);",
+        "description": "RGB値で同じ青色を指定"
+      },
+      {
+        "code": "color: hsl(217, 91%, 60%);",
+        "description": "HSL値で同じ青色を指定"
+      }
+    ],
+    "tips": "CSS変数と組み合わせるとテーマ切り替えが簡単になる。",
+    "relatedProperties": ["background-color", "border-color"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "font-size",
+    "name": "font-size",
+    "category": "テキスト・フォント",
+    "description": "テキストのフォントサイズを指定するプロパティです。",
+    "syntax": "font-size: <absolute-size> | <relative-size> | <length> | <percentage>",
+    "examples": [
+      {
+        "code": "font-size: 16px;",
+        "description": "絶対値でフォントサイズを指定"
+      },
+      {
+        "code": "font-size: 1.2em;",
+        "description": "親要素の1.2倍のサイズ"
+      },
+      {
+        "code": "font-size: 1.2rem;",
+        "description": "ルート要素の1.2倍のサイズ"
+      }
+    ],
+    "tips": "レスポンシブデザインではremやemを使うと柔軟性が高い。",
+    "relatedProperties": ["font-family", "font-weight", "line-height"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "font-weight",
+    "name": "font-weight",
+    "category": "テキスト・フォント",
+    "description": "フォントの太さを指定するプロパティです。",
+    "syntax": "font-weight: normal | bold | bolder | lighter | <number>",
+    "examples": [
+      {
+        "code": "font-weight: 400;",
+        "description": "通常の太さ（normalと同じ）"
+      },
+      {
+        "code": "font-weight: 700;",
+        "description": "太字（boldと同じ）"
+      },
+      {
+        "code": "font-weight: 300;",
+        "description": "細字（light）"
+      }
+    ],
+    "tips": "数値指定（100-900）の方が細かい制御が可能。Webフォントでは対応する太さのみ有効。",
+    "relatedProperties": ["font-family", "font-size"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "line-height",
+    "name": "line-height",
+    "category": "テキスト・フォント",
+    "description": "行の高さ（行間）を指定するプロパティです。読みやすさに大きく影響します。",
+    "syntax": "line-height: normal | <number> | <length> | <percentage>",
+    "examples": [
+      {
+        "code": "line-height: 1.6;",
+        "description": "フォントサイズの1.6倍の行高（推奨値）"
+      },
+      {
+        "code": "line-height: 1;",
+        "description": "フォントサイズと同じ高さ（タイトル用）"
+      },
+      {
+        "code": "line-height: 2rem;",
+        "description": "絶対値で行高を指定"
+      }
+    ],
+    "tips": "単位なしの数値指定が推奨。1.4-1.6が読みやすい。",
+    "relatedProperties": ["font-size", "vertical-align"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "letter-spacing",
+    "name": "letter-spacing",
+    "category": "テキスト・フォント",
+    "description": "文字間のスペース（字間）を指定するプロパティです。可読性やデザイン調整に使われます。",
+    "syntax": "letter-spacing: normal | <length>",
+    "examples": [
+      { "code": "letter-spacing: 0.1em;", "description": "文字間をやや広げる" },
+      { "code": "letter-spacing: -1px;", "description": "文字間を詰める" }
+    ],
+    "tips": "em単位で指定するとフォントサイズに応じて調整できる。日本語Webフォントでは詰めすぎに注意。",
+    "commonMistakes": "負の値を使いすぎると文字が重なって読みにくくなる。",
+    "relatedProperties": ["word-spacing", "font-size"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "text-align",
+    "name": "text-align",
+    "category": "テキスト・フォント",
+    "description": "テキストの水平方向の配置を指定するプロパティです。",
+    "syntax": "text-align: left | right | center | justify | start | end",
+    "examples": [
+      {
+        "code": "text-align: center;",
+        "description": "中央揃え"
+      },
+      {
+        "code": "text-align: justify;",
+        "description": "両端揃え"
+      },
+      {
+        "code": "text-align: start;",
+        "description": "書字方向の開始位置に揃える"
+      }
+    ],
+    "tips": "startとendは国際化対応。justifyは英語以外では注意が必要。",
+    "relatedProperties": ["vertical-align", "text-justify"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "text-decoration",
+    "name": "text-decoration",
+    "category": "テキスト・フォント",
+    "description": "テキストの装飾（下線、上線、取り消し線など）を指定するプロパティです。",
+    "syntax": "text-decoration: <text-decoration-line> <text-decoration-style> <text-decoration-color>",
+    "examples": [
+      {
+        "code": "text-decoration: underline;",
+        "description": "下線を追加"
+      },
+      {
+        "code": "text-decoration: line-through red;",
+        "description": "赤い取り消し線"
+      },
+      {
+        "code": "text-decoration: underline wavy blue;",
+        "description": "青い波線の下線"
+      }
+    ],
+    "tips": "リンクのスタイリングでよく使用。noneでデフォルトの下線を削除。",
+    "relatedProperties": ["text-decoration-thickness", "text-underline-offset"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "background-color",
+    "name": "background-color",
+    "category": "背景・装飾",
+    "description": "要素の背景色を指定するプロパティです。",
+    "syntax": "background-color: <color> | transparent",
+    "examples": [
+      {
+        "code": "background-color: #f8fafc;",
+        "description": "薄いグレーの背景色を設定"
+      },
+      {
+        "code": "background-color: rgba(59, 130, 246, 0.1);",
+        "description": "透明度10%の青い背景色"
+      }
+    ],
+    "tips": "透明度を使うことで、重なった要素との調和を図れる。",
+    "relatedProperties": ["color", "background-image", "opacity"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "background-image",
+    "name": "background-image",
+    "category": "背景・装飾",
+    "description": "要素の背景画像を指定するプロパティです。グラデーションも指定可能です。",
+    "syntax": "background-image: url(<url>) | <gradient> | none",
+    "examples": [
+      {
+        "code": "background-image: url('hero-bg.jpg');",
+        "description": "画像ファイルを背景に設定"
+      },
+      {
+        "code": "background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);",
+        "description": "線形グラデーション背景"
+      },
+      {
+        "code": "background-image: radial-gradient(circle, #ff6b6b, #4ecdc4);",
+        "description": "円形グラデーション背景"
+      }
+    ],
+    "tips": "グラデーションはCSS3の強力な機能。複数の背景画像も指定可能。",
+    "relatedProperties": [
+      "background-size",
+      "background-position",
+      "background-repeat"
+    ],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "background-size",
+    "name": "background-size",
+    "category": "背景・装飾",
+    "description": "背景画像のサイズを制御するプロパティです。",
+    "syntax": "background-size: auto | cover | contain | <length> | <percentage>",
+    "examples": [
+      {
+        "code": "background-size: cover;",
+        "description": "アスペクト比を保ちながら要素全体を覆う"
+      },
+      {
+        "code": "background-size: contain;",
+        "description": "アスペクト比を保ちながら要素内に収める"
+      },
+      {
+        "code": "background-size: 100% auto;",
+        "description": "幅100%、高さは自動調整"
+      }
+    ],
+    "tips": "coverはヒーロー画像、containはロゴなどに適している。",
+    "relatedProperties": ["background-image", "background-position"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "background-position",
+    "name": "background-position",
+    "category": "背景・装飾",
+    "description": "背景画像の配置位置を制御するプロパティです。キーワードや数値、パーセントで位置を指定できます。",
+    "syntax": "background-position: <position> | <length> | <percentage>",
+    "examples": [
+      {
+        "code": "background-position: center;",
+        "description": "背景画像を中央に配置"
+      },
+      {
+        "code": "background-position: top right;",
+        "description": "背景画像を右上に配置"
+      },
+      {
+        "code": "background-position: 20% 80%;",
+        "description": "水平方向20%、垂直方向80%の位置に配置"
+      },
+      {
+        "code": "background-position: 50px 100px;",
+        "description": "左から50px、上から100pxの位置に配置"
+      }
+    ],
+    "tips": "ヒーロー画像の重要な部分を調整したり、パターン画像の位置を微調整するのに便利。centerは最も使用頻度が高い。",
+    "commonMistakes": "パーセント指定は画像とコンテナの対応する位置を揃える仕組みなので、50% 50%が中央配置になる。",
+    "relatedProperties": [
+      "background-image",
+      "background-size",
+      "background-repeat"
+    ],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "linear-gradient",
+    "name": "linear-gradient()",
+    "category": "レスポンシブ・関数",
+    "description": "線形グラデーションを作成する関数です。モダンなデザインに欠かせません。",
+    "syntax": "linear-gradient(<angle>, <color-stop>, <color-stop>, ...)",
+    "examples": [
+      {
+        "code": "background: linear-gradient(to right, #ff6b6b, #4ecdc4);",
+        "description": "左から右への2色グラデーション"
+      },
+      {
+        "code": "background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);",
+        "description": "45度角度での斜めグラデーション"
+      },
+      {
+        "code": "background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);",
+        "description": "透明から黒への縦グラデーション（オーバーレイ効果）"
+      }
+    ],
+    "tips": "角度指定でより自然なグラデーション。透明度を使ったオーバーレイ効果も人気。",
+    "relatedProperties": ["radial-gradient()", "background-image"],
+    "browserSupport": "IE10+, 全モダンブラウザ"
+  },
+  {
+    "id": "radial-gradient",
+    "name": "radial-gradient()",
+    "category": "レスポンシブ・関数",
+    "description": "円形・楕円形のグラデーションを作成する関数です。",
+    "syntax": "radial-gradient(<shape> <size> at <position>, <color-stop>, ...)",
+    "examples": [
+      {
+        "code": "background: radial-gradient(circle, #ff6b6b, #4ecdc4);",
+        "description": "中央から外側への円形グラデーション"
+      },
+      {
+        "code": "background: radial-gradient(ellipse at top left, #667eea, transparent);",
+        "description": "左上を中心とした楕円グラデーション"
+      },
+      {
+        "code": "background: radial-gradient(circle at 30% 70%, rgba(255,107,107,0.3), transparent 50%);",
+        "description": "特定位置からの部分的なグラデーション"
+      }
+    ],
+    "tips": "ボタンのホバー効果やスポットライト効果に最適。",
+    "relatedProperties": ["linear-gradient()", "background-image"],
+    "browserSupport": "IE10+, 全モダンブラウザ"
+  },
+  {
+    "id": "padding",
+    "name": "padding",
+    "category": "スペーシング・サイズ",
+    "description": "要素の内側の余白を指定するプロパティです。",
+    "syntax": "padding: <length> | <percentage>",
+    "examples": [
+      {
+        "code": "padding: 16px;",
+        "description": "全方向に16pxの内側余白"
+      },
+      {
+        "code": "padding: 12px 24px;",
+        "description": "上下12px、左右24pxの内側余白"
+      },
+      {
+        "code": "padding: 8px 16px 12px 20px;",
+        "description": "上8px、右16px、下12px、左20pxの内側余白"
+      }
+    ],
+    "tips": "ボックスサイズに含まれるため、幅の計算に注意。box-sizing: border-boxが便利。",
+    "relatedProperties": ["margin", "box-sizing"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "margin",
+    "name": "margin",
+    "category": "スペーシング・サイズ",
+    "description": "要素の外側の余白を指定するプロパティです。",
+    "syntax": "margin: <length> | <percentage> | auto",
+    "examples": [
+      {
+        "code": "margin: 0 auto;",
+        "description": "上下0、左右自動（中央寄せ）"
+      },
+      {
+        "code": "margin: 24px;",
+        "description": "全方向に24pxの外側余白"
+      }
+    ],
+    "tips": "margin: 0 autoでブロック要素の中央寄せが可能。",
+    "commonMistakes": "マージンの相殺（margin collapse）を理解していないと予期しないレイアウトになる。",
+    "relatedProperties": ["padding"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "width",
+    "name": "width",
+    "category": "スペーシング・サイズ",
+    "description": "要素の横幅を指定するプロパティです。px, %, vw, emなど様々な単位が利用できます。",
+    "syntax": "width: <length> | <percentage> | auto | min-content | max-content | fit-content",
+    "examples": [
+      { "code": "width: 100px;", "description": "幅を100pxに固定" },
+      { "code": "width: 50%;", "description": "親要素の50%の幅" },
+      {
+        "code": "width: fit-content;",
+        "description": "内容に合わせて幅を自動調整"
+      }
+    ],
+    "tips": "autoはデフォルト値。fit-contentやmin/max-contentはモダンなレイアウトで便利。",
+    "commonMistakes": "親要素の幅に依存する場合、意図しないレイアウトになることがある。",
+    "relatedProperties": ["height", "max-width", "min-width", "box-sizing"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "height",
+    "name": "height",
+    "category": "スペーシング・サイズ",
+    "description": "要素の高さを指定するプロパティです。px, %, vh, emなど様々な単位が利用できます。",
+    "syntax": "height: <length> | <percentage> | auto | min-content | max-content | fit-content",
+    "examples": [
+      { "code": "height: 200px;", "description": "高さを200pxに固定" },
+      { "code": "height: 100%;", "description": "親要素の高さに合わせる" },
+      {
+        "code": "height: fit-content;",
+        "description": "内容に合わせて高さを自動調整"
+      }
+    ],
+    "tips": "%指定は親要素の高さが明示されていないと効かない。",
+    "commonMistakes": "高さを固定するとレスポンシブで崩れることがある。",
+    "relatedProperties": ["width", "max-height", "min-height", "box-sizing"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "max-width",
+    "name": "max-width",
+    "category": "スペーシング・サイズ",
+    "description": "要素の最大幅を指定するプロパティです。widthと組み合わせてレスポンシブなデザインが可能です。",
+    "syntax": "max-width: <length> | <percentage> | none",
+    "examples": [
+      { "code": "max-width: 600px;", "description": "最大幅を600pxに制限" },
+      {
+        "code": "max-width: 100%;",
+        "description": "親要素の幅を超えないようにする"
+      }
+    ],
+    "tips": "画像やコンテンツの横スクロール防止に便利。",
+    "commonMistakes": "widthとmax-widthを併用した場合、max-widthが優先される。",
+    "relatedProperties": ["width", "min-width"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "min-width",
+    "name": "min-width",
+    "category": "スペーシング・サイズ",
+    "description": "要素の最小幅を指定するプロパティです。レイアウトの崩れ防止やレスポンシブ対応に役立ちます。",
+    "syntax": "min-width: <length> | <percentage> | auto",
+    "examples": [
+      { "code": "min-width: 120px;", "description": "最小幅を120pxに設定" },
+      {
+        "code": "min-width: 50%;",
+        "description": "親要素の50%を下回らないようにする"
+      }
+    ],
+    "tips": "ボタンや入力欄の極端な縮小を防ぐのに便利。",
+    "commonMistakes": "min-widthが効かない場合は親要素の幅やbox-sizingを確認。",
+    "relatedProperties": ["width", "max-width"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "box-sizing",
+    "name": "box-sizing",
+    "category": "スペーシング・サイズ",
+    "description": "要素のサイズ計算方法を指定するプロパティです。モダンCSS開発では必須です。",
+    "syntax": "box-sizing: content-box | border-box",
+    "examples": [
+      {
+        "code": "* {\n  box-sizing: border-box;\n}",
+        "description": "全要素でborder-boxを適用（推奨設定）"
+      },
+      {
+        "code": ".container {\n  width: 300px;\n  padding: 20px;\n  border: 2px solid #ccc;\n  box-sizing: border-box;\n}",
+        "description": "幅300pxにpadding・borderを含める"
+      }
+    ],
+    "tips": "border-boxは直感的なサイズ計算。CSSリセットで全体に適用するのが一般的。",
+    "commonMistakes": "content-box（デフォルト）では、paddingとborderが幅に追加される。",
+    "relatedProperties": ["width", "height", "padding", "border"],
+    "browserSupport": "IE8+, 全モダンブラウザ"
+  },
+  {
+    "id": "border",
+    "name": "border",
+    "category": "背景・装飾",
+    "description": "要素の境界線を指定するプロパティです。幅、スタイル、色を一括設定できます。",
+    "syntax": "border: <border-width> <border-style> <border-color>",
+    "examples": [
+      {
+        "code": "border: 1px solid #e5e7eb;",
+        "description": "1pxの実線でグレーのボーダー"
+      },
+      {
+        "code": "border: 2px dashed #3b82f6;",
+        "description": "2pxの破線で青いボーダー"
+      }
+    ],
+    "tips": "border-radiusと組み合わせて角丸にするのが一般的。",
+    "relatedProperties": [
+      "border-radius",
+      "border-width",
+      "border-style",
+      "border-color"
+    ],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "border-radius",
+    "name": "border-radius",
+    "category": "背景・装飾",
+    "description": "要素の角を丸くするプロパティです。",
+    "syntax": "border-radius: <length> | <percentage>",
+    "examples": [
+      {
+        "code": "border-radius: 8px;",
+        "description": "全ての角を8pxで丸く"
+      },
+      {
+        "code": "border-radius: 50%;",
+        "description": "完全な円形（正方形の場合）"
+      }
+    ],
+    "tips": "カードデザインやボタンで必須のプロパティ。",
+    "relatedProperties": ["border"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "box-shadow",
+    "name": "box-shadow",
+    "category": "背景・装飾",
+    "description": "要素に影を付けるプロパティです。複数の影を重ねることも可能です。",
+    "syntax": "box-shadow: <offset-x> <offset-y> <blur-radius> <spread-radius> <color>",
+    "examples": [
+      {
+        "code": "box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);",
+        "description": "下方向に薄い影を追加"
+      },
+      {
+        "code": "box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);",
+        "description": "フォーカス時の青いアウトライン効果"
+      }
+    ],
+    "tips": "ホバー効果やフォーカス状態の表現によく使われる。",
+    "relatedProperties": ["filter"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "opacity",
+    "name": "opacity",
+    "category": "アニメーション・エフェクト",
+    "description": "要素の透明度を指定するプロパティです。0（完全透明）から1（完全不透明）の間で指定します。",
+    "syntax": "opacity: <number>",
+    "examples": [
+      {
+        "code": "opacity: 0.5;",
+        "description": "50%の透明度"
+      },
+      {
+        "code": "opacity: 0;",
+        "description": "完全に透明（但し領域は確保される）"
+      }
+    ],
+    "tips": "display: noneと違い、要素の領域は確保される。アニメーションにも対応。",
+    "relatedProperties": ["visibility", "display"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "transition",
+    "name": "transition",
+    "category": "アニメーション・エフェクト",
+    "description": "CSSプロパティの変化を滑らかにアニメーションするプロパティです。",
+    "syntax": "transition: <property> <duration> <timing-function> <delay>",
+    "examples": [
+      {
+        "code": "transition: all 0.3s ease;",
+        "description": "全てのプロパティを0.3秒でスムーズに変化"
+      },
+      {
+        "code": "transition: opacity 0.2s ease-in-out;",
+        "description": "透明度のみを0.2秒で変化"
+      }
+    ],
+    "tips": "ホバー効果やインタラクティブな要素には必須。パフォーマンスを考慮してtransformやopacityを優先。",
+    "relatedProperties": ["transform", "opacity"],
+    "browserSupport": "IE10+, 全モダンブラウザ"
+  },
+  {
+    "id": "transform",
+    "name": "transform",
+    "category": "アニメーション・エフェクト",
+    "description": "要素の変形（移動、回転、拡大縮小など）を指定するプロパティです。",
+    "syntax": "transform: <transform-function>",
+    "examples": [
+      {
+        "code": "transform: translateY(-2px);",
+        "description": "Y軸方向に2px上に移動"
+      },
+      {
+        "code": "transform: scale(1.05);",
+        "description": "1.05倍に拡大"
+      },
+      {
+        "code": "transform: rotate(45deg);",
+        "description": "45度回転"
+      }
+    ],
+    "tips": "GPUアクセラレーションが効くため、アニメーションパフォーマンスが良い。",
+    "relatedProperties": ["transition", "transform-origin"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "animation",
+    "name": "animation",
+    "category": "アニメーション・エフェクト",
+    "description": "キーフレームアニメーションを制御するプロパティです。複雑なアニメーションを実現できます。",
+    "syntax": "animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state>",
+    "examples": [
+      {
+        "code": "@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n\n.fade-in {\n  animation: fadeIn 0.5s ease-in-out;\n}",
+        "description": "フェードインアニメーション - 最もよく使われる基本的なアニメーション"
+      },
+      {
+        "code": "@keyframes slideInFromLeft {\n  0% {\n    transform: translateX(-100%);\n    opacity: 0;\n  }\n  100% {\n    transform: translateX(0);\n    opacity: 1;\n  }\n}\n\n.slide-in {\n  animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);\n}",
+        "description": "左からスライドイン - カスタムイージング関数を使用"
+      },
+      {
+        "code": "@keyframes bounce {\n  0%, 20%, 50%, 80%, 100% {\n    transform: translateY(0);\n  }\n  40% {\n    transform: translateY(-30px);\n  }\n  60% {\n    transform: translateY(-15px);\n  }\n}\n\n.bounce {\n  animation: bounce 2s infinite;\n}",
+        "description": "バウンスアニメーション - 無限ループで注意を引く効果"
+      },
+      {
+        "code": "@keyframes pulse {\n  0% {\n    transform: scale(1);\n    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);\n  }\n  70% {\n    transform: scale(1.05);\n    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);\n  }\n  100% {\n    transform: scale(1);\n    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);\n  }\n}\n\n.pulse-button {\n  animation: pulse 2s infinite;\n}",
+        "description": "脈動するボタン - スケールと影を組み合わせた注目効果"
+      },
+      {
+        "code": "@keyframes rotate {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.loading-spinner {\n  animation: rotate 1s linear infinite;\n}",
+        "description": "回転アニメーション - ローディングスピナーに最適"
+      },
+      {
+        "code": "@keyframes shake {\n  0%, 100% { transform: translateX(0); }\n  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }\n  20%, 40%, 60%, 80% { transform: translateX(10px); }\n}\n\n.error-shake {\n  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;\n}",
+        "description": "シェイクアニメーション - エラー時のフィードバックに使用"
+      },
+
+      {
+        "code": "@keyframes float {\n  0%, 100% {\n    transform: translateY(0px);\n  }\n  50% {\n    transform: translateY(-20px);\n  }\n}\n\n.floating-element {\n  animation: float 3s ease-in-out infinite;\n  animation-delay: 0.5s;\n  animation-fill-mode: both;\n}",
+        "description": "浮遊アニメーション - 遅延とfill-modeを活用"
+      },
+      {
+        "code": "@keyframes flipIn {\n  0% {\n    transform: perspective(400px) rotateY(-90deg);\n    opacity: 0;\n  }\n  40% {\n    transform: perspective(400px) rotateY(-10deg);\n  }\n  70% {\n    transform: perspective(400px) rotateY(10deg);\n  }\n  100% {\n    transform: perspective(400px) rotateY(0deg);\n    opacity: 1;\n  }\n}\n\n.flip-in {\n  animation: flipIn 0.6s ease-in-out;\n}",
+        "description": "3Dフリップイン - perspectiveを使った立体的なアニメーション"
+      },
+      {
+        "code": ".multi-animation {\n  animation: \n    fadeIn 0.5s ease-out,\n    slideInFromLeft 0.5s ease-out,\n    pulse 2s infinite 0.5s;\n}",
+        "description": "複数アニメーションの同時実行 - カンマ区切りで複数指定"
+      }
+    ],
+    "tips": "transitionより複雑なアニメーションが可能。transform、opacity、filter以外のプロパティはパフォーマンスに影響するため注意。will-changeと組み合わせて最適化。animation-fill-modeでアニメーション前後の状態を制御。複数アニメーションはカンマ区切りで指定可能。",
+    "commonMistakes": "width、height、left、topなどのレイアウトプロパティをアニメーションするとパフォーマンスが悪化。animation-fill-mode: forwardsを忘れるとアニメーション後に元の状態に戻る。キーフレーム名の重複に注意。無限アニメーションの多用はバッテリー消費を増加させる。",
+    "relatedProperties": [
+      "@keyframes",
+      "transition",
+      "transform",
+      "will-change",
+      "animation-fill-mode"
+    ],
+    "browserSupport": "IE10+, 全モダンブラウザ"
+  },
+  {
+    "id": "keyframes",
+    "name": "@keyframes",
+    "category": "アニメーション・エフェクト",
+    "description": "アニメーションの各段階を定義するルールです。",
+    "syntax": "@keyframes <name> { <keyframe-selector> { <declarations> } }",
+    "examples": [
+      {
+        "code": "@keyframes slideIn {\n  0% {\n    transform: translateX(-100%);\n    opacity: 0;\n  }\n  100% {\n    transform: translateX(0);\n    opacity: 1;\n  }\n}",
+        "description": "左からスライドインするアニメーション"
+      },
+      {
+        "code": "@keyframes pulse {\n  0%, 100% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.1);\n  }\n}",
+        "description": "脈動するアニメーション"
+      }
+    ],
+    "tips": "fromとtoは0%と100%の省略形。複数のプロパティを同時にアニメーション可能。",
+    "relatedProperties": ["animation", "transform"],
+    "browserSupport": "IE10+, 全モダンブラウザ"
+  },
+  {
+    "id": "cursor",
+    "name": "cursor",
+    "category": "インタラクション・UX",
+    "description": "要素にマウスを重ねた時のカーソルの形状を指定するプロパティです。",
+    "syntax": "cursor: <cursor-type>",
+    "examples": [
+      {
+        "code": "cursor: pointer;",
+        "description": "手の形のカーソル（クリック可能要素）"
+      },
+      {
+        "code": "cursor: not-allowed;",
+        "description": "禁止マークのカーソル（無効要素）"
+      }
+    ],
+    "tips": "ユーザビリティ向上のため、クリック可能な要素には必ずpointerを設定。",
+    "relatedProperties": [],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "overflow",
+    "name": "overflow",
+    "category": "レイアウト・配置",
+    "description": "要素からはみ出したコンテンツの表示方法を指定するプロパティです。",
+    "syntax": "overflow: visible | hidden | scroll | auto",
+    "examples": [
+      {
+        "code": ".box {\n  width: 200px;\n  height: 80px;\n  overflow: visible;\n}",
+        "description": "visible（初期値）はみ出した内容もそのまま表示されます。"
+      },
+      {
+        "code": ".box {\n  width: 200px;\n  height: 80px;\n  overflow: hidden;\n}",
+        "description": "hiddenはみ出した部分を非表示にします。スクロールもできません。"
+      },
+      {
+        "code": ".box {\n  width: 200px;\n  height: 80px;\n  overflow: scroll;\n}",
+        "description": "scrollは常にスクロールバーが表示されます。内容がはみ出していなくてもバーが出ます。"
+      },
+      {
+        "code": ".box {\n  width: 200px;\n  height: 80px;\n  overflow: auto;\n}",
+        "description": "autoは必要な時だけスクロールバーが表示されます。はみ出した時だけバーが出ます。"
+      }
+    ],
+    "tips": "overflow: hiddenは要素の角丸やマスキング効果にも使える。",
+    "relatedProperties": ["overflow-x", "overflow-y"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "visibility",
+    "name": "visibility",
+    "category": "インタラクション・UX",
+    "description": "要素の可視性を制御するプロパティです。display: noneと違い、要素は非表示になりますが領域（スペース）は確保されたままになります。アニメーションやトランジションと組み合わせて使用されることが多いです。",
+    "syntax": "visibility: visible | hidden | collapse",
+    "examples": [
+      {
+        "code": "/* 基本的な使い方 */\n.hidden-element {\n  visibility: hidden;\n}\n\n.visible-element {\n  visibility: visible;\n}",
+        "description": "基本的な表示・非表示の制御"
+      },
+      {
+        "code": "/* display: noneとの比較 */\n.visibility-hidden {\n  visibility: hidden; /* 領域は確保される */\n}\n\n.display-none {\n  display: none; /* 領域も削除される */\n}",
+        "description": "display: noneとの違いを明確にした比較例"
+      },
+      {
+        "code": "/* スムーズなフェードイン・アウト */\n.fade-element {\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity 0.3s ease, visibility 0.3s ease;\n}\n\n.fade-element.show {\n  visibility: visible;\n  opacity: 1;\n}",
+        "description": "opacityと組み合わせたスムーズなアニメーション"
+      },
+      {
+        "code": "/* ツールチップの実装 */\n.tooltip {\n  position: absolute;\n  background: #333;\n  color: white;\n  padding: 8px 12px;\n  border-radius: 4px;\n  visibility: hidden;\n  opacity: 0;\n  transition: all 0.2s;\n  pointer-events: none;\n}\n\n.tooltip-trigger:hover .tooltip {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}",
+        "description": "実用的なツールチップの表示制御"
+      },
+      {
+        "code": "/* レスポンシブでの表示制御 */\n.desktop-only {\n  visibility: visible;\n}\n\n@media (max-width: 768px) {\n  .desktop-only {\n    visibility: hidden;\n  }\n}",
+        "description": "メディアクエリと組み合わせたレスポンシブ制御"
+      },
+      {
+        "code": "/* JavaScript連携の例 */\n.modal-overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.5);\n  visibility: hidden;\n  opacity: 0;\n  transition: all 0.3s;\n}\n\n.modal-overlay.active {\n  visibility: visible;\n  opacity: 1;\n}",
+        "description": "モーダルオーバーレイの表示制御"
+      }
+    ],
+    "tips": "visibility: hiddenは要素を非表示にしつつ領域を保持するため、レイアウトが崩れない。opacityと組み合わせることでスムーズなアニメーションが可能。display: noneはアニメーションできないが、visibility: hiddenはアニメーション可能。",
+    "commonMistakes": "visibility: hiddenでも領域は確保されるため、完全に要素を除去したい場合はdisplay: noneを使用する。pointer-eventsと組み合わせないとクリックイベントが残る場合がある。",
+    "relatedProperties": ["display", "opacity", "pointer-events", "transition"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "white-space",
+    "name": "white-space",
+    "category": "テキスト・フォント",
+    "description": "要素内の空白文字の処理方法を指定するプロパティです。",
+    "syntax": "white-space: normal | nowrap | pre | pre-wrap | pre-line | break-spaces",
+    "examples": [
+      {
+        "code": "white-space: nowrap;",
+        "description": "テキストを改行させない"
+      },
+      {
+        "code": "white-space: pre-wrap;",
+        "description": "空白を保持しつつ自動改行"
+      },
+      {
+        "code": ".code {\n  white-space: pre;\n  font-family: monospace;\n}",
+        "description": "コードブロックの整形"
+      }
+    ],
+    "tips": "nowrapは一行表示、pre-wrapはコードの表示に便利。",
+    "relatedProperties": ["word-wrap", "overflow-wrap"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "text-overflow",
+    "name": "text-overflow",
+    "category": "テキスト・フォント",
+    "description": "要素からはみ出したテキストの表示方法を指定するプロパティです。",
+    "syntax": "text-overflow: clip | ellipsis | <string>",
+    "examples": [
+      {
+        "code": ".truncate {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}",
+        "description": "長いテキストを「...」で省略表示"
+      },
+      {
+        "code": "text-overflow: '→';",
+        "description": "カスタム文字で省略表示"
+      }
+    ],
+    "tips": "white-space: nowrapとoverflow: hiddenとセットで使用。",
+    "relatedProperties": ["white-space", "overflow"],
+    "browserSupport": "IE6+, 全モダンブラウザ"
+  },
+  {
+    "id": "word-break",
+    "name": "word-break",
+    "category": "テキスト・フォント",
+    "description": "単語の改行方法を制御するプロパティです。長い単語やURLの処理に便利です。",
+    "syntax": "word-break: normal | break-all | keep-all | break-word",
+    "examples": [
+      {
+        "code": "word-break: break-all;",
+        "description": "任意の文字で改行（英数字も含む）"
+      },
+      {
+        "code": "word-break: keep-all;",
+        "description": "単語を分割せずに改行"
+      },
+      {
+        "code": ".url {\n  word-break: break-all;\n  overflow-wrap: break-word;\n}",
+        "description": "長いURLの改行処理"
+      }
+    ],
+    "tips": "日本語サイトではkeep-all、英語サイトではbreak-wordが一般的。",
+    "relatedProperties": ["overflow-wrap", "hyphens"],
+    "browserSupport": "IE5.5+, 全モダンブラウザ"
+  },
+  {
+    "id": "writing-mode",
+    "name": "writing-mode",
+    "category": "テキスト・フォント",
+    "description": "テキストの書字方向を指定するプロパティです。横書き、縦書き、文字の向きを制御できます。日本語、中国語、アラビア語などの多言語対応や、デザイン上の縦書き表現に使用されます。",
+    "syntax": "writing-mode: horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr",
+    "examples": [
+      {
+        "code": ".vertical-text {\n  writing-mode: vertical-rl;\n  height: 200px;\n  width: 100px;\n}",
+        "description": "縦書き（右から左）- 日本語の伝統的な書字方向"
+      },
+      {
+        "code": ".vertical-left {\n  writing-mode: vertical-lr;\n  height: 200px;\n  width: 100px;\n}",
+        "description": "縦書き（左から右）- モンゴル語などで使用"
+      },
+      {
+        "code": ".horizontal {\n  writing-mode: horizontal-tb;\n}",
+        "description": "横書き（上から下）- デフォルトの書字方向"
+      },
+      {
+        "code": ".sidebar-title {\n  writing-mode: vertical-rl;\n  text-orientation: mixed;\n  padding: 1rem;\n  background: #f3f4f6;\n}",
+        "description": "サイドバーの縦書きタイトル"
+      },
+      {
+        "code": ".book-spine {\n  writing-mode: vertical-rl;\n  text-orientation: sideways;\n  height: 300px;\n  width: 40px;\n  background: #1f2937;\n  color: white;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
+        "description": "本の背表紙のような縦書きデザイン"
+      }
+    ],
+    "tips": "縦書き時は要素の幅と高さの概念が入れ替わる。text-orientationと組み合わせて文字の向きも制御できる。日本語の縦書きレイアウトやデザイン上のアクセントとして活用。",
+    "commonMistakes": "縦書き時にpaddingやmarginの方向が変わることを忘れがち。flexboxやgridとの組み合わせ時は軸の方向に注意。",
+    "relatedProperties": [
+      "text-orientation",
+      "direction",
+      "unicode-bidi",
+      "text-combine-upright"
+    ],
+    "browserSupport": "Chrome 48+, Firefox 41+, Safari 5.1+"
+  },
+  {
+    "id": "user-select",
+    "name": "user-select",
+    "category": "インタラクション・UX",
+    "description": "ユーザーがテキストを選択できるかどうかを制御するプロパティです。",
+    "syntax": "user-select: auto | text | none | contain | all",
+    "examples": [
+      {
+        "code": "user-select: none;",
+        "description": "テキスト選択を無効化"
+      },
+      {
+        "code": ".code-block {\n  user-select: all;\n}",
+        "description": "クリックで全テキストを選択"
+      },
+      {
+        "code": ".button {\n  user-select: none;\n  cursor: pointer;\n}",
+        "description": "ボタンのテキスト選択を防止"
+      }
+    ],
+    "tips": "UIコンポーネントでは通常none、コードブロックではallが便利。",
+    "relatedProperties": ["cursor", "pointer-events"],
+    "browserSupport": "Chrome 54+, Firefox 69+, Safari 3.1+"
+  },
+  {
+    "id": "pointer-events",
+    "name": "pointer-events",
+    "category": "インタラクション・UX",
+    "description": "要素がマウスイベントのターゲットになるかどうかを制御するプロパティです。",
+    "syntax": "pointer-events: auto | none | visiblePainted | ...",
+    "examples": [
+      {
+        "code": "pointer-events: none;",
+        "description": "マウスイベントを無効化（クリック不可）"
+      },
+      {
+        "code": ".overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}",
+        "description": "透明なオーバーレイを作成"
+      },
+      {
+        "code": ".disabled {\n  opacity: 0.5;\n  pointer-events: none;\n}",
+        "description": "要素を無効化"
+      }
+    ],
+    "tips": "オーバーレイやローディング状態の制御に便利。",
+    "relatedProperties": ["cursor", "user-select"],
+    "browserSupport": "IE11+, 全モダンブラウザ"
+  },
+  {
+    "id": "will-change",
+    "name": "will-change",
+    "category": "その他",
+    "description": "要素がどのプロパティを変更する予定かをブラウザに事前通知し、最適化を促すプロパティです。",
+    "syntax": "will-change: auto | <animateable-feature>",
+    "examples": [
+      {
+        "code": ".animated-element {\n  will-change: transform, opacity;\n}",
+        "description": "transformとopacityの変更を予告"
+      },
+      {
+        "code": ".hover-effect:hover {\n  will-change: transform;\n  transform: scale(1.1);\n}",
+        "description": "ホバー時のアニメーション最適化"
+      },
+      {
+        "code": "/* アニメーション終了後 */\n.element {\n  will-change: auto;\n}",
+        "description": "最適化の解除"
+      }
+    ],
+    "tips": "使いすぎるとメモリを消費。アニメーション前に設定し、終了後にautoに戻す。",
+    "commonMistakes": "常時設定するとパフォーマンスが悪化する場合がある。",
+    "relatedProperties": ["transform", "opacity", "animation"],
+    "browserSupport": "Chrome 36+, Firefox 36+, Safari 9.1+"
+  },
+  {
+    "id": "contain",
+    "name": "contain",
+    "category": "その他",
+    "description": "要素の影響範囲を制限し、ブラウザの最適化を助けるプロパティです。",
+    "syntax": "contain: none | strict | content | size | layout | style | paint",
+    "examples": [
+      {
+        "code": ".widget {\n  contain: layout style paint;\n}",
+        "description": "ウィジェットの影響を局所化"
+      },
+      {
+        "code": ".card {\n  contain: layout;\n}",
+        "description": "レイアウトの影響を制限"
+      }
+    ],
+    "tips": "大量の要素がある場合のパフォーマンス向上に効果的。",
+    "relatedProperties": ["will-change"],
+    "browserSupport": "Chrome 52+, Firefox 69+（部分対応）"
+  },
+  {
+    "id": "media-queries",
+    "name": "@media",
+    "category": "その他",
+    "description": "画面サイズ、デバイスタイプ、印刷状況などの条件に基づいてスタイルを適用するルールです。レスポンシブデザインの基礎となる機能で、モバイル、タブレット、デスクトップなど様々なデバイスに対応できます。",
+    "syntax": "@media <media-query> { ... }",
+    "examples": [
+      {
+        "code": "@media (max-width: 768px) {\n  .container {\n    padding: 1rem;\n    font-size: 14px;\n  }\n}",
+        "description": "モバイル（768px以下）でのレイアウト調整"
+      },
+      {
+        "code": "@media (min-width: 769px) and (max-width: 1024px) {\n  .grid {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}",
+        "description": "タブレット（769px〜1024px）で2列グリッド"
+      },
+      {
+        "code": "@media (min-width: 1025px) {\n  .sidebar {\n    display: block;\n  }\n  .main {\n    margin-left: 250px;\n  }\n}",
+        "description": "デスクトップ（1025px以上）でサイドバー表示"
+      },
+      {
+        "code": "@media (orientation: portrait) {\n  .hero {\n    height: 50vh;\n  }\n}\n\n@media (orientation: landscape) {\n  .hero {\n    height: 100vh;\n  }\n}",
+        "description": "デバイスの向き（縦・横）に応じた高さ調整"
+      },
+      {
+        "code": "@media print {\n  .no-print {\n    display: none;\n  }\n  body {\n    font-size: 12pt;\n    color: black;\n  }\n}",
+        "description": "印刷時のスタイル調整"
+      },
+      {
+        "code": "@media (prefers-color-scheme: dark) {\n  body {\n    background: #1a1a1a;\n    color: #ffffff;\n  }\n}",
+        "description": "ダークモード対応"
+      }
+    ],
+    "tips": "モバイルファーストで設計し、小さい画面から大きい画面へとスタイルを追加していくのが一般的。breakpointは320px, 768px, 1024px, 1200pxなどがよく使われる。",
+    "commonMistakes": "max-widthとmin-widthの使い分けを間違えると意図しない結果になる。重複する条件で後から書いたルールが優先される。",
+    "relatedProperties": [
+      "@container",
+      "viewport",
+      "orientation",
+      "aspect-ratio"
+    ],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "table-layout",
+    "name": "table-layout",
+    "category": "その他",
+    "description": "テーブルのレイアウトアルゴリズムを制御するプロパティです。セルの幅をどのように計算するかを決定し、テーブルの描画パフォーマンスや見た目に影響します。大きなテーブルでの表示速度向上にも効果的です。",
+    "syntax": "table-layout: auto | fixed",
+    "examples": [
+      {
+        "code": ".table-auto {\n  table-layout: auto;\n  width: 100%;\n}\n\n/* セル内容に応じて幅が自動調整される */\nth, td {\n  padding: 8px;\n  text-align: left;\n}",
+        "description": "auto: セル内容に応じて幅を自動調整（デフォルト）"
+      },
+      {
+        "code": ".table-fixed {\n  table-layout: fixed;\n  width: 100%;\n}\n\n/* 最初の行の幅設定が全体に適用される */\nth:nth-child(1) { width: 30%; }\nth:nth-child(2) { width: 50%; }\nth:nth-child(3) { width: 20%; }",
+        "description": "fixed: 最初の行の幅設定に基づいて固定レイアウト"
+      },
+      {
+        "code": ".performance-table {\n  table-layout: fixed;\n  width: 100%;\n}\n\n/* 大量データのテーブルでパフォーマンス向上 */\n.col-id { width: 10%; }\n.col-name { width: 40%; }\n.col-email { width: 35%; }\n.col-status { width: 15%; }",
+        "description": "大量データテーブルでのパフォーマンス最適化"
+      },
+      {
+        "code": ".responsive-table {\n  table-layout: fixed;\n  width: 100%;\n}\n\n/* レスポンシブテーブルの基本設定 */\n@media (max-width: 768px) {\n  .responsive-table {\n    table-layout: auto;\n  }\n}",
+        "description": "レスポンシブデザインでの使い分け"
+      },
+      {
+        "code": ".data-table {\n  table-layout: fixed;\n  border-collapse: collapse;\n  width: 100%;\n}\n\n/* 均等幅のカラムレイアウト */\n.data-table th,\n.data-table td {\n  width: 25%;\n  padding: 12px;\n  border: 1px solid #ddd;\n}",
+        "description": "均等幅カラムでの整然としたレイアウト"
+      }
+    ],
+    "tips": "table-layout: fixedは描画が高速で、大量データに適している。幅を事前に定義できるため、レイアウトが安定する。autoは内容に応じて柔軟に調整されるが、計算コストが高い。",
+    "commonMistakes": "fixedを使う際に列幅を指定しないと、等幅になってしまう。autoでは内容が多い列が他の列を圧迫する場合がある。レスポンシブ対応時の使い分けも重要。",
+    "relatedProperties": [
+      "border-collapse",
+      "border-spacing",
+      "empty-cells",
+      "caption-side"
+    ],
+    "browserSupport": "IE5+, 全ブラウザ対応"
+  },
+  {
+    "id": "content-visibility",
+    "name": "content-visibility",
+    "category": "インタラクション・UX",
+    "description": "要素のレンダリングを制御し、画面外の要素の処理をスキップしてパフォーマンスを向上させるプロパティです。",
+    "syntax": "content-visibility: visible | hidden | auto",
+    "examples": [
+      {
+        "code": ".article {\n  content-visibility: auto;\n  contain-intrinsic-size: 1000px;\n}",
+        "description": "長い記事の仮想スクロール最適化"
+      },
+      {
+        "code": ".off-screen {\n  content-visibility: hidden;\n}",
+        "description": "画面外要素のレンダリングをスキップ"
+      }
+    ],
+    "tips": "長いページや大量のコンテンツでスクロールパフォーマンスが大幅に向上。",
+    "relatedProperties": ["contain-intrinsic-size", "contain"],
+    "browserSupport": "Chrome 85+（実験的機能）"
+  },
+  {
+    "id": "accent-color",
+    "name": "accent-color",
+    "category": "背景・装飾",
+    "description": "フォーム部品やチェックボックスなどのアクセント色を指定するプロパティです。",
+    "syntax": "accent-color: <color>",
+    "examples": [
+      {
+        "code": "<input type=\"checkbox\" style=\"accent-color: #f59e42;\" checked> オレンジ色のチェックボックス",
+        "description": "accent-colorでフォーム部品の色を変更できます。上記はHTMLとCSSを組み合わせた例です。"
+      }
+    ],
+    "tips": "input[type=checkbox]やradio、progressなどで使える。",
+    "relatedProperties": ["color", "background-color"],
+    "browserSupport": "Chrome 93+, Firefox 92+, Safari 15+"
+  },
+  {
+    "id": "list-style",
+    "name": "list-style",
+    "category": "背景・装飾",
+    "description": "リストのマーカーや記号の種類・位置・画像を指定するプロパティです。",
+    "syntax": "list-style: <list-style-type> <list-style-position> <list-style-image>",
+    "examples": [
+      {
+        "code": "list-style: square inside;",
+        "description": "四角いマーカーを内側に表示"
+      },
+      { "code": "list-style: none;", "description": "マーカーを非表示" }
+    ],
+    "tips": "list-style-type, list-style-position, list-style-imageのショートハンド。",
+    "relatedProperties": [
+      "list-style-type",
+      "list-style-position",
+      "list-style-image"
+    ],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "clip-path",
+    "name": "clip-path",
+    "category": "背景・装飾",
+    "description": "要素の表示領域を多角形や円形などで切り抜くプロパティです。",
+    "syntax": "clip-path: <shape> | <url>",
+    "examples": [
+      {
+        "code": "<!-- HTML -->\n<div class=\"circle-clip\">CIRCLE</div>\n\n/* CSS */\n.circle-clip {\n  width: 120px;\n  height: 120px;\n  background: #3b82f6;\n  color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  clip-path: circle(50% at 50% 50%);\n}",
+        "description": "中央に円形で切り抜く（HTML+CSS例）"
+      },
+      {
+        "code": "<!-- HTML -->\n<div class=\"triangle-clip\">TRIANGLE</div>\n\n/* CSS */\n.triangle-clip {\n  width: 120px;\n  height: 120px;\n  background: #f59e42;\n  color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  clip-path: polygon(0 0, 100% 0, 100% 100%);\n}",
+        "description": "三角形に切り抜く（HTML+CSS例）"
+      }
+    ],
+    "tips": "SVGやCSS Shapesと組み合わせると表現力が広がる。",
+    "relatedProperties": ["mask", "shape-outside"],
+    "browserSupport": "Chrome 55+, Firefox 54+, Safari 10+"
+  },
+  {
+    "id": "pseudo-hover",
+    "name": ":hover",
+    "category": "擬似クラス",
+    "description": "要素にマウスカーソルが乗ったときに適用される擬似クラスです。ボタンやリンクのホバー効果などでよく使われます。",
+    "syntax": ":hover { ... }",
+    "examples": [
+      {
+        "code": ".btn:hover {\n  background: #3b82f6;\n  color: #fff;\n}",
+        "description": "ボタンにホバーしたときの色変化"
+      }
+    ],
+    "tips": "インタラクションを強調したい要素に使うと効果的。",
+    "commonMistakes": "タッチデバイスでは:activeや:focusも併用推奨。",
+    "relatedProperties": [":active", ":focus"],
+    "browserSupport": "全ブラウザ対応"
+  },
+  {
+    "id": "pseudo-nth-child",
+    "name": ":nth-child()",
+    "category": "擬似クラス",
+    "description": "親要素内での順序に基づいて要素を選択できる擬似クラスです。リストやグリッドの偶数・奇数行、特定のパターンにスタイルを適用する際に便利です。",
+    "syntax": ":nth-child(n) { ... }",
+    "examples": [
+      {
+        "code": "li:nth-child(2n) {\n  background: #f3f4f6;\n}",
+        "description": "偶数番目のリストアイテムに背景色を付ける"
+      },
+      {
+        "code": ".grid-item:nth-child(3n+1) {\n  border-left: 2px solid #3b82f6;\n}",
+        "description": "3の倍数+1番目のグリッドアイテムに左枠線を付ける"
+      }
+    ],
+    "tips": "nは0から始まる整数。even/oddや数式も使える。",
+    "commonMistakes": "0番目は存在しないので注意。nth-of-typeとの違いも理解しよう。",
+    "relatedProperties": [":nth-of-type", ":first-child", ":last-child"],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "pseudo-nth-of-type",
+    "name": ":nth-of-type()",
+    "category": "擬似クラス",
+    "description": "同じタグ名の要素の中での順序に基づいて要素を選択する擬似クラスです。:nth-child()との違いは、タグ名を考慮することです。見出しやセクション要素に特に有用です。",
+    "syntax": ":nth-of-type(n) { ... }",
+    "examples": [
+      {
+        "code": "h2:nth-of-type(2n) {\n  color: #3b82f6;\n}",
+        "description": "偶数番目のh2要素だけを青色にする"
+      },
+      {
+        "code": "p:nth-of-type(1) {\n  font-weight: bold;\n  margin-top: 0;\n}",
+        "description": "最初のp要素を太字にして上マージンを削除"
+      },
+      {
+        "code": "img:nth-of-type(3n) {\n  border: 2px solid #f59e42;\n}",
+        "description": "3の倍数番目の画像に枠線を付ける"
+      },
+      {
+        "code": "article:nth-of-type(odd) {\n  background: #f8fafc;\n}",
+        "description": "奇数番目のarticle要素に背景色を付ける"
+      }
+    ],
+    "tips": ":nth-child()は全ての子要素をカウントするが、:nth-of-type()は同じタグ名の要素のみをカウントする。見出しレベルや画像の装飾に便利。",
+    "commonMistakes": ":nth-child()と混同しやすい。クラス名ではなくタグ名で判断されることに注意。",
+    "relatedProperties": [
+      ":nth-child()",
+      ":first-of-type",
+      ":last-of-type",
+      ":only-of-type"
+    ],
+    "browserSupport": "IE9+, 全モダンブラウザ"
+  },
+  {
+    "id": "pseudo-first-child",
+    "name": ":first-child",
+    "category": "擬似クラス",
+    "description": "親要素の最初の子要素を選択する擬似クラスです。リストの最初の項目や、カードレイアウトの最初の要素など、特定の位置にある要素にスタイルを適用する際に便利です。",
+    "syntax": ":first-child { ... }",
+    "examples": [
+      {
+        "code": "li:first-child {\n  border-top: 2px solid #3b82f6;\n  font-weight: bold;\n}",
+        "description": "リストの最初の項目に上枠線と太字を適用"
+      },
+      {
+        "code": ".card:first-child {\n  margin-left: 0;\n}",
+        "description": "カードグリッドの最初のカードの左マージンを削除"
+      },
+      {
+        "code": "p:first-child {\n  margin-top: 0;\n}",
+        "description": "コンテナ内の最初の段落の上マージンを削除"
+      },
+      {
+        "code": ".nav-item:first-child {\n  border-radius: 8px 0 0 8px;\n}",
+        "description": "ナビゲーションの最初のアイテムに左側の角丸を適用"
+      }
+    ],
+    "tips": "レイアウトの調整やデザインの統一に非常に便利。:nth-child(1)と同じ効果だが、より読みやすい。マージンやパディングの調整によく使われる。",
+    "commonMistakes": "親要素の最初の子要素であることが条件。他の要素が間にあると適用されない。:first-of-typeとの違いも理解しよう。",
+    "relatedProperties": [
+      ":last-child",
+      ":nth-child()",
+      ":first-of-type",
+      ":only-child"
+    ],
+    "browserSupport": "IE7+, 全モダンブラウザ"
+  }
+]
