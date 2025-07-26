@@ -15,11 +15,11 @@ npm run dev
 # Build for production
 npm run build
 
+# Start production server (after build)
+npm start
+
 # Run ESLint
 npm run lint
-
-# Export static files
-npm run export
 
 # Install dependencies
 npm install
@@ -63,10 +63,11 @@ npm install
 - **useLazyLoading**: Performance optimization
 
 ### Build Configuration
-- **Static Export**: Configured for static site generation
-- **Image Optimization**: Disabled for static export
-- **Error Handling**: TypeScript and ESLint errors ignored for build
-- **PWA**: Removed in favor of better SEO
+- **Static Export**: Configured for static site generation with `output: 'export'`
+- **Image Optimization**: Disabled for static export compatibility
+- **Trailing Slash**: Enabled for better static hosting compatibility
+- **Error Handling**: TypeScript and ESLint errors ignored during builds for deployment
+- **Styling**: Tailwind CSS with custom animations and dark mode support
 
 ## Key Changes from Vite Version
 
@@ -87,12 +88,13 @@ npm install
 
 ## Development Notes
 
-- **Working directory**: `/css-dictionary-next/`
 - **No test framework**: No unit tests currently implemented
 - **Static export**: Builds to static files for deployment
 - **localStorage warnings**: Expected during SSG, works fine in browser
-- **Japanese UI**: Primary language is Japanese
+- **Japanese UI**: Primary language is Japanese with comprehensive SEO metadata
 - **Google Analytics**: Integrated with tracking ID G-5JHPBNY2J3
+- **Path aliases**: `@/*` maps to `./src/*` for cleaner imports
+- **TypeScript**: Strict mode enabled with Next.js plugin integration
 
 ## Deployment
 

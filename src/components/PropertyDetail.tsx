@@ -3009,22 +3009,114 @@ export function PropertyDetail({
       transform: {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-blue-500 text-white px-4 py-2 rounded transform -translate-y-1">
-              Y軸方向に上に移動
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                ホバー時の浮き上がり効果
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer">
+                  ホバーして浮き上がり
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                💡 カードやボタンのインタラクション効果に最適
+              </div>
             </div>
           </div>
         ),
         1: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-green-500 text-white px-4 py-2 rounded transform scale-105">
-              1.05倍に拡大
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                ズームイン効果
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-bold transition-transform duration-200 hover:scale-110 cursor-pointer">
+                  ZOOM
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-green-50 dark:bg-green-900/20 rounded">
+                💡 画像ギャラリーやアイコンの拡大表示に使用
+              </div>
             </div>
           </div>
         ),
         2: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-purple-500 text-white px-4 py-2 rounded transform rotate-12">
-              12度回転
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                アイコンの回転
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 bg-purple-500 rounded transition-transform duration-300 hover:rotate-90 cursor-pointer flex items-center justify-center">
+                    <span className="text-white text-lg">→</span>
+                  </div>
+                  <span className="text-gray-600 dark:text-gray-300">ホバーで90度回転</span>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-purple-50 dark:bg-purple-900/20 rounded">
+                💡 矢印やメニューアイコンの状態変更に最適
+              </div>
+            </div>
+          </div>
+        ),
+        3: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                完全中央配置
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 relative h-32">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded">
+                  中央配置
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-red-50 dark:bg-red-900/20 rounded">
+                💡 absolute要素の完全中央揃えに必須のテクニック
+              </div>
+            </div>
+          </div>
+        ),
+        4: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                3D回転効果
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div className="relative w-32 h-20" style={{ perspective: "1000px" }}>
+                  <div 
+                    className="w-full h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg text-white flex items-center justify-center font-bold transition-transform duration-500 hover:rotateY-180 cursor-pointer"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="backface-hidden">FRONT</div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg flex items-center justify-center font-bold" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
+                      BACK
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded">
+                💡 カードフリップアニメーションや3D効果に使用
+              </div>
+            </div>
+          </div>
+        ),
+        5: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                斜体変形効果
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div className="inline-block bg-yellow-500 text-black px-6 py-3 rounded font-bold transform skew-x-12 transition-transform duration-200 hover:skew-x-0 cursor-pointer">
+                  SKEW TEXT
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded">
+                💡 動的なテキスト効果やロゴデザインに使用
+              </div>
             </div>
           </div>
         ),
@@ -3051,16 +3143,33 @@ export function PropertyDetail({
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <div className="space-y-3">
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                バウンスアニメーション
+                左からスライドイン - カスタムイージング関数を使用
               </div>
               <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
-                <div className="bg-green-500 text-white px-4 py-2 rounded animate-bounce">
-                  バウンス効果
+                <div
+                  className="bg-green-500 text-white px-4 py-2 rounded"
+                  style={{
+                    animation: "slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite",
+                  }}
+                >
+                  スライドイン
                 </div>
               </div>
               <div className="text-xs text-gray-500 p-2 bg-green-50 dark:bg-green-900/20 rounded">
-                💡 注意を引きたい要素に使用。無限ループで動作
+                💡 カスタムイージング関数で自然な動きを実現
               </div>
+              <style>{`
+                @keyframes slideInFromLeft {
+                  0% {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                  }
+                  100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                  }
+                }
+              `}</style>
             </div>
           </div>
         ),
@@ -3068,14 +3177,34 @@ export function PropertyDetail({
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <div className="space-y-3">
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                回転ローディングスピナー
+                バウンスアニメーション - 無限ループで注意を引く効果
               </div>
               <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
-                <div className="w-8 h-8 border-4 border-purple-200 border-t-purple-500 rounded-full animate-spin"></div>
+                <div
+                  className="bg-purple-500 text-white px-4 py-2 rounded"
+                  style={{
+                    animation: "bounce 2s infinite",
+                  }}
+                >
+                  バウンス効果
+                </div>
               </div>
               <div className="text-xs text-gray-500 p-2 bg-purple-50 dark:bg-purple-900/20 rounded">
-                💡 データ読み込み中の表示に最適。linear timingで滑らかな回転
+                💡 注意を引きたい要素に使用。無限ループで動作
               </div>
+              <style>{`
+                @keyframes bounce {
+                  0%, 20%, 50%, 80%, 100% {
+                    transform: translateY(0);
+                  }
+                  40% {
+                    transform: translateY(-30px);
+                  }
+                  60% {
+                    transform: translateY(-15px);
+                  }
+                }
+              `}</style>
             </div>
           </div>
         ),
@@ -3083,27 +3212,35 @@ export function PropertyDetail({
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <div className="space-y-3">
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                シェイクアニメーション（エラー時）
+                脈動するボタン - スケールと影を組み合わせた注目効果
               </div>
               <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
                 <div
-                  className="bg-red-500 text-white px-4 py-2 rounded border-2 border-red-600"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
                   style={{
-                    animation:
-                      "shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite",
+                    animation: "pulse 2s infinite",
                   }}
                 >
-                  エラー発生！
+                  脈動ボタン
                 </div>
               </div>
-              <div className="text-xs text-gray-500 p-2 bg-red-50 dark:bg-red-900/20 rounded">
-                💡 フォーム検証エラーやシステムエラーのフィードバックに使用
+              <div className="text-xs text-gray-500 p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                💡 スケールと影を組み合わせて注目を引く効果
               </div>
               <style>{`
-                @keyframes shake {
-                  0%, 100% { transform: translateX(0); }
-                  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-                  20%, 40%, 60%, 80% { transform: translateX(10px); }
+                @keyframes pulse {
+                  0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+                  }
+                  70% {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+                  }
+                  100% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+                  }
                 }
               `}</style>
             </div>
@@ -3113,25 +3250,24 @@ export function PropertyDetail({
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <div className="space-y-3">
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                浮遊アニメーション
+                回転アニメーション - ローディングスピナーに最適
               </div>
               <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
                 <div
-                  className="bg-indigo-500 text-white px-4 py-2 rounded"
+                  className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full"
                   style={{
-                    animation: "float 3s ease-in-out infinite",
+                    animation: "rotate 1s linear infinite",
                   }}
                 >
-                  浮遊する要素
                 </div>
               </div>
-              <div className="text-xs text-gray-500 p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded">
-                💡 アイコンやイラストに動きを付けて親しみやすさを演出
+              <div className="text-xs text-gray-500 p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                💡 ローディングスピナーや読み込み中の表示に最適
               </div>
               <style>{`
-                @keyframes float {
-                  0%, 100% { transform: translateY(0px); }
-                  50% { transform: translateY(-20px); }
+                @keyframes rotate {
+                  from { transform: rotate(0deg); }
+                  to { transform: rotate(360deg); }
                 }
               `}</style>
             </div>
@@ -4575,6 +4711,151 @@ export function PropertyDetail({
             </div>
             <div className="text-xs text-gray-500 mt-2">
               .nav-item:first-child → 最初のナビゲーションアイテムに左側の角丸
+            </div>
+          </div>
+        ),
+      },
+      "pseudo-focus-visible": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                キーボードフォーカス時のみアウトライン表示
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center gap-4">
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2"
+                >
+                  キーボードでフォーカス
+                </button>
+                <button 
+                  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none"
+                >
+                  従来のフォーカス
+                </button>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                💡 左ボタン：Tabキーでフォーカス時のみアウトライン表示、右ボタン：アウトライン非表示
+              </div>
+            </div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                フォーム入力フィールドのキーボードフォーカス
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3">
+                <div className="space-y-3">
+                  <input 
+                    type="text" 
+                    placeholder="キーボードでフォーカスしてみてください"
+                    className="form-input w-full px-3 py-2 border border-gray-300 rounded transition-all focus:outline-none"
+                    style={{
+                      boxShadow: 'none',
+                      borderColor: '#d1d5db'
+                    }}
+                    onMouseDown={(e) => {
+                      // マウスクリックによるフォーカスをマーク
+                      e.target.dataset.mouseDown = 'true';
+                    }}
+                    onFocus={(e) => {
+                      // キーボードフォーカスの場合のみスタイル適用
+                      if (!e.target.dataset.mouseDown) {
+                        e.target.style.borderColor = '#3b82f6';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                      }
+                      // マウスフラグをリセット
+                      delete e.target.dataset.mouseDown;
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = '#d1d5db';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                  <input 
+                    type="email" 
+                    placeholder="メールアドレス"
+                    className="form-input w-full px-3 py-2 border border-gray-300 rounded transition-all focus:outline-none"
+                    style={{
+                      boxShadow: 'none',
+                      borderColor: '#d1d5db'
+                    }}
+                    onMouseDown={(e) => {
+                      // マウスクリックによるフォーカスをマーク
+                      e.target.dataset.mouseDown = 'true';
+                    }}
+                    onFocus={(e) => {
+                      // キーボードフォーカスの場合のみスタイル適用
+                      if (!e.target.dataset.mouseDown) {
+                        e.target.style.borderColor = '#3b82f6';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                      }
+                      // マウスフラグをリセット
+                      delete e.target.dataset.mouseDown;
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = '#d1d5db';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-green-50 dark:bg-green-900/20 rounded">
+                💡 マウスクリックでは境界線変化なし、Tabキーでフォーカス時のみ色変化
+              </div>
+            </div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                リンクのキーボードフォーカス時の背景色変更
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3">
+                <div className="space-y-2">
+                  <a 
+                    href="#" 
+                    className="inline-block text-blue-600 hover:text-blue-800 focus-visible:bg-yellow-100 focus-visible:rounded focus:outline-none px-1"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    キーボードフォーカス対応リンク
+                  </a>
+                  <br />
+                  <a 
+                    href="#" 
+                    className="inline-block text-green-600 hover:text-green-800 focus-visible:bg-green-100 focus-visible:rounded focus:outline-none px-1"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    アクセシビリティ重視リンク
+                  </a>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded">
+                💡 Tabキーでフォーカス時のみ背景色が変化。マウスクリックでは変化しない
+              </div>
+            </div>
+          </div>
+        ),
+        3: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                フォーカス可能なカード要素の視覚的フィードバック
+              </div>
+              <div className="bg-white dark:bg-gray-800 border rounded p-3 flex justify-center">
+                <div 
+                  tabIndex={0}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-lg cursor-pointer transition-all hover:scale-105 focus-visible:scale-110 focus-visible:shadow-lg focus:outline-none"
+                >
+                  フォーカス可能なカード
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 p-2 bg-purple-50 dark:bg-purple-900/20 rounded">
+                💡 Tabキーでフォーカス時のみスケール＆シャドウ効果。ホバーとは異なる効果
+              </div>
             </div>
           </div>
         ),

@@ -1339,16 +1339,28 @@
     "syntax": "transform: <transform-function>",
     "examples": [
       {
-        "code": "transform: translateY(-2px);",
-        "description": "Y軸方向に2px上に移動"
+        "code": ".hover-lift {\n  transform: translateY(-4px);\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n}",
+        "description": "ホバー時の浮き上がり効果 - カードやボタンによく使用"
       },
       {
-        "code": "transform: scale(1.05);",
-        "description": "1.05倍に拡大"
+        "code": ".zoom-in {\n  transform: scale(1.1);\n  transition: transform 0.2s ease;\n}",
+        "description": "ズームイン効果 - 画像や要素の拡大表示"
       },
       {
-        "code": "transform: rotate(45deg);",
-        "description": "45度回転"
+        "code": ".rotate-icon {\n  transform: rotate(90deg);\n  transition: transform 0.3s ease;\n}",
+        "description": "アイコンの回転 - 矢印やメニューアイコンの状態変更"
+      },
+      {
+        "code": ".center-absolute {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}",
+        "description": "完全中央配置 - absolute要素の中央揃え"
+      },
+      {
+        "code": ".flip-card {\n  transform: rotateY(180deg);\n  transform-style: preserve-3d;\n}",
+        "description": "3D回転効果 - カードフリップアニメーション"
+      },
+      {
+        "code": ".skew-text {\n  transform: skew(-15deg, 0);\n  display: inline-block;\n}",
+        "description": "斜体変形 - 動的なテキスト効果"
       }
     ],
     "tips": "GPUアクセラレーションが効くため、アニメーションパフォーマンスが良い。",
@@ -1977,5 +1989,39 @@
       ":only-child"
     ],
     "browserSupport": "IE7+, 全モダンブラウザ"
+  },
+  {
+    "id": "pseudo-focus-visible",
+    "name": ":focus-visible",
+    "category": "擬似クラス",
+    "description": "要素がキーボードからフォーカスされた場合にのみ適用される擬似クラスです。マウスクリックによるフォーカスには適用されないため、アクセシビリティを向上させながら不要なフォーカスリングを避けられます。",
+    "syntax": ":focus-visible { ... }",
+    "examples": [
+      {
+        "code": "button:focus-visible {\n  outline: 2px solid #3b82f6;\n  outline-offset: 2px;\n}",
+        "description": "キーボードフォーカス時のみアウトラインを表示"
+      },
+      {
+        "code": ".form-input:focus-visible {\n  border-color: #3b82f6;\n  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);\n}",
+        "description": "フォーム入力フィールドのキーボードフォーカススタイル"
+      },
+      {
+        "code": "a:focus-visible {\n  background: #fef3c7;\n  border-radius: 4px;\n  outline: none;\n}",
+        "description": "リンクのキーボードフォーカス時の背景色変更"
+      },
+      {
+        "code": ".card:focus-visible {\n  transform: scale(1.02);\n  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);\n}",
+        "description": "フォーカス可能なカード要素の視覚的フィードバック"
+      }
+    ],
+    "tips": "アクセシビリティの向上に重要。:focusの代わりに使用することで、マウス操作時の不要なアウトラインを避けながら、キーボード操作時の視認性を確保。",
+    "commonMistakes": ":focusと同じと思い込む。マウスクリックでは適用されないことを理解する。古いブラウザでは動作しないため、フォールバックとして:focusも併用する。",
+    "relatedProperties": [
+      ":focus",
+      ":focus-within",
+      "outline",
+      "box-shadow"
+    ],
+    "browserSupport": "Chrome 86+, Firefox 85+, Safari 15.4+"
   }
 ]

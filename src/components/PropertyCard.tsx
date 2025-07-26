@@ -75,11 +75,7 @@ export function PropertyCard({
       )}
 
       {/* Actions */}
-      <div className="flex justify-between items-center">
-        <div className="text-xs text-gray-500 dark:text-gray-400">
-          関連: {property.relatedProperties.slice(0, 2).join(", ")}
-          {property.relatedProperties.length > 2 && "..."}
-        </div>
+      <div className="flex justify-end">
         <button
           onClick={() => onViewDetail(property.id)}
           className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 
