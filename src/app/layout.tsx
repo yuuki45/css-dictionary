@@ -73,8 +73,42 @@ export default function RootLayout({
         <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta httpEquiv="Pragma" content="no-cache" />
         <meta httpEquiv="Expires" content="0" />
-        <meta name="version" content="0.1.1" />
+        <meta name="version" content="0.1.2" />
         <meta name="build-time" content={Date.now().toString()} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Register service worker for cache busting
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(() => console.log('SW registered'))
+                  .catch(() => console.log('SW registration failed'));
+              }
+              
+              // Force reload if version changed
+              const currentVersion = '0.1.2';
+              const storedVersion = localStorage.getItem('app-version');
+              if (storedVersion && storedVersion !== currentVersion) {
+                localStorage.clear();
+                sessionStorage.clear();
+                if ('caches' in window) {
+                  caches.keys().then(names => {
+                    names.forEach(name => caches.delete(name));
+                  });
+                }
+                location.reload(true);
+              }
+              localStorage.setItem('app-version', currentVersion);
+              
+              // Disable all caching
+              if ('caches' in window) {
+                caches.keys().then(names => {
+                  names.forEach(name => caches.delete(name));
+                });
+              }
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
