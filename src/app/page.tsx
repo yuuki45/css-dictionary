@@ -15,12 +15,13 @@ import {
   filterByCategory,
 } from "@/utils/search";
 import { CSSProperty } from "@/types/css";
-import cssPropertiesData from "@/data/cssProperties.json";
+import { getCacheBustingUrl } from "@/utils/cacheUtils";
 import { Clock, Star, Layers, TrendingUp } from "lucide-react";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [cssProperties, setCssProperties] = useState<CSSProperty[]>([]);
 
   const { isFavorite, addFavorite, removeFavorite, getFavoriteIds, isLoaded: favoritesLoaded } =
     useFavorites();
@@ -28,7 +29,22 @@ export default function HomePage() {
   const { theme } = useTheme();
   const analytics = useAnalytics();
 
-  const properties: CSSProperty[] = cssPropertiesData;
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch(getCacheBustingUrl('/data/cssProperties.json'));
+        const data = await response.json();
+        setCssProperties(data);
+      } catch (error) {
+        // Fallback to static import
+        const { default: fallbackData } = await import('@/data/cssProperties.json');
+        setCssProperties(fallbackData);
+      }
+    };
+    loadData();
+  }, []);
+
+  const properties: CSSProperty[] = cssProperties;
 
   const handleToggleFavorite = (propertyId: string) => {
     const property = properties.find((p) => p.id === propertyId);
