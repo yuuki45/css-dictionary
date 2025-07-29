@@ -713,4 +713,552 @@ export const techniques: Technique[] = [
 `,
     tips: "画像やボタンなど潰したくない要素にflex-shrink: 0;やmin-widthを指定。flex-basisやmin-heightも有効。親のflex-wrap: wrap;で折り返しも検討。",
   },
+  {
+    id: "button-designs-10",
+    title: "よく使うボタンデザイン10選",
+    description:
+      "モダンなWebサイトでよく使われるボタンデザインのパターン集です。基本的なボタンからトレンドのガラスモーフィズムまで、様々なシーンで使えるデザインテクニックを紹介します。",
+    html: `<!-- 1. 基本ボタン -->
+<div class="button-section">
+  <h3>1. 基本ボタン</h3>
+  <button class="btn-basic">送信する</button>
+  <button class="btn-basic-secondary">キャンセル</button>
+</div>
+
+<!-- 2. アウトラインボタン -->
+<div class="button-section">
+  <h3>2. アウトラインボタン</h3>
+  <button class="btn-outline">詳細を見る</button>
+  <button class="btn-outline-danger">削除</button>
+</div>
+
+<!-- 3. グラデーションボタン -->
+<div class="button-section">
+  <h3>3. グラデーションボタン</h3>
+  <button class="btn-gradient">今すぐ登録</button>
+  <button class="btn-gradient-purple">プレミアム</button>
+</div>
+
+<!-- 4. ホバー時浮き上がるボタン -->
+<div class="button-section">
+  <h3>4. ホバー時浮き上がるボタン</h3>
+  <button class="btn-hover-float">ダウンロード</button>
+  <button class="btn-hover-float-dark">購入する</button>
+</div>
+
+<!-- 5. アニメーション付きボタン -->
+<div class="button-section">
+  <h3>5. アニメーション付きボタン</h3>
+  <button class="btn-pulse">注目のボタン</button>
+  <button class="btn-loading">処理中...</button>
+</div>
+
+<!-- 6. 角丸の大きなボタン -->
+<div class="button-section">
+  <h3>6. 角丸の大きなボタン（Pill型）</h3>
+  <button class="btn-pill">無料で始める</button>
+  <button class="btn-pill-large">今すぐ申し込み</button>
+</div>
+
+<!-- 7. アイコン付きボタン -->
+<div class="button-section">
+  <h3>7. アイコン付きボタン</h3>
+  <button class="btn-icon">
+    <span class="icon">📧</span>
+    メール送信
+  </button>
+  <button class="btn-icon-right">
+    ダウンロード
+    <span class="icon">⬇️</span>
+  </button>
+</div>
+
+<!-- 8. ガラスモーフィズムボタン -->
+<div class="button-section glass-bg">
+  <h3>8. ガラスモーフィズムボタン</h3>
+  <button class="btn-glass">透明感のあるボタン</button>
+  <button class="btn-glass-colored">カラー版</button>
+</div>
+
+<!-- 9. ネオモーフィズムボタン -->
+<div class="button-section neomorphism-bg">
+  <h3>9. ネオモーフィズムボタン</h3>
+  <button class="btn-neomorphism">押し込み効果</button>
+  <button class="btn-neomorphism-raised">浮き出し効果</button>
+</div>
+
+<!-- 10. 矢印付きCTAボタン -->
+<div class="button-section">
+  <h3>10. 矢印付きCTAボタン</h3>
+  <button class="btn-cta">
+    今すぐ始める
+    <span class="cta-arrow">→</span>
+  </button>
+  <button class="btn-cta-animated">
+    詳しくはこちら
+    <span class="cta-arrow-animated">→</span>
+  </button>
+</div>`,
+    css: `/* ベーススタイル */
+.button-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.button-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.button-section button {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 背景用スタイル */
+.glass-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.glass-bg h3 {
+  color: white;
+}
+
+.neomorphism-bg {
+  background: #e0e5ec;
+}
+
+/* 1. 基本ボタン */
+.btn-basic {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #3b82f6;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-basic:hover {
+  background: #2563eb;
+}
+
+.btn-basic-secondary {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-basic-secondary:hover {
+  background: #e5e7eb;
+}
+
+/* 2. アウトラインボタン */
+.btn-outline {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3b82f6;
+  background: transparent;
+  border: 2px solid #3b82f6;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-outline-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dc2626;
+  background: transparent;
+  border: 2px solid #dc2626;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+  background: #dc2626;
+  color: white;
+}
+
+/* 3. グラデーションボタン */
+.btn-gradient {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-gradient-purple {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gradient-purple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+}
+
+/* 4. ホバー時浮き上がるボタン */
+.btn-hover-float {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #10b981;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-hover-float:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-hover-float-dark {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #1f2937;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-hover-float-dark:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(31, 41, 55, 0.4);
+}
+
+/* 5. アニメーション付きボタン */
+.btn-pulse {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #f59e0b;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.btn-loading {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #6b7280;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.btn-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 6. 角丸の大きなボタン（Pill型） */
+.btn-pill {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  background: #8b5cf6;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pill:hover {
+  background: #7c3aed;
+  transform: scale(1.05);
+}
+
+.btn-pill-large {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  background: #ef4444;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pill-large:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* 7. アイコン付きボタン */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #0ea5e9;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: #0284c7;
+}
+
+.btn-icon-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #059669;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-icon-right:hover {
+  background: #047857;
+}
+
+.btn-icon .icon,
+.btn-icon-right .icon {
+  font-size: 1.25em;
+}
+
+/* 8. ガラスモーフィズムボタン */
+.btn-glass {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-glass-colored {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-glass-colored:hover {
+  background: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 9. ネオモーフィズムボタン */
+.btn-neomorphism {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background: #e0e5ec;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 
+    inset -2px -2px 6px rgba(255, 255, 255, 1),
+    inset 2px 2px 6px rgba(163, 177, 198, 0.6);
+  transition: all 0.2s ease;
+}
+
+.btn-neomorphism:hover {
+  box-shadow: 
+    inset -1px -1px 3px rgba(255, 255, 255, 1),
+    inset 1px 1px 3px rgba(163, 177, 198, 0.6);
+}
+
+.btn-neomorphism-raised {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background: #e0e5ec;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 
+    -2px -2px 6px rgba(255, 255, 255, 1),
+    2px 2px 6px rgba(163, 177, 198, 0.6);
+  transition: all 0.2s ease;
+}
+
+.btn-neomorphism-raised:hover {
+  box-shadow: 
+    -4px -4px 12px rgba(255, 255, 255, 1),
+    4px 4px 12px rgba(163, 177, 198, 0.6);
+}
+
+/* 10. 矢印付きCTAボタン */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.btn-cta .cta-arrow {
+  font-size: 1.25em;
+  transition: transform 0.3s ease;
+}
+
+.btn-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.btn-cta-animated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  background: #1f2937;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-cta-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-cta-animated:hover::before {
+  left: 100%;
+}
+
+.btn-cta-animated .cta-arrow-animated {
+  font-size: 1.25em;
+  animation: arrow-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}`,
+    tips: "ボタンデザインはUIの中でも特に重要な要素です。基本的なボタンから始めて、プロジェクトに合わせてカスタマイズしましょう。アクセシビリティを考慮し、hover効果だけでなくfocus状態のスタイルも設定することを推奨します。ガラスモーフィズムやネオモーフィズムはトレンドですが、可読性とのバランスが重要です。アニメーションは適度に使用し、ユーザビリティを損なわないよう注意しましょう。",
+  },
 ];
