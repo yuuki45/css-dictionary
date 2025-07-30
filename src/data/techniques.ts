@@ -1261,4 +1261,282 @@ export const techniques: Technique[] = [
 }`,
     tips: "ボタンデザインはUIの中でも特に重要な要素です。基本的なボタンから始めて、プロジェクトに合わせてカスタマイズしましょう。アクセシビリティを考慮し、hover効果だけでなくfocus状態のスタイルも設定することを推奨します。ガラスモーフィズムやネオモーフィズムはトレンドですが、可読性とのバランスが重要です。アニメーションは適度に使用し、ユーザビリティを損なわないよう注意しましょう。",
   },
+  {
+    id: "pricing-table-design",
+    title: "おしゃれな料金テーブルデザイン",
+    description:
+      "プランやサービスの料金表示に使えるモダンな料金テーブルデザインです。カードスタイルとホバー効果、人気プランの強調表示などを組み合わせた実用的なデザインテクニックです。",
+    html: `<div class="pricing-container">
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3 class="pricing-title">ベーシック</h3>
+      <div class="pricing-price">
+        <span class="price-currency">¥</span>
+        <span class="price-amount">980</span>
+        <span class="price-period">/月</span>
+      </div>
+      <p class="pricing-description">個人利用に最適</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        月5GBストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        基本サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        モバイルアプリ
+      </li>
+      <li class="feature-item disabled">
+        <span class="feature-icon">×</span>
+        優先サポート
+      </li>
+    </ul>
+    <button class="pricing-btn">プランを選択</button>
+  </div>
+
+  <div class="pricing-card popular">
+    <div class="popular-badge">人気No.1</div>
+    <div class="pricing-header">
+      <h3 class="pricing-title">プロ</h3>
+      <div class="pricing-price">
+        <span class="price-currency">¥</span>
+        <span class="price-amount">2,980</span>
+        <span class="price-period">/月</span>
+      </div>
+      <p class="pricing-description">チーム・企業におすすめ</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        月50GBストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        優先サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        チーム管理機能
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        アナリティクス
+      </li>
+    </ul>
+    <button class="pricing-btn popular-btn">プランを選択</button>
+  </div>
+
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3 class="pricing-title">エンタープライズ</h3>
+      <div class="pricing-price">
+        <span class="price-amount">お問い合わせ</span>
+      </div>
+      <p class="pricing-description">大規模組織向け</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        無制限ストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        24時間サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        カスタム統合
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        専任担当者
+      </li>
+    </ul>
+    <button class="pricing-btn">お問い合わせ</button>
+  </div>
+</div>`,
+    css: `.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: #e5e7eb;
+}
+
+.pricing-card.popular {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.pricing-card.popular:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 0 1rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.price-currency {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.price-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1;
+}
+
+.price-period {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-left: 0.25rem;
+}
+
+.pricing-description {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item.disabled {
+  color: #9ca3af;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.feature-item.disabled .feature-icon {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+.pricing-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pricing-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+}
+
+.popular-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-color: #3b82f6;
+}
+
+.popular-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  border-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-8px);
+  }
+}`,
+    tips: "料金テーブルは比較しやすさが重要です。人気プランをtransform: scale()で少し大きく表示し、グラデーションボタンで目立たせています。hover効果でインタラクティブ性を向上。レスポンシブ対応も忘れずに。機能リストは視覚的にわかりやすいアイコンを使用し、利用できない機能は色を変えて区別しています。",
+  },
 ];
