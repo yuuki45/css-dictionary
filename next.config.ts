@@ -1,9 +1,8 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 開発時はoutput: 'export'をコメントアウト
-  // 本番ビルド時のみ有効化する
-  // output: 'export',
+  // 静的サイトとしてエクスポート
+  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
