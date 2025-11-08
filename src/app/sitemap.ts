@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import cssPropertiesData from '@/data/cssProperties.json';
 import { CSSProperty } from '@/types/css';
+import { getCategorySlug } from '@/utils/categorySlug';
 
 const properties: CSSProperty[] = cssPropertiesData;
 
@@ -54,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // カテゴリページ
   const categories = Array.from(new Set(properties.map(p => p.category)));
   const categoryPages: MetadataRoute.Sitemap = categories.map(category => ({
-    url: `${baseUrl}/categories/${encodeURIComponent(category)}/`,
+    url: `${baseUrl}/categories/${getCategorySlug(category)}/`,
     lastModified: currentDate,
     changeFrequency: 'weekly',
     priority: 0.7,

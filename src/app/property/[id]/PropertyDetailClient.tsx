@@ -8,6 +8,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { getCategorySlug } from '@/utils/categorySlug';
 import { CSSProperty } from '@/types/css';
 import cssPropertiesData from '@/data/cssProperties.json';
 
@@ -61,7 +62,7 @@ export function PropertyDetailClient({ property }: PropertyDetailClientProps) {
           items={[
             {
               label: property.category,
-              href: `/categories/${encodeURIComponent(property.category)}/`,
+              href: `/categories/${getCategorySlug(property.category)}/`,
             },
             {
               label: property.name,
