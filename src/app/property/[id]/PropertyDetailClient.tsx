@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { PropertyDetail } from '@/components/PropertyDetail';
 import { Navigation } from '@/components/Navigation';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useAnalytics } from '@/hooks/useAnalytics';
@@ -55,6 +56,19 @@ export function PropertyDetailClient({ property }: PropertyDetailClientProps) {
 
   return (
     <>
+      <div className="max-w-4xl mx-auto px-4 py-4">
+        <Breadcrumb
+          items={[
+            {
+              label: property.category,
+              href: `/categories/${encodeURIComponent(property.category)}/`,
+            },
+            {
+              label: property.name,
+            },
+          ]}
+        />
+      </div>
       <PropertyDetail
         property={property}
         isFavorite={isLoaded ? isFavorite(property.id) : false}

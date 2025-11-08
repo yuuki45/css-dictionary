@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Dictionary Inspector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">📖</span>
+          <h1 class="logo-text">CSS Inspector</h1>
+        </div>
+        <div class="version">v1.0.0</div>
+      </div>
+    </header>
+
+    <main class="popup-main">
+      <!-- インスペクターボタン -->
+      <section class="inspector-section">
+        <button id="toggleInspectorBtn" class="inspector-btn">
+          <span class="btn-icon">🔍</span>
+          <span class="btn-text">要素を調査</span>
+        </button>
+        <p class="inspector-hint">
+          クリックして、Webページ上の要素を選択してください
+        </p>
+      </section>
+
+      <!-- クイックアクセス -->
+      <section class="quick-access-section">
+        <h2 class="section-title">クイックアクセス</h2>
+        <div class="quick-links">
+          <a href="#" id="openDictionaryBtn" class="quick-link">
+            <span class="link-icon">🏠</span>
+            <span class="link-text">CSS Dictionary</span>
+          </a>
+          <a href="#" id="openFavoritesBtn" class="quick-link">
+            <span class="link-icon">⭐</span>
+            <span class="link-text">お気に入り</span>
+          </a>
+          <a href="#" id="openHistoryBtn" class="quick-link">
+            <span class="link-icon">🕐</span>
+            <span class="link-text">履歴</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 最近調査したプロパティ -->
+      <section class="recent-section">
+        <h2 class="section-title">最近調査したプロパティ</h2>
+        <div id="recentPropertiesList" class="recent-list">
+          <p class="empty-message">まだ調査したプロパティがありません</p>
+        </div>
+      </section>
+
+      <!-- 設定 -->
+      <section class="settings-section">
+        <h2 class="section-title">設定</h2>
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="autoOpenDictionary" class="setting-checkbox">
+            <span>自動的にCSS Dictionaryで開く</span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="showNotifications" class="setting-checkbox" checked>
+            <span>通知を表示</span>
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <footer class="popup-footer">
+      <a href="https://github.com/yourusername/css-dictionary-extension" target="_blank" class="footer-link">
+        GitHub
+      </a>
+      <a href="#" id="helpBtn" class="footer-link">
+        ヘルプ
+      </a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

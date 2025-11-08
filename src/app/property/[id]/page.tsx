@@ -55,7 +55,7 @@ function generateSEOTitle(property: CSSProperty): string {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const property = properties.find((p) => p.id === id);
-  
+
   if (!property) {
     return {
       title: 'プロパティが見つかりません - CSS辞書',
@@ -65,18 +65,25 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   const seoTitle = generateSEOTitle(property);
 
+  // インタラクティブデモの有無を確認
+  const hasInteractiveDemo = property.interactive?.enabled || false;
+  const interactiveDemoText = hasInteractiveDemo ? 'インタラクティブデモで試せる！' : '';
+
+  // 改善されたメタディスクリプション
+  const seoDescription = `【CSS ${property.name}完全ガイド】${interactiveDemoText}使い方・サンプルコード・ブラウザ対応を詳しく解説。${property.description}。初心者にもわかりやすい実例付き。`;
+
   return {
     title: seoTitle,
-    description: `CSS ${property.name}プロパティの使い方。${property.description}。実用的なサンプルコードと詳細解説付き。`,
+    description: seoDescription,
     openGraph: {
       title: seoTitle,
-      description: `CSS ${property.name}プロパティの使い方。${property.description}。`,
+      description: seoDescription,
       url: `https://www.css-dictionary.com/property/${property.id}`,
     },
     twitter: {
       card: 'summary_large_image',
       title: seoTitle,
-      description: `CSS ${property.name}プロパティの使い方。${property.description}。`,
+      description: seoDescription,
     },
   };
 }

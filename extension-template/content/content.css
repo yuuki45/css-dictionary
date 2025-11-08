@@ -1,0 +1,328 @@
+/* content/content.css */
+/* CSS Inspector スタイル */
+
+/* オーバーレイ（要素のハイライト） */
+.css-inspector-overlay {
+  position: absolute;
+  border: 2px solid #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+  pointer-events: none;
+  z-index: 999998;
+  display: none;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+  transition: all 0.1s ease;
+}
+
+/* ツールチップ */
+.css-inspector-tooltip {
+  position: absolute;
+  background-color: #1f2937;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 999999;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+/* パネル */
+.css-inspector-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  z-index: 999997;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: panelSlideIn 0.3s ease-out;
+}
+
+@keyframes panelSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* パネルヘッダー */
+.css-inspector-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.css-inspector-panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.css-inspector-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.css-inspector-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* パネル情報エリア */
+.css-inspector-info {
+  overflow-y: auto;
+  padding: 20px;
+  flex: 1;
+}
+
+/* セクション */
+.css-inspector-section {
+  margin-bottom: 24px;
+}
+
+.css-inspector-section:last-child {
+  margin-bottom: 0;
+}
+
+.css-inspector-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+/* プロパティリスト */
+.css-inspector-property-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* プロパティアイテム */
+.css-inspector-property-item {
+  display: grid;
+  grid-template-columns: 150px 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.css-inspector-property-item:hover {
+  background-color: #f3f4f6;
+}
+
+.css-inspector-property-name {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.css-inspector-property-value {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.css-inspector-open-btn,
+.css-inspector-copy-btn {
+  background-color: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.css-inspector-open-btn:hover {
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+}
+
+.css-inspector-copy-btn:hover {
+  background-color: #dcfce7;
+  border-color: #10b981;
+}
+
+/* ボックスモデル */
+.css-inspector-box-model {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.box-margin,
+.box-border,
+.box-padding,
+.box-content {
+  position: relative;
+  padding: 20px;
+  border: 1px solid;
+}
+
+.box-margin {
+  background-color: #fef3c7;
+  border-color: #fbbf24;
+}
+
+.box-border {
+  background-color: #fce7f3;
+  border-color: #ec4899;
+}
+
+.box-padding {
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+}
+
+.box-content {
+  background-color: #d1fae5;
+  border-color: #10b981;
+  text-align: center;
+}
+
+.box-label {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.box-value {
+  font-size: 11px;
+  color: #1f2937;
+}
+
+.box-content .box-value {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* 通知 */
+.css-inspector-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #10b981;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000000;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.css-inspector-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 640px) {
+  .css-inspector-panel {
+    width: 95vw;
+    max-height: 90vh;
+  }
+
+  .css-inspector-property-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .css-inspector-property-name {
+    font-size: 12px;
+  }
+
+  .css-inspector-property-value {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .css-inspector-open-btn,
+  .css-inspector-copy-btn {
+    width: 100%;
+    height: 36px;
+  }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .css-inspector-panel {
+    background-color: #1f2937;
+  }
+
+  .css-inspector-section h4 {
+    color: #f3f4f6;
+    border-bottom-color: #374151;
+  }
+
+  .css-inspector-property-item {
+    background-color: #374151;
+  }
+
+  .css-inspector-property-item:hover {
+    background-color: #4b5563;
+  }
+
+  .css-inspector-property-value {
+    color: #e5e7eb;
+  }
+
+  .css-inspector-open-btn,
+  .css-inspector-copy-btn {
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .box-label,
+  .box-value {
+    color: #1f2937;
+  }
+}

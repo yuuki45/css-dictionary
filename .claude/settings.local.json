@@ -3,8 +3,17 @@
     "allow": [
       "Bash(npm run build:*)",
       "Bash(grep:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "mcp__serena__list_dir",
+      "Bash(PORT=3001 npm run dev:*)",
+      "Bash(node create-icons.js:*)",
+      "Bash(node:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "serena"
+  ]
 }
