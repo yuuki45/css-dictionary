@@ -1,6 +1,7 @@
 import React from "react";
 import { Heart, Copy, ArrowLeft, ExternalLink, Eye } from "lucide-react";
 import { CSSProperty } from "../types/css";
+import { InteractiveDemo } from "./InteractiveDemo";
 
 interface PropertyDetailProps {
   property: CSSProperty;
@@ -2942,51 +2943,102 @@ export function PropertyDetail({
       },
       "border-radius": {
         0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-              8pxの角丸
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border space-y-3">
+            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold" style={{ borderRadius: "0px" }}>
+              0px
             </div>
+            <div className="text-xs text-gray-500">角の丸みなし（デフォルト）</div>
           </div>
         ),
         1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center">
-              円形
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border space-y-3">
+            <div className="w-32 h-32 bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold" style={{ borderRadius: "16px" }}>
+              16px
             </div>
+            <div className="text-xs text-gray-500">中程度の丸み</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border space-y-3">
+            <div className="w-32 h-32 bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white font-bold" style={{ borderRadius: "50%" }}>
+              50%
+            </div>
+            <div className="text-xs text-gray-500">完全な円形</div>
           </div>
         ),
       },
       "box-shadow": {
         0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border flex items-center justify-center">
-            <div
-              className="w-20 h-12 rounded bg-white"
-              style={{ boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
-            />
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="w-40 h-24 bg-white dark:bg-gray-800 rounded flex items-center justify-center font-medium" style={{ boxShadow: "none" }}>
+              影なし
+            </div>
+            <div className="text-xs text-gray-500 mt-2">box-shadow: none</div>
           </div>
         ),
         1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border flex items-center justify-center">
-            <div
-              className="w-20 h-12 rounded bg-white"
-              style={{ boxShadow: "0 0 0 3px rgba(59,130,246,0.5)" }}
-            />
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="w-40 h-24 bg-white dark:bg-gray-800 rounded flex items-center justify-center font-medium" style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
+              軽い影
+            </div>
+            <div className="text-xs text-gray-500 mt-2">軽い影（ぼかし4px）</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="w-40 h-24 bg-white dark:bg-gray-800 rounded flex items-center justify-center font-medium" style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}>
+              中程度の影
+            </div>
+            <div className="text-xs text-gray-500 mt-2">中程度の影（ぼかし12px）</div>
+          </div>
+        ),
+        3: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="w-40 h-24 bg-white dark:bg-gray-800 rounded flex items-center justify-center font-medium" style={{ boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}>
+              強い影
+            </div>
+            <div className="text-xs text-gray-500 mt-2">強い影（ぼかし30px）</div>
           </div>
         ),
       },
       opacity: {
         0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-blue-500 text-white px-4 py-2 rounded opacity-50">
-              50%の透明度
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-32">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 1 }}>
+                  opacity: 1
+                </div>
+              </div>
             </div>
+            <div className="text-xs text-gray-500 mt-2">完全に不透明</div>
           </div>
         ),
         1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <div className="bg-green-500 text-white px-4 py-2 rounded opacity-0">
-              完全に透明（領域は確保）
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-32">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 0.5 }}>
+                  opacity: 0.5
+                </div>
+              </div>
             </div>
+            <div className="text-xs text-gray-500 mt-2">半透明（背景が透けて見える）</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-32">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 0.1 }}>
+                  opacity: 0.1
+                </div>
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">ほぼ透明（うっすらと見える）</div>
           </div>
         ),
       },
@@ -4085,7 +4137,7 @@ export function PropertyDetail({
           </div>
         ),
       },
-      "focus-visible": {
+      "pseudo-focus-visible": {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <button className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2">
@@ -4193,7 +4245,7 @@ export function PropertyDetail({
           </div>
         ),
       },
-      ":nth-child": {
+      "pseudo-nth-child": {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
             <ul className="flex gap-2">
@@ -5723,6 +5775,380 @@ export function PropertyDetail({
           </div>
         ),
       },
+      "object-position": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="text-sm font-medium mb-2">object-position: center</div>
+            <div className="w-64 h-40 bg-gray-300 dark:bg-gray-600 relative overflow-hidden rounded border-2 border-blue-500">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23667eea'/%3E%3Ctext x='20' y='40' font-size='24' fill='red' font-weight='bold'%3E左上%3C/text%3E%3Ctext x='300' y='40' font-size='24' fill='green' font-weight='bold'%3E右上%3C/text%3E%3Ctext x='160' y='160' font-size='32' fill='yellow' font-weight='bold'%3E中央%3C/text%3E%3Ctext x='20' y='280' font-size='24' fill='blue' font-weight='bold'%3E左下%3C/text%3E%3Ctext x='300' y='280' font-size='24' fill='purple' font-weight='bold'%3E右下%3C/text%3E%3C/svg%3E"
+                alt="Demo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "none",
+                  objectPosition: "center"
+                }}
+              />
+            </div>
+            <div className="text-xs text-gray-500 mt-2">中央の「中央」が見える</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="text-sm font-medium mb-2">object-position: top left</div>
+            <div className="w-64 h-40 bg-gray-300 dark:bg-gray-600 relative overflow-hidden rounded border-2 border-green-500">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23764ba2'/%3E%3Ctext x='20' y='40' font-size='24' fill='red' font-weight='bold'%3E左上%3C/text%3E%3Ctext x='300' y='40' font-size='24' fill='green' font-weight='bold'%3E右上%3C/text%3E%3Ctext x='160' y='160' font-size='32' fill='yellow' font-weight='bold'%3E中央%3C/text%3E%3Ctext x='20' y='280' font-size='24' fill='blue' font-weight='bold'%3E左下%3C/text%3E%3Ctext x='300' y='280' font-size='24' fill='purple' font-weight='bold'%3E右下%3C/text%3E%3C/svg%3E"
+                alt="Demo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "none",
+                  objectPosition: "top left"
+                }}
+              />
+            </div>
+            <div className="text-xs text-gray-500 mt-2">左上の「左上」が見える</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="text-sm font-medium mb-2">object-position: bottom right</div>
+            <div className="w-64 h-40 bg-gray-300 dark:bg-gray-600 relative overflow-hidden rounded border-2 border-purple-500">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%234facfe'/%3E%3Ctext x='20' y='40' font-size='24' fill='red' font-weight='bold'%3E左上%3C/text%3E%3Ctext x='300' y='40' font-size='24' fill='green' font-weight='bold'%3E右上%3C/text%3E%3Ctext x='160' y='160' font-size='32' fill='yellow' font-weight='bold'%3E中央%3C/text%3E%3Ctext x='20' y='280' font-size='24' fill='blue' font-weight='bold'%3E左下%3C/text%3E%3Ctext x='300' y='280' font-size='24' fill='purple' font-weight='bold'%3E右下%3C/text%3E%3C/svg%3E"
+                alt="Demo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "none",
+                  objectPosition: "bottom right"
+                }}
+              />
+            </div>
+            <div className="text-xs text-gray-500 mt-2">右下の「右下」が見える</div>
+          </div>
+        ),
+      },
+      "opacity": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div
+              className="relative h-32 rounded"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, #4CAF50 0, #4CAF50 20px, #8BC34A 20px, #8BC34A 40px)'
+              }}
+            >
+              <div
+                className="absolute inset-0 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-lg"
+                style={{ opacity: 1 }}
+              >
+                opacity: 1（完全に不透明）
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">背景が全く見えない</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div
+              className="relative h-32 rounded"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, #4CAF50 0, #4CAF50 20px, #8BC34A 20px, #8BC34A 40px)'
+              }}
+            >
+              <div
+                className="absolute inset-0 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-lg"
+                style={{ opacity: 0.5 }}
+              >
+                opacity: 0.5（半透明）
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">背景が透けて見える</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div
+              className="relative h-32 rounded"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, #4CAF50 0, #4CAF50 20px, #8BC34A 20px, #8BC34A 40px)'
+              }}
+            >
+              <div
+                className="absolute inset-0 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-lg"
+                style={{ opacity: 0.1 }}
+              >
+                opacity: 0.1（ほぼ透明）
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">背景がはっきり見える</div>
+          </div>
+        ),
+      },
+      "mix-blend-mode": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
+              <div className="absolute text-6xl font-bold text-yellow-400" style={{ mixBlendMode: "multiply" }}>
+                TEXT
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">multiply - 乗算（暗くなる）</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
+              <div className="absolute text-6xl font-bold text-white" style={{ mixBlendMode: "screen" }}>
+                TEXT
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">screen - スクリーン（明るくなる）</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
+            <div className="relative h-48 bg-gradient-to-r from-pink-500 to-orange-500 rounded flex items-center justify-center">
+              <div className="absolute text-6xl font-bold text-cyan-400" style={{ mixBlendMode: "difference" }}>
+                TEXT
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">difference - 差の絶対値（反転効果）</div>
+          </div>
+        ),
+      },
+      "background-blend-mode": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div
+              className="h-48 rounded"
+              style={{
+                backgroundImage: 'linear-gradient(45deg, rgba(255,0,0,0.5), rgba(0,0,255,0.5)), repeating-linear-gradient(45deg, #606dbc 0, #606dbc 10px, #465298 10px, #465298 20px)',
+                backgroundBlendMode: "multiply"
+              }}
+            />
+            <div className="text-xs text-gray-500 mt-2">multiply - グラデーションとパターンを乗算</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div
+              className="h-48 rounded"
+              style={{
+                backgroundImage: 'linear-gradient(45deg, rgba(255,255,0,0.7), rgba(255,0,255,0.7)), repeating-linear-gradient(90deg, #4ecdc4 0, #4ecdc4 15px, #44a5a0 15px, #44a5a0 30px)',
+                backgroundBlendMode: "screen"
+              }}
+            />
+            <div className="text-xs text-gray-500 mt-2">screen - 明るく混ざり合う効果</div>
+          </div>
+        ),
+      },
+      "inset": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="relative h-48 bg-gray-200 dark:bg-gray-600 rounded">
+              <div className="absolute bg-blue-500 text-white p-3 rounded" style={{ inset: "20px" }}>
+                inset: 20px
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">全方向から20pxの位置</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="relative h-48 bg-gray-200 dark:bg-gray-600 rounded">
+              <div className="absolute bg-green-500 text-white p-3 rounded" style={{ inset: "10px 30px" }}>
+                inset: 10px 30px
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">上下10px、左右30px</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="relative h-48 bg-gray-200 dark:bg-gray-600 rounded">
+              <div className="absolute bg-purple-500 text-white p-3 rounded" style={{ inset: "auto 10px 10px auto" }}>
+                右下固定
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">inset: auto 10px 10px auto（右下）</div>
+          </div>
+        ),
+      },
+      "align-self": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="flex items-center h-40 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded" style={{ alignSelf: "flex-start" }}>
+                align-self: start
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが上揃え</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="flex items-center h-40 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded" style={{ alignSelf: "flex-end" }}>
+                align-self: end
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが下揃え</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="flex items-center h-40 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded h-full flex items-center" style={{ alignSelf: "stretch" }}>
+                align-self: stretch
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが引き伸ばされる</div>
+          </div>
+        ),
+      },
+      "justify-self": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-3 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center" style={{ justifySelf: "start" }}>
+                start
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが左寄せ</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-3 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center" style={{ justifySelf: "center" }}>
+                center
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが中央</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-3 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">Item 1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center" style={{ justifySelf: "end" }}>
+                end
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">Item 3</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目のアイテムが右寄せ</div>
+          </div>
+        ),
+      },
+      "grid-column": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-4 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center" style={{ gridColumn: "span 2" }}>
+                grid-column: span 2
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">4</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目が2列分を占有</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-4 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center" style={{ gridColumn: "1 / 4" }}>
+                grid-column: 1 / 4
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目が列1〜4を占有</div>
+          </div>
+        ),
+      },
+      "grid-row": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-3 grid-rows-3 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded h-64">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center flex items-center justify-center" style={{ gridRow: "span 2" }}>
+                grid-row: span 2
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">3</div>
+              <div className="bg-orange-500 text-white p-4 rounded text-center">4</div>
+              <div className="bg-pink-500 text-white p-4 rounded text-center">5</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目が2行分を占有</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <div className="grid grid-cols-2 grid-rows-3 gap-2 bg-gray-200 dark:bg-gray-600 p-2 rounded h-64">
+              <div className="bg-blue-500 text-white p-4 rounded text-center">1</div>
+              <div className="bg-green-500 text-white p-4 rounded text-center flex items-center justify-center" style={{ gridRow: "1 / 4" }}>
+                grid-row: 1 / 4
+              </div>
+              <div className="bg-purple-500 text-white p-4 rounded text-center">3</div>
+              <div className="bg-orange-500 text-white p-4 rounded text-center">4</div>
+            </div>
+            <div className="text-xs text-gray-500 mt-2">2番目が行1〜4を占有</div>
+          </div>
+        ),
+      },
+      "resize": {
+        0: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <textarea
+              className="w-full h-24 p-2 border-2 border-blue-500 rounded"
+              style={{ resize: "both" }}
+              defaultValue="resize: both - 縦横両方向にリサイズ可能（右下をドラッグ）"
+            />
+            <div className="text-xs text-gray-500 mt-2">右下の角をドラッグしてサイズ変更可能</div>
+          </div>
+        ),
+        1: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <textarea
+              className="w-full h-24 p-2 border-2 border-green-500 rounded"
+              style={{ resize: "horizontal" }}
+              defaultValue="resize: horizontal - 横方向のみリサイズ可能"
+            />
+            <div className="text-xs text-gray-500 mt-2">横方向のみリサイズ可能</div>
+          </div>
+        ),
+        2: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <textarea
+              className="w-full h-24 p-2 border-2 border-purple-500 rounded"
+              style={{ resize: "vertical" }}
+              defaultValue="resize: vertical - 縦方向のみリサイズ可能"
+            />
+            <div className="text-xs text-gray-500 mt-2">縦方向のみリサイズ可能</div>
+          </div>
+        ),
+        3: (
+          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
+            <textarea
+              className="w-full h-24 p-2 border-2 border-red-500 rounded"
+              style={{ resize: "none" }}
+              defaultValue="resize: none - リサイズ不可"
+            />
+            <div className="text-xs text-gray-500 mt-2">リサイズできない</div>
+          </div>
+        ),
+      },
     };
 
     return examples[propertyId]?.[exampleIndex] || null;
@@ -5793,6 +6219,16 @@ export function PropertyDetail({
             </code>
           </div>
         </section>
+
+        {/* Interactive Demo */}
+        {property.interactive && (
+          <section className="mb-8">
+            <InteractiveDemo
+              config={property.interactive}
+              propertyName={property.name}
+            />
+          </section>
+        )}
 
         {/* Examples */}
         <section className="mb-8">
