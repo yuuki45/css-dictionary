@@ -1,8 +1,8 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 静的サイトとしてエクスポート
-  output: 'export',
+  // 本番環境のみ静的エクスポート（Vercelでは環境変数VERCELが設定される）
+  ...(process.env.NODE_ENV === 'production' ? { output: 'export' } : {}),
   trailingSlash: true,
   images: {
     unoptimized: true,

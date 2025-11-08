@@ -5,9 +5,6 @@ import { getCategorySlug } from '@/utils/categorySlug';
 
 const properties: CSSProperty[] = cssPropertiesData;
 
-// 静的エクスポートで必須の設定
-export const dynamic = 'force-static';
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.css-dictionary.com';
   const currentDate = new Date();
