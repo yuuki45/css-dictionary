@@ -2903,7 +2903,7 @@
   {
     "id": "scroll-behavior",
     "name": "scroll-behavior",
-    "category": "レイアウト・配置",
+    "category": "インタラクション・UX",
     "description": "スクロール動作をスムーズにするか、即座に移動するかを指定するプロパティです。smooth指定でスムーススクロールが有効になり、アンカーリンクやJavaScriptでのスクロール操作が滑らかになります。",
     "syntax": "scroll-behavior: auto | smooth",
     "examples": [
@@ -2958,7 +2958,7 @@
   {
     "id": "scroll-snap-type",
     "name": "scroll-snap-type",
-    "category": "レイアウト・配置",
+    "category": "インタラクション・UX",
     "description": "スクロールスナップコンテナの動作を定義するプロパティです。カルーセルやフルページスクロールの実装に使用します。",
     "syntax": "scroll-snap-type: none | [ x | y | block | inline | both ] [ mandatory | proximity ]?",
     "examples": [
@@ -2991,7 +2991,7 @@
   {
     "id": "scroll-snap-align",
     "name": "scroll-snap-align",
-    "category": "レイアウト・配置",
+    "category": "インタラクション・UX",
     "description": "スクロールスナップ時の子要素の配置位置を指定するプロパティです。scroll-snap-typeと組み合わせて使用します。",
     "syntax": "scroll-snap-align: none | start | end | center",
     "examples": [
@@ -3023,7 +3023,7 @@
   {
     "id": "overscroll-behavior",
     "name": "overscroll-behavior",
-    "category": "レイアウト・配置",
+    "category": "インタラクション・UX",
     "description": "スクロール領域の境界に達した時の動作を制御するプロパティです。auto、contain、noneの値があり、スクロールチェーン（親要素へのスクロール伝播）を防ぐのに便利です。",
     "syntax": "overscroll-behavior: auto | contain | none",
     "examples": [
@@ -3055,7 +3055,7 @@
   {
     "id": "scroll-margin",
     "name": "scroll-margin",
-    "category": "レイアウト・配置",
+    "category": "スペーシング・サイズ",
     "description": "スクロールスナップ時のマージンを指定するプロパティです。固定ヘッダーがある場合などに、スクロール位置を調整して要素が隠れないようにできます。",
     "syntax": "scroll-margin: <length>",
     "examples": [
@@ -3139,7 +3139,7 @@
   {
     "id": "isolation",
     "name": "isolation",
-    "category": "レイアウト・配置",
+    "category": "背景・装飾",
     "description": "新しいスタッキングコンテキストを作成し、ブレンドモードの影響範囲を制限するプロパティです。mix-blend-modeやbackground-blend-modeの効果を特定の要素内に封じ込めるのに使用します。",
     "syntax": "isolation: auto | isolate",
     "examples": [
