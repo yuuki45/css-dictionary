@@ -59,7 +59,7 @@ export function Navigation({
                   currentActiveTab === id ? "scale-110" : ""
                 }`}
               />
-              <span className="text-xs font-medium">{label}</span>
+              <span className="text-xs font-medium hidden sm:block">{label}</span>
             </Link>
           ))}
         </div>
