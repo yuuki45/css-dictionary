@@ -9,7 +9,7 @@
     <!-- メインページ -->
     <url>
         <loc>https://www.css-dictionary.com/</loc>
-        <lastmod>2024-12-28</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -17,469 +17,631 @@
     <!-- CSSプロパティ個別ページ -->
     <url>
         <loc>https://www.css-dictionary.com/property/display</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/display-flex</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/display-grid</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/order</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/container-queries</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/container-type</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/subgrid</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/aspect-ratio</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/gap</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/clamp</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/min-max-functions</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/css-custom-properties</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/backdrop-filter</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/filter</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/object-fit</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/place-items</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/place-content</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/flex-direction</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/justify-content</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/justify-items</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/align-items</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/align-content</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/flex-wrap</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/flex-grow-shrink-basis</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/grid-template-columns</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/grid-template-areas</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/grid-auto-fit-fill</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/position</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/z-index</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/color</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/font-size</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/font-weight</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/line-height</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/letter-spacing</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/text-align</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/text-decoration</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/background-color</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/background-image</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/background-size</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/background-position</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/linear-gradient</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/radial-gradient</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/padding</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/margin</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/width</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/height</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/max-width</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/min-width</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/box-sizing</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/border</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/border-radius</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/box-shadow</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/opacity</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/transition</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/transform</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/animation</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/keyframes</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/cursor</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/overflow</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/visibility</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/white-space</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/text-overflow</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/word-break</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/writing-mode</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/user-select</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/pointer-events</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/will-change</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/contain</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/media-queries</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/table-layout</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/content-visibility</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/accent-color</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/list-style</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/clip-path</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/pseudo-hover</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/pseudo-nth-child</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/pseudo-nth-of-type</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/property/pseudo-first-child</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/pseudo-focus-visible</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/object-position</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/scroll-behavior</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/inset</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/scroll-snap-type</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/scroll-snap-align</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/overscroll-behavior</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/scroll-margin</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/mix-blend-mode</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/background-blend-mode</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/isolation</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/align-self</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/justify-self</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/grid-column</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/grid-row</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/caret-color</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/appearance</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/outline</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/vertical-align</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/text-transform</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/resize</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/scroll-snap</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/position-sticky</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/color-scheme</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/prefers-color-scheme</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/prefers-reduced-motion</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.css-dictionary.com/property/logical-properties</loc>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -487,129 +649,79 @@
     <!-- カテゴリ一覧 -->
     <url>
         <loc>https://www.css-dictionary.com/categories</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.7</priority>
     </url>
     
     <!-- カテゴリ別ページ -->
     <url>
         <loc>https://www.css-dictionary.com/categories/layout</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/text</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/background</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/animation</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/spacing</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/responsive</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/interaction</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/pseudo-class</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.css-dictionary.com/categories/other</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-    </url>
-    
-    <!-- 逆引き検索 -->
-    <url>
-        <loc>https://www.css-dictionary.com/reverse</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
     </url>
     
     <!-- テクニック集 -->
     <url>
         <loc>https://www.css-dictionary.com/techniques</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     
-    <!-- 個別テクニックページ -->
+    <!-- 逆引き検索 -->
     <url>
-        <loc>https://www.css-dictionary.com/techniques/full-bleed-side</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/equal-height-center</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/text-hover-underline</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/hover-image-zoom</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/button-arrow-hover</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/scrollable-table</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/simple-dropdown-menu</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.css-dictionary.com/techniques/flex-prevent-shrink</loc>
-        <lastmod>2025-01-15</lastmod>
+        <loc>https://www.css-dictionary.com/reverse</loc>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -617,17 +729,17 @@
     <!-- お気に入り -->
     <url>
         <loc>https://www.css-dictionary.com/favorites</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.6</priority>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
     </url>
     
     <!-- 設定 -->
     <url>
         <loc>https://www.css-dictionary.com/settings</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-11-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.4</priority>
     </url>
     
-</urlset> 
+</urlset>
