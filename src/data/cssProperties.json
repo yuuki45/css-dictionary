@@ -3439,7 +3439,7 @@
   {
     "id": "resize",
     "name": "resize",
-    "category": "レイアウト・配置",
+    "category": "インタラクション・UX",
     "description": "ユーザーが要素のサイズを変更できるかどうかを指定するプロパティです。none、both、horizontal、verticalの値があり、textareaのリサイズ動作を制御できます。",
     "syntax": "resize: none | both | horizontal | vertical",
     "examples": [
