@@ -476,7 +476,9 @@
     ],
     "tips": "JavaScriptから動的に変更可能。ダークモードの実装に必須。",
     "commonMistakes": "変数名は大文字小文字を区別する。--で始める必要がある。",
-    "relatedProperties": [],
+    "relatedProperties": [
+      "color-mix"
+    ],
     "browserSupport": {
       "chrome": "49",
       "firefox": "31",
@@ -1215,7 +1217,8 @@
     "tips": "CSS変数と組み合わせるとテーマ切り替えが簡単になる。",
     "relatedProperties": [
       "background-color",
-      "border"
+      "border",
+      "color-mix"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2748,7 +2751,9 @@
     ],
     "tips": "nowrapは一行表示、pre-wrapはコードの表示に便利。",
     "relatedProperties": [
-      "word-break"
+      "word-break",
+      "overflow-wrap",
+      "text-wrap"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2810,7 +2815,10 @@
       }
     ],
     "tips": "日本語サイトではkeep-all、英語サイトではbreak-wordが一般的。",
-    "relatedProperties": [],
+    "relatedProperties": [
+      "overflow-wrap",
+      "text-wrap"
+    ],
     "browserSupport": {
       "chrome": "1",
       "firefox": "15",
@@ -3200,7 +3208,9 @@
     ],
     "tips": "インタラクションを強調したい要素に使うと効果的。",
     "commonMistakes": "タッチデバイスでは:activeや:focusも併用推奨。",
-    "relatedProperties": [],
+    "relatedProperties": [
+      "pseudo-has"
+    ],
     "browserSupport": {
       "chrome": "1",
       "firefox": "1",
@@ -3230,7 +3240,8 @@
     "commonMistakes": "0番目は存在しないので注意。nth-of-typeとの違いも理解しよう。",
     "relatedProperties": [
       "pseudo-nth-of-type",
-      "pseudo-first-child"
+      "pseudo-first-child",
+      "pseudo-has"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -3337,7 +3348,8 @@
     "commonMistakes": ":focusと同じと思い込む。マウスクリックでは適用されないことを理解する。古いブラウザでは動作しないため、フォールバックとして:focusも併用する。",
     "relatedProperties": [
       "outline",
-      "box-shadow"
+      "box-shadow",
+      "pseudo-has"
     ],
     "browserSupport": {
       "chrome": "86",
@@ -4248,5 +4260,254 @@
       "baselineLowDate": "2020-01"
     },
     "category": "レイアウト・配置"
+  },
+  {
+    "id": "pseudo-has",
+    "name": ":has()",
+    "category": "擬似クラス",
+    "description": "「子や後続の要素が条件を満たす親・前の要素」を選択できる擬似クラスです。長年不可能だった『親セレクタ』を実現し、JavaScriptなしで子の状態に応じた親のスタイリングができます。",
+    "syntax": ":has(<relative-selector-list>)",
+    "examples": [
+      {
+        "code": "/* 画像を含むカードだけレイアウトを変える */\n.card:has(img) {\n  display: grid;\n  grid-template-columns: 120px 1fr;\n}",
+        "description": "画像を含むカードにだけグリッドレイアウトを適用"
+      },
+      {
+        "code": "/* 入力が無効な時にフィールド全体を強調 */\n.field:has(input:invalid) {\n  border-color: red;\n  background: #fff5f5;\n}",
+        "description": "子のinputの検証状態に応じて親フィールドを装飾"
+      },
+      {
+        "code": "/* チェックされたら次の要素ではなく“前”のラベルを変える */\nlabel:has(+ input:checked) {\n  font-weight: bold;\n  color: #2563eb;\n}",
+        "description": "直後の兄弟がチェック済みのラベルを強調（前方の要素を選択）"
+      }
+    ],
+    "tips": "「〜を含む」だけでなく:has(> img)で直下限定、:has(+ .next)で兄弟条件も書けます。フォームの状態連動UI（:has(:checked)や:has(:focus-visible)）はJavaScript削減の定番パターンです。",
+    "commonMistakes": ":has()の中に:has()はネストできません。また詳細度は引数のセレクタで決まるため、:has(#id)のような指定は詳細度が跳ね上がり上書きしにくくなります。",
+    "relatedProperties": [
+      "pseudo-hover",
+      "pseudo-nth-child",
+      "pseudo-focus-visible"
+    ],
+    "aiNotes": "AIは学習時期によって「:has()は未対応ブラウザが多いのでJavaScriptで実装すべき」と古い提案をしがちですが、2023年12月に全主要ブラウザ対応済み（Baseline）です。逆にAIが生成した:has()が意図通り動かない場合、:has()内のネスト（:has(:has())は不可）や、擬似要素（::before等）を引数に書いている（無効）ケースが典型です。",
+    "promptExamples": [
+      "チェックボックスがONのとき、その親のカード全体の背景色を変えたい。JavaScriptを使わず:has()で実装して",
+      "input:invalidのときにラベルの色を赤にしたい。ラベルがinputの前にあるHTML構造のまま:has()で書いて",
+      "このjQueryの親要素操作コードを、:has()を使ったCSSだけの実装に置き換えられるか検討して"
+    ],
+    "searchAliases": [
+      "親セレクタ",
+      "親要素を選択",
+      "子の状態で親を変える",
+      "has"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/:has",
+    "browserSupport": {
+      "chrome": "105",
+      "firefox": "121",
+      "safari": "15.4",
+      "edge": "105",
+      "baseline": "widely",
+      "baselineLowDate": "2023-12"
+    }
+  },
+  {
+    "id": "css-nesting",
+    "name": "CSSネスティング",
+    "category": "その他",
+    "description": "Sassなどのプリプロセッサなしで、セレクタを入れ子（ネスト）にして書けるネイティブCSS機能です。親子関係のスタイルをまとめて記述でき、&で親セレクタを参照します。ビルドツール不要でSass風の書き心地を実現します。",
+    "syntax": ".parent { .child { ... } &:hover { ... } }",
+    "examples": [
+      {
+        "code": ".card {\n  padding: 1rem;\n\n  .title {\n    font-size: 1.2rem;\n  }\n\n  &:hover {\n    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);\n  }\n}",
+        "description": "子要素とホバー状態を1つのブロックにまとめて記述"
+      },
+      {
+        "code": ".button {\n  background: #2563eb;\n\n  @media (width >= 768px) {\n    padding: 12px 24px;\n  }\n}",
+        "description": "メディアクエリもセレクタの中にネストできる"
+      },
+      {
+        "code": "/* & を前置すると「親自身が条件を満たす場合」 */\n.input {\n  border: 1px solid #ccc;\n\n  .dark & {\n    border-color: #555;\n  }\n}",
+        "description": "&の位置を変えて「.darkの中の.input」を表現"
+      }
+    ],
+    "tips": "擬似クラスや複合セレクタ（&:hover、&.active）には&が必須です。要素セレクタの子（.card { p { ... } }）は&なしで書けます。ネストは2〜3階層までに抑えると詳細度の事故を防げます。",
+    "commonMistakes": "ネストしたセレクタの詳細度は:is()と同じ計算になるため、Sassの単純結合とは異なる場合があります。また「& div」と「&div」は意味が違います（後者は無効になりがち）。深いネストは可読性と詳細度を悪化させます。",
+    "relatedProperties": [
+      "css-custom-properties",
+      "media-queries",
+      "pseudo-hover"
+    ],
+    "aiNotes": "AIはSassの記法（@mixin、$variable、&-suffix による命名結合）とネイティブネスティングを混同しがちです。特に「&-item」のようなセレクタ名の文字列結合はネイティブCSSでは動きません。また2023年の初期実装にあった「ネスト側は&か記号で始める必要がある」制約を今も適用した冗長なコードを書くことがありますが、現在は要素セレクタも直接ネストできます。",
+    "promptExamples": [
+      "このSCSSファイルをビルドツールなしで動くネイティブCSSネスティングに書き直して。&-fooのような文字列結合は使えない点に注意して",
+      "このフラットなCSSをネイティブネスティングで整理して。ネストは2階層まで、詳細度が変わらないように",
+      "CSSネスティングで書いたこのコードが古いブラウザでどう振る舞うか、フォールバックが必要か評価して"
+    ],
+    "searchAliases": [
+      "ネスト",
+      "入れ子",
+      "nesting",
+      "Sassみたいに書く",
+      "SCSS"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/CSS_nesting",
+    "browserSupport": {
+      "chrome": "120",
+      "firefox": "117",
+      "safari": "17.2",
+      "edge": "120",
+      "baseline": "widely",
+      "baselineLowDate": "2023-12"
+    }
+  },
+  {
+    "id": "text-wrap",
+    "name": "text-wrap",
+    "category": "テキスト・フォント",
+    "description": "テキストの折り返し方法を制御するプロパティです。balanceで見出しの各行の長さを揃え、prettyで段落末尾の孤立した単語（1文字だけの行など）を防げます。日本語の見出しの不格好な改行対策にも有効です。",
+    "syntax": "text-wrap: wrap | nowrap | balance | pretty | stable",
+    "examples": [
+      {
+        "code": "h1, h2, h3 {\n  text-wrap: balance;\n}",
+        "description": "見出しの行ごとの長さを揃えてバランスよく折り返す"
+      },
+      {
+        "code": "p {\n  text-wrap: pretty;\n}",
+        "description": "段落の最終行に1単語だけ残る「孤立行」を防ぐ"
+      },
+      {
+        "code": ".badge {\n  text-wrap: nowrap;\n}",
+        "description": "折り返しを禁止（white-space: nowrapと同等の折り返し制御）"
+      }
+    ],
+    "tips": "balanceは見出しなど短いテキスト専用です（Chromeは6行までしか処理しない）。全ブラウザ対応が必要な場合も、非対応ブラウザでは単に通常の折り返しになるだけなので、プログレッシブエンハンスメントとして安全に使えます。",
+    "commonMistakes": "本文の長い段落にbalanceを指定しても効果がない（行数制限で無視される）うえ、レイアウト計算コストだけかかります。段落にはprettyを使います。また改行位置そのものを指定したい場合はtext-wrapではなく<wbr>やword-breakの領域です。",
+    "relatedProperties": [
+      "white-space",
+      "word-break",
+      "overflow-wrap",
+      "letter-spacing"
+    ],
+    "aiNotes": "AIはtext-wrap自体を知らない（2024年普及のため学習データにない）か、逆にどこにでもbalanceを付ける過剰提案をしがちです。balanceは短いテキスト向け・prettyは段落向けという使い分け、そしてprettyは2026年時点でFirefox未対応（limited）という対応状況の差をAIはよく間違えます。",
+    "promptExamples": [
+      "カードタイトルの改行が不格好なのでtext-wrap: balanceで整えて。非対応ブラウザでも壊れない書き方で",
+      "この記事ページの見出しと本文に、text-wrapのbalance/prettyを適切に使い分けて適用して",
+      "日本語見出しの「1文字だけ次の行に落ちる」問題への対策を、text-wrapとword-breakの組み合わせで提案して"
+    ],
+    "searchAliases": [
+      "改行バランス",
+      "見出しの改行",
+      "孤立行",
+      "balance",
+      "pretty"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/text-wrap",
+    "browserSupport": {
+      "chrome": "114",
+      "firefox": "121",
+      "safari": "17.4",
+      "edge": "114",
+      "baseline": "newly",
+      "baselineLowDate": "2024-03",
+      "note": "balanceは全主要ブラウザ対応。prettyはChrome 117+/Safari 26+のみでFirefox未対応（2026年7月時点）"
+    }
+  },
+  {
+    "id": "overflow-wrap",
+    "name": "overflow-wrap",
+    "category": "テキスト・フォント",
+    "description": "長い単語やURLが要素からはみ出す場合にのみ、単語の途中で折り返すことを許可するプロパティです。通常の単語間折り返しを保ちながら「はみ出すときだけ」強制改行するため、word-breakより安全な折り返し手段です。",
+    "syntax": "overflow-wrap: normal | break-word | anywhere",
+    "examples": [
+      {
+        "code": ".comment-body {\n  overflow-wrap: break-word;\n}",
+        "description": "長いURLや連続文字列がはみ出すときだけ途中で折り返す"
+      },
+      {
+        "code": ".cell {\n  overflow-wrap: anywhere;\n  min-width: 0;\n}",
+        "description": "flex/grid内でmin-content幅にも影響させて確実にはみ出しを防ぐ"
+      }
+    ],
+    "tips": "flexboxやgridの中で効かない場合は、アイテム側にmin-width: 0を併用するのが定番です。break-wordとanywhereの違いは最小コンテンツ幅の計算に影響するかどうかで、テーブルや flex での挙動が変わります。",
+    "commonMistakes": "word-break: break-allとの混同が最多です。break-allは日本語・英語問わずすべての文字間で折るため英単語がぶつ切りになります。「はみ出すときだけ折る」ならoverflow-wrapを使います。旧名word-wrapは互換エイリアスで、新規コードではoverflow-wrapを使います。",
+    "relatedProperties": [
+      "word-break",
+      "white-space",
+      "text-overflow",
+      "min-width"
+    ],
+    "aiNotes": "AIは「テキストのはみ出し」に対してword-break: break-allを提案しがちですが、多くの場合overflow-wrap: break-wordが正解です（英単語の可読性を壊さない）。また旧名のword-wrapを出すことも多いです。flex内で効かない問題にはmin-width: 0の併用が必要という文脈をAIはよく落とします。",
+    "promptExamples": [
+      "コメント欄で長いURLがはみ出す。word-break: break-allではなくoverflow-wrapを使って、英単語の折り返しを不自然にしない形で直して",
+      "flexboxの子要素内のテキストがはみ出す。overflow-wrapとmin-width: 0を使った定番の修正をして",
+      "word-break、overflow-wrap、white-spaceの使い分けを、このデザインの要件に合わせて整理して"
+    ],
+    "searchAliases": [
+      "折り返し",
+      "はみ出し防止",
+      "URLの改行",
+      "word-wrap",
+      "長い単語"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/overflow-wrap",
+    "browserSupport": {
+      "chrome": "23",
+      "firefox": "49",
+      "safari": "7",
+      "edge": "18",
+      "baseline": "widely",
+      "baselineLowDate": "2018-10"
+    }
+  },
+  {
+    "id": "color-mix",
+    "name": "color-mix()",
+    "category": "レスポンシブ・関数",
+    "description": "2つの色を指定した比率で混ぜた色を生成するCSS関数です。ベース色から明るい色・暗い色・半透明色をCSSだけで派生でき、SassのdarkenやJavaScriptでの色計算を置き換えられます。CSS変数と組み合わせるとテーマ設計が大幅に簡潔になります。",
+    "syntax": "color-mix(in <color-space>, <color> [<percentage>], <color> [<percentage>])",
+    "examples": [
+      {
+        "code": ":root {\n  --primary: #2563eb;\n}\n\n.button:hover {\n  background: color-mix(in oklch, var(--primary), black 15%);\n}",
+        "description": "ベース色を15%暗くしたホバー色をCSSだけで生成"
+      },
+      {
+        "code": ".badge {\n  background: color-mix(in oklch, var(--primary), white 85%);\n  color: var(--primary);\n}",
+        "description": "同系色の淡い背景色を生成（Tailwindの50番系のような色）"
+      },
+      {
+        "code": ".overlay {\n  background: color-mix(in srgb, var(--primary), transparent 60%);\n}",
+        "description": "透明色と混ぜて好きな色の半透明版を作る"
+      }
+    ],
+    "tips": "色空間はin oklchやin oklabを使うと人間の知覚に近い自然な混色になります（in srgbは濁りやすい）。CSS変数のベース色1つからhover/active/disabled/淡色背景まで派生させる設計が実務での定番です。",
+    "commonMistakes": "in srgbとin oklchでは結果の色がかなり違います。白・黒との混合はoklch推奨です。またパーセンテージ省略時は50%ずつになる、両方に%を指定して合計が100%未満だと正規化される、などの仕様も見落としがちです。",
+    "relatedProperties": [
+      "css-custom-properties",
+      "color",
+      "opacity",
+      "background-color"
+    ],
+    "aiNotes": "AIはSassのdarken()/lighten()やrgba()の手計算、JavaScriptでの色操作を提案しがちですが、2023年以降はcolor-mix()でCSSのみで完結します。またAIは色空間の指定（in srgb / in oklch）を省略したり深く考えずにsrgbを選びがちですが、混色の自然さが大きく変わる重要な選択です。相対色構文（rgb(from ...)）との混同にも注意。",
+    "promptExamples": [
+      "CSS変数--primaryから、hover用に15%暗い色、背景用に90%淡い色をcolor-mix()で派生させるボタンのCSSを書いて。色空間はoklchで",
+      "このSassのdarken()/lighten()をcolor-mix()に置き換えて、Sassなしで動くようにして",
+      "ブランドカラー1色から成るカラーパレット（濃淡5段階）をcolor-mix()とCSS変数で設計して"
+    ],
+    "searchAliases": [
+      "色を混ぜる",
+      "色の混合",
+      "暗い色を作る",
+      "薄い色を作る",
+      "ホバー色"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/color_value/color-mix",
+    "browserSupport": {
+      "chrome": "111",
+      "firefox": "113",
+      "safari": "16.2",
+      "edge": "111",
+      "baseline": "widely",
+      "baselineLowDate": "2023-05"
+    }
   }
 ]

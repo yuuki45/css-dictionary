@@ -257,7 +257,7 @@ export const usecases: Usecase[] = [
     id: "word-wrap",
     label: "長い単語を改行したい",
     description: "長いURLや単語を適切に改行したい場合",
-    propertyIds: ["word-break", "white-space"],
+    propertyIds: ["word-break", "white-space", "overflow-wrap"],
   },
   {
     id: "spacing-control",
@@ -300,5 +300,29 @@ export const usecases: Usecase[] = [
     label: "クリックを無効にしたい",
     description: "要素のクリックイベントを無効にしたい場合",
     propertyIds: ["pointer-events"],
+  },
+  {
+    id: "parent-selector",
+    label: "子の状態で親のスタイルを変えたい",
+    description: "チェック状態や入力エラーなど、子要素の状態に応じて親要素を装飾したい場合",
+    propertyIds: ["pseudo-has"],
+  },
+  {
+    id: "nest-css",
+    label: "CSSをネストして書きたい",
+    description: "Sassなしでセレクタを入れ子にして整理したい場合",
+    propertyIds: ["css-nesting"],
+  },
+  {
+    id: "heading-balance",
+    label: "見出しの改行を整えたい",
+    description: "見出しの不格好な折り返しや孤立行を防ぎたい場合",
+    propertyIds: ["text-wrap", "word-break", "white-space"],
+  },
+  {
+    id: "mix-colors",
+    label: "色を混ぜたい・明暗の色を作りたい",
+    description: "ベース色からホバー色や淡い背景色を派生させたい場合",
+    propertyIds: ["color-mix", "css-custom-properties", "opacity"],
   },
 ];
