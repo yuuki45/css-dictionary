@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# LLMO自動生成物（prebuildで生成: scripts/generate/generate-llms.ts）
+/public/llms.txt
+/public/llms-full.txt
+/public/sitemap.xml
+/public/reverse.md
+/public/property/
+/public/techniques/

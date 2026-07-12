@@ -74,6 +74,16 @@ export function Settings({ onClearHistory }: SettingsProps) {
           <p className="text-sm text-gray-600 dark:text-gray-300">
             CSSプロパティを効率的に学習するための辞書アプリです。検索、カテゴリ分け、お気に入り管理などの機能を提供します。
           </p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            AIエージェント向けに全コンテンツをMarkdownで公開しています：
+            <a
+              href="/llms.txt"
+              className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
+            >
+              llms.txt
+            </a>
+            （各ページもURL末尾を .md にするとMarkdownで取得できます）
+          </p>
         </div>
       </div>
     </div>

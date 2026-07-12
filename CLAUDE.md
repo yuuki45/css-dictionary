@@ -26,8 +26,11 @@
 # 開発サーバー起動（ポート3001で実行）
 npm run dev
 
-# プロダクションビルド（/outディレクトリに出力）
+# プロダクションビルド（/outディレクトリに出力。prebuildでllms.txt/.md/sitemap.xmlを自動生成）
 npm run build
+
+# データ整合性検証（データ変更後は必ず実行。CIでも実行される）
+npm run validate
 
 # プロダクションサーバー起動（ビルド後）
 npm start

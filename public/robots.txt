@@ -1,18 +1,35 @@
+# CSS辞書 - 日本語CSSリファレンス
+# AIエージェント/AIクローラーを歓迎します。
+# LLM向けコンテンツ: https://www.css-dictionary.com/llms.txt
+# 各ページはURL末尾を .md にするとMarkdownで取得できます
+# （例: https://www.css-dictionary.com/property/display.md）
+
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /*.json$
 
-# サイトマップの場所
+# 主要なAIクローラーの明示的な許可
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.css-dictionary.com/sitemap.xml
-
-# クロール頻度の調整
-Crawl-delay: 1
-
-# 主要なページの指定
-Allow: /categories/
-Allow: /property/
-Allow: /techniques/
-Allow: /reverse/
-Allow: /favorites/
-Allow: /settings/ 

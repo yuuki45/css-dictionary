@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PropertyDetailClient } from './PropertyDetailClient';
+import { PropertyStructuredData } from '@/components/StructuredData';
 import { cssProperties as cssPropertiesData } from '@/data/properties';
 import { CSSProperty } from '@/types/css';
 
@@ -75,10 +76,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: seoTitle,
     description: seoDescription,
+    alternates: {
+      canonical: `/property/${property.id}/`,
+      types: {
+        'text/markdown': `/property/${property.id}.md`,
+      },
+    },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
-      url: `https://www.css-dictionary.com/property/${property.id}`,
+      url: `https://www.css-dictionary.com/property/${property.id}/`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -96,5 +103,10 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
     notFound();
   }
 
-  return <PropertyDetailClient property={property} />;
+  return (
+    <>
+      <PropertyStructuredData property={property} title={generateSEOTitle(property)} />
+      <PropertyDetailClient property={property} />
+    </>
+  );
 }
