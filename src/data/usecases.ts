@@ -349,4 +349,28 @@ export const usecases: Usecase[] = [
     description: "RTL言語や縦書きでも崩れない書字方向対応のレイアウトにしたい場合",
     propertyIds: ["logical-properties", "margin-inline", "padding-inline", "inset-inline", "writing-mode"],
   },
+  {
+    id: "page-transition",
+    label: "ページ・画面切替をアニメーションさせたい",
+    description: "一覧→詳細のような遷移を滑らかにつなぎたい場合",
+    propertyIds: ["view-transition-name", "at-starting-style", "transition", "animation"],
+  },
+  {
+    id: "scroll-animation",
+    label: "スクロールに連動してアニメーションさせたい",
+    description: "読了バーやパララックス、出現アニメーションをスクロールに合わせたい場合",
+    propertyIds: ["animation-timeline", "animation", "keyframes", "scroll-behavior"],
+  },
+  {
+    id: "tooltip-position",
+    label: "ツールチップ・ドロップダウンを配置したい",
+    description: "基準要素に追従する吹き出しやメニューを配置したい場合",
+    propertyIds: ["anchor-positioning", "position", "z-index", "inset"],
+  },
+  {
+    id: "css-priority",
+    label: "CSSの優先順位・衝突を整理したい",
+    description: "詳細度バトルや!importantの乱用を構造的に解決したい場合",
+    propertyIds: ["cascade-layers", "at-scope", "css-nesting"],
+  },
 ];

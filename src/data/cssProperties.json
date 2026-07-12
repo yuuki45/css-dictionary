@@ -1113,7 +1113,8 @@
     "commonMistakes": "absoluteを使う際は、親要素にrelativeを指定することを忘れがち。top/right/bottom/leftを指定しないと効果が見えない場合がある。",
     "relatedProperties": [
       "z-index",
-      "transform"
+      "transform",
+      "anchor-positioning"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2395,7 +2396,8 @@
       "transform",
       "opacity",
       "at-starting-style",
-      "at-property"
+      "at-property",
+      "view-transition-name"
     ],
     "browserSupport": {
       "chrome": "26",
@@ -2533,7 +2535,9 @@
       "transition",
       "transform",
       "will-change",
-      "at-starting-style"
+      "at-starting-style",
+      "animation-timeline",
+      "view-transition-name"
     ],
     "browserSupport": {
       "chrome": "43",
@@ -2563,7 +2567,8 @@
     "tips": "fromとtoは0%と100%の省略形。複数のプロパティを同時にアニメーション可能。",
     "relatedProperties": [
       "animation",
-      "transform"
+      "transform",
+      "animation-timeline"
     ],
     "browserSupport": {
       "chrome": "43",
@@ -4348,7 +4353,9 @@
     "relatedProperties": [
       "css-custom-properties",
       "media-queries",
-      "pseudo-hover"
+      "pseudo-hover",
+      "at-scope",
+      "cascade-layers"
     ],
     "aiNotes": "AIはSassの記法（@mixin、$variable、&-suffix による命名結合）とネイティブネスティングを混同しがちです。特に「&-item」のようなセレクタ名の文字列結合はネイティブCSSでは動きません。また2023年の初期実装にあった「ネスト側は&か記号で始める必要がある」制約を今も適用した冗長なコードを書くことがありますが、現在は要素セレクタも直接ネストできます。",
     "promptExamples": [
@@ -4795,6 +4802,241 @@
       "edge": "117",
       "baseline": "newly",
       "baselineLowDate": "2024-08"
+    }
+  },
+  {
+    "id": "view-transition-name",
+    "name": "view-transition-name",
+    "category": "アニメーション・エフェクト",
+    "description": "View Transitions APIで、状態変化の前後で「同じ要素」として扱う名前を付けるプロパティです。一覧→詳細への画像モーフのような遷移アニメーションを、ブラウザが前後のスナップショットから自動生成してくれます。",
+    "syntax": "view-transition-name: none | <custom-ident>",
+    "examples": [
+      {
+        "code": ".hero-image {\n  view-transition-name: hero;\n}\n\n/* JS側: 状態変化をトランジションでラップ */\n/* document.startViewTransition(() => updateDOM()); */",
+        "description": "名前を付けた要素が変化の前後で滑らかにモーフする"
+      },
+      {
+        "code": "::view-transition-old(hero) {\n  animation-duration: 0.25s;\n}\n\n::view-transition-new(hero) {\n  animation-duration: 0.25s;\n}",
+        "description": "擬似要素で遷移アニメーション自体をカスタマイズ"
+      },
+      {
+        "code": "/* MPA（別ページへの遷移）で有効化 */\n@view-transition {\n  navigation: auto;\n}",
+        "description": "通常のページ遷移（MPA）でもクロスフェードを有効化"
+      }
+    ],
+    "tips": "same-document（SPA的な状態変化）はJSのdocument.startViewTransition()とセットで使います。名前はページ内で一意である必要があるため、一覧アイテムにはview-transition-name: auto（またはJSで動的付与）を検討します。",
+    "commonMistakes": "同時に同じview-transition-nameを持つ要素が2つあると遷移がスキップされます。また遷移中はスナップショット画像が動くため、遷移前後で要素の中身が変わるUIではレイアウトずれに見えることがあります。",
+    "relatedProperties": [
+      "animation",
+      "transition",
+      "at-starting-style",
+      "opacity"
+    ],
+    "aiNotes": "AIは画面遷移アニメーションにFLIPテクニックやアニメーションライブラリ（Framer Motion等）を提案しがちですが、view-transition-name + startViewTransition()なら数行で済みます。クロスドキュメント（MPA）対応の@view-transitionはChrome 126+/Safari 18.2+でFirefox未対応（2026年7月時点）という段階差があり、AIはこの差を混同して全部使える/全部使えないと誤答しがちです。",
+    "promptExamples": [
+      "商品一覧のサムネイルをクリックすると詳細ページの大きな画像にモーフするView Transitionを実装して",
+      "このSPAのタブ切替にdocument.startViewTransition()とview-transition-nameでクロスフェードを付けて",
+      "View TransitionsのMPA対応状況を踏まえて、非対応ブラウザでも壊れないページ遷移アニメーションを設計して"
+    ],
+    "searchAliases": [
+      "ビュートランジション",
+      "ページ遷移アニメーション",
+      "画面遷移",
+      "モーフィング"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/view-transition-name",
+    "browserSupport": {
+      "chrome": "111",
+      "firefox": "144",
+      "safari": "18",
+      "edge": "111",
+      "baseline": "newly",
+      "baselineLowDate": "2025-10",
+      "note": "同一ドキュメント遷移はBaseline。別ページ遷移（@view-transition）はChrome 126+/Safari 18.2+でFirefox未対応（2026年7月時点）"
+    }
+  },
+  {
+    "id": "animation-timeline",
+    "name": "animation-timeline",
+    "category": "アニメーション・エフェクト",
+    "description": "アニメーションの進行を時間ではなくスクロール位置に連動させるプロパティです（スクロール駆動アニメーション）。読了プログレスバーやパララックス、ビューポートに入ったら動き出す演出をJavaScriptなしで実装できます。",
+    "syntax": "animation-timeline: auto | none | scroll([<scroller>] [<axis>]) | view([<axis>] [<inset>])",
+    "examples": [
+      {
+        "code": ".progress-bar {\n  transform-origin: left;\n  animation: grow linear;\n  animation-timeline: scroll();\n}\n\n@keyframes grow {\n  from { transform: scaleX(0); }\n  to { transform: scaleX(1); }\n}",
+        "description": "ページのスクロール量に連動する読了プログレスバー"
+      },
+      {
+        "code": ".card {\n  animation: fade-in linear both;\n  animation-timeline: view();\n  animation-range: entry 0% entry 100%;\n}\n\n@keyframes fade-in {\n  from { opacity: 0; translate: 0 40px; }\n  to { opacity: 1; translate: 0 0; }\n}",
+        "description": "要素がビューポートに入る間だけ進行するフェードイン"
+      }
+    ],
+    "tips": "スクロール駆動ではanimation-durationは意味を持たないためautoのままでOK。進行範囲はanimation-range（entry/exit/cover等）で細かく制御できます。JSのIntersectionObserver+scrollイベントの組み合わせを丸ごと置き換えられます。",
+    "commonMistakes": "animationショートハンドはanimation-timelineをリセットするため、必ずanimationより後にanimation-timelineを書きます。Firefox未対応（2026年7月時点）なので、動かなくても内容が読める設計（プログレッシブエンハンスメント）が前提です。",
+    "relatedProperties": [
+      "animation",
+      "keyframes",
+      "scroll-behavior",
+      "will-change",
+      "at-starting-style"
+    ],
+    "aiNotes": "AIはスクロール連動の実装にscrollイベント+JSやIntersectionObserverを提案しがちですが、CSSのanimation-timelineで完結する場面が増えています。AI生成コードの最頻バグは「animationショートハンドの後にanimation-timelineを書かずリセットされる」順序ミスです。Firefox未対応（limited）という対応状況もAIの知識では古いことが多く、必ず現在の対応状況を確認してください。",
+    "promptExamples": [
+      "ページ上部に読了プログレスバーをJSなし・animation-timeline: scroll()で実装して。Firefox非対応でも壊れないように",
+      "スクロールでカードが順にフェードインする演出を、IntersectionObserverではなくanimation-timeline: view()で書いて",
+      "このscrollイベントベースのパララックスをスクロール駆動アニメーションに移行できるか評価して"
+    ],
+    "searchAliases": [
+      "スクロール連動",
+      "スクロールアニメーション",
+      "パララックス",
+      "読了バー",
+      "scroll-timeline"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/animation-timeline",
+    "browserSupport": {
+      "chrome": "115",
+      "safari": "26",
+      "edge": "115",
+      "baseline": "limited",
+      "note": "Firefox未対応（2026年7月時点）。非対応環境では通常表示になる前提で使う"
+    }
+  },
+  {
+    "id": "anchor-positioning",
+    "name": "アンカーポジショニング",
+    "category": "レイアウト・配置",
+    "description": "ツールチップやドロップダウンを「基準要素（アンカー）」に紐付けて配置できる機能群です。anchor-nameで基準を宣言し、position-anchorとposition-areaで相対配置します。JSライブラリで行っていた位置計算をCSSだけで実現できます。",
+    "syntax": "anchor-name: --name; / position-anchor: --name; / position-area: <area>; / anchor(<side>)",
+    "examples": [
+      {
+        "code": ".trigger {\n  anchor-name: --menu-button;\n}\n\n.dropdown {\n  position: absolute;\n  position-anchor: --menu-button;\n  position-area: bottom center;\n}",
+        "description": "ボタンの直下中央にドロップダウンを配置"
+      },
+      {
+        "code": ".tooltip {\n  position: fixed;\n  position-anchor: --target;\n  bottom: anchor(top);\n  justify-self: anchor-center;\n  position-try-fallbacks: flip-block;\n}",
+        "description": "対象の上に表示し、画面上端では自動で下に反転"
+      }
+    ],
+    "tips": "popover属性と組み合わせると「クリックで開く・外側クリックで閉じる・最前面表示」まで含めてJSほぼゼロで実装できます。画面端での自動反転はposition-try-fallbacksが担当します。",
+    "commonMistakes": "anchor-nameの値はCSS変数と同じ--始まりの識別子です（--を忘れると無効）。またアンカー要素と配置要素が同じスタッキングコンテキスト条件を満たさないと参照できない場合があります。配置要素にはposition: absolute/fixedが必要です。",
+    "relatedProperties": [
+      "position",
+      "inset",
+      "z-index",
+      "inset-inline"
+    ],
+    "aiNotes": "AIはツールチップ実装にFloating UI（Popper.js）やgetBoundingClientRect()でのJS位置計算を提案しがちですが、2026年からはCSSアンカーポジショニングがBaseline入りしています。AIの知識では「Chrome限定の実験的機能」と古い認識のことが多い点、またanchor-nameの--プレフィックスを落とす生成ミスに注意してください。",
+    "promptExamples": [
+      "このPopper.js製ツールチップを、CSSアンカーポジショニング＋popover属性のJS最小実装に置き換えて",
+      "画面端で自動反転するドロップダウンメニューをposition-areaとposition-try-fallbacksで実装して",
+      "アンカーポジショニング非対応ブラウザ向けのフォールバックを@supportsで設計して"
+    ],
+    "searchAliases": [
+      "ツールチップの位置",
+      "ドロップダウン配置",
+      "アンカー",
+      "anchor-name",
+      "position-area"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/CSS_anchor_positioning",
+    "browserSupport": {
+      "chrome": "125",
+      "firefox": "147",
+      "safari": "26",
+      "edge": "125",
+      "baseline": "newly",
+      "baselineLowDate": "2026-01"
+    }
+  },
+  {
+    "id": "cascade-layers",
+    "name": "@layer",
+    "category": "その他",
+    "description": "スタイルの優先順位を詳細度ではなく「レイヤーの宣言順」で管理するカスケードレイヤーです。reset・base・components・utilitiesのような層に分ければ、詳細度バトルや!importantの乱用を根本から解消できます。",
+    "syntax": "@layer <layer-name>, ...; / @layer <layer-name> { <rules> }",
+    "examples": [
+      {
+        "code": "/* 先に優先順位を宣言（後ろほど強い） */\n@layer reset, base, components, utilities;\n\n@layer base {\n  a { color: #2563eb; }\n}\n\n@layer components {\n  .button { color: white; }\n}",
+        "description": "レイヤー順で優先度を管理（詳細度に依存しない）"
+      },
+      {
+        "code": "/* 外部CSSをレイヤーに隔離して上書きしやすくする */\n@import url('vendor.css') layer(vendor);\n\n@layer vendor, overrides;\n\n@layer overrides {\n  .vendor-widget { margin: 0; }\n}",
+        "description": "ライブラリのCSSを弱いレイヤーに閉じ込める"
+      }
+    ],
+    "tips": "「レイヤーに属さないスタイルは全レイヤーより強い」がルールです。これを利用して、通常のスタイルを最後の砦にできます。ファイル冒頭で@layer a, b, c;と順序だけ先に宣言しておくのが定石です。",
+    "commonMistakes": "!importantが付くとレイヤーの優先順位が逆転します（先に宣言したレイヤーの!importantが最強）。この仕様は直感に反するため注意。また@layer内のスタイルはレイヤー外の同セレクタに必ず負けるので「効かない」と混乱しがちです。",
+    "relatedProperties": [
+      "css-nesting",
+      "css-custom-properties",
+      "media-queries"
+    ],
+    "aiNotes": "AIは詳細度の競合に対して:where()での詳細度ゼロ化や!important、セレクタの詳細度引き上げを提案しがちで、@layerによる構造的な解決を出さないことが多いです。また「!importantはレイヤー順が逆転する」「レイヤー外がレイヤー内より強い」という2つの反直感ルールはAIも頻繁に間違えます。",
+    "promptExamples": [
+      "このCSSをreset/base/components/utilitiesの@layer構成に再編して、!importantを全廃して",
+      "サードパーティのCSSがサイトのスタイルを壊すので、@importのlayer()で隔離する設計にして",
+      "@layerと!importantの優先順位の関係を、このコードが効かない原因として調査して"
+    ],
+    "searchAliases": [
+      "カスケードレイヤー",
+      "詳細度の管理",
+      "CSSの優先順位",
+      "レイヤー"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/@layer",
+    "browserSupport": {
+      "chrome": "99",
+      "firefox": "97",
+      "safari": "15.4",
+      "edge": "99",
+      "baseline": "widely",
+      "baselineLowDate": "2022-03"
+    }
+  },
+  {
+    "id": "at-scope",
+    "name": "@scope",
+    "category": "その他",
+    "description": "スタイルの適用範囲を特定の要素の部分木に限定するアットルールです。下限（to）も指定でき、「カードの中だけ、ただし埋め込みウィジェットの中は除く」のような範囲指定が可能。BEM的な命名規則に頼らないスコープ管理を実現します。",
+    "syntax": "@scope (<scope-start>) [to (<scope-end>)] { <rules> }",
+    "examples": [
+      {
+        "code": "@scope (.card) {\n  img {\n    border-radius: 8px;\n  }\n  :scope {\n    padding: 1rem;\n  }\n}",
+        "description": ".card配下のimgだけに適用（:scopeはカード自身）"
+      },
+      {
+        "code": "/* .content内、ただし.embedの中は対象外 */\n@scope (.content) to (.embed) {\n  p {\n    line-height: 1.9;\n  }\n}",
+        "description": "下限（ドーナツスコープ）で埋め込み領域を除外"
+      }
+    ],
+    "tips": "同じ詳細度なら「スコープ根に近い方が勝つ」近接性ルールが加わるのが@scopeの特徴です。テーマの入れ子（ライトの中にダークカードがある等）で威力を発揮します。",
+    "commonMistakes": "スコープ内のセレクタは自動で範囲限定されますが、詳細度自体は変わりません。またスコープ根自身を対象にするには:scopeを使います（@scope (.card) { .card {...} }とは書かない）。",
+    "relatedProperties": [
+      "css-nesting",
+      "cascade-layers",
+      "pseudo-has"
+    ],
+    "aiNotes": "AIはスタイルの衝突回避にBEM命名やCSS Modulesを前提としがちで、ネイティブの@scopeを提案に含めないことが多いです。AIの知識では「Chrome限定」と古い場合がありますが、Firefoxも2025年末に対応しBaseline入りしています。近接性（proximity）という新しい競合解決ルールはAIの説明が不正確になりやすい領域です。",
+    "promptExamples": [
+      "このBEM命名だらけのカードコンポーネントCSSを@scopeでスコープ管理する形に書き換えて",
+      "記事本文のタイポグラフィを、埋め込みウィジェット内を除外して適用したい。@scopeのto構文で実装して",
+      "ネストしたライト/ダークテーマの上書きを@scopeの近接性ルールで解決できるか検討して"
+    ],
+    "searchAliases": [
+      "スコープ",
+      "適用範囲の限定",
+      "BEMの代替",
+      "スタイルの衝突回避"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/@scope",
+    "browserSupport": {
+      "chrome": "118",
+      "firefox": "146",
+      "safari": "17.4",
+      "edge": "118",
+      "baseline": "newly",
+      "baselineLowDate": "2025-12"
     }
   }
 ]

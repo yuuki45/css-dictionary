@@ -56,6 +56,9 @@ export const manualKeys: Record<string, string[]> = {
   'light-dark': ['css.types.color.light-dark'],
   'at-property': ['css.at-rules.property'],
   'at-starting-style': ['css.at-rules.starting-style'],
+  'anchor-positioning': ['css.properties.anchor-name'],
+  'cascade-layers': ['css.at-rules.layer'],
+  'at-scope': ['css.at-rules.scope'],
 };
 
 let cachedIndex: Map<string, KeyStatus> | null = null;
