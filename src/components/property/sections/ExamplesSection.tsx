@@ -3,6 +3,7 @@ import { Copy, Eye } from "lucide-react";
 import { CodeExample } from "../../../types/css";
 import { getVisualExample } from "../visualExamples";
 import { copyToClipboard } from "../clipboard";
+import { ExamplePlayground } from "../ExamplePlayground";
 
 interface ExamplesSectionProps {
   propertyId: string;
@@ -58,6 +59,9 @@ export function ExamplesSection({ propertyId, examples }: ExamplesSectionProps) 
             <p className="text-gray-600 dark:text-gray-300 text-sm">
               {example.description}
             </p>
+
+            {/* 編集して試す */}
+            <ExamplePlayground propertyId={propertyId} code={example.code} />
           </div>
         ))}
       </div>
