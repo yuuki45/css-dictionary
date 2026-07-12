@@ -373,4 +373,28 @@ export const usecases: Usecase[] = [
     description: "詳細度バトルや!importantの乱用を構造的に解決したい場合",
     propertyIds: ["cascade-layers", "at-scope", "css-nesting"],
   },
+  {
+    id: "auto-resize-textarea",
+    label: "テキストエリアを自動で伸ばしたい",
+    description: "入力内容に応じて入力欄のサイズを自動調整したい場合",
+    propertyIds: ["field-sizing", "resize", "height"],
+  },
+  {
+    id: "form-validation-style",
+    label: "フォームの入力エラーを装飾したい",
+    description: "入力チェックの結果に応じてスタイルを変えたい場合",
+    propertyIds: ["pseudo-user-valid", "pseudo-has", "accent-color", "pseudo-focus-within"],
+  },
+  {
+    id: "accordion-animation",
+    label: "アコーディオンを滑らかに開閉したい",
+    description: "height: autoまでの開閉アニメーションを実装したい場合",
+    propertyIds: ["interpolate-size", "transition", "at-starting-style", "overflow"],
+  },
+  {
+    id: "japanese-typography",
+    label: "日本語の組版を美しくしたい",
+    description: "約物の空きや改行位置など日本語テキストの見た目を整えたい場合",
+    propertyIds: ["text-spacing-trim", "word-break", "text-wrap", "letter-spacing", "line-height"],
+  },
 ];

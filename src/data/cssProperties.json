@@ -1439,7 +1439,8 @@
     "tips": "em単位で指定するとフォントサイズに応じて調整できる。日本語Webフォントでは詰めすぎに注意。",
     "commonMistakes": "負の値を使いすぎると文字が重なって読みにくくなる。",
     "relatedProperties": [
-      "font-size"
+      "font-size",
+      "text-spacing-trim"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -1975,7 +1976,9 @@
     "commonMistakes": "高さを固定するとレスポンシブで崩れることがある。",
     "relatedProperties": [
       "width",
-      "box-sizing"
+      "box-sizing",
+      "interpolate-size",
+      "field-sizing"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2397,7 +2400,8 @@
       "opacity",
       "at-starting-style",
       "at-property",
-      "view-transition-name"
+      "view-transition-name",
+      "interpolate-size"
     ],
     "browserSupport": {
       "chrome": "26",
@@ -2824,12 +2828,17 @@
       {
         "code": ".url {\n  word-break: break-all;\n  overflow-wrap: break-word;\n}",
         "description": "長いURLの改行処理"
+      },
+      {
+        "code": "/* 日本語を文節単位で自然に折り返す */\nh1 {\n  word-break: auto-phrase;\n}",
+        "description": "見出しを文節の切れ目で折り返す（Chrome 119+限定）"
       }
     ],
     "tips": "日本語サイトではkeep-all、英語サイトではbreak-wordが一般的。",
     "relatedProperties": [
       "overflow-wrap",
-      "text-wrap"
+      "text-wrap",
+      "text-spacing-trim"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2837,8 +2846,20 @@
       "safari": "3",
       "edge": "12",
       "baseline": "widely",
-      "baselineLowDate": "2015-07"
-    }
+      "baselineLowDate": "2015-07",
+      "note": "auto-phrase値のみChrome 119+限定（2026年7月時点）"
+    },
+    "aiNotes": "AIは「はみ出し対策」にword-break: break-allを多用しがちですが、英単語がぶつ切りになる副作用があります（多くの場合overflow-wrapが正解）。また日本語の見出しにはword-break: auto-phrase（文節改行、Chrome限定）という新しい選択肢があり、AIの知識にはまだ無いことが多い機能です。",
+    "promptExamples": [
+      "日本語見出しの改行位置が不自然。word-break: auto-phraseとtext-wrap: balanceを組み合わせて、非対応ブラウザでも崩れない形で整えて",
+      "word-break・overflow-wrap・white-spaceの役割分担を整理して、このサイトのテキスト折り返しポリシーを設計して"
+    ],
+    "searchAliases": [
+      "文節改行",
+      "改行位置",
+      "日本語の折り返し",
+      "auto-phrase"
+    ]
   },
   {
     "id": "writing-mode",
@@ -3138,7 +3159,8 @@
     "tips": "input[type=checkbox]やradio、progressなどで使える。",
     "relatedProperties": [
       "color",
-      "background-color"
+      "background-color",
+      "pseudo-user-valid"
     ],
     "browserSupport": {
       "chrome": "93",
@@ -3361,7 +3383,9 @@
     "relatedProperties": [
       "outline",
       "box-shadow",
-      "pseudo-has"
+      "pseudo-has",
+      "pseudo-focus-within",
+      "pseudo-user-valid"
     ],
     "browserSupport": {
       "chrome": "86",
@@ -4089,7 +4113,8 @@
     "relatedProperties": [
       "overflow",
       "min-width",
-      "max-width"
+      "max-width",
+      "field-sizing"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -4304,7 +4329,8 @@
     "relatedProperties": [
       "pseudo-hover",
       "pseudo-nth-child",
-      "pseudo-focus-visible"
+      "pseudo-focus-visible",
+      "pseudo-user-valid"
     ],
     "aiNotes": "AIは学習時期によって「:has()は未対応ブラウザが多いのでJavaScriptで実装すべき」と古い提案をしがちですが、2023年12月に全主要ブラウザ対応済み（Baseline）です。逆にAIが生成した:has()が意図通り動かない場合、:has()内のネスト（:has(:has())は不可）や、擬似要素（::before等）を引数に書いている（無効）ケースが典型です。",
     "promptExamples": [
@@ -5037,6 +5063,227 @@
       "edge": "118",
       "baseline": "newly",
       "baselineLowDate": "2025-12"
+    }
+  },
+  {
+    "id": "field-sizing",
+    "name": "field-sizing",
+    "category": "インタラクション・UX",
+    "description": "テキストエリアや入力欄のサイズを入力内容に合わせて自動で伸縮させるプロパティです。field-sizing: contentを指定するだけで、これまでJavaScriptで実装していたtextareaの自動リサイズが不要になります。",
+    "syntax": "field-sizing: fixed | content",
+    "examples": [
+      {
+        "code": "textarea {\n  field-sizing: content;\n  min-height: 3lh;\n  max-height: 12lh;\n}",
+        "description": "内容に応じて伸びるテキストエリア（最小3行・最大12行に制限）"
+      },
+      {
+        "code": "input {\n  field-sizing: content;\n  min-width: 8em;\n}",
+        "description": "入力した文字数に合わせて幅が伸びるインプット"
+      }
+    ],
+    "tips": "min-height / max-height（行数ベースならlh単位が便利）と組み合わせて伸縮範囲を制御するのが定番です。select要素にも適用でき、選択中の項目に合わせた幅になります。",
+    "commonMistakes": "field-sizing: contentを指定すると、rows属性やwidthによる固定サイズ指定は無視されます。無制限に伸びると困る場合はmax-heightの併用を忘れずに。",
+    "relatedProperties": [
+      "height",
+      "width",
+      "min-width",
+      "resize"
+    ],
+    "aiNotes": "AIはtextareaの自動リサイズにscrollHeightを使ったJavaScript実装やライブラリを提案しがちですが、field-sizing: contentならCSS1行です。2026年6月にBaseline入りしたばかりの新しい機能のため、ほとんどのAIの学習データに存在しません。「そんなプロパティはない」とAIが否定してきたら、このページを見せてください。",
+    "promptExamples": [
+      "このJavaScriptによるtextarea自動リサイズを、field-sizing: contentとmin/max-heightのCSSだけの実装に置き換えて",
+      "チャット入力欄を、1行から始まって内容に応じて最大8行まで伸びるようにfield-sizingで実装して"
+    ],
+    "searchAliases": [
+      "テキストエリア自動リサイズ",
+      "入力欄を自動で伸ばす",
+      "自動高さ調整"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/field-sizing",
+    "browserSupport": {
+      "chrome": "123",
+      "firefox": "152",
+      "safari": "26.2",
+      "edge": "123",
+      "baseline": "newly",
+      "baselineLowDate": "2026-06",
+      "note": "2026年6月にBaseline到達したばかりの新機能"
+    }
+  },
+  {
+    "id": "pseudo-user-valid",
+    "name": ":user-valid / :user-invalid",
+    "category": "擬似クラス",
+    "description": "ユーザーが実際に操作した後にのみ、フォーム入力の検証結果に応じてスタイルを適用する擬似クラスです。:invalidと違いページ表示直後の未入力フォームが赤くならないため、実用的なバリデーション表示がCSSだけで実現できます。",
+    "syntax": ":user-valid / :user-invalid",
+    "examples": [
+      {
+        "code": "input:user-invalid {\n  border-color: #dc2626;\n  background: #fef2f2;\n}\n\ninput:user-valid {\n  border-color: #16a34a;\n}",
+        "description": "操作後にのみエラー/成功の見た目を適用"
+      },
+      {
+        "code": ".field:has(input:user-invalid) .error-message {\n  display: block;\n}",
+        "description": ":has()と組み合わせてエラーメッセージの表示を制御"
+      }
+    ],
+    "tips": "「操作した後」の判定（フォーカスを外した時など）はブラウザが適切に行ってくれるため、JSでtouched状態を管理する必要がありません。:has()との組み合わせでエラー文言の出し分けまでCSSで完結します。",
+    "commonMistakes": ":invalidをそのまま使うと、ページを開いた瞬間から必須項目が全部エラー表示になります。ユーザー向けのスタイルには:user-invalidを使い、:invalidはJSからの状態参照など内部用途に留めるのが現代的な使い分けです。",
+    "relatedProperties": [
+      "pseudo-focus-visible",
+      "pseudo-has",
+      "accent-color"
+    ],
+    "aiNotes": "AIはフォームバリデーションの見た目に:invalid直付け（初期表示から赤くなる欠陥UI）か、JSでtouched/dirtyフラグを管理する重い実装を提案しがちです。:user-invalidを知らないAIも多いので、「:user-valid/:user-invalidを使って」と明示すると質の高いコードが出ます。",
+    "promptExamples": [
+      "このフォームのバリデーション表示を、初期表示では赤くならないように:user-invalidベースで実装して",
+      "Reactのtouchedフラグでやっているエラー表示切替を、:user-invalidと:has()のCSSに寄せられるか検討して"
+    ],
+    "searchAliases": [
+      "フォームエラー表示",
+      "バリデーション",
+      "入力チェックの装飾",
+      "user-invalid"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/:user-valid",
+    "browserSupport": {
+      "chrome": "119",
+      "firefox": "88",
+      "safari": "16.5",
+      "edge": "119",
+      "baseline": "widely",
+      "baselineLowDate": "2023-11"
+    }
+  },
+  {
+    "id": "pseudo-focus-within",
+    "name": ":focus-within",
+    "category": "擬似クラス",
+    "description": "自分自身または子孫要素にフォーカスがあるときにマッチする擬似クラスです。入力中の検索ボックス全体をハイライトしたり、フォーカスでドロップダウンを開いたりと、「中にフォーカスがある親」の装飾がJavaScriptなしで書けます。",
+    "syntax": ":focus-within",
+    "examples": [
+      {
+        "code": ".search-box:focus-within {\n  border-color: #2563eb;\n  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.2);\n}",
+        "description": "中のinputにフォーカスがあるとき検索ボックス全体を強調"
+      },
+      {
+        "code": ".dropdown .menu {\n  visibility: hidden;\n}\n\n.dropdown:focus-within .menu {\n  visibility: visible;\n}",
+        "description": "キーボードフォーカスで開閉するアクセシブルなメニュー"
+      }
+    ],
+    "tips": "アイコンとinputを組み合わせた複合フォームコントロールの「見た目上のフォーカスリング」に最適です。キーボード操作時だけに限定したい場合は:has(:focus-visible)という選択肢もあります。",
+    "commonMistakes": ":focusは「その要素自身」、:focus-withinは「自身+子孫」です。また:focus-withinはマウスクリックのフォーカスにも反応するため、キーボード限定にしたい場合は:has(:focus-visible)を使い分けます。",
+    "relatedProperties": [
+      "pseudo-hover",
+      "pseudo-focus-visible",
+      "pseudo-has",
+      "outline"
+    ],
+    "aiNotes": "AIは「入力中に親要素を装飾」という要望にfocusin/focusoutイベントで親にクラスを付けるJavaScriptを提案しがちですが、:focus-withinで1行です。逆に:focus-visibleと:focus-withinを混同した説明をすることもあります（前者はキーボード判定、後者は子孫判定で直交する概念）。",
+    "promptExamples": [
+      "アイコン付き検索ボックスで、中のinputにフォーカスしたら外枠全体が光るデザインを:focus-withinで実装して",
+      "このJSでクラス切替しているフォーカス時のカード強調を:focus-withinに置き換えて"
+    ],
+    "searchAliases": [
+      "フォーカスで親を装飾",
+      "入力中のハイライト",
+      "フォーカスリング"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/:focus-within",
+    "browserSupport": {
+      "chrome": "60",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
+  },
+  {
+    "id": "interpolate-size",
+    "name": "interpolate-size",
+    "category": "アニメーション・エフェクト",
+    "description": "height: autoのような「キーワード値」へのtransition/animationを可能にするプロパティです。アコーディオンの開閉など「0から自然な高さまで」のアニメーションが、max-heightハックやJavaScriptなしで書けるようになります。",
+    "syntax": "interpolate-size: numeric-only | allow-keywords",
+    "examples": [
+      {
+        "code": ":root {\n  interpolate-size: allow-keywords;\n}\n\ndetails::details-content {\n  height: 0;\n  overflow: clip;\n  transition: height 0.3s, content-visibility 0.3s allow-discrete;\n}\n\ndetails[open]::details-content {\n  height: auto;\n}",
+        "description": "details/summaryのアコーディオンを高さautoまで滑らかに開閉"
+      },
+      {
+        "code": ".panel {\n  interpolate-size: allow-keywords;\n  width: 3rem;\n  transition: width 0.3s;\n}\n\n.panel:hover {\n  width: max-content;\n}",
+        "description": "ホバーでmax-contentまで自然に広がるパネル"
+      }
+    ],
+    "tips": ":rootに一度指定すれば継承されるため、サイト全体で有効化するのが手軽です。個別の値で使いたい場合はcalc-size()関数という選択肢もあります。",
+    "commonMistakes": "非対応ブラウザではアニメーションせず瞬時に切り替わります（表示自体は壊れません）。opt-in（明示的な指定）が必要な設計なので、指定なしでheight: autoへのtransitionを書いても動きません。",
+    "relatedProperties": [
+      "transition",
+      "height",
+      "max-width",
+      "at-starting-style"
+    ],
+    "aiNotes": "AIはアコーディオンの高さアニメーションにmax-heightハック（適当な大きい値へのtransition、速度が不自然になる欠陥あり）やgrid-template-rows: 0fr/1frテクニック、JSのscrollHeight実装を提案しがちです。Chrome系ではinterpolate-size: allow-keywordsが最も素直な解ですが、2026年7月時点でChrome限定（limited）のため、フォールバック前提の設計をAIに求めてください。",
+    "promptExamples": [
+      "details/summaryのアコーディオンを、interpolate-sizeを使ってheight: autoまで滑らかに開閉させて。非対応ブラウザでは瞬時切替で良い",
+      "このmax-heightハックのアコーディオンをinterpolate-size + フォールバックの2段構えに書き換えて"
+    ],
+    "searchAliases": [
+      "height autoをアニメーション",
+      "アコーディオン",
+      "高さのアニメーション",
+      "calc-size"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/interpolate-size",
+    "browserSupport": {
+      "chrome": "129",
+      "edge": "129",
+      "baseline": "limited",
+      "note": "Chrome/Edge限定（2026年7月時点）。非対応ブラウザではアニメーションせず瞬時に切り替わる"
+    }
+  },
+  {
+    "id": "text-spacing-trim",
+    "name": "text-spacing-trim",
+    "category": "テキスト・フォント",
+    "description": "日本語の約物（括弧・句読点など）が持つ余分な空きを自動調整するプロパティです。「（」の前や連続する約物「）。」の間の空きを詰めて、組版ソフトのような美しい日本語テキストをWebで実現します。",
+    "syntax": "text-spacing-trim: normal | space-all | space-first | trim-start",
+    "examples": [
+      {
+        "code": "body {\n  text-spacing-trim: trim-start;\n}",
+        "description": "行頭の始め括弧の空きを詰める（新聞・書籍風の組版）"
+      },
+      {
+        "code": "h1, h2, h3 {\n  text-spacing-trim: space-first;\n}",
+        "description": "段落先頭の括弧は全角のまま、行頭のみ詰める標準的な設定"
+      }
+    ],
+    "tips": "フォント側のかな詰め機能（font-feature-settings: 'palt'）が文字全体を詰めるのに対し、text-spacing-trimは約物の空きだけを調整するため本文にも安全に使えます。日本語見出しの「（」で始まる行の不揃い解消に効果的です。",
+    "commonMistakes": "2026年7月時点でChrome/Edge限定（limited）です。非対応ブラウザでは通常の全角空きのままなので表示は壊れませんが、ブラウザ間で見た目が揃わないことは把握しておきましょう。",
+    "relatedProperties": [
+      "letter-spacing",
+      "word-break",
+      "line-height",
+      "writing-mode",
+      "text-wrap"
+    ],
+    "aiNotes": "AIは日本語約物の空き調整に、手動のletter-spacing負値指定やJSライブラリ（約物半角化処理）を提案しがちですが、text-spacing-trimがネイティブの解です。日本語組版特有の機能のため英語圏中心のAIは存在自体を知らないことが多く、「text-spacing-trimを使って」と明示するのが有効です。",
+    "promptExamples": [
+      "日本語見出しの「（」で始まる行の字下がりが気になる。text-spacing-trimで組版を整えて",
+      "このサイトの日本語本文に、text-spacing-trim・text-wrap・word-break: auto-phraseを組み合わせたモダンな日本語組版設定を提案して"
+    ],
+    "searchAliases": [
+      "約物",
+      "括弧の空き",
+      "日本語組版",
+      "句読点の詰め",
+      "文字詰め"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/text-spacing-trim",
+    "browserSupport": {
+      "chrome": "123",
+      "edge": "123",
+      "baseline": "limited",
+      "note": "Chrome/Edge限定（2026年7月時点）。非対応ブラウザでは通常の全角空きで表示"
     }
   }
 ]

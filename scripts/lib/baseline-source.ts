@@ -59,6 +59,8 @@ export const manualKeys: Record<string, string[]> = {
   'anchor-positioning': ['css.properties.anchor-name'],
   'cascade-layers': ['css.at-rules.layer'],
   'at-scope': ['css.at-rules.scope'],
+  'pseudo-user-valid': ['css.selectors.user-valid'],
+  'pseudo-focus-within': ['css.selectors.focus-within'],
 };
 
 let cachedIndex: Map<string, KeyStatus> | null = null;
