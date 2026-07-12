@@ -9,8 +9,8 @@ export function Techniques() {
       <h1 className="font-serif text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
         CSSテクニック集
       </h1>
-      <div className="mb-6 text-sm text-red-600 dark:text-red-300">
-        ※ PCでの閲覧推奨。スマホサイズだと一部デモが崩れる場合があります。
+      <div className="mb-6 text-sm text-gray-500 dark:text-gray-400">
+        各テクニックはHTML/CSSをその場で書き換えて試せます。
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {techniques.map((tech) => (
