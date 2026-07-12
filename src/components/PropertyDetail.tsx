@@ -2,6 +2,7 @@ import React from "react";
 import { Heart, Copy, ArrowLeft, ExternalLink, Eye } from "lucide-react";
 import { CSSProperty } from "../types/css";
 import { InteractiveDemo } from "./InteractiveDemo";
+import { BaselineBadge } from "./BaselineBadge";
 
 interface PropertyDetailProps {
   property: CSSProperty;
@@ -24,7 +25,7 @@ export function PropertyDetail({
 
   const getVisualExample = (propertyId: string, exampleIndex: number) => {
     // プロパティごとの視覚的な例を生成
-    const examples: { [key: string]: { [key: number]: JSX.Element } } = {
+    const examples: { [key: string]: { [key: number]: React.JSX.Element } } = {
       display: {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
@@ -3001,47 +3002,6 @@ export function PropertyDetail({
           </div>
         ),
       },
-      opacity: {
-        0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
-            <div className="relative h-32">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 1 }}>
-                  opacity: 1
-                </div>
-              </div>
-            </div>
-            <div className="text-xs text-gray-500 mt-2">完全に不透明</div>
-          </div>
-        ),
-        1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
-            <div className="relative h-32">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 0.5 }}>
-                  opacity: 0.5
-                </div>
-              </div>
-            </div>
-            <div className="text-xs text-gray-500 mt-2">半透明（背景が透けて見える）</div>
-          </div>
-        ),
-        2: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded border">
-            <div className="relative h-32">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-blue-600 text-white px-6 py-4 font-bold text-lg" style={{ opacity: 0.1 }}>
-                  opacity: 0.1
-                </div>
-              </div>
-            </div>
-            <div className="text-xs text-gray-500 mt-2">ほぼ透明（うっすらと見える）</div>
-          </div>
-        ),
-      },
       transition: {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
@@ -3924,7 +3884,7 @@ export function PropertyDetail({
               className="bg-white p-2 rounded font-mono"
               style={{ userSelect: "all" }}
             >
-              クリックで全選択: console.log('hello');
+              クリックで全選択: {"console.log('hello');"}
             </div>
           </div>
         ),
@@ -4137,24 +4097,6 @@ export function PropertyDetail({
           </div>
         ),
       },
-      "pseudo-focus-visible": {
-        0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2">
-              キーボードフォーカス時のみアウトライン
-            </button>
-          </div>
-        ),
-        1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <input
-              type="text"
-              placeholder="フォーカススタイル"
-              className="px-3 py-2 border rounded focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-200"
-            />
-          </div>
-        ),
-      },
       "logical-properties": {
         0: (
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
@@ -4185,111 +4127,6 @@ export function PropertyDetail({
               <div className="bg-green-500 text-white p-2 rounded text-sm flex-1">
                 メインコンテンツ
               </div>
-            </div>
-          </div>
-        ),
-      },
-      inset: {
-        0: (
-          <div
-            className="bg-gray-100 dark:bg-gray-700 p-4 rounded border relative"
-            style={{ width: 220, height: 120 }}
-          >
-            <div
-              className="absolute bg-blue-500/20 rounded flex items-center justify-center text-sm"
-              style={{ inset: 0 }}
-            >
-              <div className="bg-blue-500 text-white rounded px-3 py-1">
-                inset: 0
-              </div>
-            </div>
-            <div className="absolute top-2 left-2 text-xs text-gray-500">
-              親要素
-            </div>
-          </div>
-        ),
-        1: (
-          <div
-            className="bg-gray-100 dark:bg-gray-700 p-4 rounded border relative"
-            style={{ width: 220, height: 120 }}
-          >
-            <div
-              className="absolute bg-green-500/20 rounded flex items-center justify-center text-sm"
-              style={{ inset: "16px" }}
-            >
-              <div className="bg-green-500 text-white rounded px-3 py-1">
-                inset: 16px
-              </div>
-            </div>
-            <div className="absolute top-2 left-2 text-xs text-gray-500">
-              親要素
-            </div>
-          </div>
-        ),
-        2: (
-          <div
-            className="bg-gray-100 dark:bg-gray-700 p-4 rounded border relative"
-            style={{ width: 220, height: 120 }}
-          >
-            <div
-              className="absolute bg-purple-500/20 rounded flex items-center justify-center text-sm"
-              style={{ inset: "10px 20px" }}
-            >
-              <div className="bg-purple-500 text-white rounded px-3 py-1">
-                inset: 10px 20px
-              </div>
-            </div>
-            <div className="absolute top-2 left-2 text-xs text-gray-500">
-              親要素
-            </div>
-          </div>
-        ),
-      },
-      "pseudo-nth-child": {
-        0: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <ul className="flex gap-2">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <li
-                  key={i}
-                  className={
-                    `px-3 py-2 rounded text-sm font-semibold ` +
-                    (i % 2 === 0
-                      ? "bg-blue-500 text-white"
-                      : "bg-green-200 text-green-900 dark:bg-green-600 dark:text-white")
-                  }
-                  style={{ minWidth: 40, textAlign: "center" }}
-                >
-                  {i + 1}
-                </li>
-              ))}
-            </ul>
-            <div className="text-xs text-gray-500 mt-2">
-              <span className="font-mono">li:nth-child(odd)</span>：青色、
-              <span className="font-mono">li:nth-child(even)</span>：緑色
-            </div>
-          </div>
-        ),
-        1: (
-          <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded border">
-            <ul className="divide-y divide-gray-300 dark:divide-gray-600">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <li
-                  key={i}
-                  className={
-                    `px-4 py-2 text-sm ` +
-                    (i % 2 === 0
-                      ? "bg-blue-50 dark:bg-blue-900/40"
-                      : "bg-green-50 dark:bg-green-900/40")
-                  }
-                >
-                  行 {i + 1}
-                </li>
-              ))}
-            </ul>
-            <div className="text-xs text-gray-500 mt-2">
-              <span className="font-mono">li:nth-child(odd)</span>：青背景、
-              <span className="font-mono">li:nth-child(even)</span>：緑背景
             </div>
           </div>
         ),
@@ -4810,20 +4647,20 @@ export function PropertyDetail({
                     }}
                     onMouseDown={(e) => {
                       // マウスクリックによるフォーカスをマーク
-                      e.target.dataset.mouseDown = 'true';
+                      e.currentTarget.dataset.mouseDown = 'true';
                     }}
                     onFocus={(e) => {
                       // キーボードフォーカスの場合のみスタイル適用
-                      if (!e.target.dataset.mouseDown) {
-                        e.target.style.borderColor = '#3b82f6';
-                        e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                      if (!e.currentTarget.dataset.mouseDown) {
+                        e.currentTarget.style.borderColor = '#3b82f6';
+                        e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
                       }
                       // マウスフラグをリセット
-                      delete e.target.dataset.mouseDown;
+                      delete e.currentTarget.dataset.mouseDown;
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = '#d1d5db';
-                      e.target.style.boxShadow = 'none';
+                      e.currentTarget.style.borderColor = '#d1d5db';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
                   <input 
@@ -4836,20 +4673,20 @@ export function PropertyDetail({
                     }}
                     onMouseDown={(e) => {
                       // マウスクリックによるフォーカスをマーク
-                      e.target.dataset.mouseDown = 'true';
+                      e.currentTarget.dataset.mouseDown = 'true';
                     }}
                     onFocus={(e) => {
                       // キーボードフォーカスの場合のみスタイル適用
-                      if (!e.target.dataset.mouseDown) {
-                        e.target.style.borderColor = '#3b82f6';
-                        e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                      if (!e.currentTarget.dataset.mouseDown) {
+                        e.currentTarget.style.borderColor = '#3b82f6';
+                        e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
                       }
                       // マウスフラグをリセット
-                      delete e.target.dataset.mouseDown;
+                      delete e.currentTarget.dataset.mouseDown;
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = '#d1d5db';
-                      e.target.style.boxShadow = 'none';
+                      e.currentTarget.style.borderColor = '#d1d5db';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -6338,10 +6175,44 @@ export function PropertyDetail({
           <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             ブラウザサポート
           </h2>
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <p className="text-blue-800 dark:text-blue-300">
-              {property.browserSupport}
-            </p>
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 space-y-4">
+            <BaselineBadge
+              baseline={property.browserSupport.baseline}
+              baselineLowDate={property.browserSupport.baselineLowDate}
+            />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {(
+                [
+                  ["Chrome", property.browserSupport.chrome],
+                  ["Firefox", property.browserSupport.firefox],
+                  ["Safari", property.browserSupport.safari],
+                  ["Edge", property.browserSupport.edge],
+                ] as const
+              ).map(([browser, version]) => (
+                <div
+                  key={browser}
+                  className="bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-center border border-blue-100 dark:border-blue-900"
+                >
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    {browser}
+                  </div>
+                  <div
+                    className={`text-sm font-semibold ${
+                      version
+                        ? "text-gray-900 dark:text-gray-100"
+                        : "text-red-500 dark:text-red-400"
+                    }`}
+                  >
+                    {version ? `${version}+` : "未対応"}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {property.browserSupport.note && (
+              <p className="text-sm text-blue-800 dark:text-blue-300">
+                {property.browserSupport.note}
+              </p>
+            )}
           </div>
         </section>
       </div>

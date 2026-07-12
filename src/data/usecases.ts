@@ -1,10 +1,7 @@
 // CSSユースケース逆引き用データ
-export type Usecase = {
-  id: string;
-  label: string;
-  description?: string;
-  propertyIds: string[];
-};
+import type { Usecase } from '@/types/css';
+
+export type { Usecase };
 
 export const usecases: Usecase[] = [
   {
@@ -142,7 +139,7 @@ export const usecases: Usecase[] = [
     id: "scroll",
     label: "スクロールさせたい",
     description: "要素内でスクロールしたい場合",
-    propertyIds: ["overflow", "height", "max-height", "width", "max-width"],
+    propertyIds: ["overflow", "height", "width", "max-width"],
   },
   {
     id: "animation",
@@ -193,7 +190,7 @@ export const usecases: Usecase[] = [
     id: "sticky-header",
     label: "ヘッダーを固定したい",
     description: "スクロール時にヘッダーを固定表示したい場合",
-    propertyIds: ["position", "z-index", "top", "left", "right", "width"],
+    propertyIds: ["position", "position-sticky", "z-index", "inset", "width"],
   },
   {
     id: "gradient-background",
@@ -260,7 +257,7 @@ export const usecases: Usecase[] = [
     id: "word-wrap",
     label: "長い単語を改行したい",
     description: "長いURLや単語を適切に改行したい場合",
-    propertyIds: ["word-break", "white-space", "overflow-wrap"],
+    propertyIds: ["word-break", "white-space"],
   },
   {
     id: "spacing-control",

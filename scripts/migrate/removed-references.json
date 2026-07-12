@@ -1,0 +1,130 @@
+{
+  "note": "Phase 3 でプロパティを追加した際、このリストを元に relatedProperties を復元する。キー: 削除された参照ID、値: 参照元プロパティID",
+  "removedAt": "2026-07-12",
+  "removed": {
+    "grid-area": [
+      "display-grid",
+      "grid-template-areas",
+      "grid-column",
+      "grid-row"
+    ],
+    "calc()": [
+      "clamp",
+      "min-max-functions",
+      "css-custom-properties"
+    ],
+    "font-family": [
+      "font-size",
+      "font-weight"
+    ],
+    "word-spacing": [
+      "letter-spacing"
+    ],
+    "text-justify": [
+      "text-align"
+    ],
+    "text-decoration-thickness": [
+      "text-decoration"
+    ],
+    "text-underline-offset": [
+      "text-decoration"
+    ],
+    "background-repeat": [
+      "background-image",
+      "background-position"
+    ],
+    "transform-origin": [
+      "transform"
+    ],
+    "animation-fill-mode": [
+      "animation"
+    ],
+    "hyphens": [
+      "word-break"
+    ],
+    "text-orientation": [
+      "writing-mode"
+    ],
+    "unicode-bidi": [
+      "writing-mode"
+    ],
+    "text-combine-upright": [
+      "writing-mode"
+    ],
+    "viewport": [
+      "media-queries"
+    ],
+    "orientation": [
+      "media-queries"
+    ],
+    "border-collapse": [
+      "table-layout"
+    ],
+    "border-spacing": [
+      "table-layout"
+    ],
+    "empty-cells": [
+      "table-layout"
+    ],
+    "caption-side": [
+      "table-layout"
+    ],
+    "contain-intrinsic-size": [
+      "content-visibility"
+    ],
+    "list-style-type": [
+      "list-style"
+    ],
+    "list-style-position": [
+      "list-style"
+    ],
+    "list-style-image": [
+      "list-style"
+    ],
+    "mask": [
+      "clip-path"
+    ],
+    "shape-outside": [
+      "clip-path"
+    ],
+    ":active": [
+      "pseudo-hover"
+    ],
+    ":focus": [
+      "pseudo-hover",
+      "pseudo-focus-visible"
+    ],
+    ":last-child": [
+      "pseudo-nth-child",
+      "pseudo-first-child"
+    ],
+    ":first-of-type": [
+      "pseudo-nth-of-type",
+      "pseudo-first-child"
+    ],
+    ":last-of-type": [
+      "pseudo-nth-of-type"
+    ],
+    ":only-of-type": [
+      "pseudo-nth-of-type"
+    ],
+    ":only-child": [
+      "pseudo-first-child"
+    ],
+    ":focus-within": [
+      "pseudo-focus-visible"
+    ],
+    "scroll-snap-stop": [
+      "scroll-snap-type"
+    ],
+    "scroll-padding": [
+      "scroll-margin"
+    ],
+    "outline-offset": [
+      "outline"
+    ],
+    "font-variant": [
+      "text-transform"
+    ]
+  }
+}

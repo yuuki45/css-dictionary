@@ -6,7 +6,7 @@ import { useFavorites } from '@/hooks/useFavorites';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { CSSProperty } from '@/types/css';
-import cssPropertiesData from '@/data/cssProperties.json';
+import { cssProperties as cssPropertiesData } from '@/data/properties';
 import { Star } from 'lucide-react';
 
 export function FavoritesClient() {

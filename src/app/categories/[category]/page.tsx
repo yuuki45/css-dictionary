@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CategoryDetailClient } from './CategoryDetailClient';
-import cssPropertiesData from '@/data/cssProperties.json';
+import { cssProperties as cssPropertiesData } from '@/data/properties';
 import { CSSProperty } from '@/types/css';
 import { getUniqueCategories, filterByCategory } from '@/utils/search';
 import { getCategorySlug, getCategoryFromSlug, getAllCategorySlugs } from '@/utils/categorySlug';

@@ -8,7 +8,7 @@ import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { CSSProperty } from '@/types/css';
 import { usecases, Usecase } from '@/data/usecases';
-import cssPropertiesData from '@/data/cssProperties.json';
+import { cssProperties as cssPropertiesData } from '@/data/properties';
 
 export function ReverseClient() {
   const [selectedUsecase, setSelectedUsecase] = useState<Usecase | null>(null);

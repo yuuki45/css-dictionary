@@ -10,7 +10,7 @@ import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { getCategorySlug } from '@/utils/categorySlug';
 import { CSSProperty } from '@/types/css';
-import cssPropertiesData from '@/data/cssProperties.json';
+import { cssProperties as cssPropertiesData } from '@/data/properties';
 
 interface PropertyDetailClientProps {
   property: CSSProperty;

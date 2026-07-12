@@ -35,7 +35,14 @@
       "align-items",
       "grid-template-columns"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -94,10 +101,17 @@
       "align-items",
       "flex-wrap",
       "gap",
-      "flex",
+      "flex-grow-shrink-basis",
       "order"
     ],
-    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "display-grid",
@@ -127,14 +141,19 @@
     "commonMistakes": "grid-template-columnsを指定しないと1列になる。frとpxを混在させる際のサイズ計算に注意。grid-areaの名前にハイフンやアンダースコアを使うとエラーになる場合がある。",
     "relatedProperties": [
       "grid-template-columns",
-      "grid-template-rows",
       "grid-template-areas",
       "gap",
-      "grid-area",
       "justify-items",
       "align-items"
     ],
-    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "order",
@@ -168,7 +187,14 @@
       "justify-content",
       "align-items"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "container-queries",
@@ -189,10 +215,16 @@
     "tips": "メディアクエリよりも柔軟で再利用可能。コンポーネント指向の開発に最適。",
     "commonMistakes": "container-typeの指定を忘れると動作しない。",
     "relatedProperties": [
-      "container-type",
-      "container-name"
+      "container-type"
     ],
-    "browserSupport": "Chrome 105+, Firefox 110+, Safari 16+"
+    "browserSupport": {
+      "chrome": "105",
+      "firefox": "110",
+      "safari": "16",
+      "edge": "105",
+      "baseline": "widely",
+      "baselineLowDate": "2023-02"
+    }
   },
   {
     "id": "container-type",
@@ -213,10 +245,16 @@
     "tips": "inline-sizeは横幅のみ監視（最も一般的）。sizeは幅と高さ両方を監視するが、無限ループの可能性があるため慎重に使用。container-nameと組み合わせて複数コンテナを管理できる。",
     "commonMistakes": "container-typeを指定しないとコンテナクエリが動作しない。sizeを使う際は高さの循環参照に注意。",
     "relatedProperties": [
-      "@container",
-      "container-name"
+      "container-queries"
     ],
-    "browserSupport": "Chrome 105+, Firefox 110+, Safari 16+"
+    "browserSupport": {
+      "chrome": "105",
+      "firefox": "110",
+      "safari": "16",
+      "edge": "105",
+      "baseline": "widely",
+      "baselineLowDate": "2023-02"
+    }
   },
   {
     "id": "subgrid",
@@ -237,10 +275,16 @@
     "tips": "カードレイアウトで高さを揃えるのに非常に便利。Flexboxでは難しい複雑な整列が可能。",
     "relatedProperties": [
       "display",
-      "grid-template-columns",
-      "grid-template-rows"
+      "grid-template-columns"
     ],
-    "browserSupport": "Firefox 71+, Safari 16+（Chrome未対応）"
+    "browserSupport": {
+      "chrome": "117",
+      "firefox": "71",
+      "safari": "16",
+      "edge": "117",
+      "baseline": "widely",
+      "baselineLowDate": "2023-09"
+    }
   },
   {
     "id": "aspect-ratio",
@@ -281,7 +325,14 @@
       "width",
       "height"
     ],
-    "browserSupport": "Chrome 88+, Firefox 89+, Safari 15+"
+    "browserSupport": {
+      "chrome": "88",
+      "firefox": "89",
+      "safari": "15",
+      "edge": "88",
+      "baseline": "widely",
+      "baselineLowDate": "2021-09"
+    }
   },
   {
     "id": "gap",
@@ -305,11 +356,16 @@
     ],
     "tips": "marginと違って最初と最後の要素には適用されない。レスポンシブデザインに最適。",
     "relatedProperties": [
-      "row-gap",
-      "column-gap",
       "display"
     ],
-    "browserSupport": "Chrome 84+, Firefox 63+, Safari 14.1+",
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -354,11 +410,16 @@
     ],
     "tips": "メディアクエリを減らせる。calc()と組み合わせるとさらに柔軟。",
     "relatedProperties": [
-      "min()",
-      "max()",
-      "calc()"
+      "min-max-functions"
     ],
-    "browserSupport": "Chrome 79+, Firefox 75+, Safari 13.1+"
+    "browserSupport": {
+      "chrome": "79",
+      "firefox": "75",
+      "safari": "13.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-07"
+    }
   },
   {
     "id": "min-max-functions",
@@ -382,10 +443,16 @@
     ],
     "tips": "clamp()の代替として使える。calc()と組み合わせて複雑な計算も可能。",
     "relatedProperties": [
-      "clamp()",
-      "calc()"
+      "clamp"
     ],
-    "browserSupport": "Chrome 79+, Firefox 75+, Safari 11.1+"
+    "browserSupport": {
+      "chrome": "79",
+      "firefox": "75",
+      "safari": "11.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-07"
+    }
   },
   {
     "id": "css-custom-properties",
@@ -409,11 +476,15 @@
     ],
     "tips": "JavaScriptから動的に変更可能。ダークモードの実装に必須。",
     "commonMistakes": "変数名は大文字小文字を区別する。--で始める必要がある。",
-    "relatedProperties": [
-      "var()",
-      "calc()"
-    ],
-    "browserSupport": "Chrome 49+, Firefox 31+, Safari 9.1+"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "49",
+      "firefox": "31",
+      "safari": "9.1",
+      "edge": "15",
+      "baseline": "widely",
+      "baselineLowDate": "2017-04"
+    }
   },
   {
     "id": "backdrop-filter",
@@ -439,10 +510,17 @@
     "commonMistakes": "背景が透明でないと効果が見えない。",
     "relatedProperties": [
       "filter",
-      "background",
+      "background-color",
       "opacity"
     ],
-    "browserSupport": "Chrome 76+, Firefox 103+, Safari 9+"
+    "browserSupport": {
+      "chrome": "76",
+      "firefox": "103",
+      "safari": "18",
+      "edge": "79",
+      "baseline": "newly",
+      "baselineLowDate": "2024-09"
+    }
   },
   {
     "id": "filter",
@@ -469,7 +547,14 @@
       "backdrop-filter",
       "transition"
     ],
-    "browserSupport": "Chrome 53+, Firefox 35+, Safari 9.1+"
+    "browserSupport": {
+      "chrome": "53",
+      "firefox": "35",
+      "safari": "9.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2016-09"
+    }
   },
   {
     "id": "object-fit",
@@ -504,7 +589,14 @@
       "object-position",
       "aspect-ratio"
     ],
-    "browserSupport": "Chrome 32+, Firefox 36+, Safari 10+"
+    "browserSupport": {
+      "chrome": "32",
+      "firefox": "36",
+      "safari": "10",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "place-items",
@@ -528,7 +620,14 @@
       "justify-items",
       "place-content"
     ],
-    "browserSupport": "Chrome 59+, Firefox 45+, Safari 11+"
+    "browserSupport": {
+      "chrome": "59",
+      "firefox": "45",
+      "safari": "11",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "place-content",
@@ -552,7 +651,14 @@
       "justify-content",
       "place-items"
     ],
-    "browserSupport": "Chrome 59+, Firefox 45+, Safari 11+"
+    "browserSupport": {
+      "chrome": "59",
+      "firefox": "45",
+      "safari": "9",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "flex-direction",
@@ -578,7 +684,14 @@
       "align-items",
       "flex-wrap"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "22",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -633,7 +746,14 @@
       "flex-direction",
       "display"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -692,7 +812,14 @@
       "place-items",
       "grid-template-columns"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "52",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2016-07"
+    }
   },
   {
     "id": "align-items",
@@ -724,7 +851,14 @@
       "flex-direction",
       "align-self"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -780,9 +914,16 @@
       "align-items",
       "justify-content",
       "flex-wrap",
-      "grid-template-rows"
+      "grid-template-columns"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "28",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "flex-wrap",
@@ -802,11 +943,16 @@
     ],
     "tips": "flex-basisと組み合わせてレスポンシブレイアウトを作成。",
     "relatedProperties": [
-      "flex-basis",
-      "flex-grow",
-      "flex-shrink"
+      "flex-grow-shrink-basis"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "28",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "flex-grow-shrink-basis",
@@ -834,7 +980,14 @@
       "min-width",
       "max-width"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "grid-template-columns",
@@ -854,11 +1007,17 @@
     ],
     "tips": "repeat()とminmax()を組み合わせるとレスポンシブなグリッドが簡単に作れる。",
     "relatedProperties": [
-      "grid-template-rows",
       "display",
-      "grid-gap"
+      "gap"
     ],
-    "browserSupport": "IE11+（一部制限あり）, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "grid-template-areas",
@@ -878,11 +1037,16 @@
     ],
     "tips": "レイアウトが視覚的に理解しやすい。メディアクエリで簡単に変更可能。",
     "relatedProperties": [
-      "grid-area",
-      "grid-template-columns",
-      "grid-template-rows"
+      "grid-template-columns"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "grid-auto-fit-fill",
@@ -902,10 +1066,16 @@
     ],
     "tips": "auto-fitは余った空間を埋める、auto-fillは空の列も作成する。",
     "relatedProperties": [
-      "minmax()",
       "grid-template-columns"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "76",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2020-07"
+    }
   },
   {
     "id": "position",
@@ -941,7 +1111,14 @@
       "z-index",
       "transform"
     ],
-    "browserSupport": "全ブラウザ対応（stickyはIE非対応）",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "multi",
@@ -1006,7 +1183,14 @@
     "relatedProperties": [
       "position"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "color",
@@ -1031,9 +1215,16 @@
     "tips": "CSS変数と組み合わせるとテーマ切り替えが簡単になる。",
     "relatedProperties": [
       "background-color",
-      "border-color"
+      "border"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "color",
@@ -1074,11 +1265,17 @@
     ],
     "tips": "レスポンシブデザインではremやemを使うと柔軟性が高い。",
     "relatedProperties": [
-      "font-family",
       "font-weight",
       "line-height"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1123,10 +1320,16 @@
     ],
     "tips": "数値指定（100-900）の方が細かい制御が可能。Webフォントでは対応する太さのみ有効。",
     "relatedProperties": [
-      "font-family",
       "font-size"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "2",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -1181,7 +1384,14 @@
       "font-size",
       "vertical-align"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1223,10 +1433,16 @@
     "tips": "em単位で指定するとフォントサイズに応じて調整できる。日本語Webフォントでは詰めすぎに注意。",
     "commonMistakes": "負の値を使いすぎると文字が重なって読みにくくなる。",
     "relatedProperties": [
-      "word-spacing",
       "font-size"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1275,10 +1491,16 @@
     ],
     "tips": "startとendは国際化対応。justifyは英語以外では注意が必要。",
     "relatedProperties": [
-      "vertical-align",
-      "text-justify"
+      "vertical-align"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -1324,11 +1546,15 @@
       }
     ],
     "tips": "リンクのスタイリングでよく使用。noneでデフォルトの下線を削除。",
-    "relatedProperties": [
-      "text-decoration-thickness",
-      "text-underline-offset"
-    ],
-    "browserSupport": "全ブラウザ対応"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "background-color",
@@ -1352,7 +1578,14 @@
       "background-image",
       "opacity"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "color",
@@ -1394,10 +1627,16 @@
     "tips": "グラデーションはCSS3の強力な機能。複数の背景画像も指定可能。",
     "relatedProperties": [
       "background-size",
-      "background-position",
-      "background-repeat"
+      "background-position"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "background-size",
@@ -1424,7 +1663,14 @@
       "background-image",
       "background-position"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "3",
+      "firefox": "4",
+      "safari": "5",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "background-position",
@@ -1454,10 +1700,16 @@
     "commonMistakes": "パーセント指定は画像とコンテナの対応する位置を揃える仕組みなので、50% 50%が中央配置になる。",
     "relatedProperties": [
       "background-image",
-      "background-size",
-      "background-repeat"
+      "background-size"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "linear-gradient",
@@ -1481,10 +1733,17 @@
     ],
     "tips": "角度指定でより自然なグラデーション。透明度を使ったオーバーレイ効果も人気。",
     "relatedProperties": [
-      "radial-gradient()",
+      "radial-gradient",
       "background-image"
     ],
-    "browserSupport": "IE10+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "26",
+      "firefox": "16",
+      "safari": "7",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "radial-gradient",
@@ -1508,10 +1767,17 @@
     ],
     "tips": "ボタンのホバー効果やスポットライト効果に最適。",
     "relatedProperties": [
-      "linear-gradient()",
+      "linear-gradient",
       "background-image"
     ],
-    "browserSupport": "IE10+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "26",
+      "firefox": "16",
+      "safari": "7",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "padding",
@@ -1538,7 +1804,14 @@
       "margin",
       "box-sizing"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1582,7 +1855,14 @@
     "relatedProperties": [
       "padding"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1633,7 +1913,14 @@
       "min-width",
       "box-sizing"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1680,11 +1967,16 @@
     "commonMistakes": "高さを固定するとレスポンシブで崩れることがある。",
     "relatedProperties": [
       "width",
-      "max-height",
-      "min-height",
       "box-sizing"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1729,7 +2021,14 @@
       "width",
       "min-width"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "min-width",
@@ -1753,7 +2052,14 @@
       "width",
       "max-width"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "box-sizing",
@@ -1779,7 +2085,14 @@
       "padding",
       "border"
     ],
-    "browserSupport": "IE8+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "10",
+      "firefox": "29",
+      "safari": "5.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "border",
@@ -1799,12 +2112,16 @@
     ],
     "tips": "border-radiusと組み合わせて角丸にするのが一般的。",
     "relatedProperties": [
-      "border-radius",
-      "border-width",
-      "border-style",
-      "border-color"
+      "border-radius"
     ],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "multi",
@@ -1871,7 +2188,14 @@
     "relatedProperties": [
       "border"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "4",
+      "firefox": "4",
+      "safari": "5",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -1922,7 +2246,14 @@
     "relatedProperties": [
       "filter"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "10",
+      "firefox": "4",
+      "safari": "5.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "multi",
@@ -2006,7 +2337,14 @@
       "visibility",
       "display"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "2",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "number",
@@ -2050,7 +2388,14 @@
       "transform",
       "opacity"
     ],
-    "browserSupport": "IE10+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "26",
+      "firefox": "16",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "transform",
@@ -2086,10 +2431,16 @@
     ],
     "tips": "GPUアクセラレーションが効くため、アニメーションパフォーマンスが良い。",
     "relatedProperties": [
-      "transition",
-      "transform-origin"
+      "transition"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ",
+    "browserSupport": {
+      "chrome": "36",
+      "firefox": "16",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    },
     "interactive": {
       "enabled": true,
       "type": "multi",
@@ -2169,13 +2520,19 @@
     "tips": "transitionより複雑なアニメーションが可能。transform、opacity、filter以外のプロパティはパフォーマンスに影響するため注意。will-changeと組み合わせて最適化。animation-fill-modeでアニメーション前後の状態を制御。複数アニメーションはカンマ区切りで指定可能。",
     "commonMistakes": "width、height、left、topなどのレイアウトプロパティをアニメーションするとパフォーマンスが悪化。animation-fill-mode: forwardsを忘れるとアニメーション後に元の状態に戻る。キーフレーム名の重複に注意。無限アニメーションの多用はバッテリー消費を増加させる。",
     "relatedProperties": [
-      "@keyframes",
+      "keyframes",
       "transition",
       "transform",
-      "will-change",
-      "animation-fill-mode"
+      "will-change"
     ],
-    "browserSupport": "IE10+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "43",
+      "firefox": "16",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "keyframes",
@@ -2198,7 +2555,14 @@
       "animation",
       "transform"
     ],
-    "browserSupport": "IE10+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "43",
+      "firefox": "16",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "cursor",
@@ -2218,7 +2582,14 @@
     ],
     "tips": "ユーザビリティ向上のため、クリック可能な要素には必ずpointerを設定。",
     "relatedProperties": [],
-    "browserSupport": "全ブラウザ対応",
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1.2",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2021-12"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -2273,11 +2644,15 @@
       }
     ],
     "tips": "overflow: hiddenは要素の角丸やマスキング効果にも使える。",
-    "relatedProperties": [
-      "overflow-x",
-      "overflow-y"
-    ],
-    "browserSupport": "全ブラウザ対応",
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    },
     "interactive": {
       "enabled": true,
       "type": "select",
@@ -2342,7 +2717,14 @@
       "pointer-events",
       "transition"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "white-space",
@@ -2366,10 +2748,16 @@
     ],
     "tips": "nowrapは一行表示、pre-wrapはコードの表示に便利。",
     "relatedProperties": [
-      "word-wrap",
-      "overflow-wrap"
+      "word-break"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "text-overflow",
@@ -2392,7 +2780,14 @@
       "white-space",
       "overflow"
     ],
-    "browserSupport": "IE6+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "7",
+      "safari": "1.3",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "word-break",
@@ -2415,11 +2810,15 @@
       }
     ],
     "tips": "日本語サイトではkeep-all、英語サイトではbreak-wordが一般的。",
-    "relatedProperties": [
-      "overflow-wrap",
-      "hyphens"
-    ],
-    "browserSupport": "IE5.5+, 全モダンブラウザ"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "15",
+      "safari": "3",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "writing-mode",
@@ -2451,13 +2850,15 @@
     ],
     "tips": "縦書き時は要素の幅と高さの概念が入れ替わる。text-orientationと組み合わせて文字の向きも制御できる。日本語の縦書きレイアウトやデザイン上のアクセントとして活用。",
     "commonMistakes": "縦書き時にpaddingやmarginの方向が変わることを忘れがち。flexboxやgridとの組み合わせ時は軸の方向に注意。",
-    "relatedProperties": [
-      "text-orientation",
-      "direction",
-      "unicode-bidi",
-      "text-combine-upright"
-    ],
-    "browserSupport": "Chrome 48+, Firefox 41+, Safari 5.1+"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "48",
+      "firefox": "41",
+      "safari": "10.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2017-03"
+    }
   },
   {
     "id": "user-select",
@@ -2484,7 +2885,12 @@
       "cursor",
       "pointer-events"
     ],
-    "browserSupport": "Chrome 54+, Firefox 69+, Safari 3.1+"
+    "browserSupport": {
+      "chrome": "54",
+      "firefox": "69",
+      "edge": "79",
+      "baseline": "limited"
+    }
   },
   {
     "id": "pointer-events",
@@ -2507,7 +2913,14 @@
       "cursor",
       "user-select"
     ],
-    "browserSupport": "IE11+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1.5",
+      "safari": "4",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "will-change",
@@ -2536,7 +2949,14 @@
       "opacity",
       "animation"
     ],
-    "browserSupport": "Chrome 36+, Firefox 36+, Safari 9.1+"
+    "browserSupport": {
+      "chrome": "36",
+      "firefox": "36",
+      "safari": "9.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "contain",
@@ -2558,7 +2978,14 @@
     "relatedProperties": [
       "will-change"
     ],
-    "browserSupport": "Chrome 52+, Firefox 69+（部分対応）"
+    "browserSupport": {
+      "chrome": "52",
+      "firefox": "69",
+      "safari": "15.4",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2022-03"
+    }
   },
   {
     "id": "media-queries",
@@ -2595,12 +3022,17 @@
     "tips": "モバイルファーストで設計し、小さい画面から大きい画面へとスタイルを追加していくのが一般的。breakpointは320px, 768px, 1024px, 1200pxなどがよく使われる。",
     "commonMistakes": "max-widthとmin-widthの使い分けを間違えると意図しない結果になる。重複する条件で後から書いたルールが優先される。",
     "relatedProperties": [
-      "@container",
-      "viewport",
-      "orientation",
+      "container-queries",
       "aspect-ratio"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "3",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "table-layout",
@@ -2632,13 +3064,15 @@
     ],
     "tips": "table-layout: fixedは描画が高速で、大量データに適している。幅を事前に定義できるため、レイアウトが安定する。autoは内容に応じて柔軟に調整されるが、計算コストが高い。",
     "commonMistakes": "fixedを使う際に列幅を指定しないと、等幅になってしまう。autoでは内容が多い列が他の列を圧迫する場合がある。レスポンシブ対応時の使い分けも重要。",
-    "relatedProperties": [
-      "border-collapse",
-      "border-spacing",
-      "empty-cells",
-      "caption-side"
-    ],
-    "browserSupport": "IE5+, 全ブラウザ対応"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "14",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "content-visibility",
@@ -2658,10 +3092,16 @@
     ],
     "tips": "長いページや大量のコンテンツでスクロールパフォーマンスが大幅に向上。",
     "relatedProperties": [
-      "contain-intrinsic-size",
       "contain"
     ],
-    "browserSupport": "Chrome 85+（実験的機能）"
+    "browserSupport": {
+      "chrome": "85",
+      "firefox": "125",
+      "safari": "18",
+      "edge": "85",
+      "baseline": "newly",
+      "baselineLowDate": "2024-09"
+    }
   },
   {
     "id": "accent-color",
@@ -2680,7 +3120,13 @@
       "color",
       "background-color"
     ],
-    "browserSupport": "Chrome 93+, Firefox 92+, Safari 15+"
+    "browserSupport": {
+      "chrome": "93",
+      "firefox": "92",
+      "safari": "26.2",
+      "edge": "93",
+      "baseline": "limited"
+    }
   },
   {
     "id": "list-style",
@@ -2699,12 +3145,15 @@
       }
     ],
     "tips": "list-style-type, list-style-position, list-style-imageのショートハンド。",
-    "relatedProperties": [
-      "list-style-type",
-      "list-style-position",
-      "list-style-image"
-    ],
-    "browserSupport": "全ブラウザ対応"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "clip-path",
@@ -2723,11 +3172,15 @@
       }
     ],
     "tips": "SVGやCSS Shapesと組み合わせると表現力が広がる。",
-    "relatedProperties": [
-      "mask",
-      "shape-outside"
-    ],
-    "browserSupport": "Chrome 55+, Firefox 54+, Safari 10+"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "55",
+      "firefox": "3.5",
+      "safari": "9.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "pseudo-hover",
@@ -2747,11 +3200,15 @@
     ],
     "tips": "インタラクションを強調したい要素に使うと効果的。",
     "commonMistakes": "タッチデバイスでは:activeや:focusも併用推奨。",
-    "relatedProperties": [
-      ":active",
-      ":focus"
-    ],
-    "browserSupport": "全ブラウザ対応"
+    "relatedProperties": [],
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "2",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "pseudo-nth-child",
@@ -2772,11 +3229,17 @@
     "tips": "nは0から始まる整数。even/oddや数式も使える。",
     "commonMistakes": "0番目は存在しないので注意。nth-of-typeとの違いも理解しよう。",
     "relatedProperties": [
-      ":nth-of-type",
-      ":first-child",
-      ":last-child"
+      "pseudo-nth-of-type",
+      "pseudo-first-child"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "3.5",
+      "safari": "3.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "pseudo-nth-of-type",
@@ -2805,12 +3268,16 @@
     "tips": ":nth-child()は全ての子要素をカウントするが、:nth-of-type()は同じタグ名の要素のみをカウントする。見出しレベルや画像の装飾に便利。",
     "commonMistakes": ":nth-child()と混同しやすい。クラス名ではなくタグ名で判断されることに注意。",
     "relatedProperties": [
-      ":nth-child()",
-      ":first-of-type",
-      ":last-of-type",
-      ":only-of-type"
+      "pseudo-nth-child"
     ],
-    "browserSupport": "IE9+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "3.5",
+      "safari": "3.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "pseudo-first-child",
@@ -2839,12 +3306,16 @@
     "tips": "レイアウトの調整やデザインの統一に非常に便利。:nth-child(1)と同じ効果だが、より読みやすい。マージンやパディングの調整によく使われる。",
     "commonMistakes": "親要素の最初の子要素であることが条件。他の要素が間にあると適用されない。:first-of-typeとの違いも理解しよう。",
     "relatedProperties": [
-      ":last-child",
-      ":nth-child()",
-      ":first-of-type",
-      ":only-child"
+      "pseudo-nth-child"
     ],
-    "browserSupport": "IE7+, 全モダンブラウザ"
+    "browserSupport": {
+      "chrome": "4",
+      "firefox": "3",
+      "safari": "3.1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "pseudo-focus-visible",
@@ -2865,12 +3336,17 @@
     "tips": "アクセシビリティの向上に重要。:focusの代わりに使用することで、マウス操作時の不要なアウトラインを避けながら、キーボード操作時の視認性を確保。",
     "commonMistakes": ":focusと同じと思い込む。マウスクリックでは適用されないことを理解する。古いブラウザでは動作しないため、フォールバックとして:focusも併用する。",
     "relatedProperties": [
-      ":focus",
-      ":focus-within",
       "outline",
       "box-shadow"
     ],
-    "browserSupport": "Chrome 86+, Firefox 85+, Safari 15.4+"
+    "browserSupport": {
+      "chrome": "86",
+      "firefox": "85",
+      "safari": "15.4",
+      "edge": "86",
+      "baseline": "widely",
+      "baselineLowDate": "2022-03"
+    }
   },
   {
     "id": "object-position",
@@ -2898,7 +3374,14 @@
       "object-fit",
       "aspect-ratio"
     ],
-    "browserSupport": "Chrome 32+, Firefox 36+, Safari 10+"
+    "browserSupport": {
+      "chrome": "32",
+      "firefox": "36",
+      "safari": "10",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "scroll-behavior",
@@ -2922,7 +3405,14 @@
       "overflow",
       "scroll-snap-type"
     ],
-    "browserSupport": "Chrome 61+, Firefox 36+, Safari 15.4+"
+    "browserSupport": {
+      "chrome": "61",
+      "firefox": "36",
+      "safari": "15.4",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2022-03"
+    }
   },
   {
     "id": "inset",
@@ -2947,13 +3437,16 @@
     "tips": "モーダルやオーバーレイを親要素いっぱいに広げたい時、inset: 0;が便利。コードが短くなり読みやすい。",
     "commonMistakes": "position: static（デフォルト）では効果がない。position: absolute、fixed、relative、stickyと組み合わせて使う。",
     "relatedProperties": [
-      "position",
-      "top",
-      "right",
-      "bottom",
-      "left"
+      "position"
     ],
-    "browserSupport": "Chrome 87+, Firefox 66+, Safari 14.1+"
+    "browserSupport": {
+      "chrome": "87",
+      "firefox": "66",
+      "safari": "14.1",
+      "edge": "87",
+      "baseline": "widely",
+      "baselineLowDate": "2021-04"
+    }
   },
   {
     "id": "scroll-snap-type",
@@ -2983,10 +3476,16 @@
     "commonMistakes": "子要素にscroll-snap-alignを指定しないと機能しない。overflowが設定されているコンテナに指定する必要がある。",
     "relatedProperties": [
       "scroll-snap-align",
-      "scroll-snap-stop",
       "overflow"
     ],
-    "browserSupport": "Chrome 69+, Firefox 68+, Safari 11+"
+    "browserSupport": {
+      "chrome": "69",
+      "firefox": "99",
+      "safari": "11",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2022-04"
+    }
   },
   {
     "id": "scroll-snap-align",
@@ -3018,7 +3517,14 @@
       "scroll-snap-type",
       "scroll-margin"
     ],
-    "browserSupport": "Chrome 69+, Firefox 68+, Safari 11+"
+    "browserSupport": {
+      "chrome": "69",
+      "firefox": "68",
+      "safari": "11",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "overscroll-behavior",
@@ -3050,7 +3556,13 @@
       "overflow",
       "scroll-behavior"
     ],
-    "browserSupport": "Chrome 63+, Firefox 59+, Safari 16+"
+    "browserSupport": {
+      "chrome": "144",
+      "firefox": "150",
+      "edge": "18",
+      "baseline": "limited",
+      "note": "Safariは未対応。スクロール連鎖の防止が必要な場合はSafari向けの回避策も検討"
+    }
   },
   {
     "id": "scroll-margin",
@@ -3076,10 +3588,16 @@
     "commonMistakes": "scroll-paddingと混同しやすい。scroll-marginは子要素に、scroll-paddingは親要素に指定する。",
     "relatedProperties": [
       "scroll-snap-align",
-      "scroll-padding",
       "scroll-behavior"
     ],
-    "browserSupport": "Chrome 69+, Firefox 68+, Safari 14.1+"
+    "browserSupport": {
+      "chrome": "69",
+      "firefox": "90",
+      "safari": "14.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2021-07"
+    }
   },
   {
     "id": "mix-blend-mode",
@@ -3108,7 +3626,14 @@
       "isolation",
       "opacity"
     ],
-    "browserSupport": "Chrome 41+, Firefox 32+, Safari 8+"
+    "browserSupport": {
+      "chrome": "41",
+      "firefox": "32",
+      "safari": "8",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "background-blend-mode",
@@ -3134,7 +3659,14 @@
       "mix-blend-mode",
       "filter"
     ],
-    "browserSupport": "Chrome 35+, Firefox 30+, Safari 8+"
+    "browserSupport": {
+      "chrome": "35",
+      "firefox": "30",
+      "safari": "8",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "isolation",
@@ -3159,7 +3691,14 @@
       "z-index",
       "transform"
     ],
-    "browserSupport": "Chrome 41+, Firefox 36+, Safari 8+"
+    "browserSupport": {
+      "chrome": "41",
+      "firefox": "36",
+      "safari": "8",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "align-self",
@@ -3188,7 +3727,14 @@
       "justify-self",
       "flex-direction"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "29",
+      "firefox": "20",
+      "safari": "9",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-09"
+    }
   },
   {
     "id": "justify-self",
@@ -3215,9 +3761,16 @@
     "relatedProperties": [
       "justify-items",
       "align-self",
-      "place-self"
+      "place-items"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "45",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "grid-column",
@@ -3239,10 +3792,16 @@
     "commonMistakes": "終了位置は「その列の手前」を指す。1 / 3は1列目と2列目の2列分。列番号は1から始まる（0ではない）。",
     "relatedProperties": [
       "grid-row",
-      "grid-area",
       "grid-template-columns"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "grid-row",
@@ -3264,10 +3823,16 @@
     "commonMistakes": "終了位置は「その行の手前」を指す。行番号も1から始まる。",
     "relatedProperties": [
       "grid-column",
-      "grid-area",
-      "grid-template-rows"
+      "grid-template-columns"
     ],
-    "browserSupport": "Chrome 57+, Firefox 52+, Safari 10.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "52",
+      "safari": "10.1",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2017-10"
+    }
   },
   {
     "id": "caret-color",
@@ -3299,7 +3864,14 @@
       "color",
       "accent-color"
     ],
-    "browserSupport": "Chrome 57+, Firefox 53+, Safari 11.1+"
+    "browserSupport": {
+      "chrome": "57",
+      "firefox": "53",
+      "safari": "11.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    }
   },
   {
     "id": "appearance",
@@ -3329,10 +3901,17 @@
     "commonMistakes": "appearance: none;だけでは見た目が消えるだけ。独自のスタイルを必ず追加する必要がある。ベンダープレフィックス（-webkit-、-moz-）が必要な場合がある。",
     "relatedProperties": [
       "border",
-      "background",
+      "background-color",
       "accent-color"
     ],
-    "browserSupport": "Chrome 84+, Firefox 80+, Safari 15.4+ (プレフィックスなし)"
+    "browserSupport": {
+      "chrome": "84",
+      "firefox": "80",
+      "safari": "15.4",
+      "edge": "84",
+      "baseline": "widely",
+      "baselineLowDate": "2022-03"
+    }
   },
   {
     "id": "outline",
@@ -3362,10 +3941,17 @@
     "commonMistakes": "outline: none;でフォーカス表示を消すとアクセシビリティ問題。代わりに独自のフォーカススタイルを実装する。outline-offsetで位置調整可能。",
     "relatedProperties": [
       "border",
-      "outline-offset",
       "box-shadow"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "94",
+      "firefox": "88",
+      "safari": "16.4",
+      "edge": "94",
+      "baseline": "widely",
+      "baselineLowDate": "2023-03",
+      "note": "outline自体は全ブラウザで古くから利用可能。記載バージョンは角丸への追従など仕様準拠が完成した時点"
+    }
   },
   {
     "id": "vertical-align",
@@ -3402,7 +3988,14 @@
       "align-items",
       "display"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "text-transform",
@@ -3431,10 +4024,16 @@
     "tips": "ナビゲーションメニューやボタンでよく使われる。HTMLの内容を変更せずにスタイルだけで変換できる。",
     "commonMistakes": "日本語には効果がない。capitalizeは各単語の先頭のみ（全角スペースでは動作しない場合がある）。",
     "relatedProperties": [
-      "font-variant",
       "letter-spacing"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   },
   {
     "id": "resize",
@@ -3467,7 +4066,13 @@
       "min-width",
       "max-width"
     ],
-    "browserSupport": "全ブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "4",
+      "safari": "3",
+      "edge": "79",
+      "baseline": "limited"
+    }
   },
   {
     "id": "scroll-snap",
@@ -3486,7 +4091,14 @@
       "scroll-snap-align",
       "scroll-margin"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "69",
+      "firefox": "99",
+      "safari": "11",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2022-04"
+    },
     "category": "インタラクション・UX"
   },
   {
@@ -3507,10 +4119,17 @@
     "tips": "親要素にoverflow: hiddenがあると動作しない",
     "relatedProperties": [
       "position",
-      "top",
+      "inset",
       "z-index"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "56",
+      "firefox": "32",
+      "safari": "13",
+      "edge": "16",
+      "baseline": "widely",
+      "baselineLowDate": "2019-09"
+    },
     "category": "レイアウト・配置"
   },
   {
@@ -3532,13 +4151,20 @@
     "relatedProperties": [
       "prefers-color-scheme"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "81",
+      "firefox": "96",
+      "safari": "13",
+      "edge": "81",
+      "baseline": "widely",
+      "baselineLowDate": "2022-01"
+    },
     "category": "その他"
   },
   {
     "id": "prefers-color-scheme",
     "name": "@media (prefers-color-scheme)",
-    "description": "ユーザーのシステム設定がライトモードかダークモードかを検出するメディアクエリです。",
+    "description": "ユーザーのシステム設定がライトモードかダークモードかを検出するメディアクエリです。OSのテーマ設定に合わせてサイトの配色を自動で切り替えたい場合に使用します。",
     "examples": [
       {
         "code": "@media (prefers-color-scheme: dark) { body { background: black; } }",
@@ -3554,7 +4180,14 @@
     "relatedProperties": [
       "color-scheme"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "76",
+      "firefox": "67",
+      "safari": "12.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    },
     "category": "レスポンシブ・関数"
   },
   {
@@ -3577,7 +4210,14 @@
       "animation",
       "transition"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "74",
+      "firefox": "63",
+      "safari": "10.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    },
     "category": "レスポンシブ・関数"
   },
   {
@@ -3597,10 +4237,16 @@
     "syntax": "margin-inline | margin-block | padding-inline | padding-block | inset-inline | inset-block",
     "tips": "国際化対応に最適。RTL言語でも自動対応",
     "relatedProperties": [
-      "writing-mode",
-      "direction"
+      "writing-mode"
     ],
-    "browserSupport": "Modern browsers",
+    "browserSupport": {
+      "chrome": "69",
+      "firefox": "41",
+      "safari": "12.1",
+      "edge": "79",
+      "baseline": "widely",
+      "baselineLowDate": "2020-01"
+    },
     "category": "レイアウト・配置"
   }
 ]

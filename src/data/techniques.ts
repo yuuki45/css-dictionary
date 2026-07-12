@@ -1,12 +1,7 @@
 // 最新CSSテクニック集データ
-export type Technique = {
-  id: string;
-  title: string;
-  description: string;
-  html: string;
-  css: string;
-  tips?: string;
-};
+import type { Technique } from '@/types/css';
+
+export type { Technique };
 
 export const techniques: Technique[] = [
   {

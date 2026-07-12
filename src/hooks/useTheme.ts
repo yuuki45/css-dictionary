@@ -2,17 +2,6 @@ import { useLocalStorage } from "./useLocalStorage";
 import { Theme } from "../types/css";
 import { useEffect } from "react";
 
-// Google Analytics の型定義
-declare global {
-  interface Window {
-    gtag: (
-      command: "config" | "event" | "js" | "set",
-      targetId: string | Date,
-      config?: Record<string, any>
-    ) => void;
-  }
-}
-
 export function useTheme() {
   const [theme, setTheme, isLoaded] = useLocalStorage<Theme>(
     "css-dictionary-theme",

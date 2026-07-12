@@ -1,6 +1,7 @@
 import React from 'react';
 import { Moon, Sun, Trash2, Info } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import packageJson from '../../package.json';
 
 interface SettingsProps {
   onClearHistory: () => void;
@@ -66,7 +67,7 @@ export function Settings({ onClearHistory }: SettingsProps) {
                 CSS Dictionary
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">
-                Version 1.0.0
+                Version {packageJson.version}
               </div>
             </div>
           </div>

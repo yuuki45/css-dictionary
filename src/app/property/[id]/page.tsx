@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PropertyDetailClient } from './PropertyDetailClient';
-import cssPropertiesData from '@/data/cssProperties.json';
+import { cssProperties as cssPropertiesData } from '@/data/properties';
 import { CSSProperty } from '@/types/css';
 
 const properties: CSSProperty[] = cssPropertiesData;
@@ -18,12 +18,12 @@ function generateSEOTitle(property: CSSProperty): string {
   // カテゴリ別のSEOキーワードパターン
   const categoryPatterns: Record<string, string> = {
     'レイアウト・配置': '使い方【CSS完全図解】レイアウト指定方法',
-    '背景・装飾': '使い方【CSS完全図解】背景指定の方法', 
+    '背景・装飾': '使い方【CSS完全図解】背景指定の方法',
     'テキスト・フォント': 'とは？【CSS解説】テキスト制御プロパティ',
     'スペーシング・サイズ': '使い方【CSS解説】余白・サイズ指定方法',
-    'アニメーション・トランジション': '使い方【CSS完全図解】アニメーション実装',
-    'カラー・透明度': '使い方【CSS解説】色・透明度の指定方法',
-    'ボーダー・アウトライン': '使い方【CSS解説】枠線・境界線の指定',
+    'アニメーション・エフェクト': '使い方【CSS完全図解】アニメーション・エフェクト実装',
+    'インタラクション・UX': '使い方【CSS解説】インタラクション・UX改善',
+    '擬似クラス': 'とは？【CSS解説】擬似クラスの使い方',
     'レスポンシブ・関数': '使い方【CSS完全図解】レスポンシブ対応方法',
     'その他': '使い方【CSS解説】プロパティ完全ガイド'
   };

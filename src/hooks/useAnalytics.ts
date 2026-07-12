@@ -1,14 +1,12 @@
-import { useEffect } from "react";
-
 // Google Analytics の型定義
 declare global {
   interface Window {
     gtag: (
       command: "config" | "event" | "js" | "set",
       targetId: string | Date,
-      config?: Record<string, any>
+      config?: Record<string, unknown>
     ) => void;
-    dataLayer: any[];
+    dataLayer: unknown[];
   }
 }
 
@@ -24,7 +22,7 @@ export const useAnalytics = () => {
   };
 
   // カスタムイベントを送信
-  const trackEvent = (event_name: string, parameters?: Record<string, any>) => {
+  const trackEvent = (event_name: string, parameters?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("event", event_name, parameters);
     }

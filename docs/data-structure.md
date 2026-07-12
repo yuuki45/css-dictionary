@@ -18,14 +18,30 @@ CSSプロパティの情報を表すメインのデータ構造です。
 export interface CSSProperty {
   id: string;                    // プロパティのユニークID（例: "display", "flex-direction"）
   name: string;                  // プロパティ名（例: "display", "flex-direction"）
-  category: string;              // カテゴリ名（例: "レイアウト", "テキスト"）
-  description: string;           // プロパティの説明文
+  category: string;              // カテゴリ名（正準リストは src/utils/categorySlug.ts）
+  description: string;           // プロパティの説明文（50文字以上推奨）
   syntax: string;                // CSS構文（例: "display: flex;"）
   examples: CodeExample[];       // コード例の配列
   tips?: string;                 // 使用上のヒント（オプション）
   commonMistakes?: string;       // よくある間違い（オプション）
-  relatedProperties: string[];   // 関連プロパティのID配列
-  browserSupport: string;        // ブラウザサポート情報
+  relatedProperties: string[];   // 関連プロパティのID配列（実在するIDのみ。npm run validateで検証）
+  browserSupport: BrowserSupport; // ブラウザサポート情報（構造化、W3C Baseline準拠）
+  aiNotes?: string;              // AIがこのプロパティでよく間違えるポイント
+  promptExamples?: string[];     // AIへの依頼文例
+  searchAliases?: string[];      // 日本語検索別名（「角丸」等）
+  mdnUrl?: string;               // MDNの該当ページURL
+}
+
+export type BaselineStatus = 'widely' | 'newly' | 'limited';
+
+export interface BrowserSupport {
+  chrome?: string;          // 初対応バージョン（例: "117"）。未対応ブラウザはフィールド自体を省略
+  firefox?: string;
+  safari?: string;
+  edge?: string;
+  baseline: BaselineStatus; // widely: 安定 / newly: 全対応済みだが新しい / limited: 一部未対応
+  baselineLowDate?: string; // Baseline Newly到達年月（例: "2023-09"）
+  note?: string;            // 部分対応などの補足（日本語）
 }
 ```
 
@@ -35,14 +51,18 @@ export interface CSSProperty {
 |-----------|-----|------|------|
 | `id` | string | ✓ | URL生成とデータ参照に使用される一意の識別子 |
 | `name` | string | ✓ | UIに表示されるプロパティ名 |
-| `category` | string | ✓ | カテゴリ分類（フィルタリングに使用） |
-| `description` | string | ✓ | プロパティの詳細説明（SEOに重要） |
+| `category` | string | ✓ | カテゴリ分類（正準9カテゴリのみ。`npm run validate`で検証） |
+| `description` | string | ✓ | プロパティの詳細説明（SEOに重要、50文字以上） |
 | `syntax` | string | ✓ | 基本的な使用方法を示す構文 |
 | `examples` | CodeExample[] | ✓ | 実用的なコード例の配列 |
 | `tips` | string | - | 実務での使用ヒント |
 | `commonMistakes` | string | - | 初心者が陥りやすいミス |
-| `relatedProperties` | string[] | ✓ | 関連プロパティへのナビゲーション |
-| `browserSupport` | string | ✓ | ブラウザ対応状況 |
+| `relatedProperties` | string[] | ✓ | 関連プロパティへのナビゲーション（実在ID必須） |
+| `browserSupport` | BrowserSupport | ✓ | ブラウザ対応状況。**手書きせず`web-features`から引く**（`scripts/lib/baseline-source.ts`の`lookupBaseline()`） |
+| `aiNotes` | string | - | AIアシスタントがよく間違えるポイント（新規エントリでは必須運用） |
+| `promptExamples` | string[] | - | AIへの依頼文例（新規エントリでは必須運用） |
+| `searchAliases` | string[] | - | 日本語検索別名 |
+| `mdnUrl` | string | - | MDN該当ページ |
 
 ### CodeExample
 
@@ -156,7 +176,7 @@ const recent: RecentProperty[] = [
   {
     "id": "display",
     "name": "display",
-    "category": "レイアウト",
+    "category": "レイアウト・配置",
     "description": "要素の表示方法を指定するプロパティ",
     "syntax": "display: block | inline | flex | grid | none;",
     "examples": [
@@ -167,12 +187,19 @@ const recent: RecentProperty[] = [
     ],
     "tips": "displayはレイアウトの基本となる重要なプロパティです",
     "relatedProperties": ["flex-direction", "grid-template-columns"],
-    "browserSupport": "全モダンブラウザ対応"
+    "browserSupport": {
+      "chrome": "1",
+      "firefox": "1",
+      "safari": "1",
+      "edge": "12",
+      "baseline": "widely",
+      "baselineLowDate": "2015-07"
+    }
   }
 ]
 ```
 
-**プロパティ数:** 200以上
+**プロパティ数:** 105（`npm run validate` が件数と整合性を検証）
 
 ### techniques.ts
 
@@ -205,12 +232,12 @@ export const techniques: Technique[] = [
 
 **構造:**
 ```typescript
-export const usecases = [
+export const usecases: Usecase[] = [
   {
-    id: "center-horizontal",
-    question: "要素を水平方向に中央揃えしたい",
-    properties: ["margin", "text-align", "justify-content"],
-    category: "配置"
+    id: "center",
+    label: "中央寄せしたい",
+    description: "要素やテキストを中央に配置したい場合",
+    propertyIds: ["justify-content", "align-items", "text-align", "margin"],
   },
   // ... more use cases
 ];
@@ -218,43 +245,47 @@ export const usecases = [
 
 ## データバリデーション
 
-### 必須フィールドチェック
+`npm run validate`（`scripts/validate/validate-data.ts`）がCIとローカルで以下を検証します：
 
-全てのCSSプロパティは以下のフィールドが必須です：
-- `id`: 空でない文字列
-- `name`: 空でない文字列
-- `category`: 有効なカテゴリ名
-- `description`: 50文字以上推奨
-- `syntax`: 有効なCSS構文
+**エラー（ビルドを止める）:**
+- `id`: 一意であること
+- `category`: 正準カテゴリ名であること（`src/utils/categorySlug.ts` が単一ソース）
 - `examples`: 少なくとも1つのコード例
-- `relatedProperties`: 配列（空でも可）
-- `browserSupport`: 空でない文字列
+- `relatedProperties` / `usecases.propertyIds`: 全参照が実在するIDに解決すること（自己参照・重複も禁止）
+- `browserSupport`: 構造化オブジェクトで、`baseline` が widely/newly/limited のいずれか
+
+**警告:**
+- `description`: 50文字未満
+- `baseline` が `web-features` パッケージの最新値と不一致（データ陳腐化の検知）
 
 ### カテゴリ一覧
 
-CSSプロパティは以下のカテゴリに分類されます：
+正準カテゴリは `src/utils/categorySlug.ts` の9種のみ（スラッグとの対応も同ファイルが単一ソース）：
 
-1. **レイアウト** - display, position, flex, grid関連
-2. **テキスト** - font, text, line関連
-3. **ボックスモデル** - margin, padding, border, width, height
-4. **背景と装飾** - background, border-radius, shadow
-5. **アニメーション** - transition, animation, transform
-6. **カラー** - color, opacity関連
-7. **その他** - 上記以外のプロパティ
+1. **レイアウト・配置** (layout)
+2. **テキスト・フォント** (text)
+3. **背景・装飾** (background)
+4. **アニメーション・エフェクト** (animation)
+5. **スペーシング・サイズ** (spacing)
+6. **レスポンシブ・関数** (responsive)
+7. **インタラクション・UX** (interaction)
+8. **擬似クラス** (pseudo-class)
+9. **その他** (other)
 
 ## データアクセスパターン
 
 ### 1. プロパティの取得
 
 ```typescript
-import cssProperties from '@/data/cssProperties.json';
+// JSONを直接importせず、型付き中央モジュールを経由する
+import { cssProperties } from '@/data/properties';
 
 // ID指定で取得
 const property = cssProperties.find(p => p.id === 'display');
 
 // カテゴリで絞り込み
 const layoutProps = cssProperties.filter(
-  p => p.category === 'レイアウト'
+  p => p.category === 'レイアウト・配置'
 );
 ```
 

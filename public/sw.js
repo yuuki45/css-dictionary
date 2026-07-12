@@ -1,35 +1,18 @@
-// Service Worker for cache busting
-const CACHE_NAME = 'css-dictionary-v' + Date.now();
-
-self.addEventListener('install', (event) => {
-  // Skip waiting to activate immediately
+// 自己破壊用Service Worker。
+// 旧バージョンがキャッシュ対策目的でSWを登録していたため、
+// 既存クライアントのSWを確実に解除するために当面残置する（数ヶ月後に削除予定）。
+self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    // Delete all old caches
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => {
-      // Take control of all clients immediately
-      return self.clients.claim();
-    })
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  // Always fetch from network, never from cache
-  event.respondWith(
-    fetch(event.request.clone()).catch(() => {
-      // Fallback for offline
-      return caches.match(event.request);
-    })
+    (async () => {
+      const cacheNames = await caches.keys();
+      await Promise.all(cacheNames.map((name) => caches.delete(name)));
+      await self.registration.unregister();
+      const clients = await self.clients.matchAll({ type: 'window' });
+      clients.forEach((client) => client.navigate(client.url));
+    })()
   );
 });
