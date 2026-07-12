@@ -28,7 +28,7 @@ function ModernPropertyCard({ property }: { property: CSSProperty }) {
   return (
     <Link
       href={`/property/${property.id}/`}
-      className="block bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all"
+      className="block bg-white dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700 p-4 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"
     >
       <div className="flex items-center justify-between gap-2 mb-2">
         <span className="font-mono font-semibold text-gray-900 dark:text-gray-100">
@@ -67,7 +67,7 @@ export function ModernClient() {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-6 h-6 text-blue-500" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            <h1 className="font-serif text-3xl font-bold text-gray-900 dark:text-gray-100">
               モダンCSS
             </h1>
           </div>
@@ -82,7 +82,7 @@ export function ModernClient() {
         <div className="space-y-10">
           {newly.length > 0 && (
             <section>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              <h2 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
                 新しく利用可能になった機能
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -98,7 +98,7 @@ export function ModernClient() {
 
           {limited.length > 0 && (
             <section>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              <h2 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
                 対応が限定的な最先端機能
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -114,7 +114,7 @@ export function ModernClient() {
 
           {recentlyWidely.length > 0 && (
             <section>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              <h2 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
                 定着した比較的新しい機能
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">

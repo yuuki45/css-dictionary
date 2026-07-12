@@ -3,9 +3,16 @@ import { Theme } from "../types/css";
 import { useEffect } from "react";
 
 export function useTheme() {
+  // 保存値がない場合はOSのテーマ設定に従う
+  const systemDefault: Theme =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
   const [theme, setTheme, isLoaded] = useLocalStorage<Theme>(
     "css-dictionary-theme",
-    "light"
+    systemDefault
   );
 
   useEffect(() => {

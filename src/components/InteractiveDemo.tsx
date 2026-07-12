@@ -180,12 +180,15 @@ export function InteractiveDemo({ config, propertyName }: InteractiveDemoProps) 
   };
 
   return (
-    <div className="interactive-demo bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-blue-200 dark:border-gray-600">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-2xl">🎮</span>
-        <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">
+    <div className="interactive-demo bg-white dark:bg-gray-800 rounded-md p-6 border border-gray-200 dark:border-gray-700">
+      <div className="flex items-center gap-2.5 mb-4">
+        <span className="entry-marker" aria-hidden="true" />
+        <h3 className="font-serif text-lg font-bold text-gray-900 dark:text-gray-100">
           インタラクティブデモ
         </h3>
+        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-gray-400 dark:text-gray-500 ml-1">
+          Try it
+        </span>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">

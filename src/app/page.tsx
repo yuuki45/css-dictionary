@@ -17,7 +17,7 @@ import {
 } from "@/utils/search";
 import { CSSProperty } from "@/types/css";
 import { cssProperties } from "@/data/properties";
-import { Clock, Star, Layers, TrendingUp, Sparkles, ArrowRight } from "lucide-react";
+import { Layers, Sparkles, ArrowRight } from "lucide-react";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,13 +91,16 @@ export default function HomePage() {
 
   return (
     <Layout>
-      <div className="py-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            CSS Dictionary
+      <div className="py-10">
+        <div className="mb-10 animate-fade-up">
+          <h1 className="font-serif text-3xl md:text-4xl font-bold tracking-wide text-gray-900 dark:text-gray-100 mb-3 leading-snug">
+            調べる、書ける、確かめる。
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            CSSプロパティを効率的に学習しよう！
+            AIと協働する開発者のための日本語CSSリファレンス
+            <span className="font-mono text-sm text-gray-500 dark:text-gray-500 ml-2">
+              — 全{properties.length}項目
+            </span>
           </p>
         </div>
 
@@ -112,12 +115,12 @@ export default function HomePage() {
           {!searchQuery && (
             <Link
               href="/modern/"
-              className="flex items-center justify-between gap-3 rounded-lg border border-blue-200 dark:border-blue-800 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 px-4 py-3 hover:shadow-md transition-shadow"
+              className="group flex items-center justify-between gap-3 rounded-md border border-gold-300 dark:border-gold-700 bg-gold-50 dark:bg-gold-900/20 px-4 py-3 hover:border-gold-500 dark:hover:border-gold-500 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <Sparkles className="w-5 h-5 text-blue-500 shrink-0" />
+                <Sparkles className="w-5 h-5 text-gold-600 dark:text-gold-300 shrink-0" />
                 <div>
-                  <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                  <div className="font-serif font-semibold text-gray-900 dark:text-gray-100 text-sm">
                     モダンCSS — あなたのAIが知らないかもしれない新機能
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -125,15 +128,15 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 shrink-0" />
+              <ArrowRight className="w-4 h-4 text-gold-600 dark:text-gold-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           )}
 
           {recentLoaded && recentProperties.length > 0 && !searchQuery && (
             <section>
-              <div className="flex items-center gap-2 mb-4">
-                <Clock className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="entry-marker" aria-hidden="true" />
+                <h2 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100">
                   最近見たプロパティ
                 </h2>
               </div>
@@ -152,15 +155,11 @@ export default function HomePage() {
           )}
 
           <section>
-            <div className="flex items-center gap-2 mb-4">
-              {searchQuery ? (
-                <Layers className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              ) : (
-                <TrendingUp className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              )}
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="entry-marker" aria-hidden="true" />
+              <h2 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {searchQuery
-                  ? `検索結果 (${filteredProperties.length}件)`
+                  ? `検索結果（${filteredProperties.length}件）`
                   : "人気のプロパティ"}
               </h2>
             </div>

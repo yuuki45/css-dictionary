@@ -41,25 +41,31 @@ export function Navigation({
   const currentActiveTab = getActiveTab();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-gray-300 dark:border-gray-700 shadow-[0_-3px_0_-2px] shadow-gray-200 dark:shadow-gray-800 z-50">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-around py-2">
           {tabs.map(({ id, label, icon: Icon, href }) => (
             <Link
               key={id}
               href={href}
-              className={`flex flex-col items-center px-3 py-2 rounded-lg transition-all duration-200 ${
+              className={`relative flex flex-col items-center px-3 py-2 transition-colors duration-200 ${
                 currentActiveTab === id
-                  ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 transform scale-105"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  ? "text-vermillion-600 dark:text-gold-300"
+                  : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
               }`}
             >
-              <Icon
-                className={`w-5 h-5 mb-1 transition-transform ${
-                  currentActiveTab === id ? "scale-110" : ""
+              {/* アクティブタブの朱点 */}
+              {currentActiveTab === id && (
+                <span className="absolute -top-0.5 w-1 h-1 rounded-full bg-vermillion-500 dark:bg-gold-400" />
+              )}
+              <Icon className="w-5 h-5 mb-1" />
+              <span
+                className={`text-xs hidden sm:block ${
+                  currentActiveTab === id ? "font-bold" : "font-medium"
                 }`}
-              />
-              <span className="text-xs font-medium hidden sm:block">{label}</span>
+              >
+                {label}
+              </span>
             </Link>
           ))}
         </div>

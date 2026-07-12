@@ -47,7 +47,7 @@ export function TechniqueDetailClient({ technique }: TechniqueDetailClientProps)
 
           {/* Header */}
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            <h1 className="font-serif text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               {technique.title}
             </h1>
             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">

@@ -6,7 +6,7 @@ export function Techniques() {
   // 一覧画面
   return (
     <div className="max-w-5xl mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-blue-300">
+      <h1 className="font-serif text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
         CSSテクニック集
       </h1>
       <div className="mb-6 text-sm text-red-600 dark:text-red-300">

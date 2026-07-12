@@ -79,7 +79,7 @@ export function CategoriesClient() {
             <>
               <div className="flex items-center gap-2 mb-6">
                 <Layers className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <h1 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100">
                   カテゴリ一覧
                 </h1>
               </div>

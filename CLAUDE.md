@@ -206,8 +206,14 @@ export default function RouteClient() {
 
 ### 5. Tailwind CSSでのスタイリング
 
+- **デザインシステム「モダンな紙の辞書」**（tailwind.config.jsが単一ソース）:
+  - 標準パレットを和色で上書き済み: `gray`=墨（紙〜漆黒）、`blue`=藍、`green`=松葉、`orange/amber`=琥珀、`purple`=江戸紫、`red`=緋、`white`=紙白。既存のgray/blue系クラスはそのまま和紙トーンになる
+  - アクセント: ライトは `vermillion`（朱）、ダークは `gold`（金茶）。ホバーやアクティブ表示は `text-vermillion-600 dark:text-gold-300` のペアで書く
+  - フォント: `font-serif`=しっぽり明朝（見出し）、`font-sans`=Zen角ゴシックNew（本文）、`font-mono`=IBM Plex Mono（コード・プロパティ名）。ページタイトルh1とセクションh2は`font-serif`
+  - 辞書的ディテール: `.rule-double`（二重罫線）、`.entry-marker`（朱のひし形マーク）はglobals.cssで定義。カテゴリ色は`src/utils/categoryColors.ts`
+  - カードはフラット（`border` + hoverで`border-vermillion-400 dark:border-gold-500`）。`shadow-md`や青グラデーションは使わない
 - モバイルファースト：`class="base md:medium lg:large"`
-- ダークモード：`class="bg-white dark:bg-gray-900"`
+- ダークモード：`class="bg-white dark:bg-gray-900"`。テーマ初期化スクリプトはlayout.tsxの`<head>`にあり（フラッシュ防止）、削除しない
 - カスタムアニメーションは`src/app/globals.css`に配置
 - コンポーネントスタイリングパターン：再利用可能なパターンはCSSファイルではなくコンポーネントに抽出
 

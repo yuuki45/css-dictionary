@@ -1,8 +1,33 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Shippori_Mincho, Zen_Kaku_Gothic_New, IBM_Plex_Mono } from "next/font/google";
+import { Header } from "@/components/Header";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// 見出し: しっぽり明朝（辞書らしい端正な明朝体）
+const mincho = Shippori_Mincho({
+  weight: ["500", "600", "700"],
+  subsets: ["latin"],
+  preload: false,
+  display: "swap",
+  variable: "--font-mincho",
+});
+
+// 本文: Zen角ゴシックNew（すっきりした現代的ゴシック）
+const gothic = Zen_Kaku_Gothic_New({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  preload: false,
+  display: "swap",
+  variable: "--font-gothic",
+});
+
+// コード: IBM Plex Mono
+const mono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: "CSS辞書 - CSSプロパティ完全ガイド",
@@ -71,6 +96,22 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // ダークモードのフラッシュ防止（描画前にテーマを適用）
+              (function () {
+                try {
+                  var stored = localStorage.getItem('css-dictionary-theme');
+                  var theme = stored ? JSON.parse(stored) : null;
+                  var dark = theme === 'dark' ||
+                    (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  if (dark) document.documentElement.classList.add('dark');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -109,7 +150,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${gothic.variable} ${mincho.variable} ${mono.variable} font-sans`}
+      >
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

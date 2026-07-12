@@ -29,7 +29,7 @@ export function PropertyDetail({
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 z-40 px-4 py-4">
+      <div className="sticky top-0 bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-sm rule-double z-40 px-4 py-3">
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <button
             onClick={onBack}
@@ -59,10 +59,10 @@ export function PropertyDetail({
         {/* Title and Category */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            <h1 className="font-mono text-3xl font-bold text-gray-900 dark:text-gray-100">
               {property.name}
             </h1>
-            <span className="px-3 py-1 text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
+            <span className="px-2 py-0.5 text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-sm">
               {property.category}
             </span>
           </div>
@@ -73,7 +73,7 @@ export function PropertyDetail({
 
         {/* Syntax */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             構文
           </h2>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
@@ -107,7 +107,7 @@ export function PropertyDetail({
 
         {/* Examples */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             コード例
           </h2>
           <div className="space-y-6">
@@ -161,7 +161,7 @@ export function PropertyDetail({
         {/* Tips */}
         {property.tips && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
               💡 TIPS
             </h2>
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
@@ -175,7 +175,7 @@ export function PropertyDetail({
         {/* Common Mistakes */}
         {property.commonMistakes && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
               ⚠️ よくある間違い
             </h2>
             <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
@@ -189,7 +189,7 @@ export function PropertyDetail({
         {/* AI Notes */}
         {property.aiNotes && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
               🤖 AIがよく間違えるポイント
             </h2>
             <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
@@ -203,7 +203,7 @@ export function PropertyDetail({
         {/* Prompt Examples */}
         {property.promptExamples && property.promptExamples.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
               💬 AIへの頼み方
             </h2>
             <div className="space-y-3">
@@ -234,7 +234,7 @@ export function PropertyDetail({
         {/* Related Properties */}
         {property.relatedProperties.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
               関連プロパティ
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -255,7 +255,7 @@ export function PropertyDetail({
 
         {/* Browser Support */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             ブラウザサポート
           </h2>
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 space-y-4">

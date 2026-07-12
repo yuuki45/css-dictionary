@@ -19,9 +19,10 @@ export function SearchBar({ value, onChange, placeholder = "プロパティを�
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg 
-                 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400
-                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        className="block w-full pl-10 pr-10 py-3 text-lg bg-transparent
+                 border-0 border-b-2 border-gray-300 dark:border-gray-600 rounded-none
+                 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 placeholder:text-base
+                 focus:outline-none focus:ring-0 focus:border-vermillion-500 dark:focus:border-gold-400 transition-colors"
         placeholder={placeholder}
       />
       {value && (

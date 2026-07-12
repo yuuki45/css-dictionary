@@ -37,7 +37,7 @@ export function BaselineBadge({ baseline, baselineLowDate, size = 'md' }: Baseli
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full border font-medium ${sizeClass} ${className}`}
+      className={`inline-flex items-center gap-1 rounded-sm border font-medium tracking-wide ${sizeClass} ${className}`}
       title={
         baseline === 'newly' && baselineLowDate
           ? `${formatYearMonth(baselineLowDate)}に全主要ブラウザ対応`

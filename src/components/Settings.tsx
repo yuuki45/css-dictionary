@@ -12,7 +12,7 @@ export function Settings({ onClearHistory }: SettingsProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">設定</h1>
+      <h1 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">設定</h1>
 
       {/* Theme Setting */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
