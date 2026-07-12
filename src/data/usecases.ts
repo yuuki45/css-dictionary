@@ -325,4 +325,28 @@ export const usecases: Usecase[] = [
     description: "ベース色からホバー色や淡い背景色を派生させたい場合",
     propertyIds: ["color-mix", "css-custom-properties", "opacity"],
   },
+  {
+    id: "dark-mode",
+    label: "ダークモードに対応したい",
+    description: "OSのテーマ設定に合わせて配色を切り替えたい場合",
+    propertyIds: ["light-dark", "color-scheme", "prefers-color-scheme", "css-custom-properties"],
+  },
+  {
+    id: "entry-animation",
+    label: "表示された瞬間にアニメーションさせたい",
+    description: "display: noneからの表示やDOM追加時にフェードイン等を付けたい場合",
+    propertyIds: ["at-starting-style", "transition", "animation", "opacity"],
+  },
+  {
+    id: "animate-css-variables",
+    label: "CSS変数をアニメーションさせたい",
+    description: "グラデーションの角度や進捗値を滑らかに変化させたい場合",
+    propertyIds: ["at-property", "css-custom-properties", "transition"],
+  },
+  {
+    id: "logical-layout",
+    label: "多言語・縦書きに強いレイアウトにしたい",
+    description: "RTL言語や縦書きでも崩れない書字方向対応のレイアウトにしたい場合",
+    propertyIds: ["logical-properties", "margin-inline", "padding-inline", "inset-inline", "writing-mode"],
+  },
 ];

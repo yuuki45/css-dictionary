@@ -53,6 +53,9 @@ export const manualKeys: Record<string, string[]> = {
   'pseudo-has': ['css.selectors.has'],
   'css-nesting': ['css.selectors.nesting'],
   'color-mix': ['css.types.color.color-mix'],
+  'light-dark': ['css.types.color.light-dark'],
+  'at-property': ['css.at-rules.property'],
+  'at-starting-style': ['css.at-rules.starting-style'],
 };
 
 let cachedIndex: Map<string, KeyStatus> | null = null;

@@ -477,7 +477,9 @@
     "tips": "JavaScriptから動的に変更可能。ダークモードの実装に必須。",
     "commonMistakes": "変数名は大文字小文字を区別する。--で始める必要がある。",
     "relatedProperties": [
-      "color-mix"
+      "color-mix",
+      "at-property",
+      "light-dark"
     ],
     "browserSupport": {
       "chrome": "49",
@@ -1805,7 +1807,8 @@
     "tips": "ボックスサイズに含まれるため、幅の計算に注意。box-sizing: border-boxが便利。",
     "relatedProperties": [
       "margin",
-      "box-sizing"
+      "box-sizing",
+      "padding-inline"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -1856,7 +1859,8 @@
     "tips": "margin: 0 autoでブロック要素の中央寄せが可能。",
     "commonMistakes": "マージンの相殺（margin collapse）を理解していないと予期しないレイアウトになる。",
     "relatedProperties": [
-      "padding"
+      "padding",
+      "margin-inline"
     ],
     "browserSupport": {
       "chrome": "1",
@@ -2389,7 +2393,9 @@
     "tips": "ホバー効果やインタラクティブな要素には必須。パフォーマンスを考慮してtransformやopacityを優先。",
     "relatedProperties": [
       "transform",
-      "opacity"
+      "opacity",
+      "at-starting-style",
+      "at-property"
     ],
     "browserSupport": {
       "chrome": "26",
@@ -2526,7 +2532,8 @@
       "keyframes",
       "transition",
       "transform",
-      "will-change"
+      "will-change",
+      "at-starting-style"
     ],
     "browserSupport": {
       "chrome": "43",
@@ -3449,7 +3456,8 @@
     "tips": "モーダルやオーバーレイを親要素いっぱいに広げたい時、inset: 0;が便利。コードが短くなり読みやすい。",
     "commonMistakes": "position: static（デフォルト）では効果がない。position: absolute、fixed、relative、stickyと組み合わせて使う。",
     "relatedProperties": [
-      "position"
+      "position",
+      "inset-inline"
     ],
     "browserSupport": {
       "chrome": "87",
@@ -4161,7 +4169,8 @@
     "syntax": "color-scheme: normal | [ light | dark | <custom-ident> ]+",
     "tips": "ブラウザのフォーム要素の外観も変わる",
     "relatedProperties": [
-      "prefers-color-scheme"
+      "prefers-color-scheme",
+      "light-dark"
     ],
     "browserSupport": {
       "chrome": "81",
@@ -4190,7 +4199,8 @@
     "syntax": "@media (prefers-color-scheme: light | dark)",
     "tips": "OSやブラウザのテーマ設定を自動検出",
     "relatedProperties": [
-      "color-scheme"
+      "color-scheme",
+      "light-dark"
     ],
     "browserSupport": {
       "chrome": "76",
@@ -4249,7 +4259,10 @@
     "syntax": "margin-inline | margin-block | padding-inline | padding-block | inset-inline | inset-block",
     "tips": "国際化対応に最適。RTL言語でも自動対応",
     "relatedProperties": [
-      "writing-mode"
+      "writing-mode",
+      "margin-inline",
+      "padding-inline",
+      "inset-inline"
     ],
     "browserSupport": {
       "chrome": "69",
@@ -4508,6 +4521,280 @@
       "edge": "111",
       "baseline": "widely",
       "baselineLowDate": "2023-05"
+    }
+  },
+  {
+    "id": "light-dark",
+    "name": "light-dark()",
+    "category": "レスポンシブ・関数",
+    "description": "ライトモード用とダークモード用の2色を1行で指定できるCSS関数です。メディアクエリで変数を二重定義する従来のダークモード実装を大幅に簡潔にできます。使用にはcolor-scheme: light darkの指定が必須です。",
+    "syntax": "light-dark(<light-color>, <dark-color>)",
+    "examples": [
+      {
+        "code": ":root {\n  color-scheme: light dark;\n}\n\nbody {\n  color: light-dark(#333, #eee);\n  background: light-dark(#fff, #1a1a1a);\n}",
+        "description": "ライト/ダーク両対応の文字色・背景色を1行ずつで定義"
+      },
+      {
+        "code": ":root {\n  color-scheme: light dark;\n  --surface: light-dark(#f8f9fa, #202124);\n  --text: light-dark(#212529, #e8eaed);\n}\n\n.card {\n  background: var(--surface);\n  color: var(--text);\n}",
+        "description": "CSS変数と組み合わせてテーマトークンを定義"
+      }
+    ],
+    "tips": "手動のテーマ切替ボタンと共存させる場合は、htmlにcolor-scheme: lightまたはdarkを上書きすればlight-dark()の結果も追従します。@media (prefers-color-scheme)による二重定義より保守が圧倒的に楽です。",
+    "commonMistakes": "color-scheme: light darkの指定を忘れると常にライト側の色が使われます。また色以外の値（サイズや画像URL）には使えません。色以外を切り替えたい場合は従来のメディアクエリやクラス切替を使います。",
+    "relatedProperties": [
+      "color-scheme",
+      "prefers-color-scheme",
+      "css-custom-properties",
+      "color-mix"
+    ],
+    "aiNotes": "AIはダークモード実装に「@media (prefers-color-scheme: dark)で変数を再定義する」冗長パターンを提案しがちですが、2024年以降はlight-dark()で1行に集約できます。AIが生成したlight-dark()が効かない場合、ほぼ確実にcolor-scheme: light darkの指定漏れです。また色以外の値に使おうとする誤生成にも注意してください。",
+    "promptExamples": [
+      "このサイトのダークモード対応を、@mediaの二重定義ではなくlight-dark()とcolor-schemeで書き直して",
+      "ライト/ダーク対応のデザイントークン（背景・文字・ボーダー各3階調）をlight-dark()とCSS変数で設計して",
+      "手動テーマ切替ボタン（ライト/ダーク/システム準拠の3択）をlight-dark()ベースのCSSと最小限のJSで実装して"
+    ],
+    "searchAliases": [
+      "ダークモード",
+      "ライトダーク",
+      "テーマ切替",
+      "配色切替"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/color_value/light-dark",
+    "browserSupport": {
+      "chrome": "123",
+      "firefox": "120",
+      "safari": "17.5",
+      "edge": "123",
+      "baseline": "newly",
+      "baselineLowDate": "2024-05"
+    }
+  },
+  {
+    "id": "margin-inline",
+    "name": "margin-inline",
+    "category": "スペーシング・サイズ",
+    "description": "インライン方向（横書きなら左右）のマージンをまとめて指定する論理プロパティです。margin-left/rightと違い、アラビア語などのRTL言語や縦書きでも意図通りのレイアウトになります。margin-inline: autoで中央寄せも書けます。",
+    "syntax": "margin-inline: <length> | auto [<length> | auto]",
+    "examples": [
+      {
+        "code": ".container {\n  max-width: 720px;\n  margin-inline: auto;\n}",
+        "description": "margin-left/right: autoと同じ中央寄せを1行で"
+      },
+      {
+        "code": ".button + .button {\n  margin-inline-start: 8px;\n}",
+        "description": "書字方向に応じた「前側」の余白（LTRなら左、RTLなら右）"
+      },
+      {
+        "code": ".card {\n  margin-inline: 16px 32px;\n}",
+        "description": "開始側16px・終了側32pxを個別指定"
+      }
+    ],
+    "tips": "横書き日本語サイトだけならmargin-left/rightと結果は同じですが、margin-inline: autoの中央寄せなど記述が短くなる場面が多く、新規コードでは論理プロパティに寄せるのがモダンな書き方です。個別指定はmargin-inline-start / margin-inline-end。",
+    "commonMistakes": "margin-inlineは「左右」ではなく「書字方向のインライン軸」です。writing-mode: vertical-rl（縦書き）では上下方向に効きます。物理方向を固定したい装飾（例: 画面左端に固定）にはmargin-leftを使い分けます。",
+    "relatedProperties": [
+      "margin",
+      "padding-inline",
+      "logical-properties",
+      "writing-mode"
+    ],
+    "aiNotes": "AIは国際化（RTL）対応の文脈でもmargin-left/rightを出しがちです。RTL・縦書き対応を求めるなら「論理プロパティで」と明示すると精度が上がります。逆にAIがmargin-inlineを使ったコードを古いブラウザ向けに書き直す際、start/endの対応（LTRでstart=左）を取り違えることがあります。",
+    "promptExamples": [
+      "このCSSのmargin-left/margin-rightを論理プロパティ（margin-inline系）に置き換えて。RTLでも崩れないように",
+      "コンテナの中央寄せをmargin-inline: autoで書いて、縦書きモードでの挙動も説明して"
+    ],
+    "searchAliases": [
+      "論理マージン",
+      "左右の余白",
+      "左右マージン",
+      "中央寄せ"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/margin-inline",
+    "browserSupport": {
+      "chrome": "87",
+      "firefox": "66",
+      "safari": "14.1",
+      "edge": "87",
+      "baseline": "widely",
+      "baselineLowDate": "2021-04"
+    }
+  },
+  {
+    "id": "padding-inline",
+    "name": "padding-inline",
+    "category": "スペーシング・サイズ",
+    "description": "インライン方向（横書きなら左右）のパディングをまとめて指定する論理プロパティです。padding-left/rightの1行版として便利なうえ、RTL言語や縦書きでも意図が保たれます。コンテナの左右余白の定番の書き方になりつつあります。",
+    "syntax": "padding-inline: <length> [<length>]",
+    "examples": [
+      {
+        "code": ".container {\n  padding-inline: 16px;\n}",
+        "description": "左右パディング16pxを1行で指定"
+      },
+      {
+        "code": ".prose {\n  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));\n}",
+        "description": "セーフエリアを考慮した左右余白（開始側・終了側を個別指定）"
+      }
+    ],
+    "tips": "ブロック方向（上下）はpadding-block。inline/blockのペアで覚えると論理プロパティ全体が理解しやすくなります。個別指定はpadding-inline-start / padding-inline-end。",
+    "commonMistakes": "縦書き（writing-mode: vertical-rl）ではpadding-inlineは上下方向に効きます。「常に左右」を意図する装飾にはpadding-left/rightを使います。またpadding-inline: 16px 32pxの1つ目は「開始側」でありLTRなら左ですが、RTLでは右になります。",
+    "relatedProperties": [
+      "padding",
+      "margin-inline",
+      "logical-properties",
+      "writing-mode"
+    ],
+    "aiNotes": "AIはpadding-left/rightとpadding-inlineを無差別に混在させたコードを書くことがあります。コードベースの方針（物理か論理か）を伝えて統一させると保守性が上がります。縦書き文脈での軸の向き（inlineが上下になる）はAIもよく間違えるポイントです。",
+    "promptExamples": [
+      "サイト全体の左右余白の指定をpadding-inlineに統一してリファクタリングして",
+      "スマホのセーフエリア（ノッチ）を考慮した左右パディングをpadding-inlineとenv()で書いて"
+    ],
+    "searchAliases": [
+      "論理パディング",
+      "左右の内側余白",
+      "左右パディング"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/padding-inline",
+    "browserSupport": {
+      "chrome": "87",
+      "firefox": "66",
+      "safari": "14.1",
+      "edge": "87",
+      "baseline": "widely",
+      "baselineLowDate": "2021-04"
+    }
+  },
+  {
+    "id": "inset-inline",
+    "name": "inset-inline",
+    "category": "レイアウト・配置",
+    "description": "position指定した要素のインライン方向（横書きなら左右）のオフセットをまとめて指定する論理プロパティです。left/rightの論理版で、RTL言語ではミラーリングされるため国際化対応のUI配置に適しています。",
+    "syntax": "inset-inline: <length> | auto [<length> | auto]",
+    "examples": [
+      {
+        "code": ".drawer {\n  position: fixed;\n  inset-block: 0;\n  inset-inline-start: 0;\n  width: 280px;\n}",
+        "description": "書字方向の「開始側」に張り付くドロワー（RTLでは自動で右側に）"
+      },
+      {
+        "code": ".badge {\n  position: absolute;\n  inset-inline: auto 8px;\n  inset-block-start: 8px;\n}",
+        "description": "終了側から8pxの位置にバッジを配置"
+      }
+    ],
+    "tips": "上下方向はinset-block、4方向一括はinsetです。start/endで書いておくとRTL対応が「自動で正しくなる」のが最大の利点。ドロワーやトースト通知など方向依存のUIで効果を発揮します。",
+    "commonMistakes": "inset系は position: static では効きません（left/topと同じ）。またinset-inline: 0は左右両方0の意味で、左だけに張り付けたい場合はinset-inline-start: 0とinset-inline-end: autoです。",
+    "relatedProperties": [
+      "inset",
+      "position",
+      "logical-properties",
+      "writing-mode"
+    ],
+    "aiNotes": "AIは絶対配置でtop/left/right/bottomを使いがちで、論理版のinset-inline/inset-blockの存在を出してこないことが多いです。RTL対応が要件にあるなら明示的に論理プロパティを指定させてください。inset: 0とinset-inline: 0の違い（前者は4方向）もAIが混同しやすい点です。",
+    "promptExamples": [
+      "このモーダル・ドロワーの配置をtop/left/rightからinset系論理プロパティに書き換えて、RTLでも正しく動くようにして",
+      "画面端に固定するトースト通知を、inset-inline-endとinset-block-endで実装して"
+    ],
+    "searchAliases": [
+      "論理位置指定",
+      "左右の位置",
+      "配置の論理プロパティ"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/inset-inline",
+    "browserSupport": {
+      "chrome": "87",
+      "firefox": "63",
+      "safari": "14.1",
+      "edge": "87",
+      "baseline": "widely",
+      "baselineLowDate": "2021-04"
+    }
+  },
+  {
+    "id": "at-property",
+    "name": "@property",
+    "category": "その他",
+    "description": "CSS変数（カスタムプロパティ）に型・初期値・継承の有無を登録できるアットルールです。型を登録した変数はtransitionやanimationで補間可能になり、グラデーションのアニメーションなど従来不可能だった表現がCSSだけで実現できます。",
+    "syntax": "@property --name { syntax: '<type>'; inherits: true|false; initial-value: <value>; }",
+    "examples": [
+      {
+        "code": "@property --angle {\n  syntax: '<angle>';\n  inherits: false;\n  initial-value: 0deg;\n}\n\n.gradient-border {\n  background: conic-gradient(from var(--angle), #2563eb, #ec4899, #2563eb);\n  transition: --angle 0.5s;\n}\n\n.gradient-border:hover {\n  --angle: 180deg;\n}",
+        "description": "型登録によりグラデーションの角度をスムーズにアニメーション"
+      },
+      {
+        "code": "@property --progress {\n  syntax: '<percentage>';\n  inherits: false;\n  initial-value: 0%;\n}\n\n.bar {\n  background: linear-gradient(to right, #22c55e var(--progress), #e5e7eb var(--progress));\n  transition: --progress 0.8s ease;\n}",
+        "description": "プログレスバーの進捗をCSS変数の補間で滑らかに変化"
+      }
+    ],
+    "tips": "syntaxに使える型は<color>、<length>、<angle>、<percentage>、<number>など。登録していないCSS変数は「ただの文字列」なので補間されず、値が瞬時に切り替わるだけです。JavaScriptからはCSS.registerProperty()でも登録できます。",
+    "commonMistakes": "syntax: '*'（任意）の場合を除きinitial-valueは必須です。またinheritsも省略できません。変数のtransitionが「一瞬で切り替わる」場合は@propertyの登録漏れがほぼ原因です。",
+    "relatedProperties": [
+      "css-custom-properties",
+      "transition",
+      "animation",
+      "linear-gradient"
+    ],
+    "aiNotes": "AIは「CSS変数をtransitionで滑らかに変化させる」コードを@propertyなしで生成しがちで、そのままでは補間されずに動きません。変数のアニメーションが絡んだら@propertyの型登録が必要、とセットで覚えさせてください。またsyntax値の引用符（syntax: '<angle>'）を落とす生成ミスもよくあります。",
+    "promptExamples": [
+      "ホバーでグラデーションの角度が回転するボーダーを@propertyと conic-gradientで実装して",
+      "このCSS変数ベースのプログレスバーがカクカク切り替わるのを、@propertyで型登録して滑らかにして"
+    ],
+    "searchAliases": [
+      "CSS変数のアニメーション",
+      "カスタムプロパティ登録",
+      "変数の型",
+      "グラデーションアニメーション"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/@property",
+    "browserSupport": {
+      "chrome": "85",
+      "firefox": "128",
+      "safari": "16.4",
+      "edge": "85",
+      "baseline": "newly",
+      "baselineLowDate": "2024-07"
+    }
+  },
+  {
+    "id": "at-starting-style",
+    "name": "@starting-style",
+    "category": "アニメーション・エフェクト",
+    "description": "要素が最初に表示された瞬間の「開始スタイル」を定義するアットルールです。display: noneからの表示やDOM追加直後の要素に、JavaScriptなしでフェードインなどの出現アニメーションを付けられます。transition-behavior: allow-discreteとの併用が定番です。",
+    "syntax": "@starting-style { <declarations> } / 要素側: transition-behavior: allow-discrete",
+    "examples": [
+      {
+        "code": "dialog[open] {\n  opacity: 1;\n  transition: opacity 0.3s, display 0.3s allow-discrete, overlay 0.3s allow-discrete;\n\n  @starting-style {\n    opacity: 0;\n  }\n}\n\ndialog {\n  opacity: 0;\n}",
+        "description": "ダイアログの開閉両方向をCSSだけでフェード"
+      },
+      {
+        "code": ".toast {\n  opacity: 1;\n  translate: 0 0;\n  transition: opacity 0.3s, translate 0.3s;\n\n  @starting-style {\n    opacity: 0;\n    translate: 0 12px;\n  }\n}",
+        "description": "DOMに追加されたトースト通知が下からフェードイン"
+      }
+    ],
+    "tips": "display: noneからのtransitionにはtransition-behavior: allow-discrete（transitionショートハンドではallow-discreteキーワード）が必要です。popover/dialogの出現・消滅アニメーションはこの組み合わせ＋overlayプロパティで完全にCSS化できます。",
+    "commonMistakes": "@starting-styleは「表示された瞬間」の起点なので、消えるとき（表示→非表示）のアニメーションには効きません。消える方向は通常のtransition＋allow-discreteで実装します。またキャッシュされた再表示など、レンダリング済み要素には適用されません。",
+    "relatedProperties": [
+      "transition",
+      "animation",
+      "opacity",
+      "transform",
+      "display"
+    ],
+    "aiNotes": "AIは「display: noneからフェードイン」の要望にJavaScript（クラス付替え+requestAnimationFrame）やkeyframesハックを提案しがちですが、2024年以降は@starting-style + transition-behavior: allow-discreteでCSSのみで実装できます。AIの生成コードでallow-discreteが抜けてdisplayが補間されず動かない、というのが最頻の失敗パターンです。",
+    "promptExamples": [
+      "popover要素の出現・消滅に@starting-styleとallow-discreteを使ったフェードアニメーションを付けて。JSは使わない",
+      "JSでクラスを付け替えてフェードインしているこのコードを、@starting-styleベースのCSSだけの実装に書き換えて"
+    ],
+    "searchAliases": [
+      "出現アニメーション",
+      "フェードイン",
+      "display noneからアニメーション",
+      "エントリーアニメーション"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/@starting-style",
+    "browserSupport": {
+      "chrome": "117",
+      "firefox": "129",
+      "safari": "17.5",
+      "edge": "117",
+      "baseline": "newly",
+      "baselineLowDate": "2024-08"
     }
   }
 ]
