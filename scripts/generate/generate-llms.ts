@@ -129,6 +129,7 @@ interface SitemapEntry {
 
 const entries: SitemapEntry[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
+  { path: '/modern/', priority: '0.9', changefreq: 'weekly' },
   { path: '/categories/', priority: '0.8', changefreq: 'weekly' },
   ...categories.map((category) => ({
     path: `/categories/${getCategorySlug(category)}/`,

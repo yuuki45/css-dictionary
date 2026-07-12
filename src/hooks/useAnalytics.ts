@@ -98,6 +98,14 @@ export const useAnalytics = () => {
     });
   };
 
+  // AI用Markdownコピーイベント
+  const trackCopyForAI = (propertyId: string, propertyName: string) => {
+    trackEvent("copy_for_ai", {
+      property_id: propertyId,
+      property_name: propertyName,
+    });
+  };
+
   return {
     trackPageView,
     trackEvent,
@@ -110,5 +118,6 @@ export const useAnalytics = () => {
     trackTechniqueView,
     trackThemeChange,
     trackCodeCopy,
+    trackCopyForAI,
   };
 };

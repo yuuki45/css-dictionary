@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 import { PropertyCard } from "@/components/PropertyCard";
 import { Navigation } from "@/components/Navigation";
@@ -16,7 +17,7 @@ import {
 } from "@/utils/search";
 import { CSSProperty } from "@/types/css";
 import { cssProperties } from "@/data/properties";
-import { Clock, Star, Layers, TrendingUp } from "lucide-react";
+import { Clock, Star, Layers, TrendingUp, Sparkles, ArrowRight } from "lucide-react";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -90,6 +91,26 @@ export default function HomePage() {
             onChange={setSearchQuery}
             placeholder="プロパティを検索..."
           />
+
+          {!searchQuery && (
+            <Link
+              href="/modern/"
+              className="flex items-center justify-between gap-3 rounded-lg border border-blue-200 dark:border-blue-800 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 px-4 py-3 hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-5 h-5 text-blue-500 shrink-0" />
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    モダンCSS — あなたのAIが知らないかもしれない新機能
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    :has()・ネスティング・View Transitions など2022年以降の新しいCSS
+                  </div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-gray-400 shrink-0" />
+            </Link>
+          )}
 
           {recentLoaded && recentProperties.length > 0 && !searchQuery && (
             <section>

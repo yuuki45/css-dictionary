@@ -1,6 +1,7 @@
 import React from "react";
 import { Heart, Copy, ExternalLink } from "lucide-react";
 import { CSSProperty } from "../types/css";
+import { BaselineBadge } from "./BaselineBadge";
 
 interface PropertyCardProps {
   property: CSSProperty;
@@ -30,9 +31,14 @@ export function PropertyCard({
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
             {property.name}
           </h3>
-          <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
-            {property.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
+              {property.category}
+            </span>
+            {property.browserSupport.baseline !== "widely" && (
+              <BaselineBadge baseline={property.browserSupport.baseline} size="sm" />
+            )}
+          </div>
         </div>
         <button
           onClick={() => onToggleFavorite(property.id)}

@@ -3,6 +3,7 @@ import { Heart, Copy, ArrowLeft, ExternalLink, Eye } from "lucide-react";
 import { CSSProperty } from "../types/css";
 import { InteractiveDemo } from "./InteractiveDemo";
 import { BaselineBadge } from "./BaselineBadge";
+import { CopyForAIButton } from "./CopyForAIButton";
 
 interface PropertyDetailProps {
   property: CSSProperty;
@@ -6003,16 +6004,19 @@ export function PropertyDetail({
             <ArrowLeft className="w-5 h-5" />
             戻る
           </button>
-          <button
-            onClick={() => onToggleFavorite(property.id)}
-            className={`p-2 rounded-full transition-colors ${
-              isFavorite
-                ? "text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
-                : "text-gray-400 hover:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700"
-            }`}
-          >
-            <Heart className={`w-6 h-6 ${isFavorite ? "fill-current" : ""}`} />
-          </button>
+          <div className="flex items-center gap-2">
+            <CopyForAIButton property={property} />
+            <button
+              onClick={() => onToggleFavorite(property.id)}
+              className={`p-2 rounded-full transition-colors ${
+                isFavorite
+                  ? "text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                  : "text-gray-400 hover:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700"
+              }`}
+            >
+              <Heart className={`w-6 h-6 ${isFavorite ? "fill-current" : ""}`} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -6145,6 +6149,51 @@ export function PropertyDetail({
                 {property.commonMistakes}
               </p>
             </div>
+          </section>
+        )}
+
+        {/* AI Notes */}
+        {property.aiNotes && (
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+              🤖 AIがよく間違えるポイント
+            </h2>
+            <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+              <p className="text-purple-800 dark:text-purple-300">
+                {property.aiNotes}
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Prompt Examples */}
+        {property.promptExamples && property.promptExamples.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+              💬 AIへの頼み方
+            </h2>
+            <div className="space-y-3">
+              {property.promptExamples.map((prompt, index) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex items-start justify-between gap-3"
+                >
+                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                    {prompt}
+                  </p>
+                  <button
+                    onClick={() => copyToClipboard(prompt)}
+                    className="shrink-0 p-1.5 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    title="この依頼文をコピー"
+                  >
+                    <Copy className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              そのままAIチャットに貼り付けて使える依頼文の例です。ページ上部の「AI用にコピー」でこのページ全体をコンテキストとして渡せます。
+            </p>
           </section>
         )}
 

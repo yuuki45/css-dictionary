@@ -67,7 +67,18 @@
         "content": "要素",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "AIはflexとgridの選択理由を説明せずにどちらかを使いがちです（目安: 1方向の並び=flex、行と列の2次元=grid）。またdisplay: noneはスクリーンリーダーからも完全に消える点を省略しがちで、視覚的にだけ隠したい場合の代替（sr-onlyパターン等）を確認する必要があります。",
+    "promptExamples": [
+      "このUIのレイアウトはflexとgridのどちらが適切か、理由付きで提案して実装して",
+      "display: noneで隠している要素のアクセシビリティへの影響を確認し、必要なら代替手段を提案して"
+    ],
+    "searchAliases": [
+      "表示形式",
+      "要素の表示",
+      "ブロック",
+      "インライン"
+    ]
   },
   {
     "id": "display-flex",
@@ -111,7 +122,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "AIの定番ミスはflex-direction: columnにしたときにjustify-contentとalign-itemsの軸が入れ替わる点の混同です（justify-contentは常に主軸方向）。「縦中央にしたいのに効かない」場合はまず方向と軸の対応を疑ってください。",
+    "promptExamples": [
+      "flex-direction: columnのコンテナで子要素を縦横中央にしたい。justify-contentとalign-itemsの軸を間違えずに書いて",
+      "このflexレイアウトが折り返したときに崩れる原因を、flex-wrapとalign-contentの観点で調査して"
+    ],
+    "searchAliases": [
+      "フレックスボックス",
+      "横並び",
+      "flexbox"
+    ]
   },
   {
     "id": "display-grid",
@@ -153,7 +174,17 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "AIはgrid一発で組める場面でflexの入れ子を量産しがちです。カード一覧や2次元配置はgrid+gapの方が簡潔です。またgrid-template-areasによる視覚的なレイアウト定義をAIはあまり提案しないので、明示的に求めると保守しやすいコードになります。",
+    "promptExamples": [
+      "このflexの入れ子で組まれたレイアウトを、gridで簡潔に書き直せるか検討して",
+      "ヘッダー・サイドバー・メイン・フッターの構成をgrid-template-areasで実装して"
+    ],
+    "searchAliases": [
+      "グリッドレイアウト",
+      "格子",
+      "2次元レイアウト"
+    ]
   },
   {
     "id": "order",
@@ -386,7 +417,16 @@
         "content": "",
         "className": "flex"
       }
-    }
+    },
+    "aiNotes": "AIは古い知識でmargin + :last-child打ち消しや負マージンハックを提案することがありますが、flexのgapも2021年から全ブラウザ対応済みで、現在はgap一択です。gapは「アイテム間」だけに効き、外周には効かない（そこはpadding）という役割分担も明確に伝わります。",
+    "promptExamples": [
+      "このmarginと:last-childで管理している要素間の余白をgapに置き換えてリファクタリングして"
+    ],
+    "searchAliases": [
+      "要素間の余白",
+      "間隔",
+      "隙間"
+    ]
   },
   {
     "id": "clamp",
@@ -718,7 +758,16 @@
         "content": "",
         "className": "flex gap-2"
       }
-    }
+    },
+    "aiNotes": "row/columnを切り替えると主軸が変わり、justify-content（主軸）とalign-items（交差軸）の意味が入れ替わります。AIはレスポンシブでcolumnに切り替えた際に、中央寄せ指定を追従させ忘れることが多いです。",
+    "promptExamples": [
+      "PCでは横並び・スマホでは縦並びにしたい。flex-directionの切替で中央寄せが崩れないように実装して"
+    ],
+    "searchAliases": [
+      "並び方向",
+      "縦並び",
+      "横並び"
+    ]
   },
   {
     "id": "justify-content",
@@ -782,7 +831,16 @@
         "content": "",
         "className": "flex h-32"
       }
-    }
+    },
+    "aiNotes": "space-betweenは最終行で要素がまばらに広がる問題があり、AIは一覧グリッドに安易にspace-betweenを使いがちです（gap+flex-start、またはgridが正解のことが多い）。またjustify-contentは主軸方向にしか効かない点の混同も定番です。",
+    "promptExamples": [
+      "カード一覧のspace-betweenで最終行が不自然に広がる問題を、gapベースの実装に直して"
+    ],
+    "searchAliases": [
+      "主軸の配置",
+      "均等配置",
+      "左右中央"
+    ]
   },
   {
     "id": "justify-items",
@@ -886,7 +944,16 @@
         "content": "",
         "className": "flex h-32"
       }
-    }
+    },
+    "aiNotes": "デフォルトがstretchのため「子要素の高さが勝手に揃う」ことをAIは説明せずに使いがちです。1行のアイテム配置はalign-items、複数行の行間配置はalign-contentという使い分けもよく混同されます。",
+    "promptExamples": [
+      "flexの子要素の高さが勝手に伸びる原因を説明して、意図した高さにする修正をして"
+    ],
+    "searchAliases": [
+      "交差軸の配置",
+      "上下中央",
+      "高さを揃える"
+    ]
   },
   {
     "id": "align-content",
@@ -1021,7 +1088,17 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "repeat(auto-fit, minmax(240px, 1fr))のレスポンシブグリッドは定番ですが、AIはauto-fitとauto-fillの違い（アイテムが少ないとき広がるか空トラックを残すか）を逆に説明することがあります。また%とfrの違い（frはgapを引いた残りを分配）も混同されがちです。",
+    "promptExamples": [
+      "メディアクエリなしで列数が自動調整されるカードグリッドをrepeat(auto-fit, minmax())で実装して",
+      "auto-fitとauto-fillの違いを、このレイアウトでどちらを使うべきかの判断込みで説明して"
+    ],
+    "searchAliases": [
+      "グリッド列",
+      "列の定義",
+      "レスポンシブグリッド"
+    ]
   },
   {
     "id": "grid-template-areas",
@@ -1165,7 +1242,18 @@
         "content": "",
         "className": "relative h-64 bg-gray-100 dark:bg-gray-800"
       }
-    }
+    },
+    "aiNotes": "AIはposition: absoluteを使うとき基準となる祖先（position: relative等）の指定を忘れた壊れコードを出しがちです。またstickyは「親にoverflow: hidden等があると効かない」「top等の閾値指定が必須」という2大条件をよく落とします。",
+    "promptExamples": [
+      "このposition: stickyが効かない原因を、祖先のoverflowと閾値指定の観点から調査して",
+      "カードの右上にバッジを絶対配置したい。基準要素の指定を含めて正しく実装して"
+    ],
+    "searchAliases": [
+      "配置",
+      "固定",
+      "絶対配置",
+      "追従"
+    ]
   },
   {
     "id": "z-index",
@@ -1195,7 +1283,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "AIは重なり問題に対して安易にz-index: 9999を出しがちですが、スタッキングコンテキストが違えば数値をいくら上げても勝てません。transformやopacity、filterが新しいスタッキングコンテキストを作る点はAIも人間も見落とす定番ポイントです。",
+    "promptExamples": [
+      "z-indexを上げてもモーダルがヘッダーの下に隠れる。スタッキングコンテキストの観点で原因を特定して",
+      "このプロジェクトのz-index値をトークン化（変数で段階管理）して整理して"
+    ],
+    "searchAliases": [
+      "重なり順",
+      "前面に表示",
+      "レイヤー順"
+    ]
   },
   {
     "id": "color",
@@ -1840,7 +1938,15 @@
         "content": "コンテンツ",
         "className": "border-2 border-blue-500"
       }
-    }
+    },
+    "aiNotes": "パーセンテージのpaddingは上下方向でも「親の幅」基準という直感に反する仕様があり、かつてはアスペクト比ハックに使われました。AIが古いpadding-topハックを出してきたら、現在はaspect-ratioプロパティが正解です。",
+    "promptExamples": [
+      "このpadding-topによるアスペクト比ハックをaspect-ratioプロパティに置き換えて"
+    ],
+    "searchAliases": [
+      "内側の余白",
+      "パディング"
+    ]
   },
   {
     "id": "margin",
@@ -1892,7 +1998,17 @@
         "content": "",
         "className": "bg-blue-500"
       }
-    }
+    },
+    "aiNotes": "縦方向のマージン相殺（collapsing）をAIは考慮せず、「余白が思ったより小さい/大きい」コードを出しがちです。また要素間の余白管理は個別marginよりも親のgapに寄せるのがモダンな設計で、AIには方針を明示すると一貫したコードになります。",
+    "promptExamples": [
+      "この縦の余白が意図通りにならない原因をマージン相殺の観点で調査して修正して",
+      "セクション間の余白管理をmarginからgapベースの設計に整理して"
+    ],
+    "searchAliases": [
+      "外側の余白",
+      "マージン",
+      "余白"
+    ]
   },
   {
     "id": "width",
@@ -1950,7 +2066,17 @@
         "content": "",
         "className": "h-32"
       }
-    }
+    },
+    "aiNotes": "AIはwidth: 100%とwidth: 100vwを混同しがちです。100vwはスクロールバーの幅を含むため横スクロールが発生します。またインライン要素にはwidthが効かない、fit-content/min-content/max-contentという内在サイズキーワードの存在も、AIの提案から漏れがちです。",
+    "promptExamples": [
+      "100vw指定で発生している横スクロールを修正して",
+      "ボタンの幅を内容に合わせつつ最小幅を確保する指定をfit-contentとminmaxの考え方で書いて"
+    ],
+    "searchAliases": [
+      "幅",
+      "横幅",
+      "サイズ"
+    ]
   },
   {
     "id": "height",
@@ -2008,7 +2134,17 @@
         "content": "",
         "className": "w-32"
       }
-    }
+    },
+    "aiNotes": "height: 100%は親に明示的な高さがないと効かない点がAIコードの定番バグです。また100vhはモバイルのアドレスバーで実際の画面からはみ出すため、現在は100dvh（動的ビューポート単位）が推奨ですが、AIは古い知識で100vhを出しがちです。",
+    "promptExamples": [
+      "モバイルで100vhの要素が画面からはみ出す問題をdvh単位で修正して",
+      "height: 100%が効かない原因を親要素の高さ指定から調査して"
+    ],
+    "searchAliases": [
+      "高さ",
+      "画面いっぱい",
+      "全画面"
+    ]
   },
   {
     "id": "max-width",
@@ -2227,7 +2363,18 @@
         "content": "",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "AIは「完全な丸ゴマ/ピル形」にborder-radius: 50%を使うことがありますが、50%は楕円になるため、ピル形には9999pxや calc(infinity * 1px) が正解です（正円なら50%でOK）。角丸の入れ子（親と子の半径調整）もAIが省略しがちな仕上げポイントです。",
+    "promptExamples": [
+      "このボタンをピル形（カプセル形）にしたい。50%だと楕円になる問題を回避して実装して",
+      "カードとその中の画像の角丸を、入れ子でも自然に見えるよう半径を調整して"
+    ],
+    "searchAliases": [
+      "角丸",
+      "丸角",
+      "ピル形",
+      "円形"
+    ]
   },
   {
     "id": "box-shadow",
@@ -2321,7 +2468,17 @@
         "content": "",
         "className": "bg-white"
       }
-    }
+    },
+    "aiNotes": "AIの生成する影は不自然に濃い・硬いことが多いです。実務では「小さくて濃い影+大きくて薄い影」のカンマ区切り多重指定が自然に見える定番です。またborder代わりの1px影（0 0 0 1px）やinsetの活用も、明示すると質が上がります。",
+    "promptExamples": [
+      "このカードの影を、多重シャドウを使った自然で柔らかい印象に調整して",
+      "ダークモードでも破綻しないbox-shadowの設計（色や透明度）を提案して"
+    ],
+    "searchAliases": [
+      "影",
+      "シャドウ",
+      "ドロップシャドウ"
+    ]
   },
   {
     "id": "opacity",
@@ -2410,7 +2567,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "AIはtransition: all を多用しがちですが、意図しないプロパティまでアニメーションしパフォーマンスも悪化するため、対象プロパティの明示が原則です。またdisplayやheight: autoは従来transitionできない代表格で、現在はtransition-behavior: allow-discreteやinterpolate-sizeという解決策があります（AIの知識にはないことが多い）。",
+    "promptExamples": [
+      "このtransition: allを、実際に変化するプロパティだけの指定に最適化して",
+      "displayの切替を伴うこの表示/非表示にtransitionを効かせたい。allow-discreteと@starting-styleを使って"
+    ],
+    "searchAliases": [
+      "トランジション",
+      "滑らかな変化",
+      "ホバーアニメーション"
+    ]
   },
   {
     "id": "transform",
@@ -2486,7 +2653,18 @@
         "content": "🎯",
         "className": "text-4xl"
       }
-    }
+    },
+    "aiNotes": "transformは1プロパティなので、hover時にtransform: scale()だけ書くと既存のtranslate()が消える上書き事故が定番です。現在はtranslate/rotate/scaleが個別プロパティとして独立しており（全ブラウザ対応）、AIはこの新しい書き方を知らないことがあります。",
+    "promptExamples": [
+      "translateで中央寄せした要素にhoverでscaleを追加したら位置がずれた。個別プロパティ（translate/scale）で書き直して",
+      "このtransformの多重指定を、個別のtranslate/rotate/scaleプロパティに分解して"
+    ],
+    "searchAliases": [
+      "変形",
+      "移動",
+      "回転",
+      "拡大縮小"
+    ]
   },
   {
     "id": "animation",
@@ -2550,7 +2728,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "animationショートハンドの値の順序（最初の時間がduration、2つ目がdelay）はAIも間違えます。またprefers-reduced-motion（視差効果を減らす設定）への配慮をAIは省略しがちなので、アニメーション実装時は必ずセットで要求してください。",
+    "promptExamples": [
+      "このループアニメーションにprefers-reduced-motion対応を追加して、動きに敏感なユーザーに配慮して",
+      "animationショートハンドのdurationとdelayの指定が正しいか確認して"
+    ],
+    "searchAliases": [
+      "アニメーション",
+      "動き",
+      "keyframes"
+    ]
   },
   {
     "id": "keyframes",
@@ -2694,7 +2882,17 @@
         "content": "これは長いテキストです。オーバーフローの動作を確認できます。スクロールバーが表示されるか、隠れるか、はみ出すかを選択できます。",
         "className": "h-24 w-48"
       }
-    }
+    },
+    "aiNotes": "overflow: hiddenが祖先にあるとposition: stickyが効かなくなる副作用は、AIが原因究明で見落とす定番です。単に「はみ出しを切りたい」だけならスクロールコンテナを作らないoverflow: clipという新しい選択肢もあります。",
+    "promptExamples": [
+      "position: stickyが効かない原因を祖先のoverflow設定から調査して",
+      "overflow: hiddenとclipの違いを踏まえて、この装飾のはみ出し対策を実装して"
+    ],
+    "searchAliases": [
+      "はみ出し",
+      "スクロール",
+      "切り取り"
+    ]
   },
   {
     "id": "visibility",
