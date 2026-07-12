@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Copy, CheckCircle, RotateCcw } from 'lucide-react';
+import { buildSrcDoc } from '@/utils/sandboxDoc';
 
 interface PlaygroundProps {
   initialHtml: string;
@@ -10,19 +11,6 @@ interface PlaygroundProps {
   onCopy?: (type: 'html' | 'css') => void;
   /** 最初に編集された時に一度だけ呼ばれる（アナリティクス用） */
   onFirstEdit?: () => void;
-}
-
-// サンドボックスiframe用のドキュメントを組み立てる。
-// sandbox=""（スクリプト実行なし）なので、ユーザー入力はこのiframe内に閉じる。
-function buildSrcDoc(html: string, css: string): string {
-  return [
-    '<!doctype html><html><head><meta charset="utf-8">',
-    '<style>body{margin:16px;background:#fdfaf3;color:#1a1712;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;}</style>',
-    `<style>${css}</style>`,
-    '</head><body>',
-    html,
-    '</body></html>',
-  ].join('\n');
 }
 
 interface EditorPaneProps {

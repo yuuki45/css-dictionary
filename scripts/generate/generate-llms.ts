@@ -17,10 +17,12 @@ import { cssProperties } from '../../src/data/properties';
 import { techniques } from '../../src/data/techniques';
 import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
+import { animations } from '../../src/data/animations';
 import {
   propertyToMarkdown,
   techniqueToMarkdown,
   comparisonToMarkdown,
+  animationToMarkdown,
   SITE_URL,
 } from '../../src/utils/propertyMarkdown';
 import { getUniqueCategories } from '../../src/utils/search';
@@ -35,7 +37,7 @@ function writeFile(relativePath: string, content: string): void {
 }
 
 // 生成ディレクトリ内の古い.mdを掃除（削除されたエントリの残骸を防ぐ）
-for (const dir of ['property', 'techniques', 'compare']) {
+for (const dir of ['property', 'techniques', 'compare', 'animations']) {
   const fullDir = path.join(publicDir, dir);
   if (fs.existsSync(fullDir)) {
     for (const file of fs.readdirSync(fullDir)) {
@@ -53,6 +55,9 @@ for (const technique of techniques) {
 }
 for (const comparison of comparisons) {
   writeFile(`compare/${comparison.id}.md`, comparisonToMarkdown(comparison) + '\n');
+}
+for (const animation of animations) {
+  writeFile(`animations/${animation.id}.md`, animationToMarkdown(animation) + '\n');
 }
 
 // ---- 2. 逆引き一覧 reverse.md ----
@@ -127,6 +132,14 @@ for (const technique of techniques) {
   );
 }
 llmsLines.push('');
+llmsLines.push('## アニメーション実装集');
+llmsLines.push('');
+for (const animation of animations) {
+  llmsLines.push(
+    `- [${animation.title}](${SITE_URL}/animations/${animation.id}.md): ${animation.description}`
+  );
+}
+llmsLines.push('');
 llmsLines.push('## AI協働');
 llmsLines.push('');
 llmsLines.push(
@@ -158,6 +171,7 @@ const fullSections: string[] = [
   `# CSS辞書 全コンテンツ（${SITE_URL}）`,
   ...cssProperties.map((p) => propertyToMarkdown(p)),
   ...comparisons.map((c) => comparisonToMarkdown(c)),
+  ...animations.map((a) => animationToMarkdown(a)),
   ...techniques.map((t) => techniqueToMarkdown(t)),
   reverseLines.join('\n'),
 ];
@@ -194,6 +208,12 @@ const entries: SitemapEntry[] = [
     priority: '0.8',
     changefreq: 'monthly',
   })),
+  { path: '/animations/', priority: '0.8', changefreq: 'weekly' },
+  ...animations.map((animation) => ({
+    path: `/animations/${animation.id}/`,
+    priority: '0.7',
+    changefreq: 'monthly',
+  })),
   { path: '/techniques/', priority: '0.7', changefreq: 'weekly' },
   ...techniques.map((technique) => ({
     path: `/techniques/${technique.id}/`,
@@ -224,5 +244,5 @@ writeFile('sitemap.xml', sitemapXml);
 
 console.log(
   `✅ 生成完了: property/*.md ${cssProperties.length}件, techniques/*.md ${techniques.length}件, ` +
-    `compare/*.md ${comparisons.length}件, reverse.md, llms.txt, llms-full.txt, sitemap.xml (${entries.length} URL)`
+    `compare/*.md ${comparisons.length}件, animations/*.md ${animations.length}件, reverse.md, llms.txt, llms-full.txt, sitemap.xml (${entries.length} URL)`
 );

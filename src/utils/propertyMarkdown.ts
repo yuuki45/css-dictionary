@@ -1,4 +1,4 @@
-import type { CSSProperty, Technique, Comparison } from '@/types/css';
+import type { CSSProperty, Technique, Comparison, AnimationExample } from '@/types/css';
 
 export const SITE_URL = 'https://www.css-dictionary.com';
 
@@ -142,6 +142,47 @@ export function comparisonToMarkdown(comparison: Comparison): string {
   lines.push('## それぞれの詳しい解説');
   lines.push('');
   for (const propertyId of comparison.propertyIds) {
+    lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+/** アニメーション実装例をMarkdownに変換する */
+export function animationToMarkdown(animation: AnimationExample): string {
+  const lines: string[] = [];
+  lines.push(`# ${animation.title}のCSSアニメーション実装`);
+  lines.push('');
+  lines.push(`> ${animation.description}`);
+  lines.push('');
+  lines.push(`- カテゴリ: ${animation.category}`);
+  lines.push(`- URL: ${SITE_URL}/animations/${animation.id}/`);
+  lines.push('');
+  lines.push('## HTML');
+  lines.push('');
+  lines.push('```html');
+  lines.push(animation.html);
+  lines.push('```');
+  lines.push('');
+  lines.push('## CSS');
+  lines.push('');
+  lines.push('```css');
+  lines.push(animation.css);
+  lines.push('```');
+  lines.push('');
+  lines.push('## 仕組みの解説');
+  lines.push('');
+  lines.push(animation.explanation);
+  lines.push('');
+  if (animation.tips) {
+    lines.push('## 実装のポイント');
+    lines.push('');
+    lines.push(animation.tips);
+    lines.push('');
+  }
+  lines.push('## 使っているプロパティ');
+  lines.push('');
+  for (const propertyId of animation.keyProperties) {
     lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
   }
   lines.push('');

@@ -133,7 +133,21 @@ export default function HomePage() {
           )}
 
           {!searchQuery && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <Link
+                href="/animations/"
+                className="group flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"
+              >
+                <div>
+                  <div className="font-serif font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    アニメーション実装集
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    動くプレビュー付き・その場で編集できる実装例
+                  </div>
+                </div>
+                <ArrowRight className="w-4 h-4 text-gray-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
               <Link
                 href="/compare/"
                 className="group flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"

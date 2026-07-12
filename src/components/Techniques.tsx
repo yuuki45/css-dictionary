@@ -10,7 +10,14 @@ export function Techniques() {
         CSSテクニック集
       </h1>
       <div className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-        各テクニックはHTML/CSSをその場で書き換えて試せます。
+        各テクニックはHTML/CSSをその場で書き換えて試せます。動きの実装例は
+        <Link
+          href="/animations/"
+          className="text-vermillion-600 dark:text-gold-300 hover:underline mx-1"
+        >
+          アニメーション実装集
+        </Link>
+        にまとまっています。
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {techniques.map((tech) => (

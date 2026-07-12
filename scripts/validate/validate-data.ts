@@ -20,6 +20,7 @@ import * as path from 'node:path';
 import { getCategorySlug } from '../../src/utils/categorySlug';
 import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
+import { animations, animationCategories } from '../../src/data/animations';
 import { lookupBaseline } from '../lib/baseline-source';
 
 interface PropertyEntry {
@@ -147,6 +148,24 @@ for (const comparison of comparisons) {
   }
 }
 
+// 5. animations の整合性
+const animationIds = new Set<string>();
+const validAnimationCategories = new Set<string>(animationCategories);
+for (const animation of animations) {
+  const label = `[animation:${animation.id}]`;
+  if (animationIds.has(animation.id)) errors.push(`${label} ID重複`);
+  animationIds.add(animation.id);
+  if (!validAnimationCategories.has(animation.category)) {
+    errors.push(`${label} 不正なカテゴリ: "${animation.category}"`);
+  }
+  for (const ref of animation.keyProperties) {
+    if (!ids.has(ref)) errors.push(`${label} keyProperties未解決参照: "${ref}"`);
+  }
+  if (!animation.html.trim() || !animation.css.trim()) {
+    errors.push(`${label} html/cssが空`);
+  }
+}
+
 // 結果出力
 if (warnings.length > 0) {
   console.warn(`⚠️  警告 ${warnings.length}件:`);
@@ -157,4 +176,4 @@ if (errors.length > 0) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
-console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件 / 比較${comparisons.length}件（警告${warnings.length}件）`);
+console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件 / 比較${comparisons.length}件 / アニメ${animations.length}件（警告${warnings.length}件）`);

@@ -92,6 +92,19 @@ export interface Usecase {
   propertyIds: string[];
 }
 
+// アニメーション実装例
+export interface AnimationExample {
+  id: string;               // URLスラッグ（例: "spinner-ring"）
+  title: string;            // 「リングスピナー」
+  description: string;      // 一覧・meta description用の説明
+  category: string;         // 'ホバー' | 'ローディング' | '出現・入場' | 'テキスト' | 'マイクロインタラクション' | '背景・装飾'
+  html: string;
+  css: string;
+  explanation: string;      // 仕組みの解説
+  keyProperties: string[];  // 使用している主要プロパティ（実在ID。validateで検証）
+  tips?: string;
+}
+
 // 比較記事（「AとBの違い」）
 export interface Comparison {
   id: string;               // URLスラッグ（例: "word-break-vs-overflow-wrap"）
