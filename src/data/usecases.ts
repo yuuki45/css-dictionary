@@ -323,7 +323,7 @@ export const usecases: Usecase[] = [
     id: "mix-colors",
     label: "色を混ぜたい・明暗の色を作りたい",
     description: "ベース色からホバー色や淡い背景色を派生させたい場合",
-    propertyIds: ["color-mix", "css-custom-properties", "opacity"],
+    propertyIds: ["color-mix", "oklch", "css-custom-properties", "opacity"],
   },
   {
     id: "dark-mode",

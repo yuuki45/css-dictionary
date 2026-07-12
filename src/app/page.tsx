@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 import { PropertyCard } from "@/components/PropertyCard";
@@ -22,6 +22,22 @@ import { Clock, Star, Layers, TrendingUp, Sparkles, ArrowRight } from "lucide-re
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // 「/」キーで検索ボックスにフォーカス（入力中は無効）
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "/") return;
+      const target = event.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
+        return;
+      }
+      event.preventDefault();
+      searchInputRef.current?.focus();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const { isFavorite, addFavorite, removeFavorite, getFavoriteIds, isLoaded: favoritesLoaded } =
     useFavorites();
@@ -89,7 +105,8 @@ export default function HomePage() {
           <SearchBar
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="プロパティを検索..."
+            placeholder="プロパティを検索（例: 角丸、ダークモード、:has）..."
+            inputRef={searchInputRef}
           />
 
           {!searchQuery && (

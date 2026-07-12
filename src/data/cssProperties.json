@@ -4729,7 +4729,8 @@
       "css-custom-properties",
       "color",
       "opacity",
-      "background-color"
+      "background-color",
+      "oklch"
     ],
     "aiNotes": "AIはSassのdarken()/lighten()やrgba()の手計算、JavaScriptでの色操作を提案しがちですが、2023年以降はcolor-mix()でCSSのみで完結します。またAIは色空間の指定（in srgb / in oklch）を省略したり深く考えずにsrgbを選びがちですが、混色の自然さが大きく変わる重要な選択です。相対色構文（rgb(from ...)）との混同にも注意。",
     "promptExamples": [
@@ -5482,6 +5483,56 @@
       "edge": "123",
       "baseline": "limited",
       "note": "Chrome/Edge限定（2026年7月時点）。非対応ブラウザでは通常の全角空きで表示"
+    }
+  },
+  {
+    "id": "oklch",
+    "name": "oklch()",
+    "category": "レスポンシブ・関数",
+    "description": "人間の知覚に基づくOKLCH色空間で色を指定する関数です。明度（L）・彩度（C）・色相（H）で直感的に色を操作でき、明度を変えても見た目の明るさが揃うためカラーパレット設計に最適です。Display P3などの広色域も表現できます。",
+    "syntax": "oklch(<lightness> <chroma> <hue> [/ <alpha>])",
+    "examples": [
+      {
+        "code": ".button {\n  background: oklch(0.65 0.2 250);\n}",
+        "description": "明度0.65・彩度0.2・色相250度（青系）の色を指定"
+      },
+      {
+        "code": ":root {\n  --primary: oklch(0.65 0.2 250);\n}\n\n.button:hover {\n  /* 相対色構文: 明度だけ10%下げる */\n  background: oklch(from var(--primary) calc(l - 0.1) c h);\n}",
+        "description": "相対色構文でベース色から明度違いを派生"
+      },
+      {
+        "code": "/* 色相だけ変えれば知覚的な明るさの揃ったパレットに */\n.info    { background: oklch(0.7 0.15 250); }\n.success { background: oklch(0.7 0.15 150); }\n.warning { background: oklch(0.7 0.15 80); }",
+        "description": "同じ明度・彩度で色相だけ変えた統一感のあるパレット"
+      }
+    ],
+    "tips": "hslは色相によって見た目の明るさがバラつきますが（黄色は明るく青は暗く見える）、oklchは同じL値なら知覚的な明るさが揃います。color-mix(in oklch, ...)との組み合わせも自然な混色になり好相性です。",
+    "commonMistakes": "明度Lは0〜1（または0%〜100%）で、hslの明度とはスケールも意味も違います。彩度Cは0〜0.4程度が実用域で、大きすぎるとディスプレイで表現できない色になります（その場合ブラウザが近似色に丸めます）。",
+    "relatedProperties": [
+      "color-mix",
+      "color",
+      "css-custom-properties",
+      "background-color"
+    ],
+    "aiNotes": "AIは色指定にhexやhsl()を使いがちで、OKLCHの知覚均一性を活かしたパレット設計は知識が浅い領域です。また相対色構文（oklch(from ...)）の文法をAIはよく間違えます（from句の位置、l c hチャンネル名の書き方）。Tailwind CSS v4がOKLCHを採用するなど、実務でも標準になりつつあります。",
+    "promptExamples": [
+      "ブランドカラーを基準に、知覚的な明るさが揃った5色のカテゴリカラーをoklch()で設計して",
+      "このhsl()ベースのカラーパレットをoklch()に移行して、ダークモード用の明度違いも相対色構文で派生させて"
+    ],
+    "searchAliases": [
+      "色空間",
+      "知覚的な色",
+      "広色域",
+      "P3",
+      "カラーパレット"
+    ],
+    "mdnUrl": "https://developer.mozilla.org/ja/docs/Web/CSS/color_value/oklch",
+    "browserSupport": {
+      "chrome": "111",
+      "firefox": "113",
+      "safari": "15.4",
+      "edge": "111",
+      "baseline": "widely",
+      "baselineLowDate": "2023-05"
     }
   }
 ]

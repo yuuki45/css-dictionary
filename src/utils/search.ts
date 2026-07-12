@@ -1,5 +1,31 @@
 import { CSSProperty } from "../types/css";
 
+// マッチの強さでスコアリングする（大きいほど上位に表示）
+function scoreProperty(property: CSSProperty, lowerQuery: string): number {
+  const name = property.name.toLowerCase();
+  if (name === lowerQuery) return 100;
+  if (name.startsWith(lowerQuery)) return 80;
+
+  const aliases = property.searchAliases ?? [];
+  if (aliases.some((alias) => alias.toLowerCase() === lowerQuery)) return 75;
+  if (aliases.some((alias) => alias.toLowerCase().includes(lowerQuery))) return 70;
+
+  if (name.includes(lowerQuery)) return 60;
+  if (property.description.toLowerCase().includes(lowerQuery)) return 40;
+  if (property.category.toLowerCase().includes(lowerQuery)) return 30;
+  if (property.syntax.toLowerCase().includes(lowerQuery)) return 20;
+  if (
+    property.examples.some(
+      (example) =>
+        example.code.toLowerCase().includes(lowerQuery) ||
+        example.description.toLowerCase().includes(lowerQuery)
+    )
+  ) {
+    return 10;
+  }
+  return 0;
+}
+
 export function searchProperties(
   properties: CSSProperty[],
   query: string
@@ -8,21 +34,13 @@ export function searchProperties(
     return properties;
   }
 
-  const lowerQuery = query.toLowerCase();
+  const lowerQuery = query.trim().toLowerCase();
 
-  return properties.filter((property) => {
-    return (
-      property.name.toLowerCase().includes(lowerQuery) ||
-      property.description.toLowerCase().includes(lowerQuery) ||
-      property.category.toLowerCase().includes(lowerQuery) ||
-      property.syntax.toLowerCase().includes(lowerQuery) ||
-      property.examples.some(
-        (example) =>
-          example.code.toLowerCase().includes(lowerQuery) ||
-          example.description.toLowerCase().includes(lowerQuery)
-      )
-    );
-  });
+  return properties
+    .map((property) => ({ property, score: scoreProperty(property, lowerQuery) }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((entry) => entry.property);
 }
 
 export function getUniqueCategories(properties: CSSProperty[]): string[] {

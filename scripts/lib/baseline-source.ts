@@ -61,6 +61,7 @@ export const manualKeys: Record<string, string[]> = {
   'at-scope': ['css.at-rules.scope'],
   'pseudo-user-valid': ['css.selectors.user-valid'],
   'pseudo-focus-within': ['css.selectors.focus-within'],
+  oklch: ['css.types.color.oklch'],
 };
 
 let cachedIndex: Map<string, KeyStatus> | null = null;
