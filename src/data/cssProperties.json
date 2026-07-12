@@ -225,7 +225,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "AIは「表示順を変えたい」という要望にorderを気軽に使いますが、orderが変えるのは見た目だけで、スクリーンリーダーの読み上げ順やTabキーのフォーカス順はHTML順のままです。順序が本質的に違うならHTML自体を変えるのが正解で、orderはレスポンシブでの限定的な並び替えに留めるべきです。",
+    "promptExamples": [
+      "スマホでは画像を先頭に、PCではテキストを先頭にしたい。orderを使う場合のアクセシビリティへの影響も説明して",
+      "このorderだらけのレイアウトを、HTML順の変更で解決できないか検討して"
+    ],
+    "searchAliases": [
+      "並び順",
+      "表示順序",
+      "順番を変える"
+    ]
   },
   {
     "id": "container-queries",
@@ -255,7 +265,17 @@
       "edge": "105",
       "baseline": "widely",
       "baselineLowDate": "2023-02"
-    }
+    },
+    "aiNotes": "AIはレスポンシブ対応を反射的に@media（画面幅基準）で書きますが、コンポーネント単位なら@container（親要素基準）が正解の場面が増えています。AI生成コードの最頻バグは親へのcontainer-type指定漏れで、これがないと@containerは一切動きません。cqw/cqi等のコンテナクエリ単位もAIの知識が浅い領域です。",
+    "promptExamples": [
+      "このカードコンポーネントを、置かれた場所の幅に応じてレイアウトが変わるように@containerで書き直して。container-typeの指定も忘れずに",
+      "メディアクエリとコンテナクエリの使い分け方針を、このプロジェクトの構成に合わせて提案して"
+    ],
+    "searchAliases": [
+      "コンテナクエリ",
+      "親要素基準",
+      "コンポーネントのレスポンシブ"
+    ]
   },
   {
     "id": "container-type",
@@ -285,7 +305,15 @@
       "edge": "105",
       "baseline": "widely",
       "baselineLowDate": "2023-02"
-    }
+    },
+    "aiNotes": "AIはinline-sizeとsizeの違いを曖昧に説明しがちです。通常はinline-size（幅のみ監視）が正解で、size（高さも監視）は要素自身に明示的な高さが必要になるため、安易に使うと子のコンテンツで高さが決まるレイアウトが壊れます。またcontainer-typeを指定した要素自身のサイズはコンテナクエリで参照できません（参照できるのは子孫から）。",
+    "promptExamples": [
+      "このサイドバーをコンテナ化したい。inline-sizeとsizeのどちらを使うべきか理由付きで実装して"
+    ],
+    "searchAliases": [
+      "コンテナ化",
+      "コンテナの定義"
+    ]
   },
   {
     "id": "subgrid",
@@ -315,7 +343,17 @@
       "edge": "117",
       "baseline": "widely",
       "baselineLowDate": "2023-09"
-    }
+    },
+    "aiNotes": "AIは学習時期によって「subgridはFirefox限定」と古い情報を答えますが、Chrome 117（2023年9月）以降全ブラウザ対応済みです。またsubgridは行・列それぞれ個別に継承指定でき（grid-template-columns: subgridなど）、gapも親から継承されます（上書き可能）。「カード内の要素の高さを揃える」定番問題の最も正しい解です。",
+    "promptExamples": [
+      "カード一覧で、各カードのタイトル・本文・ボタンの高さ位置を揃えたい。subgridで実装して",
+      "このネストしたgridの列ずれをsubgridで親のトラックに揃えて"
+    ],
+    "searchAliases": [
+      "サブグリッド",
+      "グリッドの継承",
+      "高さを揃える"
+    ]
   },
   {
     "id": "aspect-ratio",
@@ -363,7 +401,17 @@
       "edge": "88",
       "baseline": "widely",
       "baselineLowDate": "2021-09"
-    }
+    },
+    "aiNotes": "AIは古い知識でpadding-top比率ハック（padding-top: 56.25%）を提案しがちですが、現在はaspect-ratio: 16 / 9の1行で済みます。またimg要素はwidth/height属性からアスペクト比が自動計算されるため、CLS（レイアウトシフト）対策には属性指定＋aspect-ratioの理解が重要です。両方の寸法を明示すると aspect-ratio は無視される仕様も見落とされがちです。",
+    "promptExamples": [
+      "このpadding-topハックによる16:9埋め込みをaspect-ratioに置き換えて",
+      "画像読み込み時のレイアウトシフトを、width/height属性とaspect-ratioで防いで"
+    ],
+    "searchAliases": [
+      "アスペクト比",
+      "縦横比",
+      "16:9"
+    ]
   },
   {
     "id": "gap",
@@ -459,7 +507,17 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-07"
-    }
+    },
+    "aiNotes": "AIの生成するclamp()は中央値がvwのみ（例: clamp(1rem, 2vw, 2rem)）になりがちで、これはブラウザのズームや文字サイズ設定に追従しにくいアクセシビリティ上の問題があります。中央値はrem+vwの混合（例: clamp(1rem, 0.8rem + 1vw, 2rem)）が推奨です。最小値と最大値を逆に書く単純ミスもAIにはよくあります。",
+    "promptExamples": [
+      "見出しのフルードタイポグラフィをclamp()で設計して。ズームに追従するようrem+vwの混合で",
+      "このclamp()の中央値がvw単体になっている問題をアクセシビリティ観点で修正して"
+    ],
+    "searchAliases": [
+      "フルードタイポグラフィ",
+      "可変フォントサイズ",
+      "レスポンシブな値"
+    ]
   },
   {
     "id": "min-max-functions",
@@ -492,7 +550,17 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-07"
-    }
+    },
+    "aiNotes": "min()とmax()は直感と逆に働くためAIも人も混乱します: min(100%, 600px)は「最大600pxまで」という上限指定、max(50%, 300px)は「最低300pxを確保」という下限指定です。AIが逆の関数を選んでいないか、境界値で必ず確認してください。",
+    "promptExamples": [
+      "コンテナ幅を「基本100%、ただし最大600px」にしたい。min()とmax()のどちらが正しいか説明付きで書いて"
+    ],
+    "searchAliases": [
+      "最小値",
+      "最大値",
+      "上限",
+      "下限"
+    ]
   },
   {
     "id": "css-custom-properties",
@@ -528,7 +596,17 @@
       "edge": "15",
       "baseline": "widely",
       "baselineLowDate": "2017-04"
-    }
+    },
+    "aiNotes": "AIはSassの$変数とCSS変数を混同した説明をすることがあります。決定的な違いは、CSS変数は実行時に評価される（メディアクエリ内やJSからの変更で動的に変わる）点です。またvar(--x, フォールバック値)の第2引数、未定義時に「保証された無効値」となってプロパティ全体が initial/inherit になる挙動は、AIの生成コードでバグの温床になりがちです。",
+    "promptExamples": [
+      "このSassの$変数をCSS変数に移行して。動的に変えたいもの（テーマ色）とビルド時定数（ブレークポイント）を区別して",
+      "CSS変数が未定義のときのフォールバック設計を、var()の第2引数で整備して"
+    ],
+    "searchAliases": [
+      "CSS変数",
+      "カスタムプロパティ",
+      "変数"
+    ]
   },
   {
     "id": "backdrop-filter",
@@ -564,7 +642,17 @@
       "edge": "79",
       "baseline": "newly",
       "baselineLowDate": "2024-09"
-    }
+    },
+    "aiNotes": "AIはfilterとbackdrop-filterを混同しがちです（filterは要素自身、backdrop-filterは要素の背後）。またAI生成のガラス風UIでよくある「効いていない」原因は、要素の背景が不透明（背後が見えない）ことです。背景は必ず半透明（rgba/color-mix）にする必要があります。ぼかし半径が大きいとスクロール時の負荷が高い点も指摘されにくい注意点です。",
+    "promptExamples": [
+      "ヘッダーをすりガラス風（グラスモーフィズム）にして。backdrop-filterと半透明背景のセットで、非対応環境のフォールバックも",
+      "このbackdrop-filterが効かない原因を、背景の透明度とスタッキングの観点で調査して"
+    ],
+    "searchAliases": [
+      "すりガラス",
+      "グラスモーフィズム",
+      "背景ぼかし"
+    ]
   },
   {
     "id": "filter",
@@ -598,7 +686,18 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2016-09"
-    }
+    },
+    "aiNotes": "影の付与でAIはbox-shadowを選びがちですが、切り抜き画像（透過PNG/SVG）にはfilter: drop-shadow()が正解です（形状に沿った影になる）。またfilterを指定した要素は新しいスタッキングコンテキストを作り、子孫のposition: fixedがビューポートでなくその要素基準になる、という重大な副作用をAIはほぼ言及しません。",
+    "promptExamples": [
+      "透過PNGのキャラクター画像に形状に沿った影を付けて。box-shadowとdrop-shadowの違いも説明して",
+      "filterを付けたらモーダル（position: fixed）の位置が壊れた。スタッキングコンテキストの観点で原因を特定して"
+    ],
+    "searchAliases": [
+      "ぼかし",
+      "グレースケール",
+      "ドロップシャドウ",
+      "画像効果"
+    ]
   },
   {
     "id": "object-fit",
@@ -640,7 +739,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "coverとcontainの取り違えがAIにも頻発します（cover=領域を埋めて見切れる、contain=全体が見えて余白が出る）。またobject-fitはimg/video自身に指定するもので、親要素に書いても効きません。img側にwidth/height（またはaspect-ratio）でボックスサイズを与えないと効果が見えない点も生成コードの定番ミスです。",
+    "promptExamples": [
+      "サムネイル一覧で画像の縦横比がバラバラでも揃って見えるように、object-fit: coverとaspect-ratioで実装して"
+    ],
+    "searchAliases": [
+      "画像のトリミング",
+      "画像を枠に収める",
+      "はみ出さない画像"
+    ]
   },
   {
     "id": "place-items",
@@ -671,7 +779,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "place-items: centerはgridの完全中央寄せ最短コード（align-items + justify-itemsの一括指定）ですが、AIはこれをflexコンテナに書くことがあります。flexにはjustify-itemsが存在しないため半分しか効きません（flexならalign-items + justify-content）。2値指定の順序はalign→justifyです。",
+    "promptExamples": [
+      "display: grid; place-items: center の1行中央寄せと、flexでの中央寄せの使い分けを説明して実装して"
+    ],
+    "searchAliases": [
+      "完全中央",
+      "ど真ん中",
+      "一括配置"
+    ]
   },
   {
     "id": "place-content",
@@ -702,7 +819,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "place-itemsが「各セル内のアイテム」の配置なのに対し、place-contentは「トラック群全体」の配置です。AIはこの2つを混同した説明をよくします。コンテンツ全体をコンテナ中央に置くのがplace-content、各セルの中でアイテムを中央に置くのがplace-itemsです。",
+    "promptExamples": [
+      "gridでトラック全体をコンテナ中央に配置したい。place-contentとplace-itemsの違いを踏まえて書いて"
+    ],
+    "searchAliases": [
+      "コンテンツ全体の配置",
+      "トラックの配置"
+    ]
   },
   {
     "id": "flex-direction",
@@ -881,7 +1006,14 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2016-07"
-    }
+    },
+    "aiNotes": "justify-itemsはgrid（とブロックレイアウト）専用で、flexコンテナでは無効です。AIはflexに書いて「効かない」コードを出しがちで、flexで同じことをするなら子側のmargin-inline: autoやコンテナのjustify-contentを使います。",
+    "promptExamples": [
+      "gridの各セル内でアイテムを左寄せ・中央・右寄せに出し分けたい。justify-itemsとjustify-selfで実装して"
+    ],
+    "searchAliases": [
+      "セル内の水平配置"
+    ]
   },
   {
     "id": "align-items",
@@ -994,7 +1126,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "align-items（各行内のアイテム配置）とalign-content（行そのものの配置）の混同はAIの定番です。align-contentは複数行あるときだけ意味を持つため、flexではflex-wrap: wrapが前提になります（単一行では通常効きません）。「折り返したflexの行間を詰めたい」はalign-content: flex-startが答えです。",
+    "promptExamples": [
+      "折り返したflexコンテナで行間が勝手に広がる問題を、align-itemsとalign-contentの違いを説明しながら修正して"
+    ],
+    "searchAliases": [
+      "行の配置",
+      "複数行の間隔"
+    ]
   },
   {
     "id": "flex-wrap",
@@ -1023,7 +1163,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "AIは「一定幅で折り返すカード列」をメディアクエリで書きがちですが、flex-wrap: wrap + flex-basis（またはminmax付きgrid）ならブレークポイントなしで自動化できます。折り返し後の行間が広がって見える問題はalign-content、折り返しタイミングは子のflex-basisとmin-widthで制御する、という関連知識までセットで確認すると精度が上がります。",
+    "promptExamples": [
+      "メディアクエリを使わずに、幅に応じて自動で折り返すタグ一覧をflex-wrapで実装して"
+    ],
+    "searchAliases": [
+      "折り返し",
+      "改行するflex"
+    ]
   },
   {
     "id": "flex-grow-shrink-basis",
@@ -1058,7 +1206,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "flex: 1はflex: 1 1 0%の省略で、basisが0になるため「コンテンツ量に関係なく均等分配」になります。一方flex-grow: 1だけ指定するとbasisはautoのままで「コンテンツ量に応じた分配」です。この違いはAIの説明でも頻繁に曖昧にされます。また「flexアイテムがつぶれる/はみ出す」問題の多くはflex-shrinkとmin-width: autoの相互作用で、flex-shrink: 0またはmin-width: 0が処方箋です。",
+    "promptExamples": [
+      "flex: 1とflex-grow: 1の違いを、このレイアウトでの実際の挙動の差で説明して",
+      "flexで固定幅サイドバー+可変メインの定番レイアウトを、つぶれ防止（shrink: 0）込みで書いて"
+    ],
+    "searchAliases": [
+      "均等分配",
+      "伸縮",
+      "flexの比率"
+    ]
   },
   {
     "id": "grid-template-columns",
@@ -1127,7 +1285,16 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "AIはgrid-template-areasの制約（各行の列数が全行で一致、同名エリアは矩形のみ）を破った無効テンプレートを生成することがあります。1つでも規則違反があるとテンプレート全体が無効になり黙って崩れるので、行の列数と矩形性を必ず確認してください。空セルはピリオド（.）です。",
+    "promptExamples": [
+      "ヘッダー・サイドバー・メイン・フッターのレイアウトをgrid-template-areasで視覚的に定義して、スマホでは並び替えて"
+    ],
+    "searchAliases": [
+      "エリア名",
+      "レイアウト定義",
+      "グリッドエリア"
+    ]
   },
   {
     "id": "grid-auto-fit-fill",
@@ -1156,7 +1323,17 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2020-07"
-    }
+    },
+    "aiNotes": "auto-fitとauto-fillの違いはAIも逆に説明しがちです: アイテムが少ないとき、auto-fitは空トラックを潰してアイテムを広げ、auto-fillは空トラックを残します。また定番のminmax(240px, 1fr)は、コンテナが240px未満になるとはみ出すため、minmax(min(240px, 100%), 1fr)としておくと小画面でも安全です（この防御はAIはまず出しません）。",
+    "promptExamples": [
+      "メディアクエリなしのレスポンシブカードグリッドを、小画面ではみ出さない防御込み（minmax+min）で書いて",
+      "auto-fitとauto-fillの違いを、アイテムが1個しかない場合の見え方で説明して"
+    ],
+    "searchAliases": [
+      "自動折り返しグリッド",
+      "auto-fit",
+      "auto-fill"
+    ]
   },
   {
     "id": "position",
@@ -1345,7 +1522,15 @@
         "content": "サンプルテキスト",
         "className": "text-2xl font-bold"
       }
-    }
+    },
+    "aiNotes": "AIが見落としがちなのはcurrentColorの活用です。SVGアイコンやborderにcurrentColorを指定しておけば、colorを変えるだけで一括追従します。またリンク色をcolorで上書きする際、:visited/:hover等の状態まで面倒を見ない生成コードが多いので、状態込みで依頼すると質が上がります。",
+    "promptExamples": [
+      "アイコン・ボーダー・テキストが1箇所のcolor変更で全て追従するボタンを、currentColorで設計して"
+    ],
+    "searchAliases": [
+      "文字色",
+      "テキストの色"
+    ]
   },
   {
     "id": "font-size",
@@ -1400,7 +1585,15 @@
         "content": "サンプルテキスト",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "AIはfont-sizeをpxで直書きしがちですが、ユーザーのブラウザ設定やズームを尊重するならremが原則です。「html { font-size: 62.5% }で1rem=10pxにするハック」をAIは今でも出すことがありますが、ユーザー設定の前提を崩すため現在は非推奨とする意見が主流です。",
+    "promptExamples": [
+      "このpx指定だらけのタイポグラフィをremベースの階層（タイプスケール）に再設計して"
+    ],
+    "searchAliases": [
+      "文字サイズ",
+      "フォントの大きさ"
+    ]
   },
   {
     "id": "font-weight",
@@ -1461,7 +1654,16 @@
         "content": "サンプルテキスト",
         "className": "text-2xl"
       }
-    }
+    },
+    "aiNotes": "指定したウェイトがフォントに存在しない場合、ブラウザが機械的に太らせる「合成ボールド」になり、特に日本語フォントでは著しく汚くなります。AIはWebフォントの読み込みウェイトと指定ウェイトの対応を確認しないことが多いので、使うウェイトを読み込んでいるかをセットで確認してください。可変フォントなら100〜900の任意値が使えます。",
+    "promptExamples": [
+      "このサイトで使っているfont-weightの値と、Webフォントで読み込んでいるウェイトの対応を監査して"
+    ],
+    "searchAliases": [
+      "太字",
+      "フォントの太さ",
+      "ウェイト"
+    ]
   },
   {
     "id": "line-height",
@@ -1516,7 +1718,15 @@
         "content": "これは複数行のテキストです。\n行の高さを変更すると、\n行間が変化します。",
         "className": "whitespace-pre-line"
       }
-    }
+    },
+    "aiNotes": "line-heightは単位なし（例: 1.7）で書くのが原則です。em や % で書くと「計算後の値」が子に継承され、フォントサイズの違う子要素で行間が破綻します。AIは1.5emのような単位付きを出すことがあるので注意。日本語本文は英語より広めの1.7〜1.9が読みやすい目安です。",
+    "promptExamples": [
+      "このline-heightの単位付き指定を単位なしに直して、継承の破綻がないか確認して"
+    ],
+    "searchAliases": [
+      "行間",
+      "行の高さ"
+    ]
   },
   {
     "id": "letter-spacing",
@@ -1568,7 +1778,16 @@
         "content": "サンプルテキスト",
         "className": "text-xl"
       }
-    }
+    },
+    "aiNotes": "letter-spacingは最後の文字の後ろにも付くため、中央寄せテキストがわずかに左にずれて見えます（見出しで顕著）。AIはこの相殺（text-indentやpadding調整）まで気が回りません。日本語の見出しでは0.02〜0.08em程度の字間がよく使われますが、本文への広い字間は可読性を下げます。",
+    "promptExamples": [
+      "中央寄せ見出しにletter-spacingを付けたら中心がずれて見える問題を修正して"
+    ],
+    "searchAliases": [
+      "字間",
+      "文字の間隔",
+      "トラッキング"
+    ]
   },
   {
     "id": "text-align",
@@ -1628,7 +1847,16 @@
         "content": "テキストの配置を変更できます。左寄せ、中央寄せ、右寄せ、両端揃えが選択できます。",
         "className": "w-full"
       }
-    }
+    },
+    "aiNotes": "text-alignが配置するのは「インラインコンテンツ」であり、ブロック要素自体の中央寄せ（margin-inline: auto）とは別物です。この混同はAIにも頻発します。またtext-align: justify（両端揃え）は日本語では約物や英単語の周りで不自然な空きを生みやすく、扱いが難しい指定です。",
+    "promptExamples": [
+      "「ボックス自体を中央に、その中のテキストは左寄せ」を、text-alignとmargin autoの役割分担で実装して"
+    ],
+    "searchAliases": [
+      "文字揃え",
+      "中央揃え",
+      "右寄せ"
+    ]
   },
   {
     "id": "text-decoration",
@@ -1659,7 +1887,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "AIは下線のカスタマイズにborder-bottomを使いがちですが、現在はtext-decoration-color / -thickness / text-underline-offsetで下線自体を細かく制御できます（複数行でも正しく機能するのが利点）。リンクの下線を消すだけの提案（アクセシビリティ低下）にも注意が必要です。",
+    "promptExamples": [
+      "リンクの下線を消さずに、色を薄く・少し下にオフセットして上品にして。border-bottomではなくtext-decoration系で"
+    ],
+    "searchAliases": [
+      "下線",
+      "取り消し線",
+      "アンダーライン"
+    ]
   },
   {
     "id": "background-color",
@@ -1707,7 +1944,14 @@
         "content": "コンテンツ",
         "className": "text-white"
       }
-    }
+    },
+    "aiNotes": "backgroundショートハンドは指定しなかった項目をすべて初期値にリセットします。AIがbackground: url(...)と別の場所のbackground-colorを混在させると、順序次第で色が消える事故が起きます。ショートハンドと個別プロパティの混在は方針を決めて統一するのが安全です。",
+    "promptExamples": [
+      "backgroundショートハンドとbackground-colorの混在で背景色が消えるバグを調査して、書き方を統一して"
+    ],
+    "searchAliases": [
+      "背景色"
+    ]
   },
   {
     "id": "background-image",
@@ -1741,7 +1985,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "複数背景はカンマ区切りで「先に書いたものが上」に重なります。AIはこの重ね順を逆に説明することがあります（グラデーションオーバーレイ+写真の定番でよく間違える）。また意味のある画像をbackground-imageにするとalt相当がなく印刷やアクセシビリティで不利なので、コンテンツ画像はimg要素が原則です。",
+    "promptExamples": [
+      "写真の上に暗いグラデーションを重ねたヒーロー背景を、複数背景の重ね順に注意して実装して",
+      "この装飾画像はbackground-imageとimgのどちらにすべきか、アクセシビリティ観点で判断して"
+    ],
+    "searchAliases": [
+      "背景画像",
+      "重ねる背景"
+    ]
   },
   {
     "id": "background-size",
@@ -1775,7 +2028,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "coverとcontainの取り違えはobject-fitと同様にAIでも頻発します（cover=領域を埋めて見切れる、contain=全体表示で余白）。また%指定は「要素サイズに対する割合」で画像の縦横比を無視するため、意図せず歪んだ背景になる生成コードがあります。",
+    "promptExamples": [
+      "ヒーローセクションの背景写真を、画面サイズが変わっても見切れ方が自然なようにbackground-sizeとpositionで調整して"
+    ],
+    "searchAliases": [
+      "背景のサイズ",
+      "背景を全面に"
+    ]
   },
   {
     "id": "background-position",
@@ -1814,7 +2075,14 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "%指定の意味が特殊で、「画像の50%地点を要素の50%地点に合わせる」という基準点同士の対応です（pxのような単純オフセットではない）。この仕様はAIも誤って説明しがちです。人物写真の顔位置合わせなどはパーセンテージ基準の方が破綻しにくい、という実務知識も添えると良いコードが出ます。",
+    "promptExamples": [
+      "レスポンシブで背景写真の顔が見切れないよう、background-positionをパーセンテージ基準で調整して"
+    ],
+    "searchAliases": [
+      "背景の位置"
+    ]
   },
   {
     "id": "linear-gradient",
@@ -1848,7 +2116,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "角度の基準はAIも混同します: 0degは「下から上」、90degは「左から右」で、to right等のキーワード構文と角度の対応を取り違えた生成コードが出がちです。また同位置に2つの色を置くハードストップ（#fff 50%, #000 50%）でストライプや分割背景が作れることは、知っていると指示の幅が広がります。",
+    "promptExamples": [
+      "左上から右下への斜めグラデーションを、角度指定とtoキーワードの両方で書いて違いを説明して",
+      "CSSグラデーションだけで斜めストライプの背景パターンを作って"
+    ],
+    "searchAliases": [
+      "グラデーション",
+      "線形グラデーション"
+    ]
   },
   {
     "id": "radial-gradient",
@@ -1882,7 +2159,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "構文の順序（形状 サイズ at 位置, 色...）をAIは崩しがちで、特にat句の位置ミスで無効になるコードが出ます。closest-side/farthest-corner等のサイズキーワードの違いも曖昧に説明されがちです。スポットライト風の演出や、複数のradial-gradientを重ねたメッシュ風背景が定番用途です。",
+    "promptExamples": [
+      "複数のradial-gradientを重ねて、ぼんやり光が差すメッシュグラデーション背景を作って"
+    ],
+    "searchAliases": [
+      "円形グラデーション",
+      "放射状"
+    ]
   },
   {
     "id": "padding",
@@ -2175,7 +2460,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "min-widthとmax-widthが矛盾する場合はmin-widthが勝つ、という優先規則をAIは説明し忘れます。またコンテナの定番はwidth: 100% + max-widthではなく、widthは初期値autoのままmax-width + margin-inline: autoで十分なことが多いです。",
+    "promptExamples": [
+      "本文コンテナを「最大720px・小画面では左右16px余白」にする定番パターンをmax-widthで書いて"
+    ],
+    "searchAliases": [
+      "最大幅",
+      "幅の上限"
+    ]
   },
   {
     "id": "min-width",
@@ -2206,7 +2499,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "flexアイテムのmin-widthの初期値はautoで「コンテンツの最小幅より縮まない」ため、長いテキストや画像を含むアイテムがはみ出す原因の筆頭です。処方箋はmin-width: 0（またはoverflow: hidden）。この知識はAIの「flexがはみ出す」系の回答から抜けがちなので明示的に確認してください。",
+    "promptExamples": [
+      "flexレイアウトで長いテキストを含むカラムがはみ出す。min-width: autoの仕様を踏まえて修正して"
+    ],
+    "searchAliases": [
+      "最小幅",
+      "つぶれ防止"
+    ]
   },
   {
     "id": "box-sizing",
@@ -2239,7 +2540,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "AIは「*, *::before, *::after { box-sizing: border-box }のリセットが既に入っている」前提で幅計算のコードを書くことがあります。プロジェクトにリセットがあるか確認してから使うこと。またborder-boxでもmarginは含まれない（含むのはpaddingとborder）点の誤解が混じることがあります。",
+    "promptExamples": [
+      "このプロジェクトにbox-sizingのリセットが入っているか確認し、なければ現代的なCSSリセットを提案して"
+    ],
+    "searchAliases": [
+      "ボックスモデル",
+      "幅の計算",
+      "border-box"
+    ]
   },
   {
     "id": "border",
@@ -2309,7 +2619,15 @@
         "content": "",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "hover時にborderを追加するとその分レイアウトがずれる問題に対し、AIは気づかないことがあります。定番の対策は最初からborder: 2px solid transparentを敷いておき色だけ変える方法（またはoutlineやbox-shadowの利用）です。ショートハンドが3項目（幅・スタイル・色）を一括リセットする点も混在バグの元です。",
+    "promptExamples": [
+      "hoverでボーダーが付くとカードがガタつく問題を、transparentボーダー方式で修正して"
+    ],
+    "searchAliases": [
+      "枠線",
+      "ボーダー"
+    ]
   },
   {
     "id": "border-radius",
@@ -2533,7 +2851,16 @@
         "content": "テキスト",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "opacityは子要素も道連れに透過します。「背景だけ半透明にしたい」ならopacityではなく背景色のアルファ値（rgba/色 + 透明度）が正解で、この取り違えはAIにも頻発します。またopacityが1未満の要素は新しいスタッキングコンテキストを作るため、z-indexの挙動が変わる副作用があります。",
+    "promptExamples": [
+      "「テキストはくっきり、背景だけ半透明」のカードを、opacityを使わずに実装して",
+      "opacityを付けたら重なり順がおかしくなった。スタッキングコンテキストの観点で調査して"
+    ],
+    "searchAliases": [
+      "透明度",
+      "半透明"
+    ]
   },
   {
     "id": "transition",
@@ -2769,7 +3096,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "AIは今でも-webkit-プレフィックス付きの@keyframesを出すことがありますが、現在は不要です。また同名の@keyframesは後の定義が完全に上書きします（マージされない）。0%/100%とfrom/toは同義で、複数セレクタ（0%, 50% { ... }）でキーフレームをまとめられます。",
+    "promptExamples": [
+      "この古いプレフィックス付きkeyframesを現代的な書き方に整理して"
+    ],
+    "searchAliases": [
+      "キーフレーム",
+      "アニメーション定義"
+    ]
   },
   {
     "id": "cursor",
@@ -2824,7 +3159,15 @@
         "content": "カーソルを重ねてください",
         "className": ""
       }
-    }
+    },
+    "aiNotes": "AIは「クリックできる感」を出すために非インタラクティブ要素にまでcursor: pointerを付けがちですが、押せないものをポインターにするのはUX上の嘘になります。またカスタムカーソル画像には必ずフォールバック値が必要（cursor: url(...), pointer;）で、これを省略した無効構文が生成されることがあります。",
+    "promptExamples": [
+      "このUIのcursor指定を監査して、実際にクリックできる要素だけがpointerになるよう修正して"
+    ],
+    "searchAliases": [
+      "カーソル",
+      "マウスポインタ"
+    ]
   },
   {
     "id": "overflow",
@@ -2941,7 +3284,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "display: none（領域ごと消える・読み上げ対象外）、visibility: hidden（領域は残る・読み上げ対象外）、opacity: 0（領域も操作性も残りフォーカス可能）の3択の使い分けはAIの説明が雑になりがちです。visibilityはdiscreteながらtransition可能（遅延切替に使える）という中級知識も役立ちます。",
+    "promptExamples": [
+      "display: none / visibility: hidden / opacity: 0 の違いを、この開閉UIでどれを使うべきかの判断込みで説明して"
+    ],
+    "searchAliases": [
+      "非表示",
+      "隠す"
+    ]
   },
   {
     "id": "white-space",
@@ -2976,7 +3327,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "「改行文字を反映したい」という要望にAIはJSでの<br>変換を提案しがちですが、white-space: pre-line（改行は反映・連続スペースは畳む）で済みます。pre-wrapとの違い（スペースも保持するか）、nowrapが省略記号の三点セット（overflow: hidden + text-overflow: ellipsis）の一角である点もセットで押さえると精度が上がります。",
+    "promptExamples": [
+      "APIから来る改行入りテキストを、JSで加工せずwhite-spaceで改行反映して表示して"
+    ],
+    "searchAliases": [
+      "改行の扱い",
+      "スペースの扱い",
+      "折り返し禁止"
+    ]
   },
   {
     "id": "text-overflow",
@@ -3006,7 +3366,18 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "text-overflow: ellipsisは単独では動きません。overflow: hidden + white-space: nowrapとの三点セットが必須で、AIはこのセットを崩した不完全なコードを出すことがあります。複数行の省略は別の仕組み（-webkit-line-clamp）で、これもdisplay: -webkit-box等との定型セットが必要です。",
+    "promptExamples": [
+      "カードタイトルを1行省略（...）にして。必要な3点セットを漏れなく",
+      "本文を3行で省略したい。line-clampの定型セットで実装して"
+    ],
+    "searchAliases": [
+      "三点リーダー",
+      "省略記号",
+      "ellipsis",
+      "はみ出しを…にする"
+    ]
   },
   {
     "id": "word-break",
@@ -3097,7 +3468,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2017-03"
-    }
+    },
+    "aiNotes": "縦書き（vertical-rl）にすると、幅と高さ・上下左右の意味が入れ替わるため、物理プロパティ（width, margin-left等）で書かれたスタイルは破綻します。縦書き対応は論理プロパティ（inline/block系）とセットが原則です。数字や英字を正立させるtext-orientationやtext-combine-upright（縦中横）の存在もAIは出し忘れがちです。",
+    "promptExamples": [
+      "この見出しを縦書きにして。数字は縦中横で正立させ、レイアウトは論理プロパティで崩れないように"
+    ],
+    "searchAliases": [
+      "縦書き",
+      "書字方向"
+    ]
   },
   {
     "id": "user-select",
@@ -3129,7 +3508,16 @@
       "firefox": "69",
       "edge": "79",
       "baseline": "limited"
-    }
+    },
+    "aiNotes": "AIはUI装飾の一環でuser-select: noneを広範囲に付けがちですが、本文まで選択不能にするのはユーザーの引用・コピー・翻訳を妨げる悪手です。ボタンラベルやドラッグUIなど限定的に使うもの。逆にuser-select: allは「クリックで全選択」でコード片やIDのコピーUXに便利です。",
+    "promptExamples": [
+      "APIキー表示欄を「クリックで全選択」できるようにuser-select: allで実装して"
+    ],
+    "searchAliases": [
+      "テキスト選択",
+      "選択禁止",
+      "全選択"
+    ]
   },
   {
     "id": "pointer-events",
@@ -3159,7 +3547,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "pointer-events: noneはクリックを下の要素へ素通しさせる（無効化ではなく透過）点の理解が重要です。オーバーレイ装飾を透過させつつ、中の特定ボタンだけpointer-events: autoで復活させる、という組み合わせ技はAIが自発的に出しにくい定番パターンです。noneの要素はhoverもtitleも効かなくなる点にも注意。",
+    "promptExamples": [
+      "全画面の装飾オーバーレイの下にあるUIを操作可能にしたい。pointer-eventsのnone/auto組み合わせで実装して"
+    ],
+    "searchAliases": [
+      "クリック透過",
+      "クリック無効"
+    ]
   },
   {
     "id": "will-change",
@@ -3195,7 +3591,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "AIは「アニメーションを滑らかに」という要望でwill-changeを無差別に振りかけがちですが、常時付与はメモリを浪費し逆効果です。原則は「問題が実測されたときに、アニメ直前に付けて終わったら外す」。多くの場合はtransform/opacityベースのアニメに直す方が先決です。",
+    "promptExamples": [
+      "このwill-changeだらけのCSSを監査して、本当に必要な箇所だけに整理して"
+    ],
+    "searchAliases": [
+      "描画最適化",
+      "GPU"
+    ]
   },
   {
     "id": "contain",
@@ -3224,7 +3628,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2022-03"
-    }
+    },
+    "aiNotes": "containは「この要素の内部は外に影響しない」とブラウザに約束してレンダリングを分離する上級プロパティです。AIはcontent-visibilityとの関係（後者はcontainを内包する遅延描画）を混同しがちです。誤った値（strictなど）を広く付けるとレイアウトが実際に壊れる（サイズが0になる等）ため、効果測定なしの多用は危険です。",
+    "promptExamples": [
+      "長いリストのレンダリング負荷を下げたい。containとcontent-visibilityのどちらが適切か判断して適用して"
+    ],
+    "searchAliases": [
+      "レンダリング分離",
+      "封じ込め"
+    ]
   },
   {
     "id": "media-queries",
@@ -3271,7 +3683,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "AIは古いmin-width/max-width記法だけで書きがちですが、現在は範囲構文（@media (768px <= width < 1024px)）が全ブラウザで使え、境界の重複ミス（max-width: 767pxのような-1px調整）を根本から解消できます。また画面幅以外（hover: hover、prefers-*系）のクエリを組み合わせる発想もAIからは出にくいので明示すると良いです。",
+    "promptExamples": [
+      "このmin-width/max-widthだらけのメディアクエリを新しい範囲構文に書き換えて、境界のバグがないか確認して"
+    ],
+    "searchAliases": [
+      "メディアクエリ",
+      "ブレークポイント",
+      "画面幅で切替"
+    ]
   },
   {
     "id": "table-layout",
@@ -3311,7 +3732,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "table-layout: fixedにしないとtableのセルでtext-overflow: ellipsisは効きません（自動レイアウトは内容で列幅が決まるため）。「テーブルのセルで省略記号が効かない」問題の答えがこれで、AIはこの因果関係に辿り着かないことがあります。列幅は1行目（またはcol要素）で決まる点も重要です。",
+    "promptExamples": [
+      "テーブルの特定列だけ幅固定+省略記号にしたい。table-layout: fixedとcolを使って実装して"
+    ],
+    "searchAliases": [
+      "テーブルの列幅",
+      "表のレイアウト"
+    ]
   },
   {
     "id": "content-visibility",
@@ -3340,7 +3769,16 @@
       "edge": "85",
       "baseline": "newly",
       "baselineLowDate": "2024-09"
-    }
+    },
+    "aiNotes": "content-visibility: autoには contain-intrinsic-size の併用がほぼ必須です（未描画部分の想定サイズを与えないとスクロールバーが暴れる）。AIはこの相棒を省略しがちです。またAIの知識では「Chrome限定の実験的機能」と古いことがありますが、現在は全ブラウザ対応（Baseline）です。",
+    "promptExamples": [
+      "長いページの初期描画を速くしたい。content-visibility: autoとcontain-intrinsic-sizeのセットで、スクロールバーが暴れないように実装して"
+    ],
+    "searchAliases": [
+      "遅延レンダリング",
+      "描画スキップ",
+      "表示高速化"
+    ]
   },
   {
     "id": "accent-color",
@@ -3366,7 +3804,15 @@
       "safari": "26.2",
       "edge": "93",
       "baseline": "limited"
-    }
+    },
+    "aiNotes": "チェックボックスやラジオの色変えにAIはappearance: noneからの完全自作を提案しがちですが、「色を変えたいだけ」ならaccent-color 1行で済みます（ネイティブのアクセシビリティを保てるのが利点）。形状まで変えたい場合に初めて自作を検討する、という段階の使い分けが重要です。",
+    "promptExamples": [
+      "フォームのチェックボックス・ラジオ・レンジをブランドカラーにしたい。自作せずaccent-colorで済むか判断して実装して"
+    ],
+    "searchAliases": [
+      "チェックボックスの色",
+      "フォーム部品の色"
+    ]
   },
   {
     "id": "list-style",
@@ -3393,7 +3839,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "list-style: noneを指定するとSafari（VoiceOver）はリストとして読み上げなくなるため、意味的にリストである場合はul側にrole=\"list\"を付けるのが定石ですが、AIはこのアクセシビリティ知識を出し忘れます。マーカーの色や大きさだけ変えるなら::marker擬似要素が使えます。",
+    "promptExamples": [
+      "ナビゲーションのリストマーカーを消しつつ、スクリーンリーダーでリストとして読まれるように実装して",
+      "リストの行頭マーカーの色とサイズだけ::markerで変えて"
+    ],
+    "searchAliases": [
+      "リストマーカー",
+      "箇条書きの点"
+    ]
   },
   {
     "id": "clip-path",
@@ -3420,7 +3875,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "clip-pathで切り抜いた外側はクリックも当たらなくなる（ヒットテスト領域も切れる）点をAIは説明し忘れがちです。またpolygon同士のアニメーションは頂点数が同じでないと補間されません。切り抜きでなく「ぼかしマスク」が欲しい場合はmask-imageが適任、という使い分けも有効です。",
+    "promptExamples": [
+      "セクションの下端を斜めに切るデザインをclip-pathで実装して、hoverで形が滑らかに変わるよう頂点数を揃えて"
+    ],
+    "searchAliases": [
+      "切り抜き",
+      "斜めのセクション",
+      "多角形"
+    ]
   },
   {
     "id": "pseudo-hover",
@@ -3450,7 +3914,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "タッチデバイスでは:hoverがタップ後に貼り付く（sticky hover）ため、素の:hoverだけで書くとスマホで不自然になります。AIはこの配慮を省略しがちで、@media (hover: hover)で「ホバーできる環境だけ」に限定するのが現代の定石です。ホバーでしか到達できない情報を作らない（キーボード・タッチ代替）ことも重要です。",
+    "promptExamples": [
+      "このhoverエフェクトをタッチデバイスで貼り付かないよう@media (hover: hover)でガードして"
+    ],
+    "searchAliases": [
+      "ホバー",
+      "マウスオーバー"
+    ]
   },
   {
     "id": "pseudo-nth-child",
@@ -3482,7 +3954,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": ":nth-child()は「親の中での位置」で数え、型は無関係です（型で数えるのは:nth-of-type()）。混在した子要素があるとAIもこの2つを取り違えます。また比較的新しいof構文（:nth-child(2 of .item)）を使うと「特定クラスの中でn番目」が選べ、従来JSが必要だった選択がCSSで書けます。",
+    "promptExamples": [
+      "非表示要素が混ざるリストで「表示中の要素の偶数番目」だけ装飾したい。:nth-childのof構文で書いて"
+    ],
+    "searchAliases": [
+      "n番目",
+      "偶数行",
+      "奇数行",
+      "ゼブラ"
+    ]
   },
   {
     "id": "pseudo-nth-of-type",
@@ -3520,7 +4002,14 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": ":nth-of-type()が数えるのは「同じ要素型（タグ）」の中での順番で、クラスは考慮されません。「.item の3番目」のつもりで div.item:nth-of-type(3) と書くと、クラスのないdivも数に入るためズレます——これはAIの生成コードでも頻出のバグです。クラス基準なら:nth-child(n of .item)が正解です。",
+    "promptExamples": [
+      "このnth-of-typeの選択がズレる原因を、childとof-typeの数え方の違いから特定して修正して"
+    ],
+    "searchAliases": [
+      "同じタグのn番目"
+    ]
   },
   {
     "id": "pseudo-first-child",
@@ -3558,7 +4047,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": ":first-childは「親の最初の子」であり、「その型の最初」ではありません。前に別のタグ（例: 見出しの前のアイコンdiv）があると効かず、その場合は:first-of-typeが正解——この取り違えはAI・人間ともに定番です。「最初以外すべて」には li + li や :not(:first-child) のパターンがあります。",
+    "promptExamples": [
+      "「リスト項目の間だけに区切り線」を、:first-child否定と隣接セレクタの2通りで書いて違いを説明して"
+    ],
+    "searchAliases": [
+      "最初の要素",
+      "先頭だけ"
+    ]
   },
   {
     "id": "pseudo-focus-visible",
@@ -3592,7 +4089,15 @@
       "edge": "86",
       "baseline": "widely",
       "baselineLowDate": "2022-03"
-    }
+    },
+    "aiNotes": "AIは今でも「フォーカスの枠を消す」ためにoutline: noneを単独提案することがありますが、キーボード利用者への重大なアクセシビリティ破壊です。正解は:focus-visibleで「キーボード操作時だけ」表示する使い分け。マウスクリックでは出ず、Tab移動では出る、という理想の挙動がJSなしで手に入ります。",
+    "promptExamples": [
+      "このoutline: noneだらけのCSSを:focus-visibleベースの安全なフォーカス管理に書き換えて"
+    ],
+    "searchAliases": [
+      "フォーカスリング",
+      "キーボードフォーカス"
+    ]
   },
   {
     "id": "object-position",
@@ -3627,7 +4132,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "object-fit: coverでトリミングされる位置を調整するのがobject-positionです。AIは「人物の顔が見切れる」問題にimgの差し替えやJSを提案しがちですが、object-position: top（顔が上にある写真）などの1行で解決することが多いです。background-positionと同じ%基準の考え方が使えます。",
+    "promptExamples": [
+      "プロフィール画像一覧で顔が見切れる問題を、object-fitとobject-positionの組み合わせで修正して"
+    ],
+    "searchAliases": [
+      "画像の表示位置",
+      "トリミング位置"
+    ]
   },
   {
     "id": "scroll-behavior",
@@ -3658,7 +4171,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2022-03"
-    }
+    },
+    "aiNotes": "html { scroll-behavior: smooth }はページ内リンクを滑らかにしますが、ページ内検索やアンカー着地まで常時スムーズになるのを嫌う場合はJS側のscrollIntoView({behavior})で個別制御します。またprefers-reduced-motion環境ではautoに戻す配慮（メディアクエリで打ち消し）をAIは省略しがちです。",
+    "promptExamples": [
+      "ページ内リンクのスムーススクロールを、prefers-reduced-motion配慮込みで実装して"
+    ],
+    "searchAliases": [
+      "スムーススクロール",
+      "滑らかなスクロール"
+    ]
   },
   {
     "id": "inset",
@@ -3693,7 +4214,16 @@
       "edge": "87",
       "baseline": "widely",
       "baselineLowDate": "2021-04"
-    }
+    },
+    "aiNotes": "insetはtop/right/bottom/leftの一括指定で、値の順序もmarginと同じ時計回りです。inset: 0による全面配置（オーバーレイの定番）が最頻出ですが、position指定がないと何も起きない点はtop等と同じです。書字方向対応が必要ならinset-inline/inset-blockという論理版があります。",
+    "promptExamples": [
+      "モーダルの背景オーバーレイをposition: fixed + inset: 0の定番パターンで実装して"
+    ],
+    "searchAliases": [
+      "全面配置",
+      "オーバーレイ",
+      "位置の一括指定"
+    ]
   },
   {
     "id": "scroll-snap-type",
@@ -3732,7 +4262,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2022-04"
-    }
+    },
+    "aiNotes": "mandatoryとproximityの選択は重要で、AIは安易にmandatoryを選びがちです。mandatoryはスナップ点の間に長いコンテンツがあると「どこにも止まれず読めない」事故を起こすため、内容の高さが読み切れる保証がない縦スクロールではproximityが安全です。スナップ位置は子側のscroll-snap-alignとセットで機能します。",
+    "promptExamples": [
+      "横スワイプのカルーセルをscroll-snapで実装して。mandatoryとproximityの選択理由も説明して"
+    ],
+    "searchAliases": [
+      "スクロールスナップ",
+      "カルーセル",
+      "スワイプ"
+    ]
   },
   {
     "id": "scroll-snap-align",
@@ -3771,7 +4310,14 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "スナップの吸着位置を決めるのは「子要素側」のscroll-snap-alignで、コンテナに書いても効きません——コンテナ側(type)と子側(align)の役割分担はAIの生成コードでも崩れがちです。startとcenterの使い分け（一覧はstart、ギャラリーはcenter）が定番です。",
+    "promptExamples": [
+      "このscroll-snapが効かない原因を、コンテナ側と子側の指定の役割分担から調査して"
+    ],
+    "searchAliases": [
+      "スナップ位置"
+    ]
   },
   {
     "id": "overscroll-behavior",
@@ -3809,7 +4355,16 @@
       "edge": "18",
       "baseline": "limited",
       "note": "Safariは未対応。スクロール連鎖の防止が必要な場合はSafari向けの回避策も検討"
-    }
+    },
+    "aiNotes": "モーダル内スクロールが端に達すると背面ページまでスクロールする「スクロール連鎖」を止めるのがoverscroll-behavior: containです。AIはこの問題にbodyのoverflow: hidden切替（JS）を提案しがちですが、CSSだけで解ける場面が多いです。ただしSafariは未対応のため、Safari要件があるなら従来法との併用が必要です。",
+    "promptExamples": [
+      "モーダル内で端までスクロールすると背面まで動く問題を、overscroll-behaviorとSafari向けフォールバックの二段構えで対策して"
+    ],
+    "searchAliases": [
+      "スクロール連鎖",
+      "背面スクロール防止",
+      "プルトゥリフレッシュ"
+    ]
   },
   {
     "id": "scroll-margin",
@@ -3844,7 +4399,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2021-07"
-    }
+    },
+    "aiNotes": "固定ヘッダーのあるページでアンカーリンクの着地位置がヘッダーに隠れる問題——AIはpadding-top+負マージンの古いハックを出しがちですが、現在はscroll-margin-top: ヘッダー高さ の1行が正解です。scroll-padding（コンテナ側指定）との対の関係も覚えておくと使い分けられます。",
+    "promptExamples": [
+      "固定ヘッダーで見出しへのアンカーリンクが隠れる問題をscroll-margin-topで修正して"
+    ],
+    "searchAliases": [
+      "アンカーのずれ",
+      "固定ヘッダーと目次",
+      "ジャンプ位置調整"
+    ]
   },
   {
     "id": "mix-blend-mode",
@@ -3880,7 +4444,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "「効かない」原因の多くは重なる相手が不透明な背景を持たないこと、または意図しない要素とまで混ざることです。混ざる範囲を区切るには親にisolation: isolateを指定します——このセット運用をAIは省略しがちです。白背景ではmultiply、黒背景ではscreenが基本、という選び方も添えると良いコードになります。",
+    "promptExamples": [
+      "写真の上のロゴを背景と自然に馴染ませたい。mix-blend-modeとisolationのセットで、混ざる範囲を制御して"
+    ],
+    "searchAliases": [
+      "ブレンドモード",
+      "乗算",
+      "合成モード"
+    ]
   },
   {
     "id": "background-blend-mode",
@@ -3913,7 +4486,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "mix-blend-mode（要素同士）とbackground-blend-mode（同一要素内の背景レイヤー同士）の混同はAIの定番です。「写真に色を被せるダブトーン」は背景画像+背景色をbackground-blend-modeで混ぜるのが正攻法で、要素を重ねる必要はありません。",
+    "promptExamples": [
+      "ヒーロー写真をブランドカラーのダブトーン風にしたい。要素を重ねずbackground-blend-modeで実装して"
+    ],
+    "searchAliases": [
+      "ダブトーン",
+      "背景の合成"
+    ]
   },
   {
     "id": "isolation",
@@ -3945,7 +4526,15 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "isolation: isolateは「副作用なしで新しいスタッキングコンテキストを作る」唯一の専用プロパティです。ブレンドモードの範囲区切りのほか、「子のz-indexが外部と干渉する」問題をコンポーネント境界で断ち切る用途にも有効——AIはz-index問題にこの解を出せないことが多いです。",
+    "promptExamples": [
+      "コンポーネント内のz-indexが他と干渉しないよう、isolationで境界を作る設計にして"
+    ],
+    "searchAliases": [
+      "スタッキングコンテキスト",
+      "重なりの分離"
+    ]
   },
   {
     "id": "align-self",
@@ -3981,7 +4570,15 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-09"
-    }
+    },
+    "aiNotes": "コンテナのalign-items（全員）に対する個別上書きがalign-self（自分だけ）です。AIは「1つだけ配置を変えたい」場面でコンテナ側をいじる遠回りをすることがあります。flexの交差軸・gridのブロック軸という対象軸の違い、stretchを解除して固有サイズに戻す用途も押さえておくと便利です。",
+    "promptExamples": [
+      "flexの並びの中で1つのボタンだけ下端に揃えたい。align-selfで書いて"
+    ],
+    "searchAliases": [
+      "自分だけ配置",
+      "個別の配置"
+    ]
   },
   {
     "id": "justify-self",
@@ -4017,7 +4614,14 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "justify-selfはgrid（とブロック）用で、flexアイテムには効きません——flexで「自分だけ右へ」はmargin-left: auto（margin-inline-start: auto）が定石です。この振り分けはAIも間違えるポイントで、「gridならjustify-self、flexならauto margin」と覚えるのが確実です。",
+    "promptExamples": [
+      "ヘッダーの最後のボタンだけ右端に寄せたい。flexとgridそれぞれでの正しい書き方を示して"
+    ],
+    "searchAliases": [
+      "自分だけ右寄せ"
+    ]
   },
   {
     "id": "grid-column",
@@ -4048,7 +4652,16 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "span構文（grid-column: span 2）と負の線番号（grid-column: 1 / -1で全幅）はグリッドの生産性を大きく上げますが、AIは負番号の便利さ（列数を知らなくても端まで届く）を活かさないことがあります。線番号は「線」であり「セル」ではない（1 / 3は2セル分）点の混乱も定番です。",
+    "promptExamples": [
+      "カードグリッドで特定のカードだけ全幅にしたい。列数に依存しない書き方（負の線番号）で"
+    ],
+    "searchAliases": [
+      "列の結合",
+      "セルの結合",
+      "全幅"
+    ]
   },
   {
     "id": "grid-row",
@@ -4079,7 +4692,15 @@
       "edge": "16",
       "baseline": "widely",
       "baselineLowDate": "2017-10"
-    }
+    },
+    "aiNotes": "grid-columnと同じ線番号・span構文が行方向にも使えます。注意点は暗黙グリッド: 明示した行数を超える配置はgrid-auto-rowsのサイズで自動生成され、意図しない行高になりがちです。Pinterest風の段組はgrid-rowのspanとdense配置で近似できますが、真のMasonryは別仕様という区別もAIは曖昧にしがちです。",
+    "promptExamples": [
+      "サイドバーを2行ぶち抜きにするレイアウトをgrid-rowのspanで実装して"
+    ],
+    "searchAliases": [
+      "行の結合",
+      "縦に結合"
+    ]
   },
   {
     "id": "caret-color",
@@ -4118,7 +4739,16 @@
       "edge": "79",
       "baseline": "widely",
       "baselineLowDate": "2020-01"
-    }
+    },
+    "aiNotes": "入力欄の点滅カーソル（キャレット）の色だけを変えるプロパティで、ブランドカラーの入力UIの仕上げに効きます。AIはこのプロパティの存在自体を出さないことが多く、カーソル色が背景に溶けて見えない（ダークUIで黒キャレット）問題の解として覚えておく価値があります。transparentにして独自キャレットを描く上級技もあります。",
+    "promptExamples": [
+      "ダーク背景の検索ボックスでキャレットが見えない問題をcaret-colorで修正して"
+    ],
+    "searchAliases": [
+      "カーソルの色",
+      "キャレット",
+      "入力カーソル"
+    ]
   },
   {
     "id": "appearance",
@@ -4158,7 +4788,15 @@
       "edge": "84",
       "baseline": "widely",
       "baselineLowDate": "2022-03"
-    }
+    },
+    "aiNotes": "appearance: noneはOS由来の見た目を全て剥がすため、selectの矢印・checkboxの箱などが消えて「自分で全部作り直す」責任が発生します。色を変えたいだけならaccent-colorで済む——この段階の使い分けをAIは飛ばして、いきなり全自作の長いコードを出しがちです。剥がした後のフォーカス表示の再実装も忘れられがちです。",
+    "promptExamples": [
+      "selectの見た目をカスタムしたい。appearance: noneで矢印が消える分の再実装とフォーカス対応込みで"
+    ],
+    "searchAliases": [
+      "ネイティブUIの解除",
+      "フォームの見た目リセット"
+    ]
   },
   {
     "id": "outline",
@@ -4198,7 +4836,15 @@
       "baseline": "widely",
       "baselineLowDate": "2023-03",
       "note": "outline自体は全ブラウザで古くから利用可能。記載バージョンは角丸への追従など仕様準拠が完成した時点"
-    }
+    },
+    "aiNotes": "outlineはレイアウトに影響しない（スペースを取らない）点がborderとの本質的な違いで、フォーカス表示に使われる理由です。outline: noneでフォーカスを消すのは禁じ手で、消したいならoutline-offsetや色の調整で「見やすくする」方向へ。border-radiusに追従する（現在は角丸に沿う）ようになった点はAIの知識が古いことがあります。",
+    "promptExamples": [
+      "フォーカスリングをブランドに合わせて調整して。消さずにoutline-offsetと色で見やすく"
+    ],
+    "searchAliases": [
+      "アウトライン",
+      "フォーカスの枠"
+    ]
   },
   {
     "id": "vertical-align",
@@ -4242,7 +4888,17 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "vertical-alignはインライン要素とtable-cellにしか効きません。ブロック要素の上下中央に使おうとするのは最頻出の誤用で、それはflex/gridの仕事です。実務での主な出番は2つ: 画像の下にできる隙間の解消（vertical-align: bottom等）と、テキスト横のアイコンの微調整（middleや数値指定）です。",
+    "promptExamples": [
+      "画像の下にできる謎の隙間をvertical-alignで解消して、原因（baseline揃え）も説明して",
+      "テキスト横のインラインアイコンの上下位置をvertical-alignで微調整して"
+    ],
+    "searchAliases": [
+      "画像の下の隙間",
+      "アイコンの縦位置",
+      "ベースライン"
+    ]
   },
   {
     "id": "text-transform",
@@ -4280,7 +4936,16 @@
       "edge": "12",
       "baseline": "widely",
       "baselineLowDate": "2015-07"
-    }
+    },
+    "aiNotes": "text-transformは見た目だけの変換で、コピーされるテキストやスクリーンリーダーが読む内容は元のままです（略語が大文字化で1字ずつ読まれる等の影響はあり得ます）。「データ自体を大文字にしたい」ならJSやサーバー側の仕事で、この責任分界をAIは曖昧にしがちです。日本語には効果がないため英字UIラベル向けです。",
+    "promptExamples": [
+      "ナビラベルを英字大文字表示にしたい。データは変えずCSSだけで、字間調整もセットで"
+    ],
+    "searchAliases": [
+      "大文字化",
+      "小文字化",
+      "キャピタライズ"
+    ]
   },
   {
     "id": "resize",
@@ -4320,7 +4985,15 @@
       "safari": "3",
       "edge": "79",
       "baseline": "limited"
-    }
+    },
+    "aiNotes": "resizeはoverflowがvisible以外の要素にしか効きません——この前提条件をAIは省略しがちです。またtextareaの自動サイズ調整（内容に応じて伸びる）はresizeではなくfield-sizing: contentの領域で、手動リサイズと自動リサイズの区別が必要です。方向はboth/horizontal/verticalを選べます。",
+    "promptExamples": [
+      "チャット欄のtextareaを「手動リサイズは縦のみ許可、内容でも自動で伸びる」ようにresizeとfield-sizingで設計して"
+    ],
+    "searchAliases": [
+      "リサイズ",
+      "サイズ変更ハンドル"
+    ]
   },
   {
     "id": "scroll-snap",
@@ -4347,7 +5020,14 @@
       "baseline": "widely",
       "baselineLowDate": "2022-04"
     },
-    "category": "インタラクション・UX"
+    "category": "インタラクション・UX",
+    "aiNotes": "scroll-snapはコンテナ側（scroll-snap-type）と子側（scroll-snap-align）の2点セットで初めて動きます。AIの生成コードは片側だけの指定になりがちです。JSカルーセルライブラリの多くはscroll-snap+少量のJSで置き換えられる、というモダン化の視点も有効です。",
+    "promptExamples": [
+      "このカルーセルライブラリをscroll-snapベースの軽量実装に置き換えられるか評価して"
+    ],
+    "searchAliases": [
+      "スナップスクロール"
+    ]
   },
   {
     "id": "position-sticky",
@@ -4378,7 +5058,17 @@
       "baseline": "widely",
       "baselineLowDate": "2019-09"
     },
-    "category": "レイアウト・配置"
+    "category": "レイアウト・配置",
+    "aiNotes": "stickyが効かない三大原因は「祖先のoverflow: hidden/auto」「top等の閾値未指定」「親の高さ不足（貼り付く余地がない）」です。AIは症状からこの三択に絞り込めないことが多いので、原因調査はこの順で依頼すると速いです。table のヘッダー行（th）にも使える点は意外と知られていません。",
+    "promptExamples": [
+      "このposition: stickyが効かない原因を、祖先のoverflow・閾値・親の高さの3点から順に調査して",
+      "テーブルのヘッダー行をスクロールで固定して。stickyをthに使う方法で"
+    ],
+    "searchAliases": [
+      "追従",
+      "スクロールで固定",
+      "貼り付き"
+    ]
   },
   {
     "id": "color-scheme",
@@ -4408,7 +5098,15 @@
       "baseline": "widely",
       "baselineLowDate": "2022-01"
     },
-    "category": "その他"
+    "category": "その他",
+    "aiNotes": "color-schemeはフォーム部品・スクロールバー・システム由来のUIをまとめてダーク対応させるプロパティで、light-dark()関数の前提条件でもあります。AIはダークモード実装でこれを飛ばし、スクロールバーだけ白いまま等の中途半端な結果を出しがちです。:root { color-scheme: light dark } が現代のダーク対応の起点です。",
+    "promptExamples": [
+      "ダークモードでスクロールバーとフォーム部品だけ白いままの問題をcolor-schemeで解決して"
+    ],
+    "searchAliases": [
+      "ダーク対応の基本",
+      "スクロールバーの色"
+    ]
   },
   {
     "id": "prefers-color-scheme",
@@ -4438,7 +5136,14 @@
       "baseline": "widely",
       "baselineLowDate": "2020-01"
     },
-    "category": "レスポンシブ・関数"
+    "category": "レスポンシブ・関数",
+    "aiNotes": "prefers-color-schemeが検知するのはOS/ブラウザの設定のみで、サイト内の手動テーマ切替ボタンは別途仕組み（クラス切替+保存）が必要です。AIは「メディアクエリだけでテーマ切替ボタンも実現できる」かのような混同をすることがあります。現在はlight-dark()+color-schemeの上書きで手動切替も簡潔に書けます。",
+    "promptExamples": [
+      "OS設定追従+手動切替（3択: ライト/ダーク/自動）のテーマ機能を、light-dark()を軸に設計して"
+    ],
+    "searchAliases": [
+      "OSのダークモード検知"
+    ]
   },
   {
     "id": "prefers-reduced-motion",
@@ -4468,7 +5173,16 @@
       "baseline": "widely",
       "baselineLowDate": "2020-01"
     },
-    "category": "レスポンシブ・関数"
+    "category": "レスポンシブ・関数",
+    "aiNotes": "AIはアニメーション実装時にこの配慮自体を忘れるのが最大の問題です。前庭障害などで動きに敏感なユーザーのための設定で、「アニメを全部消す」のではなく「動きを減らす（フェードに置き換える等）」のが良い設計です。@media (prefers-reduced-motion: reduce)での上書きをアニメ実装の定型に組み込んでください。",
+    "promptExamples": [
+      "サイト全体のアニメーションにprefers-reduced-motion対応を後付けして。全消しではなくフェード代替で"
+    ],
+    "searchAliases": [
+      "視差効果を減らす",
+      "アニメーション配慮",
+      "酔い対策"
+    ]
   },
   {
     "id": "logical-properties",
@@ -4500,7 +5214,15 @@
       "baseline": "widely",
       "baselineLowDate": "2020-01"
     },
-    "category": "レイアウト・配置"
+    "category": "レイアウト・配置",
+    "aiNotes": "論理プロパティ（inline/block系）と物理プロパティ（left/right系）の混在は、上書き関係が読めない保守困難なCSSを生みます。AIはプロジェクトの方針を確認せず混ぜてくるので、「論理で統一」等の方針を最初に伝えるのが有効です。RTL・縦書き要件がなくても、margin-inline: autoなど記述が短くなる場面は多くあります。",
+    "promptExamples": [
+      "このスタイルシートの物理/論理プロパティの混在を監査して、論理プロパティに統一して"
+    ],
+    "searchAliases": [
+      "論理プロパティ",
+      "inline/block"
+    ]
   },
   {
     "id": "pseudo-has",
