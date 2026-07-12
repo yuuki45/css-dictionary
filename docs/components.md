@@ -208,7 +208,7 @@ export default function PropertyCard({
 ```
 
 #### PropertyDetail
-**ファイル:** `src/components/PropertyDetail.tsx`
+**ファイル:** `src/components/property/PropertyDetail.tsx`（セクションは`src/components/property/sections/`、ビジュアルデモは`visualExamples.tsx`）
 **タイプ:** Client Component
 
 **責務:**

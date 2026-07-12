@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PropertyDetail } from '@/components/PropertyDetail';
+import { PropertyDetail } from '@/components/property/PropertyDetail';
 import { Navigation } from '@/components/Navigation';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { useFavorites } from '@/hooks/useFavorites';
