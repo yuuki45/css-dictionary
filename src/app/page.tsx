@@ -133,20 +133,36 @@ export default function HomePage() {
           )}
 
           {!searchQuery && (
-            <Link
-              href="/compare/"
-              className="group flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"
-            >
-              <div>
-                <div className="font-serif font-semibold text-gray-900 dark:text-gray-100 text-sm">
-                  比較でわかるCSS — 「違い」がひと目でわかる
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Link
+                href="/compare/"
+                className="group flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"
+              >
+                <div>
+                  <div className="font-serif font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    比較でわかるCSS
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    FlexとGridの違いなど、混同しがちな「違い」を整理
+                  </div>
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  word-breakとoverflow-wrap、FlexとGrid、@mediaと@container など
+                <ArrowRight className="w-4 h-4 text-gray-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link
+                href="/ai-review/"
+                className="group flex items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 hover:border-vermillion-400 dark:hover:border-gold-500 transition-colors"
+              >
+                <div>
+                  <div className="font-serif font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    AI生成CSSレビューチェックリスト
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    AIがよく間違えるポイント全網羅の観点集
+                  </div>
                 </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+                <ArrowRight className="w-4 h-4 text-gray-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
           )}
 
           {recentLoaded && recentProperties.length > 0 && !searchQuery && (

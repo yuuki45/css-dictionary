@@ -79,6 +79,28 @@ for (const usecase of usecases) {
 }
 writeFile('reverse.md', reverseLines.join('\n'));
 
+// ---- 2.5 AI生成CSSレビューチェックリスト ai-review.md ----
+const aiItems = cssProperties.filter((p) => p.aiNotes);
+const aiReviewLines: string[] = [
+  '# AI生成CSSレビューチェックリスト',
+  '',
+  `> ChatGPTやClaudeが生成したCSSをレビューするための観点集。AIがよく間違えるポイントをプロパティ別に全${aiItems.length}項目収録。AI生成コードに登場するプロパティと突き合わせて使う。`,
+  '',
+  `- URL: ${SITE_URL}/ai-review/`,
+  '',
+];
+for (const category of getUniqueCategories(cssProperties)) {
+  const items = aiItems.filter((p) => p.category === category);
+  if (items.length === 0) continue;
+  aiReviewLines.push(`## ${category}`);
+  aiReviewLines.push('');
+  for (const p of items) {
+    aiReviewLines.push(`- **${p.name}**（${SITE_URL}/property/${p.id}.md）: ${p.aiNotes}`);
+  }
+  aiReviewLines.push('');
+}
+writeFile('ai-review.md', aiReviewLines.join('\n'));
+
 // ---- 3. llms.txt ----
 const modernCount = cssProperties.filter((p) => p.browserSupport.baseline !== 'widely').length;
 const llmsLines: string[] = [
@@ -104,6 +126,12 @@ for (const technique of techniques) {
     `- [${technique.title}](${SITE_URL}/techniques/${technique.id}.md): ${technique.description}`
   );
 }
+llmsLines.push('');
+llmsLines.push('## AI協働');
+llmsLines.push('');
+llmsLines.push(
+  `- [AI生成CSSレビューチェックリスト](${SITE_URL}/ai-review.md): AIがよく間違えるポイント全${aiItems.length}項目をプロパティ別に集約した観点集`
+);
 llmsLines.push('');
 llmsLines.push('## 比較でわかるCSS（違いの解説）');
 llmsLines.push('');
@@ -148,6 +176,7 @@ interface SitemapEntry {
 const entries: SitemapEntry[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/modern/', priority: '0.9', changefreq: 'weekly' },
+  { path: '/ai-review/', priority: '0.9', changefreq: 'weekly' },
   { path: '/categories/', priority: '0.8', changefreq: 'weekly' },
   ...categories.map((category) => ({
     path: `/categories/${getCategorySlug(category)}/`,
