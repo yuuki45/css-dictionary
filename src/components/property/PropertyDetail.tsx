@@ -100,6 +100,7 @@ export function PropertyDetail({
 
         {property.relatedProperties.length > 0 && (
           <RelatedPropertiesSection
+            propertyId={property.id}
             relatedProperties={property.relatedProperties}
             onNavigateToProperty={onNavigateToProperty}
           />

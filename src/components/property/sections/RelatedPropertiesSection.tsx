@@ -1,15 +1,23 @@
 import React from "react";
-import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, Scale } from "lucide-react";
+import { comparisons } from "../../../data/comparisons";
 
 interface RelatedPropertiesSectionProps {
+  propertyId: string;
   relatedProperties: string[];
   onNavigateToProperty: (id: string) => void;
 }
 
 export function RelatedPropertiesSection({
+  propertyId,
   relatedProperties,
   onNavigateToProperty,
 }: RelatedPropertiesSectionProps) {
+  const relatedComparisons = comparisons.filter((comparison) =>
+    comparison.propertyIds.includes(propertyId)
+  );
+
   return (
     <section className="mb-8">
       <h2 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
@@ -28,6 +36,20 @@ export function RelatedPropertiesSection({
           </button>
         ))}
       </div>
+      {relatedComparisons.length > 0 && (
+        <div className="mt-4 space-y-2">
+          {relatedComparisons.map((comparison) => (
+            <Link
+              key={comparison.id}
+              href={`/compare/${comparison.id}/`}
+              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-vermillion-600 dark:hover:text-gold-300 transition-colors"
+            >
+              <Scale className="w-4 h-4 shrink-0" />
+              比較記事: {comparison.title}
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

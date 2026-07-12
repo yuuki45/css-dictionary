@@ -91,3 +91,16 @@ export interface Usecase {
   description?: string;
   propertyIds: string[];
 }
+
+// 比較記事（「AとBの違い」）
+export interface Comparison {
+  id: string;               // URLスラッグ（例: "word-break-vs-overflow-wrap"）
+  title: string;            // 「word-break と overflow-wrap の違い」
+  description: string;      // meta description（SEO用）
+  propertyIds: string[];    // 関連プロパティ（実在IDのみ。npm run validateで検証）
+  labels: string[];         // 比較表の列見出し（rows.valuesと同順・同数）
+  tldr: string;             // 結論ファースト（ひとことで言うと）
+  rows: { aspect: string; values: string[] }[];  // 比較表（valuesはlabelsと同順）
+  guideline: string;        // 使い分けの指針
+  aiNote?: string;          // AIがよくやる取り違え
+}

@@ -1,4 +1,4 @@
-import type { CSSProperty, Technique } from '@/types/css';
+import type { CSSProperty, Technique, Comparison } from '@/types/css';
 
 export const SITE_URL = 'https://www.css-dictionary.com';
 
@@ -109,6 +109,42 @@ export function propertyToMarkdown(property: CSSProperty): string {
     lines.push('');
   }
 
+  return lines.join('\n');
+}
+
+/** 比較記事をMarkdownに変換する */
+export function comparisonToMarkdown(comparison: Comparison): string {
+  const lines: string[] = [];
+  lines.push(`# ${comparison.title}`);
+  lines.push('');
+  lines.push(`> ${comparison.tldr}`);
+  lines.push('');
+  lines.push(`- URL: ${SITE_URL}/compare/${comparison.id}/`);
+  lines.push('');
+  lines.push('## 比較表');
+  lines.push('');
+  lines.push(`| 観点 | ${comparison.labels.join(' | ')} |`);
+  lines.push(`| --- | ${comparison.labels.map(() => '---').join(' | ')} |`);
+  for (const row of comparison.rows) {
+    lines.push(`| ${row.aspect} | ${row.values.join(' | ')} |`);
+  }
+  lines.push('');
+  lines.push('## 使い分けの指針');
+  lines.push('');
+  lines.push(comparison.guideline);
+  lines.push('');
+  if (comparison.aiNote) {
+    lines.push('## AIがよくやる取り違え');
+    lines.push('');
+    lines.push(comparison.aiNote);
+    lines.push('');
+  }
+  lines.push('## それぞれの詳しい解説');
+  lines.push('');
+  for (const propertyId of comparison.propertyIds) {
+    lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
+  }
+  lines.push('');
   return lines.join('\n');
 }
 

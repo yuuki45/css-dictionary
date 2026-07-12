@@ -16,7 +16,13 @@ import * as path from 'node:path';
 import { cssProperties } from '../../src/data/properties';
 import { techniques } from '../../src/data/techniques';
 import { usecases } from '../../src/data/usecases';
-import { propertyToMarkdown, techniqueToMarkdown, SITE_URL } from '../../src/utils/propertyMarkdown';
+import { comparisons } from '../../src/data/comparisons';
+import {
+  propertyToMarkdown,
+  techniqueToMarkdown,
+  comparisonToMarkdown,
+  SITE_URL,
+} from '../../src/utils/propertyMarkdown';
 import { getUniqueCategories } from '../../src/utils/search';
 import { getCategorySlug } from '../../src/utils/categorySlug';
 
@@ -29,7 +35,7 @@ function writeFile(relativePath: string, content: string): void {
 }
 
 // 生成ディレクトリ内の古い.mdを掃除（削除されたエントリの残骸を防ぐ）
-for (const dir of ['property', 'techniques']) {
+for (const dir of ['property', 'techniques', 'compare']) {
   const fullDir = path.join(publicDir, dir);
   if (fs.existsSync(fullDir)) {
     for (const file of fs.readdirSync(fullDir)) {
@@ -44,6 +50,9 @@ for (const property of cssProperties) {
 }
 for (const technique of techniques) {
   writeFile(`techniques/${technique.id}.md`, techniqueToMarkdown(technique) + '\n');
+}
+for (const comparison of comparisons) {
+  writeFile(`compare/${comparison.id}.md`, comparisonToMarkdown(comparison) + '\n');
 }
 
 // ---- 2. 逆引き一覧 reverse.md ----
@@ -96,6 +105,14 @@ for (const technique of techniques) {
   );
 }
 llmsLines.push('');
+llmsLines.push('## 比較でわかるCSS（違いの解説）');
+llmsLines.push('');
+for (const comparison of comparisons) {
+  llmsLines.push(
+    `- [${comparison.title}](${SITE_URL}/compare/${comparison.id}.md): ${comparison.tldr}`
+  );
+}
+llmsLines.push('');
 llmsLines.push('## 逆引き');
 llmsLines.push('');
 llmsLines.push(
@@ -112,6 +129,7 @@ writeFile('llms.txt', llmsLines.join('\n'));
 const fullSections: string[] = [
   `# CSS辞書 全コンテンツ（${SITE_URL}）`,
   ...cssProperties.map((p) => propertyToMarkdown(p)),
+  ...comparisons.map((c) => comparisonToMarkdown(c)),
   ...techniques.map((t) => techniqueToMarkdown(t)),
   reverseLines.join('\n'),
 ];
@@ -138,6 +156,12 @@ const entries: SitemapEntry[] = [
   })),
   ...cssProperties.map((property) => ({
     path: `/property/${property.id}/`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  })),
+  { path: '/compare/', priority: '0.8', changefreq: 'weekly' },
+  ...comparisons.map((comparison) => ({
+    path: `/compare/${comparison.id}/`,
     priority: '0.8',
     changefreq: 'monthly',
   })),
@@ -171,5 +195,5 @@ writeFile('sitemap.xml', sitemapXml);
 
 console.log(
   `✅ 生成完了: property/*.md ${cssProperties.length}件, techniques/*.md ${techniques.length}件, ` +
-    `reverse.md, llms.txt, llms-full.txt, sitemap.xml (${entries.length} URL)`
+    `compare/*.md ${comparisons.length}件, reverse.md, llms.txt, llms-full.txt, sitemap.xml (${entries.length} URL)`
 );

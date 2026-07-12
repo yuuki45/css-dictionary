@@ -19,6 +19,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { getCategorySlug } from '../../src/utils/categorySlug';
 import { usecases } from '../../src/data/usecases';
+import { comparisons } from '../../src/data/comparisons';
 import { lookupBaseline } from '../lib/baseline-source';
 
 interface PropertyEntry {
@@ -128,6 +129,24 @@ for (const usecase of usecases) {
   }
 }
 
+// 4. comparisons の整合性
+const comparisonIds = new Set<string>();
+for (const comparison of comparisons) {
+  const label = `[compare:${comparison.id}]`;
+  if (comparisonIds.has(comparison.id)) errors.push(`${label} ID重複`);
+  comparisonIds.add(comparison.id);
+  for (const ref of comparison.propertyIds) {
+    if (!ids.has(ref)) errors.push(`${label} 未解決参照: "${ref}"`);
+  }
+  for (const row of comparison.rows) {
+    if (row.values.length !== comparison.labels.length) {
+      errors.push(
+        `${label} 行「${row.aspect}」の列数がlabelsと不一致（${row.values.length} vs ${comparison.labels.length}）`
+      );
+    }
+  }
+}
+
 // 結果出力
 if (warnings.length > 0) {
   console.warn(`⚠️  警告 ${warnings.length}件:`);
@@ -138,4 +157,4 @@ if (errors.length > 0) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
-console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件（警告${warnings.length}件）`);
+console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件 / 比較${comparisons.length}件（警告${warnings.length}件）`);

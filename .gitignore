@@ -45,5 +45,7 @@ next-env.d.ts
 /public/llms-full.txt
 /public/sitemap.xml
 /public/reverse.md
+/public/ai-review.md
 /public/property/
 /public/techniques/
+/public/compare/
