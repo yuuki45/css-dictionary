@@ -105,11 +105,8 @@ const hi = {
 };
 
 module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  // src全体をスキャンする（utils/のカテゴリ色クラス等もパージ対象に含めるため）
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: 'class',
   theme: {
     extend: {
