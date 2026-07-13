@@ -3,41 +3,52 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Layers, Heart, Settings, Search, Sparkles } from "lucide-react";
+import { Home, Search, BookOpen, Heart } from "lucide-react";
 
 interface NavigationProps {
   activeTab?: string;
   onTabChange?: (tab: string) => void;
 }
 
+// 旧タブID（categories/reverse/techniques等）からの互換マッピング
+const legacyTabMap: Record<string, string> = {
+  categories: "find",
+  reverse: "find",
+  techniques: "read",
+  settings: "",
+};
+
 export function Navigation({
   activeTab,
   onTabChange,
 }: NavigationProps) {
   const pathname = usePathname();
-  
+
   const tabs = [
     { id: "home", label: "ホーム", icon: Home, href: "/" },
-    { id: "categories", label: "カテゴリ", icon: Layers, href: "/categories" },
-    { id: "reverse", label: "逆引き", icon: Search, href: "/reverse" },
-    { id: "techniques", label: "テクニック", icon: Sparkles, href: "/techniques" },
+    { id: "find", label: "さがす", icon: Search, href: "/find" },
+    { id: "read", label: "よみもの", icon: BookOpen, href: "/read" },
     { id: "favorites", label: "お気に入り", icon: Heart, href: "/favorites" },
-    { id: "settings", label: "設定", icon: Settings, href: "/settings" },
   ];
 
   const getActiveTab = () => {
-    if (activeTab) return activeTab;
-    
+    if (activeTab) return legacyTabMap[activeTab] ?? activeTab;
+
     // パスから現在のタブを判定
     if (pathname === "/") return "home";
-    if (pathname.startsWith("/categories")) return "categories";
-    if (pathname.startsWith("/reverse")) return "reverse";
-    if (pathname.startsWith("/techniques")) return "techniques";
+    if (pathname.startsWith("/find")) return "find";
+    if (pathname.startsWith("/categories")) return "find";
+    if (pathname.startsWith("/reverse")) return "find";
+    if (pathname.startsWith("/read")) return "read";
+    if (pathname.startsWith("/modern")) return "read";
+    if (pathname.startsWith("/animations")) return "read";
+    if (pathname.startsWith("/compare")) return "read";
+    if (pathname.startsWith("/ai-review")) return "read";
+    if (pathname.startsWith("/techniques")) return "read";
     if (pathname.startsWith("/favorites")) return "favorites";
-    if (pathname.startsWith("/settings")) return "settings";
     if (pathname.startsWith("/property")) return "home"; // プロパティ詳細はホームタブ
-    
-    return "home";
+
+    return "";
   };
 
   const currentActiveTab = getActiveTab();
@@ -50,7 +61,7 @@ export function Navigation({
             <Link
               key={id}
               href={href}
-              className={`relative flex flex-col items-center px-3 py-2 transition-colors duration-200 ${
+              className={`relative flex flex-col items-center px-4 py-2 transition-colors duration-200 ${
                 currentActiveTab === id
                   ? "text-vermillion-600 dark:text-gold-300"
                   : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
@@ -62,7 +73,7 @@ export function Navigation({
               )}
               <Icon className="w-5 h-5 mb-1" />
               <span
-                className={`text-xs hidden sm:block ${
+                className={`text-[11px] sm:text-xs ${
                   currentActiveTab === id ? "font-bold" : "font-medium"
                 }`}
               >

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Moon, Sun, Sparkles } from 'lucide-react';
+import { Moon, Sun, Settings } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 
 /**
@@ -26,11 +26,12 @@ export function Header() {
 
         <div className="flex items-center gap-1">
           <Link
-            href="/modern/"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm text-gray-600 dark:text-gray-300 hover:text-vermillion-600 dark:hover:text-gold-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            href="/settings/"
+            className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-vermillion-600 dark:hover:text-gold-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            title="設定"
+            aria-label="設定"
           >
-            <Sparkles className="w-4 h-4" />
-            <span className="hidden sm:inline">モダンCSS</span>
+            <Settings className="w-5 h-5" />
           </Link>
           <button
             onClick={toggleTheme}
