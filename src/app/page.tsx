@@ -92,9 +92,10 @@ export default function HomePage() {
     }
   }, [searchQuery, filteredProperties.length, analytics]);
 
-  const recentProperties = properties.filter((p) =>
-    getRecentIds(5).includes(p.id)
-  );
+  // 履歴のID順（=最近見た順）を保ってプロパティを引く
+  const recentProperties = getRecentIds(5)
+    .map((id) => properties.find((p) => p.id === id))
+    .filter((p): p is CSSProperty => Boolean(p));
   const standardProperties = standardIds
     .map((id) => properties.find((p) => p.id === id))
     .filter((p): p is CSSProperty => Boolean(p));
