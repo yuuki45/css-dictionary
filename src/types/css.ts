@@ -111,6 +111,15 @@ export interface Recipe {
   aiPrompt: string;          // このUIをAIに作らせるときの依頼文例
 }
 
+// Tailwind対応（CSSプロパティ⇄Tailwindユーティリティ/バリアント）
+export interface TailwindMapping {
+  classes?: { className: string; css: string }[]; // 代表クラスと対応CSS値（網羅はしない）
+  pattern?: string;    // スケール系の一般形（例: "p-{n}（n×4px。p-4 = 16px）"）
+  arbitrary?: string;  // 任意値記法（例: "w-[52px]"）
+  variant?: string;    // 疑似クラス・メディア特性のバリアント（例: "hover:"）
+  note?: string;       // v3差分・注意点
+}
+
 // 比較記事（「AとBの違い」）
 export interface Comparison {
   id: string;               // URLスラッグ（例: "word-break-vs-overflow-wrap"）

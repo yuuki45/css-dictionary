@@ -4,6 +4,7 @@ import { CSSProperty } from "../../types/css";
 import { InteractiveDemo } from "../InteractiveDemo";
 import { CopyForAIButton } from "../CopyForAIButton";
 import { SyntaxSection } from "./sections/SyntaxSection";
+import { TailwindSection } from "./sections/TailwindSection";
 import { ExamplesSection } from "./sections/ExamplesSection";
 import { TipsSection } from "./sections/TipsSection";
 import { CommonMistakesSection } from "./sections/CommonMistakesSection";
@@ -74,6 +75,8 @@ export function PropertyDetail({
         </div>
 
         <SyntaxSection syntax={property.syntax} />
+
+        <TailwindSection propertyId={property.id} />
 
         {/* Interactive Demo */}
         {property.interactive && (

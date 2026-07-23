@@ -6,6 +6,7 @@ import { Navigation } from '@/components/Navigation';
 import { cssProperties } from '@/data/properties';
 import { animations } from '@/data/animations';
 import { recipes } from '@/data/recipes';
+import { tailwindMap } from '@/data/tailwindMap';
 import { comparisons } from '@/data/comparisons';
 
 export const metadata: Metadata = {
@@ -55,6 +56,12 @@ export default function ReadPage() {
       title: 'AI生成CSSレビューチェックリスト',
       description: 'AIがよく間違えるポイントを全プロパティ分集約した観点集',
       count: `${aiCount}観点`,
+    },
+    {
+      href: '/tailwind/',
+      title: 'CSS⇄Tailwind対応表',
+      description: 'プロパティとTailwindクラス・バリアントの対応をカテゴリ別に一覧（v4基準）',
+      count: `${Object.keys(tailwindMap).length}項目`,
     },
   ];
 

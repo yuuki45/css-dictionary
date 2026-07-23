@@ -46,6 +46,7 @@ next-env.d.ts
 /public/sitemap.xml
 /public/reverse.md
 /public/ai-review.md
+/public/tailwind.md
 /public/property/
 /public/compare/
 /public/animations/

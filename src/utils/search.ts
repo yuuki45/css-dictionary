@@ -1,4 +1,15 @@
 import { CSSProperty } from "../types/css";
+import { tailwindMap } from "../data/tailwindMap";
+
+// Tailwind対応データ由来の検索別名（クラス名・バリアント）。tailwindMapが単一ソース
+function tailwindAliasesOf(propertyId: string): string[] {
+  const tw = tailwindMap[propertyId];
+  if (!tw) return [];
+  return [
+    ...(tw.classes?.map((entry) => entry.className) ?? []),
+    ...(tw.variant ? [tw.variant] : []),
+  ];
+}
 
 // マッチの強さでスコアリングする（大きいほど上位に表示）
 function scoreProperty(property: CSSProperty, lowerQuery: string): number {
@@ -6,7 +17,7 @@ function scoreProperty(property: CSSProperty, lowerQuery: string): number {
   if (name === lowerQuery) return 100;
   if (name.startsWith(lowerQuery)) return 80;
 
-  const aliases = property.searchAliases ?? [];
+  const aliases = [...(property.searchAliases ?? []), ...tailwindAliasesOf(property.id)];
   if (aliases.some((alias) => alias.toLowerCase() === lowerQuery)) return 75;
   if (aliases.some((alias) => alias.toLowerCase().includes(lowerQuery))) return 70;
 

@@ -1,4 +1,5 @@
-import type { CSSProperty, Comparison, AnimationExample, Recipe } from '@/types/css';
+import type { CSSProperty, Comparison, AnimationExample, Recipe, TailwindMapping } from '@/types/css';
+import { tailwindMap } from '@/data/tailwindMap';
 
 export const SITE_URL = 'https://www.css-dictionary.com';
 
@@ -12,6 +13,22 @@ const baselineLabels: Record<string, string> = {
 function formatYearMonth(yearMonth: string): string {
   const [year, month] = yearMonth.split('-');
   return `${year}年${Number(month)}月`;
+}
+
+/** TailwindMapping 1件ぶんのMarkdown行（propertyToMarkdownとtailwindMapToMarkdownで共用） */
+function tailwindMappingLines(tw: TailwindMapping): string[] {
+  const lines: string[] = [];
+  if (tw.variant) {
+    lines.push(`- バリアント: \`${tw.variant}\` を先頭に付けて使う`);
+  }
+  for (const entry of tw.classes ?? []) {
+    lines.push(`- \`${entry.className}\` → ${entry.css}`);
+  }
+  if (tw.pattern) lines.push(`- 一般形: \`${tw.pattern}\``);
+  if (tw.arbitrary) lines.push(`- 任意値: \`${tw.arbitrary}\``);
+  if (tw.note) lines.push(`- 補足: ${tw.note}`);
+  lines.push('');
+  return lines;
 }
 
 /**
@@ -37,6 +54,13 @@ export function propertyToMarkdown(property: CSSProperty): string {
   lines.push(property.syntax);
   lines.push('```');
   lines.push('');
+
+  const tw = tailwindMap[property.id];
+  if (tw) {
+    lines.push('## Tailwindでは');
+    lines.push('');
+    lines.push(...tailwindMappingLines(tw));
+  }
 
   lines.push('## ブラウザ対応');
   lines.push('');
@@ -239,6 +263,34 @@ export function recipeToMarkdown(recipe: Recipe): string {
     lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
   }
   lines.push('');
+  return lines.join('\n');
+}
+
+/**
+ * CSS⇄Tailwind対応表全体をMarkdownに変換する。
+ * /tailwind/ の「AI用にコピー」と tailwind.md 生成（prebuild）の共通単一ソース。
+ * カテゴリ順・プロパティ順は cssProperties の並びに従う。
+ */
+export function tailwindMapToMarkdown(properties: CSSProperty[]): string {
+  const lines: string[] = [];
+  lines.push('# CSS⇄Tailwind対応表');
+  lines.push('');
+  lines.push('> CSSプロパティとTailwindユーティリティクラス・バリアントの対応表（Tailwind v4基準）。各プロパティの詳しい解説はリンク先を参照。');
+  lines.push('');
+  lines.push(`- URL: ${SITE_URL}/tailwind/`);
+  lines.push('');
+
+  const mapped = properties.filter((p) => tailwindMap[p.id]);
+  const categories = [...new Set(mapped.map((p) => p.category))];
+  for (const category of categories) {
+    lines.push(`## ${category}`);
+    lines.push('');
+    for (const property of mapped.filter((p) => p.category === category)) {
+      lines.push(`### ${property.name}（${SITE_URL}/property/${property.id}.md）`);
+      lines.push('');
+      lines.push(...tailwindMappingLines(tailwindMap[property.id]));
+    }
+  }
   return lines.join('\n');
 }
 

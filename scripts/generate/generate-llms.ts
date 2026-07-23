@@ -18,11 +18,13 @@ import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
 import { animations } from '../../src/data/animations';
 import { recipes } from '../../src/data/recipes';
+import { tailwindMap } from '../../src/data/tailwindMap';
 import {
   propertyToMarkdown,
   comparisonToMarkdown,
   animationToMarkdown,
   recipeToMarkdown,
+  tailwindMapToMarkdown,
   SITE_URL,
 } from '../../src/utils/propertyMarkdown';
 import { getUniqueCategories } from '../../src/utils/search';
@@ -106,6 +108,9 @@ for (const category of getUniqueCategories(cssProperties)) {
 }
 writeFile('ai-review.md', aiReviewLines.join('\n'));
 
+// ---- 2.5 CSS⇄Tailwind対応表 tailwind.md ----
+writeFile('tailwind.md', tailwindMapToMarkdown(cssProperties) + '\n');
+
 // ---- 3. llms.txt ----
 const modernCount = cssProperties.filter((p) => p.browserSupport.baseline !== 'widely').length;
 const llmsLines: string[] = [
@@ -146,6 +151,12 @@ llmsLines.push(
   `- [AI生成CSSレビューチェックリスト](${SITE_URL}/ai-review.md): AIがよく間違えるポイント全${aiItems.length}項目をプロパティ別に集約した観点集`
 );
 llmsLines.push('');
+llmsLines.push('## Tailwind対応');
+llmsLines.push('');
+llmsLines.push(
+  `- [CSS⇄Tailwind対応表](${SITE_URL}/tailwind.md): CSSプロパティとTailwindユーティリティ・バリアントの対応表（${Object.keys(tailwindMap).length}項目、v4基準）`
+);
+llmsLines.push('');
 llmsLines.push('## 比較でわかるCSS（違いの解説）');
 llmsLines.push('');
 for (const comparison of comparisons) {
@@ -173,6 +184,7 @@ const fullSections: string[] = [
   ...comparisons.map((c) => comparisonToMarkdown(c)),
   ...animations.map((a) => animationToMarkdown(a)),
   ...recipes.map((r) => recipeToMarkdown(r)),
+  tailwindMapToMarkdown(cssProperties),
   reverseLines.join('\n'),
 ];
 writeFile('llms-full.txt', fullSections.join('\n\n---\n\n') + '\n');
@@ -193,6 +205,7 @@ const entries: SitemapEntry[] = [
   { path: '/read/', priority: '0.6', changefreq: 'monthly' },
   { path: '/modern/', priority: '0.9', changefreq: 'weekly' },
   { path: '/ai-review/', priority: '0.9', changefreq: 'weekly' },
+  { path: '/tailwind/', priority: '0.8', changefreq: 'weekly' },
   { path: '/categories/', priority: '0.8', changefreq: 'weekly' },
   ...categories.map((category) => ({
     path: `/categories/${getCategorySlug(category)}/`,

@@ -43,6 +43,7 @@ export function Navigation({
     if (pathname.startsWith("/modern")) return "read";
     if (pathname.startsWith("/animations")) return "read";
     if (pathname.startsWith("/recipes")) return "read";
+    if (pathname.startsWith("/tailwind")) return "read";
     if (pathname.startsWith("/compare")) return "read";
     if (pathname.startsWith("/ai-review")) return "read";
     if (pathname.startsWith("/favorites")) return "favorites";

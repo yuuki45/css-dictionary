@@ -22,6 +22,7 @@ import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
 import { animations, animationCategories } from '../../src/data/animations';
 import { recipes, recipeCategories } from '../../src/data/recipes';
+import { tailwindMap } from '../../src/data/tailwindMap';
 import { lookupBaseline } from '../lib/baseline-source';
 
 interface PropertyEntry {
@@ -188,6 +189,26 @@ for (const recipe of recipes) {
   }
 }
 
+// 7. tailwindMap の整合性
+const tailwindClassNames = new Set<string>();
+for (const [propertyId, tw] of Object.entries(tailwindMap)) {
+  const label = `[tailwind:${propertyId}]`;
+  if (!ids.has(propertyId)) {
+    errors.push(`${label} 未解決参照: プロパティIDが存在しない`);
+  }
+  const hasContent =
+    (tw.classes?.length ?? 0) > 0 || tw.pattern || tw.variant || tw.arbitrary;
+  if (!hasContent) {
+    errors.push(`${label} classes/pattern/variant/arbitraryがすべて空`);
+  }
+  for (const entry of tw.classes ?? []) {
+    if (tailwindClassNames.has(entry.className)) {
+      errors.push(`${label} className重複: "${entry.className}"`);
+    }
+    tailwindClassNames.add(entry.className);
+  }
+}
+
 // 結果出力
 if (warnings.length > 0) {
   console.warn(`⚠️  警告 ${warnings.length}件:`);
@@ -198,4 +219,4 @@ if (errors.length > 0) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
-console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件 / 比較${comparisons.length}件 / アニメ${animations.length}件 / レシピ${recipes.length}件（警告${warnings.length}件）`);
+console.log(`\n✅ 検証OK: プロパティ${properties.length}件 / ユースケース${usecases.length}件 / 比較${comparisons.length}件 / アニメ${animations.length}件 / レシピ${recipes.length}件 / Tailwind対応${Object.keys(tailwindMap).length}件（警告${warnings.length}件）`);
