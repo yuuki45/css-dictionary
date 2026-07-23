@@ -5,6 +5,7 @@ import { Layout } from '@/components/Layout';
 import { Navigation } from '@/components/Navigation';
 import { cssProperties } from '@/data/properties';
 import { animations } from '@/data/animations';
+import { recipes } from '@/data/recipes';
 import { comparisons } from '@/data/comparisons';
 import { techniques } from '@/data/techniques';
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-const kanjiNumbers = ['一', '二', '三', '四', '五'];
+const kanjiNumbers = ['一', '二', '三', '四', '五', '六'];
 
 export default function ReadPage() {
   const modernCount = cssProperties.filter(
@@ -37,6 +38,12 @@ export default function ReadPage() {
       title: 'アニメーション実装集',
       description: '動くプレビュー付き・その場で編集できる実装例',
       count: `${animations.length}例`,
+    },
+    {
+      href: '/recipes/',
+      title: 'UIレシピ集',
+      description: 'ボタン・カード・フォームなど完成UI部品のレシピ。辞書リンク・Baseline対応状況付き',
+      count: `${recipes.length}例`,
     },
     {
       href: '/compare/',

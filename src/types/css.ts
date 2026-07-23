@@ -105,6 +105,21 @@ export interface AnimationExample {
   tips?: string;
 }
 
+// UIレシピ（完成されたUI部品の実装例）
+export interface Recipe {
+  id: string;                // URLスラッグ（例: "breadcrumb"）
+  title: string;             // 「パンくずリスト」
+  description: string;       // 一覧・meta description用の説明
+  category: string;          // recipeCategories（src/data/recipes.ts）のいずれか
+  html: string;
+  css: string;
+  js?: string;               // 最小限のJS（モーダル開閉等）。ある場合のみプレビューでスクリプトを実行
+  explanation: string;       // 仕組みの解説
+  keyProperties: string[];   // 使用している主要プロパティ（実在ID。validateで検証）
+  tips?: string;
+  aiPrompt: string;          // このUIをAIに作らせるときの依頼文例
+}
+
 // 比較記事（「AとBの違い」）
 export interface Comparison {
   id: string;               // URLスラッグ（例: "word-break-vs-overflow-wrap"）

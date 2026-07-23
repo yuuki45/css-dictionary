@@ -18,11 +18,13 @@ import { techniques } from '../../src/data/techniques';
 import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
 import { animations } from '../../src/data/animations';
+import { recipes } from '../../src/data/recipes';
 import {
   propertyToMarkdown,
   techniqueToMarkdown,
   comparisonToMarkdown,
   animationToMarkdown,
+  recipeToMarkdown,
   SITE_URL,
 } from '../../src/utils/propertyMarkdown';
 import { getUniqueCategories } from '../../src/utils/search';
@@ -37,7 +39,7 @@ function writeFile(relativePath: string, content: string): void {
 }
 
 // 生成ディレクトリ内の古い.mdを掃除（削除されたエントリの残骸を防ぐ）
-for (const dir of ['property', 'techniques', 'compare', 'animations']) {
+for (const dir of ['property', 'techniques', 'compare', 'animations', 'recipes']) {
   const fullDir = path.join(publicDir, dir);
   if (fs.existsSync(fullDir)) {
     for (const file of fs.readdirSync(fullDir)) {
@@ -58,6 +60,9 @@ for (const comparison of comparisons) {
 }
 for (const animation of animations) {
   writeFile(`animations/${animation.id}.md`, animationToMarkdown(animation) + '\n');
+}
+for (const recipe of recipes) {
+  writeFile(`recipes/${recipe.id}.md`, recipeToMarkdown(recipe) + '\n');
 }
 
 // ---- 2. 逆引き一覧 reverse.md ----
@@ -140,6 +145,14 @@ for (const animation of animations) {
   );
 }
 llmsLines.push('');
+llmsLines.push('## UIレシピ集');
+llmsLines.push('');
+for (const recipe of recipes) {
+  llmsLines.push(
+    `- [${recipe.title}](${SITE_URL}/recipes/${recipe.id}.md): ${recipe.description}`
+  );
+}
+llmsLines.push('');
 llmsLines.push('## AI協働');
 llmsLines.push('');
 llmsLines.push(
@@ -172,6 +185,7 @@ const fullSections: string[] = [
   ...cssProperties.map((p) => propertyToMarkdown(p)),
   ...comparisons.map((c) => comparisonToMarkdown(c)),
   ...animations.map((a) => animationToMarkdown(a)),
+  ...recipes.map((r) => recipeToMarkdown(r)),
   ...techniques.map((t) => techniqueToMarkdown(t)),
   reverseLines.join('\n'),
 ];
@@ -213,6 +227,12 @@ const entries: SitemapEntry[] = [
   { path: '/animations/', priority: '0.8', changefreq: 'weekly' },
   ...animations.map((animation) => ({
     path: `/animations/${animation.id}/`,
+    priority: '0.7',
+    changefreq: 'monthly',
+  })),
+  { path: '/recipes/', priority: '0.8', changefreq: 'weekly' },
+  ...recipes.map((recipe) => ({
+    path: `/recipes/${recipe.id}/`,
     priority: '0.7',
     changefreq: 'monthly',
   })),

@@ -1,4 +1,4 @@
-import type { CSSProperty, Technique, Comparison, AnimationExample } from '@/types/css';
+import type { CSSProperty, Technique, Comparison, AnimationExample, Recipe } from '@/types/css';
 
 export const SITE_URL = 'https://www.css-dictionary.com';
 
@@ -183,6 +183,59 @@ export function animationToMarkdown(animation: AnimationExample): string {
   lines.push('## 使っているプロパティ');
   lines.push('');
   for (const propertyId of animation.keyProperties) {
+    lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
+/** UIレシピをMarkdownに変換する（Copy for AIとrecipes/{id}.md生成で共用） */
+export function recipeToMarkdown(recipe: Recipe): string {
+  const lines: string[] = [];
+  lines.push(`# ${recipe.title}のCSS実装`);
+  lines.push('');
+  lines.push(`> ${recipe.description}`);
+  lines.push('');
+  lines.push(`- カテゴリ: ${recipe.category}`);
+  lines.push(`- URL: ${SITE_URL}/recipes/${recipe.id}/`);
+  lines.push('');
+  lines.push('## HTML');
+  lines.push('');
+  lines.push('```html');
+  lines.push(recipe.html);
+  lines.push('```');
+  lines.push('');
+  lines.push('## CSS');
+  lines.push('');
+  lines.push('```css');
+  lines.push(recipe.css);
+  lines.push('```');
+  lines.push('');
+  if (recipe.js) {
+    lines.push('## JavaScript');
+    lines.push('');
+    lines.push('```js');
+    lines.push(recipe.js);
+    lines.push('```');
+    lines.push('');
+  }
+  lines.push('## 仕組みの解説');
+  lines.push('');
+  lines.push(recipe.explanation);
+  lines.push('');
+  if (recipe.tips) {
+    lines.push('## 実装のポイント');
+    lines.push('');
+    lines.push(recipe.tips);
+    lines.push('');
+  }
+  lines.push('## AIに依頼するときの文例');
+  lines.push('');
+  lines.push(recipe.aiPrompt);
+  lines.push('');
+  lines.push('## 使っているプロパティ');
+  lines.push('');
+  for (const propertyId of recipe.keyProperties) {
     lines.push(`- [${propertyId}](${SITE_URL}/property/${propertyId}.md)`);
   }
   lines.push('');

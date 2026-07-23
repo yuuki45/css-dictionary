@@ -10,6 +10,7 @@ import { CommonMistakesSection } from "./sections/CommonMistakesSection";
 import { AiNotesSection } from "./sections/AiNotesSection";
 import { PromptExamplesSection } from "./sections/PromptExamplesSection";
 import { RelatedPropertiesSection } from "./sections/RelatedPropertiesSection";
+import { RelatedRecipesSection } from "./sections/RelatedRecipesSection";
 import { BrowserSupportSection } from "./sections/BrowserSupportSection";
 
 interface PropertyDetailProps {
@@ -105,6 +106,8 @@ export function PropertyDetail({
             onNavigateToProperty={onNavigateToProperty}
           />
         )}
+
+        <RelatedRecipesSection propertyId={property.id} />
 
         <BrowserSupportSection browserSupport={property.browserSupport} />
       </div>

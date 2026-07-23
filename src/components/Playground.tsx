@@ -7,14 +7,16 @@ import { buildSrcDoc } from '@/utils/sandboxDoc';
 interface PlaygroundProps {
   initialHtml: string;
   initialCss: string;
+  /** 最小限のJS（UIレシピ用）。指定時のみJSペインを表示し、プレビューでスクリプトを実行する */
+  initialJs?: string;
   /** コピー時に呼ばれる（アナリティクス用） */
-  onCopy?: (type: 'html' | 'css') => void;
+  onCopy?: (type: 'html' | 'css' | 'js') => void;
   /** 最初に編集された時に一度だけ呼ばれる（アナリティクス用） */
   onFirstEdit?: () => void;
 }
 
 interface EditorPaneProps {
-  label: 'HTML' | 'CSS';
+  label: 'HTML' | 'CSS' | 'JS';
   value: string;
   onChange: (value: string) => void;
   onCopy: () => void;
@@ -81,33 +83,41 @@ function EditorPane({ label, value, onChange, onCopy, copied }: EditorPaneProps)
  * HTML/CSSを書き換えるとサンドボックスiframeのプレビューに即時反映される。
  * 依存ライブラリなし・変更はページ内に閉じる。
  */
-export function Playground({ initialHtml, initialCss, onCopy, onFirstEdit }: PlaygroundProps) {
+export function Playground({ initialHtml, initialCss, initialJs, onCopy, onFirstEdit }: PlaygroundProps) {
+  // JSペインの有無はマウント時に固定（レシピにjsがあるかどうかで決まる）
+  const hasJs = initialJs !== undefined;
   const [html, setHtml] = useState(initialHtml);
   const [css, setCss] = useState(initialCss);
-  const [srcDoc, setSrcDoc] = useState(() => buildSrcDoc(initialHtml, initialCss));
-  const [copiedType, setCopiedType] = useState<'html' | 'css' | null>(null);
+  const [js, setJs] = useState(initialJs ?? '');
+  const [srcDoc, setSrcDoc] = useState(() => buildSrcDoc(initialHtml, initialCss, initialJs));
+  const [copiedType, setCopiedType] = useState<'html' | 'css' | 'js' | null>(null);
   const editedRef = useRef(false);
 
   // 入力が止まってから300msでプレビューを更新
   useEffect(() => {
-    const timer = setTimeout(() => setSrcDoc(buildSrcDoc(html, css)), 300);
+    const timer = setTimeout(
+      () => setSrcDoc(buildSrcDoc(html, css, hasJs ? js : undefined)),
+      300
+    );
     return () => clearTimeout(timer);
-  }, [html, css]);
+  }, [html, css, js, hasJs]);
 
-  const isPristine = html === initialHtml && css === initialCss;
+  const isPristine = html === initialHtml && css === initialCss && js === (initialJs ?? '');
 
-  const handleChange = (type: 'html' | 'css') => (value: string) => {
+  const handleChange = (type: 'html' | 'css' | 'js') => (value: string) => {
     if (!editedRef.current) {
       editedRef.current = true;
       onFirstEdit?.();
     }
     if (type === 'html') setHtml(value);
-    else setCss(value);
+    else if (type === 'css') setCss(value);
+    else setJs(value);
   };
 
-  const handleCopy = async (type: 'html' | 'css') => {
+  const handleCopy = async (type: 'html' | 'css' | 'js') => {
     try {
-      await navigator.clipboard.writeText(type === 'html' ? html : css);
+      const text = type === 'html' ? html : type === 'css' ? css : js;
+      await navigator.clipboard.writeText(text);
       setCopiedType(type);
       onCopy?.(type);
       setTimeout(() => setCopiedType(null), 2000);
@@ -119,6 +129,7 @@ export function Playground({ initialHtml, initialCss, onCopy, onFirstEdit }: Pla
   const handleReset = () => {
     setHtml(initialHtml);
     setCss(initialCss);
+    setJs(initialJs ?? '');
   };
 
   return (
@@ -153,7 +164,8 @@ export function Playground({ initialHtml, initialCss, onCopy, onFirstEdit }: Pla
         <div className="resize-y overflow-hidden rounded-sm border border-gray-300 dark:border-gray-600 h-[320px] min-h-[160px]">
           <iframe
             srcDoc={srcDoc}
-            sandbox=""
+            // JSありレシピのみスクリプト実行を許可（allow-same-originは付けない）
+            sandbox={hasJs ? 'allow-scripts' : ''}
             title="プレビュー"
             className="w-full h-full bg-[#fdfaf3]"
           />
@@ -174,7 +186,7 @@ export function Playground({ initialHtml, initialCss, onCopy, onFirstEdit }: Pla
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           書き換えるとプレビューに即反映されます。変更はこのページ内だけで、リロードすると元に戻ります。
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${hasJs ? 'xl:grid-cols-3' : ''} gap-4`}>
           <EditorPane
             label="HTML"
             value={html}
@@ -189,6 +201,15 @@ export function Playground({ initialHtml, initialCss, onCopy, onFirstEdit }: Pla
             onCopy={() => handleCopy('css')}
             copied={copiedType === 'css'}
           />
+          {hasJs && (
+            <EditorPane
+              label="JS"
+              value={js}
+              onChange={handleChange('js')}
+              onCopy={() => handleCopy('js')}
+              copied={copiedType === 'js'}
+            />
+          )}
         </div>
       </div>
     </div>
