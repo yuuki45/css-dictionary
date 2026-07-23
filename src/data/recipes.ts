@@ -835,6 +835,182 @@ copyBtn.addEventListener('click', async () => {
       'Webサイトで使うボタンデザインを10種類作ってください。基本・アウトライン・グラデーション・ホバーで浮き上がる・パルスアニメーション・Pill型・アイコン付き・ガラスモーフィズム・ネオモーフィズム・矢印付きCTAの構成で、各ボタンにhoverとfocus-visibleのスタイルを付けてください。',
   },
 
+  {
+    id: 'quantity-stepper',
+    title: '数量ステッパー（−／＋）',
+    description:
+      'ECのカートで使う数量選択UI。number入力の標準スピナーを消して−／＋ボタンを自作し、最小・最大値でクランプします。',
+    category: 'ボタン・操作',
+    html: `<div class="stepper">
+  <button type="button" id="dec" aria-label="数量を減らす">−</button>
+  <input type="number" id="qty" value="1" min="1" max="99" aria-label="数量" />
+  <button type="button" id="inc" aria-label="数量を増やす">＋</button>
+</div>`,
+    css: `.stepper {
+  display: inline-flex;
+  border: 1px solid #cbbfa5;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.stepper button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f3ecd9;
+  font-size: 18px;
+  color: #5c5445;
+  cursor: pointer;
+  user-select: none; /* 連打時にテキスト選択が走らないように */
+  transition: background-color 0.15s;
+}
+
+.stepper button:hover {
+  background: #e2d8c2;
+}
+
+.stepper button:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -2px;
+}
+
+.stepper input {
+  width: 56px;
+  border: none;
+  text-align: center;
+  font: inherit;
+  appearance: textfield; /* 標準スピナーを消す（Firefox） */
+}
+
+.stepper input::-webkit-outer-spin-button,
+.stepper input::-webkit-inner-spin-button {
+  appearance: none; /* 標準スピナーを消す（Chrome/Safari） */
+  margin: 0;
+}
+
+.stepper input:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -2px;
+}`,
+    js: `const qty = document.getElementById('qty');
+const step = (n) => {
+  const next = Number(qty.value || 1) + n;
+  qty.value = Math.min(Number(qty.max), Math.max(Number(qty.min), next));
+};
+document.getElementById('dec').addEventListener('click', () => step(-1));
+document.getElementById('inc').addEventListener('click', () => step(1));`,
+    explanation:
+      '実体は input type="number" なので、キーボードの上下キーや直接入力はそのまま使えます。ブラウザ標準のスピナーは appearance で消し、大きくタップしやすい−／＋ボタンを自作します。JSはmin/max属性の範囲に収める加算だけで、値の検証ロジックをHTML属性に寄せているのがポイントです。',
+    keyProperties: ['display-flex', 'appearance', 'border-radius', 'user-select'],
+    tips: '合計金額の表示がある場合は、その要素にaria-liveを付けると数量変更が支援技術にも伝わります。',
+    aiPrompt:
+      'ECカート用の数量ステッパーを作ってください。input type="number"の標準スピナーをappearanceで消し、−／＋ボタン（aria-label付き）で増減、min/max属性の範囲でクランプしてください。',
+  },
+  {
+    id: 'icon-only-button',
+    title: 'アイコンだけのボタン',
+    description:
+      'お気に入り・共有・メニューなどのアイコンボタン。44pxのタップ領域とaria-labelで、小さく見えても押しやすく意味が伝わるボタンにします。',
+    category: 'ボタン・操作',
+    html: `<div class="toolbar">
+  <button type="button" class="icon-btn" aria-label="お気に入りに追加">♡</button>
+  <button type="button" class="icon-btn" aria-label="共有する">↗</button>
+  <button type="button" class="icon-btn" aria-label="その他のメニュー">⋯</button>
+</div>`,
+    css: `.toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 44px;  /* タップターゲットの推奨サイズ */
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e2d8c2;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 18px;
+  color: #5c5445;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.icon-btn:hover {
+  border-color: #b0413e;
+  color: #b0413e;
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: 2px;
+}`,
+    explanation:
+      'アイコンだけのボタンで最も大事なのはCSSではなくaria-labelです。視覚的なラベルがない分、ボタンの意味はここでしか伝わりません。サイズはWCAGのターゲットサイズ推奨に合わせて44px四方を確保し、アイコンは display: grid + place-items: center で正確に中央へ置きます。',
+    keyProperties: ['display-grid', 'place-items', 'width', 'height', 'border-radius'],
+    tips: '絵文字ではなくSVGアイコンを使う場合は、svg側にaria-hidden="true"を付けてボタンのaria-labelに一本化します。',
+    aiPrompt:
+      'アイコンのみのボタンを3つ並べたツールバーを作ってください。各ボタンは44px四方、aria-labelで意味を伝え、display: gridで中央配置、hoverとfocus-visibleのスタイルも付けてください。',
+  },
+  {
+    id: 'button-group',
+    title: '連結ボタングループ',
+    description:
+      '「日・週・月」のような切り替えに使う連結ボタン。枠線を1px重ねて一体化し、両端だけ:first-child/:last-childで角丸にします。',
+    category: 'ボタン・操作',
+    html: `<div class="btn-group" role="group" aria-label="期間の切り替え">
+  <button type="button" class="is-active" aria-pressed="true">日</button>
+  <button type="button" aria-pressed="false">週</button>
+  <button type="button" aria-pressed="false">月</button>
+</div>`,
+    css: `.btn-group {
+  display: inline-flex;
+}
+
+.btn-group button {
+  padding: 8px 20px;
+  border: 1px solid #cbbfa5;
+  margin-left: -1px; /* 隣の枠線と重ねて二重線を防ぐ */
+  background: #fff;
+  color: #5c5445;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.btn-group button:first-child {
+  margin-left: 0;
+  border-radius: 8px 0 0 8px;
+}
+
+.btn-group button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.btn-group button:hover {
+  background: #f3ecd9;
+}
+
+.btn-group button:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -2px;
+  position: relative; /* 重なった隣のボタンにリングが隠れないように */
+}
+
+.btn-group .is-active {
+  background: #b0413e;
+  border-color: #b0413e;
+  color: #fff;
+}`,
+    explanation:
+      '各ボタンに margin-left: -1px を掛けて枠線を1本に重ね、:first-child と :last-child で両端だけ角丸にすると一体化して見えます。フォーカスリングは隣のボタンの下に潜り込むため、:focus-visible で position: relative にして最前面へ出すのが小さなコツです。選択状態は aria-pressed で支援技術にも伝えます。',
+    keyProperties: ['display-flex', 'pseudo-first-child', 'border-radius', 'margin'],
+    tips: '選択の切り替えロジックが必要ならJSでis-activeとaria-pressedを同時に更新します。単一選択ならradio方式（セグメンテッドコントロールのレシピ）も検討してください。',
+    aiPrompt:
+      '「日・週・月」を切り替える連結ボタングループを作ってください。margin-left: -1pxで枠線を重ね、:first-child/:last-childで両端のみ角丸、選択状態はaria-pressedで表現してください。',
+  },
+
   // ============ カード ============
   {
     id: 'article-card',
@@ -1414,6 +1590,244 @@ copyBtn.addEventListener('click', async () => {
       '3プラン構成の料金テーブルを作ってください。カードをrepeat(auto-fit, minmax())のグリッドで並べ、人気プランはscale(1.05)とバッジで強調、機能リストは✓/×アイコン付き、モバイルでは1カラムに畳んでください。',
   },
 
+  {
+    id: 'stat-card',
+    title: '統計カード（KPI表示）',
+    description:
+      'ダッシュボードで使う数値カード。tabular-numsで桁を揃え、増減は色と矢印記号の両方で伝える色覚フレンドリーな作りです。',
+    category: 'カード',
+    html: `<div class="stats">
+  <article class="stat">
+    <p class="stat-label">月間ページビュー</p>
+    <p class="stat-value">128,400</p>
+    <p class="stat-diff up">↑ 12.4%（先月比）</p>
+  </article>
+  <article class="stat">
+    <p class="stat-label">直帰率</p>
+    <p class="stat-value">42.1%</p>
+    <p class="stat-diff down">↓ 3.2pt（先月比）</p>
+  </article>
+</div>`,
+    css: `.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stat {
+  min-width: 160px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 10px;
+}
+
+.stat p { margin: 0; }
+
+.stat-label {
+  font-size: 12px;
+  color: #8a7d63;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1712;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums; /* 数字の桁幅を揃える */
+}
+
+.stat-diff {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stat-diff.up   { color: #4a7c59; }
+.stat-diff.down { color: #8e354a; }`,
+    explanation:
+      '数値には font-variant-numeric: tabular-nums を指定し、更新で値が変わっても桁幅が揃ってガタつかないようにします。増減の良し悪しは緑／臙脂の色だけでなく「↑↓」の記号でも重ねて表現し、色の区別が難しいユーザーにも伝わるようにしています。カード自体は flex-wrap で並べ、画面幅に応じて折り返します。',
+    keyProperties: ['display-flex', 'flex-wrap', 'gap', 'font-size', 'border-radius'],
+    tips: '「増加=良い」とは限らない指標（直帰率など）では、色の意味を「値の方向」ではなく「良し悪し」に合わせると誤読を防げます。',
+    aiPrompt:
+      'ダッシュボード用のKPI統計カードを作ってください。ラベル・大きな数値（font-variant-numeric: tabular-nums）・前月比の増減表示の構成で、増減は色と矢印記号の両方で伝えてください。',
+  },
+  {
+    id: 'product-card',
+    title: '商品カード（星評価・価格つき）',
+    description:
+      'EC一覧で使う商品カード。正方形サムネイル・星評価・税込価格・カートボタンの定番構成で、評価はaria-labelで数値も伝えます。',
+    category: 'カード',
+    html: `<article class="product">
+  <div class="product-photo" role="img" aria-label="商品写真"></div>
+  <div class="product-body">
+    <h3 class="product-name">波佐見焼マグカップ 藍</h3>
+    <p class="rating" aria-label="5点満点中4点（24件のレビュー）">
+      <span aria-hidden="true">★★★★<span class="star-off">★</span></span>
+      <span class="count" aria-hidden="true">(24)</span>
+    </p>
+    <p class="price">¥2,640 <span class="tax">税込</span></p>
+    <button type="button" class="add-cart">カートに入れる</button>
+  </div>
+</article>`,
+    css: `.product {
+  width: 220px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.product-photo {
+  aspect-ratio: 1;
+  background: linear-gradient(150deg, #d9c79a, #274a78);
+}
+
+.product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rating {
+  margin: 0;
+  color: #d9a441;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.star-off { color: #e2d8c2; }
+
+.count {
+  color: #8a7d63;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.price {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1712;
+}
+
+.tax {
+  font-size: 11px;
+  font-weight: 400;
+  color: #8a7d63;
+}
+
+.add-cart {
+  margin-top: 6px;
+  padding: 9px 0;
+  border: 1px solid #b0413e;
+  border-radius: 6px;
+  background: #b0413e;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.add-cart:hover { background: #97362f; }
+
+.add-cart:focus-visible {
+  outline: 2px solid #1a1712;
+  outline-offset: 2px;
+}`,
+    explanation:
+      '星評価は「★★★★★」の文字を塗り分ける最も単純な方式です。見た目の星は aria-hidden にし、評価の実体は親の aria-label（「5点満点中4点」）で伝えます。星の文字列だけだと支援技術には「星星星…」と読まれてしまうためです。サムネイルは aspect-ratio: 1 の正方形で、一覧に並べたときの高さが揃います。',
+    keyProperties: ['aspect-ratio', 'overflow', 'display-flex', 'gap', 'letter-spacing'],
+    tips: '0.5点刻みの星が必要な場合は、background: linear-gradient()で塗り幅を制御する方式に切り替えます。',
+    aiPrompt:
+      'EC用の商品カードを作ってください。正方形サムネイル（aspect-ratio: 1）・商品名・星評価（見た目はaria-hidden、実体はaria-labelで「5点満点中4点」）・税込価格・カートボタンの構成にしてください。',
+  },
+  {
+    id: 'testimonial-card',
+    title: 'お客様の声カード',
+    description:
+      'LPで使う推薦文（テスティモニアル）カード。blockquoteの正しいマークアップに、大きな引用符の装飾とアバター付き署名を組み合わせます。',
+    category: 'カード',
+    html: `<figure class="voice">
+  <blockquote>
+    プロパティを調べるたびに開いています。コード例がその場で動くので、AIに依頼する前の確認が早くなりました。
+  </blockquote>
+  <figcaption>
+    <span class="voice-avatar" aria-hidden="true"></span>
+    <span class="voice-who">
+      <strong>田中 美咲</strong>
+      <small>フロントエンドエンジニア</small>
+    </span>
+  </figcaption>
+</figure>`,
+    css: `.voice {
+  position: relative;
+  max-width: 320px;
+  margin: 0;
+  padding: 26px 22px 18px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 12px;
+}
+
+/* 大きな飾り引用符 */
+.voice::before {
+  content: "“";
+  position: absolute;
+  top: 2px;
+  left: 14px;
+  font-size: 52px;
+  line-height: 1;
+  color: #e2d8c2;
+  font-family: serif;
+}
+
+.voice blockquote {
+  position: relative; /* 引用符より手前に */
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #1a1712;
+}
+
+.voice figcaption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voice-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #d9c79a, #8a6d3b);
+}
+
+.voice-who strong {
+  display: block;
+  font-size: 13px;
+}
+
+.voice-who small {
+  font-size: 11px;
+  color: #8a7d63;
+}`,
+    explanation:
+      '引用は figure > blockquote + figcaption が意味的に正しい組み合わせで、「誰の発言か」が構造として伝わります。飾りの引用符は ::before の content で置き、色を枠線と同じ淡色にして本文の邪魔をしない「背景装飾」に留めます。blockquote に position: relative を与えて引用符より手前に重ねています。',
+    keyProperties: ['position', 'border-radius', 'line-height', 'display-flex', 'gap'],
+    tips: '複数並べる場合はレスポンシブカードグリッドのレシピと組み合わせると、枚数が変わっても崩れません。',
+    aiPrompt:
+      'お客様の声カードを作ってください。figure > blockquote + figcaptionでマークアップし、::beforeの大きな引用符装飾、円形アバターと名前・肩書きの署名行を付けてください。',
+  },
+
   // ============ フォーム ============
   {
     id: 'floating-label-input',
@@ -1684,6 +2098,201 @@ copyBtn.addEventListener('click', async () => {
     tips: '塗り分けを実際の値に追従させるにはJSでinputイベントを拾いCSS変数を更新します。色だけならaccent-colorが最短です。',
     aiPrompt:
       'input type="range"のスライダーをカスタムデザインしてください。appearance: noneでリセットし、::-webkit-slider-thumbと::-moz-range-thumbの両方につまみの装飾を書き、focus-visibleのリングも付けてください。',
+  },
+
+  {
+    id: 'search-input',
+    title: '検索ボックス（クリアボタン付き）',
+    description:
+      'アイコンとクリアボタンを内蔵した検索入力欄。ブラウザごとに見た目が違う標準の×ボタンを消して、自前のクリアに統一します。',
+    category: 'フォーム',
+    html: `<form class="search" role="search">
+  <span class="search-icon" aria-hidden="true">🔍</span>
+  <input type="search" id="q" placeholder="プロパティを検索" aria-label="サイト内検索" />
+  <button type="button" id="clear" class="search-clear" aria-label="入力をクリア" hidden>×</button>
+</form>`,
+    css: `.search {
+  position: relative;
+  width: 260px;
+}
+
+.search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 36px; /* 左右のアイコン分の余白 */
+  border: 1px solid #cbbfa5;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+/* ブラウザ標準の×を消して自前に統一 */
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search input:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -1px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: #f3ecd9;
+  color: #5c5445;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.search-clear:hover { background: #e2d8c2; }
+
+.search-clear:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: 1px;
+}`,
+    js: `const input = document.getElementById('q');
+const clear = document.getElementById('clear');
+
+input.addEventListener('input', () => {
+  clear.hidden = input.value === '';
+});
+
+clear.addEventListener('click', () => {
+  input.value = '';
+  clear.hidden = true;
+  input.focus(); // クリア後は入力に戻す
+});`,
+    explanation:
+      'アイコンとクリアボタンは position: absolute で入力欄に重ね、その分の余白をinputのpaddingで確保します。type="search" の標準クリアボタンはブラウザごとに見た目が異なるため、::-webkit-search-cancel-button で消して自前のボタンに統一。クリア後に input.focus() でフォーカスを戻すのが、続けて入力し直せる小さな気配りです。',
+    keyProperties: ['position', 'appearance', 'border-radius', 'transform', 'pointer-events'],
+    tips: 'form要素にrole="search"を付けると、支援技術のランドマークとして検索欄に直接ジャンプできるようになります。',
+    aiPrompt:
+      'クリアボタン付きの検索ボックスを作ってください。アイコンとクリアボタンをposition: absoluteで内蔵し、標準の×は::-webkit-search-cancel-buttonで無効化、クリア後はフォーカスを入力欄に戻してください。',
+  },
+  {
+    id: 'custom-select',
+    title: 'カスタムセレクトボックス',
+    description:
+      'appearance: noneで標準の見た目を外し、矢印を自作したセレクトボックス。ブラウザ間の見た目の差をなくしつつ、キーボード操作は標準のままです。',
+    category: 'フォーム',
+    html: `<label class="field-label" for="pref">お住まいの都道府県</label>
+<div class="select-wrap">
+  <select id="pref">
+    <option>東京都</option>
+    <option>京都府</option>
+    <option>石川県</option>
+    <option>長崎県</option>
+  </select>
+</div>`,
+    css: `.field-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.select-wrap {
+  position: relative;
+  width: 220px;
+}
+
+.select-wrap select {
+  width: 100%;
+  appearance: none; /* 標準の矢印・枠を外す */
+  padding: 10px 36px 10px 12px;
+  border: 1px solid #cbbfa5;
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  color: #1a1712;
+  cursor: pointer;
+}
+
+.select-wrap select:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -1px;
+}
+
+/* 矢印はラッパー側に描く（selectは疑似要素が使えない） */
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 10px;
+  height: 6px;
+  transform: translateY(-50%);
+  background: #8a6d3b;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  pointer-events: none; /* 矢印がクリックを妨げないように */
+}`,
+    explanation:
+      'select要素は ::after などの疑似要素が使えないため、ラッパーdivを1枚かぶせてそちらに矢印を描きます。矢印には pointer-events: none を指定し、クリックが下のselectへ素通りするようにします。appearance: none で消えるのは「閉じた状態」の見た目だけで、開いたドロップダウンの中身はOS標準のまま（装飾不可）という割り切りも覚えておくと迷いません。',
+    keyProperties: ['appearance', 'position', 'border-radius', 'pointer-events'],
+    tips: 'ドロップダウンの中身までデザインしたい場合は、カスタマイズ可能セレクト（appearance: base-select、実験的）かJSコンポーネントの領域になります。',
+    aiPrompt:
+      'カスタムデザインのセレクトボックスを作ってください。appearance: noneで標準の見た目を外し、ラッパー要素の::after + clip-pathで矢印を自作、pointer-events: noneでクリックを妨げないようにしてください。',
+  },
+  {
+    id: 'auto-grow-textarea',
+    title: '入力に合わせて伸びるテキストエリア',
+    description:
+      'field-sizing: contentだけで、入力量に応じて高さが自動で伸びるテキストエリア。従来JSが必須だった挙動がCSS1行になりました。',
+    category: 'フォーム',
+    html: `<label class="field-label" for="comment">コメント</label>
+<textarea id="comment" class="grow" rows="2" placeholder="入力すると高さが自動で伸びます"></textarea>`,
+    css: `.field-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.grow {
+  width: 280px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #cbbfa5;
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  field-sizing: content; /* 内容に合わせてサイズが変わる */
+  min-height: 2lh;       /* rows相当の最低高さ */
+  max-height: 10lh;      /* 伸びすぎ防止。超えたらスクロール */
+  resize: none;          /* 手動リサイズは無効化（自動と競合するため） */
+}
+
+.grow:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -1px;
+}`,
+    explanation:
+      'field-sizing: content は「フォーム部品のサイズを内容に合わせる」プロパティで、これまで scrollHeight を監視するJSで実装していた自動リサイズがCSSだけで済みます。最低・最大の高さは min-height / max-height で制御し、単位に lh（1行の高さ）を使うと「2行分〜10行分」と直感的に書けます。上限を超えた分は通常どおりスクロールします。',
+    keyProperties: ['field-sizing', 'resize', 'line-height', 'border-radius'],
+    tips: '未対応ブラウザでは普通のtextareaとして動くため、そのまま出しても壊れません（プログレッシブエンハンスメント）。対応状況はBaselineバッジを確認してください。',
+    aiPrompt:
+      '入力に合わせて高さが自動で伸びるテキストエリアを作ってください。JSではなくfield-sizing: contentを使い、min-height/max-heightをlh単位で指定、resize: noneで手動リサイズを無効化してください。',
   },
 
   // ============ ナビゲーション ============
@@ -2063,6 +2672,236 @@ backdrop.addEventListener('click', () => setOpen(false));`,
       'CSSだけで動くドロップダウンメニューを作ってください。position: absoluteでボタン直下に配置し、親要素の:hoverと:focus-withinで表示を切り替え、キーボードのTab操作でも開けるようにしてください。',
   },
 
+  {
+    id: 'smooth-anchor-nav',
+    title: 'ページ内目次（スムーススクロール）',
+    description:
+      '記事の目次からページ内リンクで滑らかに移動するナビ。scroll-behaviorとscroll-marginの2プロパティで、JSなしで完成します。',
+    category: 'ナビゲーション',
+    html: `<nav class="toc" aria-label="ページ内目次">
+  <a href="#sec-a">概要</a>
+  <a href="#sec-b">使い方</a>
+  <a href="#sec-c">注意点</a>
+</nav>
+
+<section id="sec-a" class="sec">
+  <h3>概要</h3>
+  <p>目次のリンクを押すと、この見出しへ滑らかにスクロールします。</p>
+</section>
+<section id="sec-b" class="sec">
+  <h3>使い方</h3>
+  <p>href="#id" のアンカーリンクだけで動いています。</p>
+</section>
+<section id="sec-c" class="sec">
+  <h3>注意点</h3>
+  <p>固定ヘッダーがある場合は scroll-margin で着地位置を調整します。</p>
+</section>`,
+    css: `html {
+  scroll-behavior: smooth; /* アンカー移動を滑らかに */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; } /* 動きを減らす設定では即時ジャンプ */
+}
+
+.toc {
+  position: sticky;
+  top: 0;
+  display: flex;
+  gap: 8px;
+  padding: 10px 0;
+  background: rgb(253 250 243 / 0.92);
+}
+
+.toc a {
+  padding: 6px 14px;
+  border: 1px solid #cbbfa5;
+  border-radius: 999px;
+  font-size: 13px;
+  color: #5c5445;
+  text-decoration: none;
+}
+
+.toc a:hover,
+.toc a:focus-visible {
+  border-color: #b0413e;
+  color: #b0413e;
+}
+
+.sec {
+  min-height: 220px;
+  scroll-margin-top: 56px; /* 固定目次に隠れない着地位置 */
+}
+
+.sec h3 {
+  margin: 0 0 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e2d8c2;
+}
+
+.sec p {
+  font-size: 13px;
+  color: #5c5445;
+}`,
+    explanation:
+      'アンカーリンク（href="#id"）はHTML標準の機能なので、CSSは移動の質だけを整えます。scroll-behavior: smooth で移動が滑らかになり、scroll-margin-top が「固定ヘッダーの下に見出しが潜り込む」定番トラブルを解決します。スムーススクロールは酔いの原因にもなるため、prefers-reduced-motion では必ず即時ジャンプに戻します。',
+    keyProperties: ['scroll-behavior', 'scroll-margin', 'position', 'display-flex'],
+    tips: '現在位置のハイライトまで必要な場合はJS（IntersectionObserver）の領域です。目次だけならこのレシピで十分です。',
+    aiPrompt:
+      'ページ内目次のナビゲーションを作ってください。scroll-behavior: smoothで滑らかに移動し、scroll-margin-topで固定ヘッダー分の着地位置を確保、prefers-reduced-motionでは即時ジャンプに戻してください。JSは使わないでください。',
+  },
+  {
+    id: 'step-indicator',
+    title: 'ステップインジケーター',
+    description:
+      '購入フローなどの進捗を示すステップ表示。番号の丸を線でつなぎ、完了・現在地・未到達を色分けします。現在地はaria-currentで伝えます。',
+    category: 'ナビゲーション',
+    html: `<ol class="steps">
+  <li class="done">
+    <span class="dot" aria-hidden="true">✓</span>
+    カート
+  </li>
+  <li class="current" aria-current="step">
+    <span class="dot" aria-hidden="true">2</span>
+    お届け先
+  </li>
+  <li>
+    <span class="dot" aria-hidden="true">3</span>
+    お支払い
+  </li>
+</ol>`,
+    css: `.steps {
+  display: flex;
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8a7d63;
+}
+
+.dot {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #cbbfa5;
+  border-radius: 50%;
+  background: #fff;
+  font-weight: 600;
+  color: #8a7d63;
+}
+
+/* 左隣の丸までつなぐ線 */
+.steps li:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  right: 50%;
+  left: -50%;
+  height: 2px;
+  background: #e2d8c2;
+  z-index: -1;
+}
+
+/* 完了済みステップの後ろの線は色付きに */
+.steps .done + li::before {
+  background: #4a7c59;
+}
+
+.steps .done .dot {
+  border-color: #4a7c59;
+  background: #4a7c59;
+  color: #fff;
+}
+
+.steps .current {
+  color: #1a1712;
+  font-weight: 600;
+}
+
+.steps .current .dot {
+  border-color: #b0413e;
+  color: #b0413e;
+}`,
+    explanation:
+      'つなぎの線は各liの ::before を left: -50% から right: 50% まで敷いて左隣の丸まで届かせ、z-index: -1 で丸の下に潜らせます。「完了→次」の線だけ緑にするのは隣接セレクタ「.done + li::before」の仕事です。完了は✓と色、現在地は aria-current="step" で構造的にも伝えます。',
+    keyProperties: ['display-flex', 'position', 'place-items', 'border-radius', 'z-index'],
+    tips: 'ステップ名が長い場合は白のtext-shadowかpaddingで線との重なりを整えてください。縦型にする場合はflex-directionと線の向きを入れ替えます。',
+    aiPrompt:
+      '3段階のステップインジケーターを作ってください。olでマークアップし、番号の丸を::beforeの線でつなぎ、完了（✓・緑）・現在地（aria-current="step"・朱）・未到達を色分けしてください。',
+  },
+  {
+    id: 'back-to-top',
+    title: 'ページトップへ戻るボタン',
+    description:
+      '右下に固定される「↑ トップへ」ボタン。アンカーリンクとscroll-behaviorだけのJSなし実装で、どのページにもすぐ足せます。',
+    category: 'ナビゲーション',
+    html: `<header id="page-top" class="head">ページの先頭</header>
+<p style="height: 400px">（スクロール用の余白）</p>
+<p>ページの末尾です。右下のボタンで先頭へ戻れます。</p>
+
+<a href="#page-top" class="to-top" aria-label="ページの先頭へ戻る">↑</a>`,
+    css: `html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+.head {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.to-top {
+  position: fixed;
+  inset: auto 16px 16px auto; /* 右下に固定 */
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #cbbfa5;
+  border-radius: 50%;
+  background: #fff;
+  color: #5c5445;
+  font-size: 18px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.to-top:hover,
+.to-top:focus-visible {
+  border-color: #b0413e;
+  color: #b0413e;
+}
+
+.to-top:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: 2px;
+}`,
+    explanation:
+      '「トップへ戻る」はボタンではなくアンカーリンク（href="#id"）で作ると、JSゼロで完成しキーボードでもそのまま動きます。position: fixed + inset で右下に固定し、移動の滑らかさは scroll-behavior: smooth に任せます。リンクの中身は「↑」だけなので、意味は aria-label で伝えます。',
+    keyProperties: ['position', 'inset', 'scroll-behavior', 'place-items'],
+    tips: '「一定量スクロールしたら表示」まで作り込む場合はJSでの出し分けか、animation-timeline: scroll()（新しめ）を検討してください。',
+    aiPrompt:
+      'ページトップへ戻るボタンをJSなしで作ってください。href="#id"のアンカーリンクをposition: fixedで右下に固定し、scroll-behavior: smoothで滑らかに移動、aria-labelとfocus-visibleも付けてください。',
+  },
+
   // ============ 表示・フィードバック ============
   {
     id: 'modal-dialog',
@@ -2419,6 +3258,518 @@ document.getElementById('close-modal').addEventListener('click', () => {
       '狭い画面で横スクロールできるレスポンシブなテーブルを作ってください。ラッパーにoverflow-x: autoとtabindex="0"、テーブルにmin-widthとwhite-space: nowrapを指定してください。',
   },
 
+  {
+    id: 'badge-notification',
+    title: 'バッジ・通知ドット',
+    description:
+      'アイコン右上の未読数バッジと、NEW・SALEなどのラベルバッジ。数はaria-labelで伝え、2桁でも崩れないmin-width設計にします。',
+    category: '表示・フィードバック',
+    html: `<div class="badge-row">
+  <button type="button" class="bell" aria-label="通知を開く（未読3件）">
+    <span aria-hidden="true">🔔</span>
+    <span class="bell-count" aria-hidden="true">3</span>
+  </button>
+  <span class="tag">NEW</span>
+  <span class="tag tag-sale">SALE</span>
+  <span class="tag tag-soldout">SOLD OUT</span>
+</div>`,
+    css: `.badge-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e2d8c2;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.bell:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: 2px;
+}
+
+.bell-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px; /* 2桁になっても丸→カプセルに伸びる */
+  height: 18px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #b0413e;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tag {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #b0413e;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.tag-sale {
+  background: #d9a441;
+  color: #1a1712;
+}
+
+.tag-soldout {
+  background: #f3ecd9;
+  color: #8a7d63;
+}`,
+    explanation:
+      '未読数のドットは position: absolute でアイコンの右上角に重ねます。幅を固定せず min-width + padding にしておくと、1桁では真円、2桁以上ではカプセル形に自然に伸びます。見た目の数字は aria-hidden にし、実際の情報はボタンの aria-label（「未読3件」）で伝えるのがアクセシビリティの要点です。',
+    keyProperties: ['position', 'border-radius', 'place-items', 'letter-spacing', 'min-width'],
+    tips: '未読数が変動する場合はJSでaria-labelも同時に更新します。99を超えたら「99+」に丸めるのが定番です。',
+    aiPrompt:
+      '通知ベルの未読数バッジとNEW/SALEのラベルバッジを作ってください。未読数はposition: absoluteで右上に重ね、min-widthで2桁対応、数の情報はボタンのaria-labelで伝えてください。',
+  },
+  {
+    id: 'alert-callout',
+    title: 'アラート・コールアウト4種',
+    description:
+      '情報・成功・注意・エラーの4種類のメッセージ枠。色だけに頼らず、アイコンと接頭辞テキストの3重で種類を伝える設計です。',
+    category: '表示・フィードバック',
+    html: `<div class="alert info" role="note">
+  <span class="alert-icon" aria-hidden="true">ℹ</span>
+  <p><strong>情報:</strong> 7月30日 2:00〜4:00 にメンテナンスを実施します。</p>
+</div>
+
+<div class="alert success" role="status">
+  <span class="alert-icon" aria-hidden="true">✓</span>
+  <p><strong>成功:</strong> 設定を保存しました。</p>
+</div>
+
+<div class="alert warning" role="alert">
+  <span class="alert-icon" aria-hidden="true">!</span>
+  <p><strong>注意:</strong> ストレージ容量が残り10%です。</p>
+</div>
+
+<div class="alert error" role="alert">
+  <span class="alert-icon" aria-hidden="true">×</span>
+  <p><strong>エラー:</strong> 送信に失敗しました。時間をおいて再試行してください。</p>
+</div>`,
+    css: `.alert {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 400px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid;
+  border-left-width: 4px; /* 左の太罫が種類の目印 */
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.alert p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.alert-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.info {
+  border-color: #274a78;
+  background: #eef2f7;
+  color: #274a78;
+}
+.info .alert-icon { background: #274a78; }
+
+.success {
+  border-color: #4a7c59;
+  background: #e6ede4;
+  color: #3c6549;
+}
+.success .alert-icon { background: #4a7c59; }
+
+.warning {
+  border-color: #d9a441;
+  background: #f8efdb;
+  color: #6d5320;
+}
+.warning .alert-icon { background: #d9a441; color: #1a1712; }
+
+.error {
+  border-color: #b0413e;
+  background: #fdf3f2;
+  color: #97362f;
+}
+.error .alert-icon { background: #b0413e; }`,
+    explanation:
+      '種類の区別を「色・アイコン・接頭辞テキスト」の3重で伝えるのがこのレシピの核です。色覚特性やモノクロ印刷でも情報が落ちません。roleは重要度で使い分けます: 即時に読み上げてほしい警告・エラーは role="alert"、控えめな通知は role="status"、静的な補足は role="note" です。左辺の太い罫線は視線のアンカーになります。',
+    keyProperties: ['border', 'border-radius', 'display-flex', 'gap', 'color'],
+    tips: '閉じるボタンを付ける場合はJSで要素を削除し、フォーカスが行き場を失わないよう直前の要素へ戻します。',
+    aiPrompt:
+      '情報・成功・注意・エラーの4種類のアラートを作ってください。色＋アイコン＋「エラー:」等の接頭辞テキストの3重で種類を伝え、roleをalert/status/noteで適切に使い分けてください。',
+  },
+  {
+    id: 'progress-bar',
+    title: 'プログレスバー',
+    description:
+      'HTML標準の<progress>要素をスタイリングした進捗バー。意味付けはブラウザ任せで、装飾だけをCSSで整えます。',
+    category: '表示・フィードバック',
+    html: `<label class="progress-label" for="upload">
+  アップロード中
+  <span class="progress-pct">60%</span>
+</label>
+<progress id="upload" max="100" value="60"></progress>`,
+    css: `.progress-label {
+  display: flex;
+  justify-content: space-between;
+  width: 260px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c5445;
+}
+
+.progress-pct {
+  font-variant-numeric: tabular-nums;
+  color: #8a7d63;
+}
+
+progress {
+  display: block;
+  width: 260px;
+  height: 10px;
+  margin-top: 6px;
+  appearance: none; /* 標準の見た目を外す */
+  border: none;
+  border-radius: 999px;
+  overflow: hidden; /* 角丸から中身がはみ出ないように */
+  background: #e2d8c2; /* Firefoxのトラック */
+}
+
+/* Chrome/Safari系: トラックと値の2つの疑似要素 */
+progress::-webkit-progress-bar {
+  background: #e2d8c2;
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #b0413e, #d9a441);
+  border-radius: 999px;
+}
+
+/* Firefox: 値はこちら */
+progress::-moz-progress-bar {
+  background: linear-gradient(90deg, #b0413e, #d9a441);
+  border-radius: 999px;
+}`,
+    explanation:
+      'divで自作せず<progress>を使うと、value/maxの意味が支援技術へそのまま伝わります。装飾はブラウザ2系統の疑似要素に同じ見た目を書きます: Chrome/Safariは ::-webkit-progress-bar（トラック）と ::-webkit-progress-value（値）、Firefoxは ::-moz-progress-bar（値）とprogress自体のbackground（トラック）です。この2系統はセレクタをまとめて書けないため、別々のルールにします。',
+    keyProperties: ['appearance', 'border-radius', 'overflow', 'width'],
+    tips: '色を変えるだけならaccent-color: #b0413e;の1行でも足ります（グラデーションは不可）。valueなしの<progress>は不確定（インジケータ）表示になります。',
+    aiPrompt:
+      'HTML標準の<progress>要素をスタイリングしてください。appearance: noneでリセットし、::-webkit-progress-bar / ::-webkit-progress-value / ::-moz-progress-barの両系統にグラデーションの進捗バーを実装してください。',
+  },
+
+  {
+    id: 'vertical-timeline',
+    title: '縦タイムライン',
+    description:
+      '配送状況や更新履歴に使う縦のタイムライン。点と線は疑似要素だけで描き、リスト構造とtime要素で意味も正しく保ちます。',
+    category: '表示・フィードバック',
+    html: `<ol class="timeline">
+  <li class="done">
+    <time datetime="2026-07-01">7月1日</time>
+    <h3>注文を受け付けました</h3>
+    <p>ご注文内容の確認メールをお送りしました。</p>
+  </li>
+  <li class="current">
+    <time datetime="2026-07-03">7月3日</time>
+    <h3>発送準備中</h3>
+    <p>倉庫で梱包作業を行っています。</p>
+  </li>
+  <li>
+    <time datetime="2026-07-05">7月5日（予定）</time>
+    <h3>お届け</h3>
+    <p>配送業者よりお届け予定です。</p>
+  </li>
+</ol>`,
+    css: `.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 300px;
+}
+
+.timeline li {
+  position: relative;
+  padding-left: 26px;
+  padding-bottom: 22px;
+}
+
+/* 点 */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #cbbfa5;
+  border-radius: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 次の項目までの線（最後の項目には描かない） */
+.timeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  bottom: 2px;
+  width: 2px;
+  background: #e2d8c2;
+}
+
+.timeline .done::before {
+  border-color: #4a7c59;
+  background: #4a7c59;
+}
+
+.timeline .done:not(:last-child)::after {
+  background: #4a7c59;
+}
+
+.timeline .current::before {
+  border-color: #b0413e;
+}
+
+.timeline time {
+  font-size: 11px;
+  color: #8a7d63;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline h3 {
+  margin: 2px 0 4px;
+  font-size: 14px;
+}
+
+.timeline .current h3 { color: #b0413e; }
+
+.timeline p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #5c5445;
+}`,
+    explanation:
+      '時系列はol（順序付きリスト）でマークアップし、日付はtime要素のdatetime属性で機械可読にします。点は各liの ::before、縦線は ::after で描き、線は「:not(:last-child)」で最後の項目にだけ描かないのがポイントです。完了区間の線は緑にして進捗が一目で分かるようにし、線のtop/bottomを点の位置に合わせて調整しています。',
+    keyProperties: ['position', 'list-style', 'border-radius', 'padding'],
+    tips: '左右交互のタイムラインにする場合はgridの2カラム化とnth-childでの振り分けが必要になり、複雑さが一段上がります。まずは縦一列が保守しやすいです。',
+    aiPrompt:
+      '配送状況の縦タイムラインを作ってください。olとtime要素でマークアップし、点は::before・縦線は::after（:not(:last-child)で最後は描かない）、完了・現在・未来を色分けしてください。',
+  },
+  {
+    id: 'plan-comparison-table',
+    title: '料金プラン比較表',
+    description:
+      '機能×プランの比較テーブル。scope属性で行列の対応を正しく伝え、おすすめ列の縦ハイライトと✓/×の色分けで見やすくします。',
+    category: '表示・フィードバック',
+    html: `<div class="plans-wrap" tabindex="0" role="region" aria-label="料金プランの比較表">
+  <table class="plans">
+    <thead>
+      <tr>
+        <th scope="col">機能</th>
+        <th scope="col">フリー</th>
+        <th scope="col" class="featured">プロ<span class="reco">おすすめ</span></th>
+        <th scope="col">チーム</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">プロジェクト数</th>
+        <td>3</td>
+        <td class="featured">無制限</td>
+        <td>無制限</td>
+      </tr>
+      <tr>
+        <th scope="row">共同編集</th>
+        <td><span class="no" aria-label="非対応">×</span></td>
+        <td class="featured"><span class="yes" aria-label="対応">✓</span></td>
+        <td><span class="yes" aria-label="対応">✓</span></td>
+      </tr>
+      <tr>
+        <th scope="row">優先サポート</th>
+        <td><span class="no" aria-label="非対応">×</span></td>
+        <td class="featured"><span class="no" aria-label="非対応">×</span></td>
+        <td><span class="yes" aria-label="対応">✓</span></td>
+      </tr>
+      <tr>
+        <th scope="row">月額（税込）</th>
+        <td>¥0</td>
+        <td class="featured">¥980</td>
+        <td>¥2,980</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+    css: `.plans-wrap {
+  overflow-x: auto; /* 狭い画面では表ごと横スクロール */
+}
+
+.plans {
+  min-width: 420px;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 13px;
+}
+
+.plans th,
+.plans td {
+  padding: 10px 16px;
+  border: 1px solid #e2d8c2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.plans thead th {
+  background: #f3ecd9;
+  font-size: 13px;
+}
+
+.plans tbody th {
+  text-align: left;
+  font-weight: 600;
+  color: #5c5445;
+  background: #faf6ea;
+}
+
+/* おすすめ列の縦ハイライト */
+.plans .featured {
+  background: #fdf3f2;
+  border-left-color: #b0413e;
+  border-right-color: #b0413e;
+}
+
+.plans thead .featured {
+  border-top-color: #b0413e;
+  color: #b0413e;
+}
+
+.reco {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: #b0413e;
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-top: 4px;
+}
+
+.yes { color: #4a7c59; font-weight: 700; }
+.no  { color: #b5a583; }`,
+    explanation:
+      '比較表の生命線はヘッダーの対応付けです。列見出しに scope="col"、行見出しに scope="row" を付けると、支援技術がセル読み上げ時に「プロ・共同編集・対応」のように文脈を補ってくれます。おすすめ列は featured クラスを列の全セルに付けて背景と左右の枠線色で縦に貫き、✓/×は色だけでなくaria-labelでも対応状況を伝えます。',
+    keyProperties: ['overflow', 'text-align', 'white-space', 'border', 'table-layout'],
+    tips: 'プラン数が多い場合はカード型（料金テーブルのレシピ）との出し分けを検討してください。表は機能軸での比較、カードはプラン軸での訴求に向きます。',
+    aiPrompt:
+      '機能×プランの料金比較表を作ってください。th要素にscope="col"/"row"を正しく設定し、おすすめ列を縦にハイライト、✓/×は色とaria-labelの両方で伝え、狭い画面ではラッパーで横スクロールさせてください。',
+  },
+  {
+    id: 'chat-bubbles',
+    title: 'チャット吹き出し',
+    description:
+      'メッセージUIの吹き出し。相手は左・自分は右に寄せ、発話者側の下角だけborder-radiusを小さくするモダンな尻尾表現です。',
+    category: '表示・フィードバック',
+    html: `<div class="chat">
+  <div class="msg">
+    <span class="chat-avatar" aria-hidden="true"></span>
+    <p class="bubble">こんにちは！注文した器の配送状況を確認したいです。</p>
+  </div>
+  <div class="msg me">
+    <p class="bubble">かしこまりました。ご注文番号をお願いします。</p>
+  </div>
+  <div class="msg">
+    <span class="chat-avatar" aria-hidden="true"></span>
+    <p class="bubble">1234-5678 です。</p>
+  </div>
+</div>`,
+    css: `.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 85%;
+}
+
+.msg.me {
+  align-self: flex-end; /* 自分の発言は右寄せ */
+}
+
+.chat-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #d9c79a, #8a6d3b);
+}
+
+.bubble {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* 発話者側の下角だけ小さくして「尻尾」に見せる */
+.msg:not(.me) .bubble {
+  border-bottom-left-radius: 4px;
+}
+
+.msg.me .bubble {
+  background: #b0413e;
+  border-color: #b0413e;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}`,
+    explanation:
+      '左右の振り分けは、縦flexコンテナの中で自分の発言にだけ align-self: flex-end を掛ける方式です。吹き出しの「尻尾」は三角形を疑似要素で描く方法もありますが、発話者側の下角だけ border-radius を4pxに絞る方が実装が軽く、モダンなメッセージアプリの見た目になります。アバターは align-items: flex-end で吹き出しの下端に揃えています。',
+    keyProperties: ['display-flex', 'flex-direction', 'align-items', 'border-radius', 'gap'],
+    tips: '発言の連続（同じ人が続けて話す）では2つ目以降のアバターを省略すると、実際のチャットUIらしくなります。時刻表示はtime要素で添えてください。',
+    aiPrompt:
+      'チャットの吹き出しUIを作ってください。相手は左・自分は右（align-self: flex-end）に振り分け、尻尾は疑似要素ではなく発話者側の下角のborder-radiusだけ4pxに絞る方式で表現してください。',
+  },
+
   // ============ レイアウトパターン ============
   {
     id: 'full-bleed-side',
@@ -2738,5 +4089,308 @@ document.getElementById('close-modal').addEventListener('click', () => {
     tips: 'stickyが効かないときは、祖先のoverflow: hiddenが原因のことが多いです。モバイルではmin-height: 100dvhにするとアドレスバーの伸縮に追従します。',
     aiPrompt:
       'スクロールで上部に残る半透明ヘッダー（position: sticky + backdrop-filter: blur）と、内容が少なくても最下部に付くフッター（flexとmin-height: 100vh）を組み合わせたページ骨格を作ってください。',
+  },
+  {
+    id: 'split-hero',
+    title: '左右分割ヒーロー',
+    description:
+      '画像半分・テキスト半分の2カラムヒーロー。gridの2カラムを、狭い画面ではメディアクエリで縦積みに切り替える定番構成です。',
+    category: 'レイアウトパターン',
+    html: `<section class="split">
+  <div class="split-media" role="img" aria-label="工房で器を作る様子"></div>
+  <div class="split-copy">
+    <p class="eyebrow">HANDMADE IN JAPAN</p>
+    <h1>手仕事のうつわを、食卓へ。</h1>
+    <p class="lead">産地から直接届く、日常使いの器を集めました。</p>
+    <a href="#" class="cta">コレクションを見る</a>
+  </div>
+</section>`,
+    css: `.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 280px;
+  border: 1px solid #e2d8c2;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.split-media {
+  background: linear-gradient(130deg, #d9c79a, #8a6d3b);
+}
+
+.split-copy {
+  display: grid;
+  place-content: center; /* コピー一式をまとめて中央に */
+  gap: 10px;
+  padding: 32px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #8a6d3b;
+}
+
+.split-copy h1 {
+  margin: 0;
+  font-size: clamp(20px, 4vw, 30px);
+  line-height: 1.4;
+}
+
+.lead {
+  margin: 0;
+  font-size: 13px;
+  color: #5c5445;
+}
+
+.cta {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 10px 22px;
+  border-radius: 6px;
+  background: #b0413e;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.cta:focus-visible {
+  outline: 2px solid #1a1712;
+  outline-offset: 2px;
+}
+
+/* 狭い画面では縦積みに */
+@media (max-width: 520px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .split-media {
+    aspect-ratio: 16 / 9;
+  }
+}`,
+    explanation:
+      'grid-template-columns: 1fr 1fr の2カラムを、メディアクエリで 1fr に切り替えるだけの潔い構成です。テキスト側は place-content: center で「コピーのかたまりごと」中央に置きます（place-itemsだと各要素が個別に中央化されて揃いません）。縦積み時の画像は高さが失われるため、aspect-ratio で確保し直します。HTMLの記述順（画像→テキスト）がモバイルでの表示順になる点も設計時に意識してください。',
+    keyProperties: ['display-grid', 'grid-template-columns', 'place-content', 'overflow', 'clamp'],
+    tips: '画像を右に置きたい場合はHTML順を変えず、メディア側にorder: 2を指定すればモバイルの順序を保てます。',
+    aiPrompt:
+      '画像半分・テキスト半分の左右分割ヒーローセクションを作ってください。gridの2カラムで、テキスト側はplace-content: centerで中央配置、狭い画面ではメディアクエリで縦積みに切り替えてください。',
+  },
+  {
+    id: 'login-card-page',
+    title: 'ログイン画面の骨格',
+    description:
+      '画面中央にフォームカードを置く認証ページの骨格。place-itemsの中央配置とmax-widthで、どの画面幅でも整うテンプレートです。',
+    category: 'レイアウトパターン',
+    html: `<div class="auth-page">
+  <form class="auth-card">
+    <h1>ログイン</h1>
+    <label for="mail">メールアドレス</label>
+    <input id="mail" type="email" autocomplete="email" placeholder="you@example.com" />
+    <label for="pw">パスワード</label>
+    <input id="pw" type="password" autocomplete="current-password" />
+    <button type="submit">ログイン</button>
+    <a class="forgot" href="#">パスワードをお忘れですか？</a>
+  </form>
+</div>`,
+    css: `.auth-page {
+  display: grid;
+  place-items: center;   /* 縦横中央 */
+  min-height: 100vh;
+  margin: -16px;         /* デモ用: プレビューのbody余白を打ち消す */
+  padding: 16px;
+  box-sizing: border-box;
+  background: #f3ecd9;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 320px; /* 広い画面では固定幅、狭い画面では100% */
+  display: grid;
+  gap: 6px;
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 12px;
+}
+
+.auth-card h1 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.auth-card label {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c5445;
+}
+
+.auth-card input {
+  padding: 10px 12px;
+  border: 1px solid #cbbfa5;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.auth-card input:focus-visible {
+  outline: 2px solid #b0413e;
+  outline-offset: -1px;
+}
+
+.auth-card button {
+  margin-top: 14px;
+  padding: 11px 0;
+  border: none;
+  border-radius: 6px;
+  background: #b0413e;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-card button:hover { background: #97362f; }
+
+.auth-card button:focus-visible {
+  outline: 2px solid #1a1712;
+  outline-offset: 2px;
+}
+
+.forgot {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #8a6d3b;
+}`,
+    explanation:
+      '外側は display: grid + place-items: center + min-height: 100vh の3行で画面中央配置が完成します。カードは width: 100% と max-width の組み合わせが要で、広い画面では320pxに収まり、狭い画面では親のpaddingを残して全幅に縮みます。autocomplete属性（email / current-password）を正しく付けると、パスワードマネージャが確実に反応します。',
+    keyProperties: ['display-grid', 'place-items', 'max-width', 'gap', 'border-radius'],
+    tips: 'モバイルのアドレスバー対策にはmin-height: 100dvhが確実です。新規登録画面ではautocomplete="new-password"に変えます。',
+    aiPrompt:
+      'ログイン画面の骨格を作ってください。display: grid + place-items: centerで画面中央にカードを置き、width: 100% + max-widthでレスポンシブ対応、autocomplete属性も正しく設定してください。',
+  },
+  {
+    id: 'container-query-card',
+    title: 'コンテナクエリで変形するカード',
+    description:
+      '置かれた場所の幅に応じて縦型⇄横型に切り替わるカード。ビューポートではなく親要素を基準にする@containerの実践例です。',
+    category: 'レイアウトパターン',
+    html: `<p class="hint">プレビュー枠の右下をドラッグして幅を変えると、カードが縦型⇄横型に切り替わります。</p>
+
+<div class="card-slot">
+  <article class="cq-card">
+    <div class="cq-media" aria-hidden="true"></div>
+    <div class="cq-body">
+      <h3>コンテナクエリ対応カード</h3>
+      <p>ビューポートではなく「親の幅」を見て形を変えます。サイドバーに置いても本文に置いても崩れません。</p>
+    </div>
+  </article>
+</div>`,
+    css: `.hint {
+  font-size: 12px;
+  color: #8a7d63;
+}
+
+.card-slot {
+  container-type: inline-size; /* この要素を問い合わせの基準にする */
+}
+
+.cq-card {
+  display: grid;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cq-media {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(140deg, #a8b8a0, #4a7c59);
+}
+
+.cq-body {
+  padding: 14px 16px;
+}
+
+.cq-body h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.cq-body p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #5c5445;
+}
+
+/* 置き場所の幅が420pxを超えたら横型に */
+@container (min-width: 420px) {
+  .cq-card {
+    grid-template-columns: 180px 1fr;
+  }
+  .cq-media {
+    aspect-ratio: auto; /* 高さは本文に合わせて伸びる */
+    height: 100%;
+  }
+}`,
+    explanation:
+      '親要素に container-type: inline-size を指定すると、その要素が「問い合わせコンテナ」になり、子は @container で親の幅に応じたスタイルを書けます。メディアクエリとの違いは基準です: 同じカードをサイドバー（狭い）と本文（広い）に置いたとき、ビューポート基準では区別できませんが、コンテナ基準ならそれぞれの置き場所に最適な形になります。再利用部品と相性のよい、コンポーネント時代のレスポンシブ手法です。',
+    keyProperties: ['container-type', 'display-grid', 'grid-template-columns', 'aspect-ratio'],
+    tips: 'container-typeを指定した要素は幅の計算が「包含を作る」挙動に変わるため、レイアウトの外枠ではなくカードの直親スロットに指定するのが安全です。',
+    aiPrompt:
+      'コンテナクエリで縦型⇄横型が切り替わるカードを作ってください。親スロットにcontainer-type: inline-sizeを指定し、@container (min-width: 420px)でgridを2カラムの横型に変形させてください。',
+  },
+  {
+    id: 'image-gallery',
+    title: '画像ギャラリー（メイン＋タイル）',
+    description:
+      '1枚目を大きく見せるタイル型フォトギャラリー。grid-column/grid-rowのspan指定だけで、雑誌のような変則グリッドが作れます。',
+    category: 'レイアウトパターン',
+    html: `<ul class="gallery">
+  <li class="featured" role="img" aria-label="メインの写真: 海辺の夕景"></li>
+  <li role="img" aria-label="写真: 松林"></li>
+  <li role="img" aria-label="写真: 器"></li>
+  <li role="img" aria-label="写真: 街並み"></li>
+  <li role="img" aria-label="写真: 夜空"></li>
+</ul>`,
+    css: `.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 78px; /* 行の高さの基準単位 */
+  gap: 8px;
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery li {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 1枚目だけ2列×2行ぶん占有 */
+.gallery .featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* デモ用の疑似写真（実際はimg + object-fit: cover） */
+.gallery li:nth-child(1) { background: linear-gradient(160deg, #d9a441, #b0413e); }
+.gallery li:nth-child(2) { background: linear-gradient(140deg, #a8b8a0, #4a7c59); }
+.gallery li:nth-child(3) { background: linear-gradient(140deg, #d9c79a, #8a6d3b); }
+.gallery li:nth-child(4) { background: linear-gradient(140deg, #cbbfa5, #5c5445); }
+.gallery li:nth-child(5) { background: linear-gradient(140deg, #274a78, #1a1712); }`,
+    explanation:
+      '3列グリッドに grid-auto-rows で行の高さの「基準単位」を決めておき、目立たせたい1枚に grid-column: span 2 と grid-row: span 2 を指定するだけで、2×2マスを占有するメイン写真になります。残りの写真は自動配置に任せるため、枚数が増減してもHTMLを並べるだけで整います。実画像では各セルの img に width/height 100% と object-fit: cover を指定します。',
+    keyProperties: ['display-grid', 'grid-column', 'grid-row', 'gap', 'overflow'],
+    tips: '写真が主役のギャラリーでは、装飾的な画像はalt=""（またはaria-hidden）、意味のある画像は内容が伝わるaltを書き分けてください。ホバー拡大はアニメ集「ホバーで画像ズーム」と組み合わせられます。',
+    aiPrompt:
+      '1枚目を大きく見せるタイル型画像ギャラリーを作ってください。3列グリッド＋grid-auto-rowsを基準に、メイン画像はgrid-column: span 2とgrid-row: span 2で2×2マスを占有させ、実画像はobject-fit: coverで収めてください。',
   },
 ];
