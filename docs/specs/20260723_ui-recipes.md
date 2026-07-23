@@ -125,6 +125,10 @@
 
 **本番反映:** Vercelへのデプロイは必ずユーザー確認後に行う（グローバル運用ルール）。
 
+## 変更履歴
+
+- **2026-07-23（初回リリース後のユーザー決定）**: Won't としていた「techniques のURL移動・統合」を撤回し、テクニック集をレシピ集へ統合。UI部品系6件（full-bleed-side / equal-height-center / scrollable-table / simple-dropdown-menu / button-designs-10 / pricing-table-design）は `/recipes/` へ、動き系2件（text-hover-underline / hover-image-zoom）は `/animations/` へ移設、重複・解説系2件（button-arrow-hover / flex-prevent-shrink）は削除。全11の旧URL（`/techniques/` 一覧含む）は `vercel.json` の301リダイレクトで新行き先へ接続し、SEO非破壊の原則は「URL不変」から「301で継承」に読み替える。
+
 ## 実装ステップ（参考・各ステップ単独でビルド可能）
 
 1. 型・データ雛形・validate拡張（レシピ2〜3件のサンプルで検証を通す）

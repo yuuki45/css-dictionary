@@ -1,4 +1,4 @@
-import type { CSSProperty, Technique, Comparison, AnimationExample, Recipe } from '@/types/css';
+import type { CSSProperty, Comparison, AnimationExample, Recipe } from '@/types/css';
 
 export const SITE_URL = 'https://www.css-dictionary.com';
 
@@ -242,32 +242,3 @@ export function recipeToMarkdown(recipe: Recipe): string {
   return lines.join('\n');
 }
 
-/** CSSテクニックをMarkdownに変換する */
-export function techniqueToMarkdown(technique: Technique): string {
-  const lines: string[] = [];
-  lines.push(`# ${technique.title}`);
-  lines.push('');
-  lines.push(`> ${technique.description}`);
-  lines.push('');
-  lines.push(`- URL: ${SITE_URL}/techniques/${technique.id}/`);
-  lines.push('');
-  lines.push('## HTML');
-  lines.push('');
-  lines.push('```html');
-  lines.push(technique.html);
-  lines.push('```');
-  lines.push('');
-  lines.push('## CSS');
-  lines.push('');
-  lines.push('```css');
-  lines.push(technique.css);
-  lines.push('```');
-  lines.push('');
-  if (technique.tips) {
-    lines.push('## TIPS');
-    lines.push('');
-    lines.push(technique.tips);
-    lines.push('');
-  }
-  return lines.join('\n');
-}

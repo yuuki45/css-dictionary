@@ -40,10 +40,10 @@ export default function NotFound() {
               カテゴリ一覧
             </Link>
             <Link
-              href="/techniques"
+              href="/recipes"
               className="inline-flex items-center gap-2 px-4 py-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
             >
-              テクニック集
+              UIレシピ集
             </Link>
             <Link
               href="/reverse"

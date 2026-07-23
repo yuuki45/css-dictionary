@@ -45,7 +45,6 @@ export function Navigation({
     if (pathname.startsWith("/recipes")) return "read";
     if (pathname.startsWith("/compare")) return "read";
     if (pathname.startsWith("/ai-review")) return "read";
-    if (pathname.startsWith("/techniques")) return "read";
     if (pathname.startsWith("/favorites")) return "favorites";
     if (pathname.startsWith("/property")) return "home"; // プロパティ詳細はホームタブ
 

@@ -280,6 +280,561 @@ copyBtn.addEventListener('click', async () => {
       '画面右下に固定表示される円形のフローティングアクションボタン（FAB）を作ってください。insetで配置し、aria-labelでボタンの意味を伝え、ホバーで浮き上がるエフェクトとフォーカスリングを付けてください。',
   },
 
+  {
+    id: 'button-designs-10',
+    title: 'よく使うボタンデザイン10選',
+    description:
+      'モダンなWebサイトでよく使われるボタンデザインのパターン集です。基本的なボタンからトレンドのガラスモーフィズムまで、様々なシーンで使えるデザインテクニックを紹介します。',
+    category: 'ボタン・操作',
+    html: `<!-- 1. 基本ボタン -->
+<div class="button-section">
+  <h3>1. 基本ボタン</h3>
+  <button class="btn-basic">送信する</button>
+  <button class="btn-basic-secondary">キャンセル</button>
+</div>
+
+<!-- 2. アウトラインボタン -->
+<div class="button-section">
+  <h3>2. アウトラインボタン</h3>
+  <button class="btn-outline">詳細を見る</button>
+  <button class="btn-outline-danger">削除</button>
+</div>
+
+<!-- 3. グラデーションボタン -->
+<div class="button-section">
+  <h3>3. グラデーションボタン</h3>
+  <button class="btn-gradient">今すぐ登録</button>
+  <button class="btn-gradient-purple">プレミアム</button>
+</div>
+
+<!-- 4. ホバー時浮き上がるボタン -->
+<div class="button-section">
+  <h3>4. ホバー時浮き上がるボタン</h3>
+  <button class="btn-hover-float">ダウンロード</button>
+  <button class="btn-hover-float-dark">購入する</button>
+</div>
+
+<!-- 5. アニメーション付きボタン -->
+<div class="button-section">
+  <h3>5. アニメーション付きボタン</h3>
+  <button class="btn-pulse">注目のボタン</button>
+  <button class="btn-loading">処理中...</button>
+</div>
+
+<!-- 6. 角丸の大きなボタン -->
+<div class="button-section">
+  <h3>6. 角丸の大きなボタン（Pill型）</h3>
+  <button class="btn-pill">無料で始める</button>
+  <button class="btn-pill-large">今すぐ申し込み</button>
+</div>
+
+<!-- 7. アイコン付きボタン -->
+<div class="button-section">
+  <h3>7. アイコン付きボタン</h3>
+  <button class="btn-icon">
+    <span class="icon">📧</span>
+    メール送信
+  </button>
+  <button class="btn-icon-right">
+    ダウンロード
+    <span class="icon">⬇️</span>
+  </button>
+</div>
+
+<!-- 8. ガラスモーフィズムボタン -->
+<div class="button-section glass-bg">
+  <h3>8. ガラスモーフィズムボタン</h3>
+  <button class="btn-glass">透明感のあるボタン</button>
+  <button class="btn-glass-colored">カラー版</button>
+</div>
+
+<!-- 9. ネオモーフィズムボタン -->
+<div class="button-section neomorphism-bg">
+  <h3>9. ネオモーフィズムボタン</h3>
+  <button class="btn-neomorphism">押し込み効果</button>
+  <button class="btn-neomorphism-raised">浮き出し効果</button>
+</div>
+
+<!-- 10. 矢印付きCTAボタン -->
+<div class="button-section">
+  <h3>10. 矢印付きCTAボタン</h3>
+  <button class="btn-cta">
+    今すぐ始める
+    <span class="cta-arrow">→</span>
+  </button>
+  <button class="btn-cta-animated">
+    詳しくはこちら
+    <span class="cta-arrow-animated">→</span>
+  </button>
+</div>`,
+    css: `/* ベーススタイル */
+.button-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.button-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1712;
+}
+
+.button-section button {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 背景用スタイル */
+.glass-bg {
+  background: linear-gradient(135deg, #274a78 0%, #745399 100%);
+  color: white;
+}
+
+.glass-bg h3 {
+  color: white;
+}
+
+.neomorphism-bg {
+  background: #eae2d0;
+}
+
+/* 1. 基本ボタン */
+.btn-basic {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #b0413e;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-basic:hover {
+  background: #97362f;
+}
+
+.btn-basic-secondary {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5c5445;
+  background: #f3ecd9;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-basic-secondary:hover {
+  background: #e2d8c2;
+}
+
+/* 2. アウトラインボタン */
+.btn-outline {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b0413e;
+  background: transparent;
+  border: 2px solid #b0413e;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: #b0413e;
+  color: white;
+}
+
+.btn-outline-danger {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8e354a;
+  background: transparent;
+  border: 2px solid #8e354a;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+  background: #8e354a;
+  color: white;
+}
+
+/* 3. グラデーションボタン */
+.btn-gradient {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #274a78 0%, #745399 100%);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 74, 120, 0.4);
+}
+
+.btn-gradient-purple {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #745399 0%, #c9556f 100%);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gradient-purple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(116, 83, 153, 0.4);
+}
+
+/* 4. ホバー時浮き上がるボタン */
+.btn-hover-float {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #4a7c59;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-hover-float:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(74, 124, 89, 0.3);
+}
+
+.btn-hover-float-dark {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #1a1712;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-hover-float-dark:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(26, 23, 18, 0.4);
+}
+
+/* 5. アニメーション付きボタン */
+.btn-pulse {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #d9a441;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(217, 164, 65, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(217, 164, 65, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 164, 65, 0);
+  }
+}
+
+.btn-loading {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #8a7d63;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.btn-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 6. 角丸の大きなボタン（Pill型） */
+.btn-pill {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  background: #745399;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pill:hover {
+  background: #5f4488;
+  transform: scale(1.05);
+}
+
+.btn-pill-large {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  background: #c73e3a;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pill-large:hover {
+  background: #8e354a;
+  transform: scale(1.05);
+}
+
+/* 7. アイコン付きボタン */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #2f5d8c;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: #274a78;
+}
+
+.btn-icon-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #4a7c59;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-icon-right:hover {
+  background: #3c6549;
+}
+
+.btn-icon .icon,
+.btn-icon-right .icon {
+  font-size: 1.25em;
+}
+
+/* 8. ガラスモーフィズムボタン */
+.btn-glass {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-glass-colored {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(74, 124, 89, 0.3);
+  border: 1px solid rgba(74, 124, 89, 0.4);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-glass-colored:hover {
+  background: rgba(74, 124, 89, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 9. ネオモーフィズムボタン */
+.btn-neomorphism {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5c5445;
+  background: #eae2d0;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow:
+    inset -2px -2px 6px rgba(255, 255, 255, 1),
+    inset 2px 2px 6px rgba(181, 165, 131, 0.6);
+  transition: all 0.2s ease;
+}
+
+.btn-neomorphism:hover {
+  box-shadow:
+    inset -1px -1px 3px rgba(255, 255, 255, 1),
+    inset 1px 1px 3px rgba(181, 165, 131, 0.6);
+}
+
+.btn-neomorphism-raised {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5c5445;
+  background: #eae2d0;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow:
+    -2px -2px 6px rgba(255, 255, 255, 1),
+    2px 2px 6px rgba(181, 165, 131, 0.6);
+  transition: all 0.2s ease;
+}
+
+.btn-neomorphism-raised:hover {
+  box-shadow:
+    -4px -4px 12px rgba(255, 255, 255, 1),
+    4px 4px 12px rgba(181, 165, 131, 0.6);
+}
+
+/* 10. 矢印付きCTAボタン */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #c73e3a 0%, #b0413e 100%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(199, 62, 58, 0.4);
+}
+
+.btn-cta .cta-arrow {
+  font-size: 1.25em;
+  transition: transform 0.3s ease;
+}
+
+.btn-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.btn-cta-animated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  background: #1a1712;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-cta-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-cta-animated:hover::before {
+  left: 100%;
+}
+
+.btn-cta-animated .cta-arrow-animated {
+  font-size: 1.25em;
+  animation: arrow-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}`,
+    explanation:
+      '基本・アウトライン・グラデーション・浮き上がり・アニメーション付き・Pill型・アイコン付き・ガラスモーフィズム・ネオモーフィズム・矢印付きCTAの10パターンをまとめています。どれも「背景・文字色・角丸・ホバー時の変化」の組み合わせで、transitionを添えることで状態変化が滑らかになります。ガラスモーフィズムは backdrop-filter: blur()、ネオモーフィズムは多重のbox-shadowが要です。',
+    keyProperties: ['border-radius', 'box-shadow', 'transition', 'animation', 'backdrop-filter'],
+    tips: 'ボタンデザインはUIの中でも特に重要な要素です。アクセシビリティを考慮し、hover効果だけでなくfocus状態のスタイルも設定することを推奨します。ガラスモーフィズムやネオモーフィズムはトレンドですが、可読性とのバランスが重要です。',
+    aiPrompt:
+      'Webサイトで使うボタンデザインを10種類作ってください。基本・アウトライン・グラデーション・ホバーで浮き上がる・パルスアニメーション・Pill型・アイコン付き・ガラスモーフィズム・ネオモーフィズム・矢印付きCTAの構成で、各ボタンにhoverとfocus-visibleのスタイルを付けてください。',
+  },
+
   // ============ カード ============
   {
     id: 'article-card',
@@ -572,6 +1127,291 @@ copyBtn.addEventListener('click', async () => {
     tips: 'タッチデバイスにはホバーがありません。重要な情報や導線はオーバーレイの中だけに置かず、常時見える場所にも用意してください。',
     aiPrompt:
       'ホバーで下からオーバーレイがスライドして詳細が現れる画像カードを作ってください。transform: translateY(100%)で隠し、:hoverと:focus-withinの両方で表示。prefers-reduced-motionではアニメーションを無効にしてください。',
+  },
+
+  {
+    id: 'pricing-table-design',
+    title: 'おしゃれな料金テーブルデザイン',
+    description:
+      'プランやサービスの料金表示に使えるモダンな料金テーブルデザインです。カードスタイルとホバー効果、人気プランの強調表示などを組み合わせた実用的なデザインテクニックです。',
+    category: 'カード',
+    html: `<div class="pricing-container">
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3 class="pricing-title">ベーシック</h3>
+      <div class="pricing-price">
+        <span class="price-currency">¥</span>
+        <span class="price-amount">980</span>
+        <span class="price-period">/月</span>
+      </div>
+      <p class="pricing-description">個人利用に最適</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        月5GBストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        基本サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        モバイルアプリ
+      </li>
+      <li class="feature-item disabled">
+        <span class="feature-icon">×</span>
+        優先サポート
+      </li>
+    </ul>
+    <button class="pricing-btn">プランを選択</button>
+  </div>
+
+  <div class="pricing-card popular">
+    <div class="popular-badge">人気No.1</div>
+    <div class="pricing-header">
+      <h3 class="pricing-title">プロ</h3>
+      <div class="pricing-price">
+        <span class="price-currency">¥</span>
+        <span class="price-amount">2,980</span>
+        <span class="price-period">/月</span>
+      </div>
+      <p class="pricing-description">チーム・企業におすすめ</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        月50GBストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        優先サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        チーム管理機能
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        アナリティクス
+      </li>
+    </ul>
+    <button class="pricing-btn popular-btn">プランを選択</button>
+  </div>
+
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3 class="pricing-title">エンタープライズ</h3>
+      <div class="pricing-price">
+        <span class="price-amount">お問い合わせ</span>
+      </div>
+      <p class="pricing-description">大規模組織向け</p>
+    </div>
+    <ul class="pricing-features">
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        無制限ストレージ
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        24時間サポート
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        カスタム統合
+      </li>
+      <li class="feature-item">
+        <span class="feature-icon">✓</span>
+        専任担当者
+      </li>
+    </ul>
+    <button class="pricing-btn">お問い合わせ</button>
+  </div>
+</div>`,
+    css: `.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: #e2d8c2;
+}
+
+.pricing-card.popular {
+  border-color: #b0413e;
+  transform: scale(1.05);
+}
+
+.pricing-card.popular:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #b0413e 0%, #7d2d28 100%);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 0 1rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1712;
+  margin: 0 0 1rem 0;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.price-currency {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #8a7d63;
+}
+
+.price-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1712;
+  line-height: 1;
+}
+
+.price-period {
+  font-size: 1rem;
+  color: #8a7d63;
+  margin-left: 0.25rem;
+}
+
+.pricing-description {
+  color: #8a7d63;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3ecd9;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item.disabled {
+  color: #b5a583;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #e6ede4;
+  color: #4a7c59;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.feature-item.disabled .feature-icon {
+  background: #f3ecd9;
+  color: #b5a583;
+}
+
+.pricing-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5c5445;
+  background: #faf6ea;
+  border: 2px solid #e2d8c2;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pricing-btn:hover {
+  background: #f3ecd9;
+  border-color: #cbbfa5;
+  transform: translateY(-2px);
+}
+
+.popular-btn {
+  background: linear-gradient(135deg, #b0413e 0%, #7d2d28 100%);
+  color: white;
+  border-color: #b0413e;
+}
+
+.popular-btn:hover {
+  background: linear-gradient(135deg, #7d2d28 0%, #632420 100%);
+  border-color: #7d2d28;
+}
+
+@media (max-width: 768px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .pricing-card.popular {
+    transform: none;
+  }
+
+  .pricing-card.popular:hover {
+    transform: translateY(-8px);
+  }
+}`,
+    explanation:
+      '3枚のプランカードを repeat(auto-fit, minmax(300px, 1fr)) のグリッドで並べ、狭い画面では自動で1カラムに畳まれます。人気プランは transform: scale(1.05) と枠線色で一段強調し、position: absolute のバッジを上辺中央に載せています。機能リストは ✓/× のアイコンと色の両方で利用可否を伝え、色だけに依存しない表現にしています。',
+    keyProperties: ['display-grid', 'grid-template-columns', 'transform', 'box-shadow', 'border-radius'],
+    tips: '料金テーブルは比較しやすさが重要です。人気プランをtransform: scale()で少し大きく表示し、グラデーションボタンで目立たせています。モバイルではscaleを解除すると読みやすくなります。',
+    aiPrompt:
+      '3プラン構成の料金テーブルを作ってください。カードをrepeat(auto-fit, minmax())のグリッドで並べ、人気プランはscale(1.05)とバッジで強調、機能リストは✓/×アイコン付き、モバイルでは1カラムに畳んでください。',
   },
 
   // ============ フォーム ============
@@ -1142,6 +1982,87 @@ backdrop.addEventListener('click', () => setOpen(false));`,
       'ページネーションを作ってください。ul/liとnav[aria-label]でマークアップし、現在ページはaria-current="page"属性セレクタでスタイリング、各リンクは36px四方以上でタップしやすくしてください。',
   },
 
+  {
+    id: 'simple-dropdown-menu',
+    title: 'シンプルなドロップダウンメニュー',
+    description:
+      'CSSだけで実装できるシンプルなドロップダウンメニューのテクニックです。ホバーやフォーカスでメニューを表示し、ナビゲーションやアクションリストに使えます。',
+    category: 'ナビゲーション',
+    html: `<div class="dropdown">
+  <button class="dropdown-btn">メニュー ▼</button>
+  <ul class="dropdown-menu">
+    <li><a href="#">プロフィール</a></li>
+    <li><a href="#">設定</a></li>
+    <li><a href="#">ログアウト</a></li>
+  </ul>
+</div>`,
+    css: `.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  padding: 0.5em 1.5em;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5em;
+  background: #97362f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-btn:hover,
+.dropdown-btn:focus {
+  background: #7d2d28;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #e2d8c2;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 16px -4px rgba(0,0,0,0.08);
+  z-index: 10;
+  padding: 0.5em 0;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5em 1.5em;
+  color: #5c5445;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0.25em;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a:focus {
+  background: #97362f;
+  color: #fff;
+}`,
+    explanation:
+      'メニュー本体はボタンの直下に position: absolute で配置し、通常は display: none で隠しておきます。親要素の :hover と :focus-within で表示を切り替えるため、マウスでもキーボード（Tabでボタンやメニュー項目にフォーカスした状態）でも開けます。top: 110% でボタンとの間にわずかな隙間を作り、z-index で他要素より手前に重ねています。',
+    keyProperties: ['position', 'display', 'z-index', 'box-shadow', 'pseudo-focus-within'],
+    tips: '親要素に:hoverや:focus-withinを使うことで、CSSだけでメニューの表示/非表示を制御できます。本格的な運用ではaria-expandedの更新やEscで閉じる操作の追加を推奨します（ドロワーメニューのレシピも参考に）。',
+    aiPrompt:
+      'CSSだけで動くドロップダウンメニューを作ってください。position: absoluteでボタン直下に配置し、親要素の:hoverと:focus-withinで表示を切り替え、キーボードのTab操作でも開けるようにしてください。',
+  },
+
   // ============ 表示・フィードバック ============
   {
     id: 'modal-dialog',
@@ -1408,7 +2329,182 @@ document.getElementById('close-modal').addEventListener('click', () => {
       '右下にスライドインするトースト通知を作ってください。position: fixedとinsetで配置、@keyframesで下からのフェードイン、role="status"の付与、prefers-reduced-motionでのアニメーション無効化も含めてください。',
   },
 
+  {
+    id: 'scrollable-table',
+    title: 'テーブルで横スクロール可能にする',
+    description:
+      '画面幅が狭い時にテーブル全体を横スクロールできるようにするテクニックです。レスポンシブ対応やデータ量の多い表で便利です。',
+    category: '表示・フィードバック',
+    html: `<div class="table-scroll-wrapper" tabindex="0" role="region" aria-label="顧客一覧の表">
+  <table class="scrollable-table">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th>電話番号</th>
+        <th>住所</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>山田 太郎</td>
+        <td>taro@example.com</td>
+        <td>090-1234-5678</td>
+        <td>東京都新宿区1-2-3</td>
+        <td>VIP顧客</td>
+      </tr>
+      <tr>
+        <td>佐藤 花子</td>
+        <td>hanako@example.com</td>
+        <td>080-9876-5432</td>
+        <td>大阪市北区4-5-6</td>
+        <td>新規</td>
+      </tr>
+      <tr>
+        <td>鈴木 一郎</td>
+        <td>ichiro@example.com</td>
+        <td>070-1111-2222</td>
+        <td>名古屋市中区7-8-9</td>
+        <td>リピーター</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+    css: `.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(90deg, #f3ecd9 80%, transparent);
+  border-radius: 0.5rem;
+}
+
+.scrollable-table {
+  min-width: 600px;
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #e2d8c2;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.scrollable-table th {
+  background: #f3ecd9;
+  font-weight: 700;
+  color: #5c5445;
+}
+
+.scrollable-table tr:nth-child(even) {
+  background: #faf6ea;
+}
+
+/* スクロールバーのカスタマイズ（任意） */
+.table-scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #cbbfa5;
+  border-radius: 4px;
+}`,
+    explanation:
+      'テーブル自体は縮めず、ラッパー要素に overflow-x: auto を指定して「テーブルは本来の幅のまま、狭い画面でははみ出た分をスクロール」させる構成です。テーブル側の min-width が「これ以上は縮まない」基準になり、white-space: nowrap でセル内の不自然な折り返しを防ぎます。ラッパーに tabindex="0" と role="region" を付けると、キーボードでもスクロール操作ができます。',
+    keyProperties: ['overflow', 'min-width', 'white-space', 'border-radius'],
+    tips: '親要素にoverflow-x: auto;を指定し、テーブルにmin-widthを設定するのがポイント。スクロールできることが伝わるよう、端をグラデーションでぼかす等の視覚ヒントも有効です。',
+    aiPrompt:
+      '狭い画面で横スクロールできるレスポンシブなテーブルを作ってください。ラッパーにoverflow-x: autoとtabindex="0"、テーブルにmin-widthとwhite-space: nowrapを指定してください。',
+  },
+
   // ============ レイアウトパターン ============
+  {
+    id: 'full-bleed-side',
+    title: '左右片方だけinner幅を超えて横幅いっぱいにする',
+    description:
+      '親のpaddingやmax-widthに制限されず、片側だけ画面端まで背景や装飾を広げたい時に使えるテクニックです。主にカードやセクションの背景装飾などで活躍します。',
+    category: 'レイアウトパターン',
+    html: `<section class="container">
+  <div class="full-bleed-right">
+    <h2>見出し</h2>
+    <p>この部分だけ右側が画面端まで背景色で広がります。</p>
+  </div>
+</section>`,
+    css: `.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.full-bleed-right {
+  margin-right: calc(50% - 50vw);
+  padding: 1.5rem;
+  background: #f3ecd9;
+  border-radius: 0.75rem;
+}`,
+    explanation:
+      '鍵は margin-right: calc(50% - 50vw) の1行です。50% は「親要素の幅の半分」、50vw は「画面幅の半分」なので、その差し引きぶんだけネガティブマージンが生まれ、要素が親のコンテナを突き破って画面端まで届きます。コンテナのmax-widthを変えても自動で追従するため、マジックナンバーが不要です。',
+    keyProperties: ['margin', 'max-width', 'padding'],
+    tips: '左右どちらでも応用可能。margin-left: calc(50% - 50vw); で左側だけ広げることもできます。縦スクロールバーの幅ぶん横スクロールが出る場合は、bodyにoverflow-x: clipを検討してください。',
+    aiPrompt:
+      '中央寄せのコンテナ内で、特定のセクションだけ右側を画面端まで広げるフルブリードレイアウトを作ってください。margin-right: calc(50% - 50vw)を使い、コンテナ幅に依存しない作りにしてください。',
+  },
+  {
+    id: 'equal-height-center',
+    title: '子要素の高さを揃えてコンテンツを上下中央',
+    description:
+      '複数の子要素を同じ高さに揃えつつ、各子要素内のコンテンツを上下中央に配置するテクニックです。カードレイアウトやリストでよく使います。',
+    category: 'レイアウトパターン',
+    html: `<div class="card-row">
+  <div class="card">
+    <div class="card-content">
+      <h3>タイトル1</h3>
+      <p>短いテキスト</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content">
+      <h3>タイトル2</h3>
+      <p>こちらは少し長めのテキストが入ります。<br>複数行でも高さが揃います。</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content">
+      <h3>タイトル3</h3>
+      <p>中央揃え＆高さ揃え</p>
+    </div>
+  </div>
+</div>`,
+    css: `.card-row {
+  display: flex;
+  gap: 1rem;
+}
+.card {
+  flex: 1 1 0;
+  background: #f3ecd9;
+  border-radius: 0.75rem;
+  min-width: 0;
+  display: flex;
+  /* stretchで高さ揃え */
+  align-items: stretch;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 100%;
+}`,
+    explanation:
+      '高さ揃えはFlexboxの標準動作（align-itemsの初期値stretch）をそのまま使います。各カードに flex: 1 1 0 を指定すると内容量に関係なく等幅になり、行内で最も背の高いカードに全員の高さが揃います。カードの内側にもう1段flexコンテナを作り、justify-content: center で中身を上下中央に置くのがこのレシピの2段構えです。min-width: 0 は長文での折り返し崩れを防ぐ保険です。',
+    keyProperties: ['display-flex', 'flex-grow-shrink-basis', 'align-items', 'justify-content', 'gap'],
+    tips: '親にdisplay: flex; 子にalign-items: stretch; 子要素内にjustify-content: center; align-items: center;でOK。min-width: 0;で折り返しも安全。',
+    aiPrompt:
+      '横並びカードの高さを揃え、各カードの中身を上下中央に配置するレイアウトを作ってください。flex: 1 1 0で等幅化し、カード内は縦方向のflexでjustify-content: centerを使ってください。',
+  },
   {
     id: 'hero-section',
     title: 'ヒーローセクション',

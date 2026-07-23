@@ -75,15 +75,6 @@ export interface PreviewConfig {
 }
 
 // CSSテクニック集
-export interface Technique {
-  id: string;
-  title: string;
-  description: string;
-  html: string;
-  css: string;
-  tips?: string;
-}
-
 // 逆引き（ユースケース → 関連プロパティ）
 export interface Usecase {
   id: string;

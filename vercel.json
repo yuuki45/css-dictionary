@@ -1,0 +1,25 @@
+{
+  "redirects": [
+    { "source": "/techniques/full-bleed-side/:rest*", "destination": "/recipes/full-bleed-side/", "permanent": true },
+    { "source": "/techniques/full-bleed-side.md", "destination": "/recipes/full-bleed-side.md", "permanent": true },
+    { "source": "/techniques/equal-height-center/:rest*", "destination": "/recipes/equal-height-center/", "permanent": true },
+    { "source": "/techniques/equal-height-center.md", "destination": "/recipes/equal-height-center.md", "permanent": true },
+    { "source": "/techniques/scrollable-table/:rest*", "destination": "/recipes/scrollable-table/", "permanent": true },
+    { "source": "/techniques/scrollable-table.md", "destination": "/recipes/scrollable-table.md", "permanent": true },
+    { "source": "/techniques/simple-dropdown-menu/:rest*", "destination": "/recipes/simple-dropdown-menu/", "permanent": true },
+    { "source": "/techniques/simple-dropdown-menu.md", "destination": "/recipes/simple-dropdown-menu.md", "permanent": true },
+    { "source": "/techniques/button-designs-10/:rest*", "destination": "/recipes/button-designs-10/", "permanent": true },
+    { "source": "/techniques/button-designs-10.md", "destination": "/recipes/button-designs-10.md", "permanent": true },
+    { "source": "/techniques/pricing-table-design/:rest*", "destination": "/recipes/pricing-table-design/", "permanent": true },
+    { "source": "/techniques/pricing-table-design.md", "destination": "/recipes/pricing-table-design.md", "permanent": true },
+    { "source": "/techniques/text-hover-underline/:rest*", "destination": "/animations/text-hover-underline/", "permanent": true },
+    { "source": "/techniques/text-hover-underline.md", "destination": "/animations/text-hover-underline.md", "permanent": true },
+    { "source": "/techniques/hover-image-zoom/:rest*", "destination": "/animations/hover-image-zoom/", "permanent": true },
+    { "source": "/techniques/hover-image-zoom.md", "destination": "/animations/hover-image-zoom.md", "permanent": true },
+    { "source": "/techniques/button-arrow-hover/:rest*", "destination": "/animations/hover-arrow-nudge/", "permanent": true },
+    { "source": "/techniques/button-arrow-hover.md", "destination": "/animations/hover-arrow-nudge.md", "permanent": true },
+    { "source": "/techniques/flex-prevent-shrink/:rest*", "destination": "/property/flex-grow-shrink-basis/", "permanent": true },
+    { "source": "/techniques/flex-prevent-shrink.md", "destination": "/property/flex-grow-shrink-basis.md", "permanent": true },
+    { "source": "/techniques/:rest*", "destination": "/recipes/", "permanent": true }
+  ]
+}

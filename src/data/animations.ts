@@ -126,6 +126,116 @@ export const animations: AnimationExample[] = [
     keyProperties: ['transition', 'transform', 'text-decoration', 'pseudo-hover'],
   },
 
+  {
+    id: 'text-hover-underline',
+    title: 'ホバーで伸びる下線',
+    description:
+      'テキストリンクにホバーすると、左から右へ滑らかに下線が伸びるアニメーション。ナビゲーションの定番エフェクトです。',
+    category: 'ホバー',
+    html: `<nav class="links">
+  <a href="#" class="underline-slide">ホバーしてみてください</a>
+  <a href="#" class="underline-slide">ナビゲーションリンク</a>
+  <a href="#" class="underline-center">中央から広がるタイプ</a>
+</nav>`,
+    css: `.links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.links a {
+  position: relative;
+  width: fit-content;
+  color: #8a6d3b;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #b0413e;
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+/* 左から右へ */
+.underline-slide::after {
+  transform-origin: right; /* 離れるときは右へ消える */
+}
+
+.underline-slide:hover::after,
+.underline-slide:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left; /* 現れるときは左から */
+}
+
+/* 中央から外へ */
+.underline-center::after {
+  transform-origin: center;
+}
+
+.underline-center:hover::after,
+.underline-center:focus-visible::after {
+  transform: scaleX(1);
+}`,
+    explanation:
+      '下線の実体は ::after で敷いた高さ2pxのバーです。widthをアニメーションさせる方法もありますが、transform: scaleX() はレイアウト再計算が起きないため滑らかです。ホバー時と非ホバー時で transform-origin を left / right に切り替えると「左から現れて右へ抜ける」一方向の動きになり、体験が上質になります。',
+    keyProperties: ['position', 'transform', 'transition'],
+    tips: 'フォーカス時（:focus-visible）にも同じ動きを付けておくと、キーボード操作でも現在地が分かりやすくなります。',
+  },
+  {
+    id: 'hover-image-zoom',
+    title: 'ホバーで画像ズーム',
+    description:
+      '枠のサイズは変えずに、中の画像だけがゆっくり拡大するホバーエフェクト。ギャラリーや商品カードの定番です。',
+    category: 'ホバー',
+    html: `<figure class="zoom-frame">
+  <div class="zoom-photo" role="img" aria-label="サンプル写真"></div>
+  <figcaption>ホバーで中身だけ拡大</figcaption>
+</figure>`,
+    css: `.zoom-frame {
+  width: 240px;
+  margin: 0;
+  border: 1px solid #e2d8c2;
+  border-radius: 10px;
+  overflow: hidden; /* 拡大した中身を枠でトリミングする */
+  background: #fff;
+}
+
+.zoom-photo {
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(circle at 70% 30%, #d9a441 0 18%, transparent 19%),
+    linear-gradient(160deg, #a8b8a0, #4a7c59);
+  transition: transform 0.4s ease;
+}
+
+.zoom-frame:hover .zoom-photo,
+.zoom-frame:focus-within .zoom-photo {
+  transform: scale(1.08);
+}
+
+figcaption {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #5c5445;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-photo { transition: none; }
+}`,
+    explanation:
+      '仕組みは「外枠の overflow: hidden ＋ 中身の transform: scale()」の2つだけです。拡大するのは中身だけで枠のサイズは変わらないため、周囲のレイアウトに影響しません。scaleは要素の中心を基点に拡大するので、はみ出した分は枠が均等にトリミングします。倍率は1.05〜1.1程度が上品です。',
+    keyProperties: ['overflow', 'transform', 'transition', 'aspect-ratio'],
+    tips: '実際の画像では img に width: 100% と object-fit: cover を指定してから同じtransformを掛けます。ホバー時にぼかしや暗幕を重ねるとテキストオーバーレイとも相性が良いです。',
+  },
+
   // ============ ローディング ============
   {
     id: 'spinner-ring',

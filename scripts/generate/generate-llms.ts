@@ -5,7 +5,7 @@
  *   - llms.txt          … サイト概要+全Markdownへの目次（https://llmstxt.org/ 仕様準拠）
  *   - llms-full.txt     … 全コンテンツ連結版
  *   - property/{id}.md  … プロパティごとのMarkdown（HTMLページと並列URL）
- *   - techniques/{id}.md … テクニックごとのMarkdown
+ *   - recipes/{id}.md   … UIレシピごとのMarkdown（compare/animationsも同様）
  *   - reverse.md        … 逆引き（ユースケース→プロパティ）一覧
  *   - sitemap.xml       … 全ページのサイトマップ（手動メンテ廃止）
  *
@@ -14,14 +14,12 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { cssProperties } from '../../src/data/properties';
-import { techniques } from '../../src/data/techniques';
 import { usecases } from '../../src/data/usecases';
 import { comparisons } from '../../src/data/comparisons';
 import { animations } from '../../src/data/animations';
 import { recipes } from '../../src/data/recipes';
 import {
   propertyToMarkdown,
-  techniqueToMarkdown,
   comparisonToMarkdown,
   animationToMarkdown,
   recipeToMarkdown,
@@ -39,7 +37,7 @@ function writeFile(relativePath: string, content: string): void {
 }
 
 // 生成ディレクトリ内の古い.mdを掃除（削除されたエントリの残骸を防ぐ）
-for (const dir of ['property', 'techniques', 'compare', 'animations', 'recipes']) {
+for (const dir of ['property', 'compare', 'animations', 'recipes']) {
   const fullDir = path.join(publicDir, dir);
   if (fs.existsSync(fullDir)) {
     for (const file of fs.readdirSync(fullDir)) {
@@ -51,9 +49,6 @@ for (const dir of ['property', 'techniques', 'compare', 'animations', 'recipes']
 // ---- 1. プロパティ/テクニックごとのMarkdown ----
 for (const property of cssProperties) {
   writeFile(`property/${property.id}.md`, propertyToMarkdown(property) + '\n');
-}
-for (const technique of techniques) {
-  writeFile(`techniques/${technique.id}.md`, techniqueToMarkdown(technique) + '\n');
 }
 for (const comparison of comparisons) {
   writeFile(`compare/${comparison.id}.md`, comparisonToMarkdown(comparison) + '\n');
@@ -129,14 +124,6 @@ for (const property of cssProperties) {
   );
 }
 llmsLines.push('');
-llmsLines.push('## CSSテクニック');
-llmsLines.push('');
-for (const technique of techniques) {
-  llmsLines.push(
-    `- [${technique.title}](${SITE_URL}/techniques/${technique.id}.md): ${technique.description}`
-  );
-}
-llmsLines.push('');
 llmsLines.push('## アニメーション実装集');
 llmsLines.push('');
 for (const animation of animations) {
@@ -186,7 +173,6 @@ const fullSections: string[] = [
   ...comparisons.map((c) => comparisonToMarkdown(c)),
   ...animations.map((a) => animationToMarkdown(a)),
   ...recipes.map((r) => recipeToMarkdown(r)),
-  ...techniques.map((t) => techniqueToMarkdown(t)),
   reverseLines.join('\n'),
 ];
 writeFile('llms-full.txt', fullSections.join('\n\n---\n\n') + '\n');
@@ -236,12 +222,6 @@ const entries: SitemapEntry[] = [
     priority: '0.7',
     changefreq: 'monthly',
   })),
-  { path: '/techniques/', priority: '0.7', changefreq: 'weekly' },
-  ...techniques.map((technique) => ({
-    path: `/techniques/${technique.id}/`,
-    priority: '0.7',
-    changefreq: 'monthly',
-  })),
   { path: '/reverse/', priority: '0.7', changefreq: 'weekly' },
   { path: '/favorites/', priority: '0.3', changefreq: 'monthly' },
   { path: '/settings/', priority: '0.3', changefreq: 'monthly' },
@@ -265,6 +245,6 @@ const sitemapXml =
 writeFile('sitemap.xml', sitemapXml);
 
 console.log(
-  `✅ 生成完了: property/*.md ${cssProperties.length}件, techniques/*.md ${techniques.length}件, ` +
+  `✅ 生成完了: property/*.md ${cssProperties.length}件, recipes/*.md ${recipes.length}件, ` +
     `compare/*.md ${comparisons.length}件, animations/*.md ${animations.length}件, reverse.md, llms.txt, llms-full.txt, sitemap.xml (${entries.length} URL)`
 );

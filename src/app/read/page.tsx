@@ -7,7 +7,6 @@ import { cssProperties } from '@/data/properties';
 import { animations } from '@/data/animations';
 import { recipes } from '@/data/recipes';
 import { comparisons } from '@/data/comparisons';
-import { techniques } from '@/data/techniques';
 
 export const metadata: Metadata = {
   title: 'よみもの - 特集コンテンツ一覧 | CSS辞書',
@@ -56,12 +55,6 @@ export default function ReadPage() {
       title: 'AI生成CSSレビューチェックリスト',
       description: 'AIがよく間違えるポイントを全プロパティ分集約した観点集',
       count: `${aiCount}観点`,
-    },
-    {
-      href: '/techniques/',
-      title: 'CSSテクニック集',
-      description: 'ボタンデザインや料金テーブルなど、コピペで使える定番実装',
-      count: `${techniques.length}本`,
     },
   ];
 

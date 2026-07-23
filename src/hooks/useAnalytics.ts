@@ -75,14 +75,6 @@ export const useAnalytics = () => {
     });
   };
 
-  // テクニック表示イベント
-  const trackTechniqueView = (techniqueId: string, techniqueTitle: string) => {
-    trackEvent("technique_view", {
-      technique_id: techniqueId,
-      technique_title: techniqueTitle,
-    });
-  };
-
   // テーマ変更イベント
   const trackThemeChange = (theme: string) => {
     trackEvent("theme_change", {
@@ -115,7 +107,6 @@ export const useAnalytics = () => {
     trackSearch,
     trackCategorySelect,
     trackUsecaseSelect,
-    trackTechniqueView,
     trackThemeChange,
     trackCodeCopy,
     trackCopyForAI,

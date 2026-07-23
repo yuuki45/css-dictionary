@@ -16,6 +16,7 @@ import { getCategorySlug } from "@/utils/categorySlug";
 import { CSSProperty } from "@/types/css";
 import { cssProperties } from "@/data/properties";
 import { animations } from "@/data/animations";
+import { recipes } from "@/data/recipes";
 import { comparisons } from "@/data/comparisons";
 import { Layers, ArrowRight } from "lucide-react";
 
@@ -128,10 +129,10 @@ export default function HomePage() {
       count: `${aiCount}観点`,
     },
     {
-      href: "/techniques/",
-      title: "CSSテクニック集",
-      description: "コピペで使える定番実装",
-      count: null,
+      href: "/recipes/",
+      title: "UIレシピ集",
+      description: "完成UI部品のコピペレシピ",
+      count: `${recipes.length}例`,
     },
   ];
 
